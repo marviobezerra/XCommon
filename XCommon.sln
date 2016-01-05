@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon", "XCommon\XCommon.csproj", "{B89BDFD6-6658-424E-9094-219834625471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Azure", "XCommon.Azure\XCommon.Azure.csproj", "{B7C5B219-7D9F-4D8E-8A66-F9ABEF4DA02C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Classic", "XCommon.Classic\XCommon.Classic.csproj", "{C088502D-63ED-4D7D-BEBC-2AD64C506AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Wcf.Server", "XCommon.Wcf.Server\XCommon.Wcf.Server.csproj", "{E89740C9-90EE-4D45-A568-1D48605C1F19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Wcf.Client", "XCommon.Wcf.Client\XCommon.Wcf.Client.csproj", "{CDE88FE3-4B9E-4FC5-AAB8-7E4EADF06297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Web", "XCommon.Web\XCommon.Web.csproj", "{4774D191-2FCE-4E9C-817B-02AD352B7F8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Extra.RunOnBuild", "XCommon.Extra.RunOnBuild\XCommon.Extra.RunOnBuild.csproj", "{F569B286-6F8C-4BDA-BA39-673025F693C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extra", "Extra", "{C6A518AC-CEB3-498F-BA2B-9CBEFB82BD20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{8ED5236C-CD6E-47BB-9721-234E9A7C3ED2}"
+	ProjectSection(SolutionItems) = preProject
+		XCommon.Files\AssemblyInfo.Common.cs = XCommon.Files\AssemblyInfo.Common.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{2C8E313E-897E-4FB5-80C9-01FE41770C40}"
+	ProjectSection(SolutionItems) = preProject
+		XCommon.Nuspec\XCommon.Azure.nuspec = XCommon.Nuspec\XCommon.Azure.nuspec
+		XCommon.Nuspec\XCommon.Classic.nuspec = XCommon.Nuspec\XCommon.Classic.nuspec
+		XCommon.Nuspec\XCommon.nuspec = XCommon.Nuspec\XCommon.nuspec
+		XCommon.Nuspec\XCommon.Web.nuspec = XCommon.Nuspec\XCommon.Web.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B89BDFD6-6658-424E-9094-219834625471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89BDFD6-6658-424E-9094-219834625471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89BDFD6-6658-424E-9094-219834625471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89BDFD6-6658-424E-9094-219834625471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C5B219-7D9F-4D8E-8A66-F9ABEF4DA02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C5B219-7D9F-4D8E-8A66-F9ABEF4DA02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C5B219-7D9F-4D8E-8A66-F9ABEF4DA02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C5B219-7D9F-4D8E-8A66-F9ABEF4DA02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C088502D-63ED-4D7D-BEBC-2AD64C506AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C088502D-63ED-4D7D-BEBC-2AD64C506AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C088502D-63ED-4D7D-BEBC-2AD64C506AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C088502D-63ED-4D7D-BEBC-2AD64C506AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E89740C9-90EE-4D45-A568-1D48605C1F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E89740C9-90EE-4D45-A568-1D48605C1F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E89740C9-90EE-4D45-A568-1D48605C1F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E89740C9-90EE-4D45-A568-1D48605C1F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE88FE3-4B9E-4FC5-AAB8-7E4EADF06297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE88FE3-4B9E-4FC5-AAB8-7E4EADF06297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE88FE3-4B9E-4FC5-AAB8-7E4EADF06297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE88FE3-4B9E-4FC5-AAB8-7E4EADF06297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4774D191-2FCE-4E9C-817B-02AD352B7F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4774D191-2FCE-4E9C-817B-02AD352B7F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4774D191-2FCE-4E9C-817B-02AD352B7F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4774D191-2FCE-4E9C-817B-02AD352B7F8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F569B286-6F8C-4BDA-BA39-673025F693C8} = {C6A518AC-CEB3-498F-BA2B-9CBEFB82BD20}
+	EndGlobalSection
+EndGlobal

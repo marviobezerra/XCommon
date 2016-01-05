@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>XCommon.Web</id>
+    <version>1.0.0</version>
+    <authors>Márvio André B. Silverio</authors>
+    <owners>Márvio André B. Silverio</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Web XCommon library</description>
+    <releaseNotes>Web package for XCommon Library.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Prospect Web</tags>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="XCommon" version="1.0.0" />
+        <dependency id="Microsoft.AspNet.Identity.Core" version="2.2.1"/>
+        <dependency id="Microsoft.AspNet.Identity.Owin" version="2.2.1"/>
+        <dependency id="Microsoft.AspNet.Mvc" version="5.2.3"/>
+        <dependency id="Microsoft.AspNet.Razor" version="3.2.3"/>
+        <dependency id="Microsoft.AspNet.WebApi" version="5.2.3"/>
+        <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3"/>
+        <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3"/>
+        <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3"/>
+        <dependency id="Microsoft.AspNet.WebPages" version="3.2.3"/>
+        <dependency id="Microsoft.Owin" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Host.SystemWeb" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security.Cookies" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security.Facebook" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security.Google" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security.MicrosoftAccount" version="3.0.1"/>
+        <dependency id="Microsoft.Owin.Security.OAuth" version="3.0.1"/>
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0"/>
+        <dependency id="Newtonsoft.Json" version="7.0.1"/>
+        <dependency id="Owin" version="1.0"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\XCommon.Web\bin\Release\XCommon.Web.dll" target="lib\net45\XCommon.Web.dll" />
+  </files>
+</package>

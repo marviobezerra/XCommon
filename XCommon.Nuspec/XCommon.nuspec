@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>XCommon</id>
+    <version>1.0.0</version>
+    <authors>Márvio André B. Silverio</authors>
+    <owners>Márvio André B. Silverio</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Base XCommon library</description>
+    <releaseNotes>Base package for XCommon Library.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Prospect Common</tags>    
+  </metadata>
+  <files>
+    <file src="..\XCommon\bin\Release\XCommon.dll" target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10\XCommon.dll" />
+  </files>
+</package>

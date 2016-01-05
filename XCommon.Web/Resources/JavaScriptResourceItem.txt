@@ -1,0 +1,2 @@
+﻿		if (Prospect.Application.Culture.Current().Id() === "{0}")
+			return "{1}";

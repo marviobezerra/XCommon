@@ -1,0 +1,8 @@
+﻿/***************************************************
+ * Nunca altere o conteudo desse arquivo 
+ * diretamente, pois o mesmo foi gerado de 
+ * forma automatica!
+ *
+ * Quando compilar o codigo este será regerado!
+ ***************************************************/
+

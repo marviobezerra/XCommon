@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>XCommon.Classic</id>
+    <version>1.0.0</version>
+    <authors>Márvio André B. Silverio</authors>
+    <owners>Márvio André B. Silverio</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Classic XCommon library</description>
+    <releaseNotes>Classic package for XCommon Library.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Prospect Classic</tags>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="XCommon" version="1.0.0" />
+        <dependency id="EntityFramework" version="6.1.3" />
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\XCommon.Classic\bin\Release\XCommon.Classic.dll" target="lib\net45\XCommon.Classic.dll" />
+  </files>
+</package>
