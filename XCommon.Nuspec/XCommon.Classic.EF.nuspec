@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\XCommon.Classic\bin\Release\XCommon.Classic.EF.dll" target="lib\net45\XCommon.Classic.EF.dll" />
+    <file src="..\XCommon.Classic.EF\bin\Release\XCommon.Classic.EF.dll" target="lib\net45\XCommon.Classic.EF.dll" />
   </files>
 </package>
