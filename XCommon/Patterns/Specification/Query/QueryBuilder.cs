@@ -36,7 +36,7 @@ namespace XCommon.Patterns.Specification.Query
                 Sort = items => items.OrderBy(property);
         }
 
-        public IQueryable<TEntity> Build(IEnumerable<TEntity> query, TFilter filter)
+        public IQueryable<TEntity> Build(IList<TEntity> query, TFilter filter)
         {
             return Build(query.AsQueryable(), filter);
         }

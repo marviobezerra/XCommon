@@ -54,7 +54,7 @@ namespace XCommon.Web.MVC.Filters
             if (HttpContext.Current.IsDebuggingEnabled)
                 return false;
 
-            string config = ConfigurationManager.AppSettings["XCommon:Filters"];
+            string config = ConfigurationManager.AppSettings["Prospect:Filters"];
 
             if (string.IsNullOrEmpty(config))
                 return false;

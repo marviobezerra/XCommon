@@ -13,7 +13,7 @@ namespace XCommon.Azure.Application.FileStorage
 
         public FileStorageAzure()
         {
-            string cnx = ConfigurationManager.AppSettings["XCommon:BlobCnx"];
+            string cnx = ConfigurationManager.AppSettings["Prospect:BlobCnx"];
             
             Account = CloudStorageAccount.Parse(cnx);
             BlobClient = Account.CreateCloudBlobClient();            

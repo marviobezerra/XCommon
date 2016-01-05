@@ -19,9 +19,9 @@ namespace XCommon.Application.Mail.Implementations
         {
             Execute result = new Execute();
 
-            string mail = ConfigurationManager.AppSettings["XCommon:Mail"].ToLower();
-            string mailUser = ConfigurationManager.AppSettings["XCommon:MailUser"].ToLower();
-            string mailPassword = ConfigurationManager.AppSettings["XCommon:MailPassword"].ToLower();
+            string mail = ConfigurationManager.AppSettings["Prospect:Mail"].ToLower();
+            string mailUser = ConfigurationManager.AppSettings["Prospect:MailUser"].ToLower();
+            string mailPassword = ConfigurationManager.AppSettings["Prospect:MailPassword"].ToLower();
 
             try
             {
