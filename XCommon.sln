@@ -27,10 +27,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{2C8E313E-897E-4FB5-80C9-01FE41770C40}"
 	ProjectSection(SolutionItems) = preProject
 		XCommon.Nuspec\XCommon.Azure.nuspec = XCommon.Nuspec\XCommon.Azure.nuspec
+		XCommon.Nuspec\XCommon.Classic.EF.nuspec = XCommon.Nuspec\XCommon.Classic.EF.nuspec
 		XCommon.Nuspec\XCommon.Classic.nuspec = XCommon.Nuspec\XCommon.Classic.nuspec
 		XCommon.Nuspec\XCommon.nuspec = XCommon.Nuspec\XCommon.nuspec
 		XCommon.Nuspec\XCommon.Web.nuspec = XCommon.Nuspec\XCommon.Web.nuspec
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Classic.EF", "XCommon.Classic.EF\XCommon.Classic.EF.csproj", "{310F684F-8A24-44D8-A6DF-EC15961DBF65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +69,10 @@ Global
 		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F569B286-6F8C-4BDA-BA39-673025F693C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310F684F-8A24-44D8-A6DF-EC15961DBF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310F684F-8A24-44D8-A6DF-EC15961DBF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310F684F-8A24-44D8-A6DF-EC15961DBF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310F684F-8A24-44D8-A6DF-EC15961DBF65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
