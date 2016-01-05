@@ -21,11 +21,11 @@ namespace XCommon.Azure.Application.Mail
 
         public SendGrid()
         {
-            UserName = ConfigurationManager.AppSettings["Prospect:SendGrid:User"];
-            Password = ConfigurationManager.AppSettings["Prospect:SendGrid:Password"];
+            UserName = ConfigurationManager.AppSettings["XCommon:SendGrid:User"];
+            Password = ConfigurationManager.AppSettings["XCommon:SendGrid:Password"];
 
-            FromName = ConfigurationManager.AppSettings["Prospect:SendGrid:FromName"];
-            FromEmail = ConfigurationManager.AppSettings["Prospect:SendGrid:FromEmail"];
+            FromName = ConfigurationManager.AppSettings["XCommon:SendGrid:FromName"];
+            FromEmail = ConfigurationManager.AppSettings["XCommon:SendGrid:FromEmail"];
         }
 
         public Execute Send(string to, string subject, string body)
