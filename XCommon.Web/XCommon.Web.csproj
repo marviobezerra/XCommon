@@ -149,11 +149,6 @@
     <Compile Include="MVC\Utils\ViewRenderer.cs" />
     <Compile Include="Owin\IdentityApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Util\DynamicContractResolver.cs" />
     <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\ResourceService.cs" />
     <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\PathService.cs" />
@@ -174,18 +169,6 @@
       <Project>{b89bdfd6-6658-424e-9094-219834625471}</Project>
       <Name>XCommon</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\JavaScriptResourceItem.txt" />
-    <Content Include="Resources\JavaScriptResourceRegister.txt" />
-    <Content Include="Resources\JavaScriptResourceValue.txt" />
-    <Content Include="Resources\NotificacaoArquivo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

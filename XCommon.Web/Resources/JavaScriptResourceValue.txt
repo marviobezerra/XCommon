@@ -1,3 +1,0 @@
-﻿	{0}: new ko.computed(function () {{
-{1}
-	}}),
