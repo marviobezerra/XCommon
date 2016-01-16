@@ -59,52 +59,5 @@ namespace XCommon.Web.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 		if (Prospect.Application.Culture.Current().Id() === &quot;{0}&quot;)
-        ///			return &quot;{1}&quot;;.
-        /// </summary>
-        internal static string JavaScriptResourceItem {
-            get {
-                return ResourceManager.GetString("JavaScriptResourceItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Prospect.Application.Culture.Add(&quot;{0}&quot;, &quot;{1}&quot;, &quot;{2}&quot;, &quot;{3}&quot;, {4});.
-        /// </summary>
-        internal static string JavaScriptResourceRegister {
-            get {
-                return ResourceManager.GetString("JavaScriptResourceRegister", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 	{0}: new ko.computed(function () {{
-        ///{1}
-        ///	}}),.
-        /// </summary>
-        internal static string JavaScriptResourceValue {
-            get {
-                return ResourceManager.GetString("JavaScriptResourceValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /***************************************************
-        /// * Nunca altere o conteudo desse arquivo 
-        /// * diretamente, pois o mesmo foi gerado de 
-        /// * forma automatica!
-        /// *
-        /// * Quando compilar o codigo este será regerado!
-        /// ***************************************************/
-        ///
-        ///.
-        /// </summary>
-        internal static string NotificacaoArquivo {
-            get {
-                return ResourceManager.GetString("NotificacaoArquivo", resourceCulture);
-            }
-        }
     }
 }

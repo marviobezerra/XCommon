@@ -83,6 +83,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -154,8 +155,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\DynamicContractResolver.cs" />
-    <Compile Include="Util\ExecuteOnBuild\ResourceJs.cs" />
-    <Compile Include="Util\ExecuteOnBuild\UrlJS.cs" />
+    <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\ResourceService.cs" />
+    <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\PathService.cs" />
     <Compile Include="Util\JsonNetResult.cs" />
     <Compile Include="WebApi\Controllers\BaseApiController.cs" />
     <Compile Include="WebApi\Controllers\SimpleAuthorizationServerProvider.cs" />
