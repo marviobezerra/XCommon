@@ -150,6 +150,7 @@
     <Compile Include="Owin\IdentityApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\DynamicContractResolver.cs" />
+    <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\EntityInterface.cs" />
     <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\ResourceService.cs" />
     <Compile Include="Util\ExecuteOnBuild\Angular\TypeScript\PathService.cs" />
     <Compile Include="Util\JsonNetResult.cs" />
