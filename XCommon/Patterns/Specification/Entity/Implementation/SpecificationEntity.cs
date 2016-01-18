@@ -42,7 +42,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         }
         #endregion
 
-        #region Implentations
+        #region Custom
         public SpecificationEntity<TEntity> AndIsEmail(Expression<Func<TEntity, string>> selector)
         {
             return AndIsEmail(selector, null, null);
@@ -98,6 +98,9 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             return this;
         }
 
+        #endregion
+
+        #region AndIsNotEmpty
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, string>> selector)
         {
             return AndIsNotEmpty(selector, null, null);
@@ -105,7 +108,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.String, message, args));
+            Specifications.Add(new AndIsNotEmptyString<TEntity>(selector, message, args));
             return this;
         }
 
@@ -116,7 +119,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, int?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Int, message, args));
+            Specifications.Add(new AndIsNotEmptyInt<TEntity>(selector, message, args));
             return this;
         }
 
@@ -127,7 +130,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, decimal?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Decimal, message, args));
+            Specifications.Add(new AndIsNotEmptyDecimal<TEntity>(selector, message, args));
             return this;
         }
 
@@ -138,7 +141,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, DateTime?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Date, message, args));
+            Specifications.Add(new AndIsNotEmptyDate<TEntity>(selector, message, args));
             return this;
         }       
 
@@ -149,10 +152,16 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Object, message, args));
+            Specifications.Add(new AndIsNotEmptyObject<TEntity, TValue>(selector, message, args));
             return this;
         }
-        
+        #endregion
+
+        #region AndCheckValue
+
+        #endregion
+
+        #region Others
         public SpecificationEntity<TEntity> AndIsValid(Func<TEntity, bool> selector)
         {
             return AndIsValid(selector, null, null);

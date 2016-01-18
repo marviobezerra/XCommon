@@ -9,12 +9,12 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        public AndIsValid(Func<TEntity, bool> selector)
+        internal AndIsValid(Func<TEntity, bool> selector)
             : this(selector, string.Empty)
         {
         }
 
-        public AndIsValid(Func<TEntity, bool> selector, string message, params object[] args)
+        internal AndIsValid(Func<TEntity, bool> selector, string message, params object[] args)
         {
             Selector = selector;
             Message = message;

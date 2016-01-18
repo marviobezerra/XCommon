@@ -13,13 +13,13 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        public AndIsValidRegex(string propertyName, string regexExpression)
+        internal AndIsValidRegex(string propertyName, string regexExpression)
             : this(propertyName, regexExpression, "")
         {
 
         }
 
-        public AndIsValidRegex(string propertyName, string regexExpression, string message, params object[] args)
+        internal AndIsValidRegex(string propertyName, string regexExpression, string message, params object[] args)
         {
             RegexExpression = regexExpression;
             PropertyName = propertyName;

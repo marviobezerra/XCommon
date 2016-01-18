@@ -58,6 +58,7 @@
     <Compile Include="Application\Login\LoginPersonEntity.cs" />
     <Compile Include="Application\Login\LoginStatus.cs" />
     <Compile Include="Application\Mail\IMail.cs" />
+    <Compile Include="Extensions\Checks\ValueCheck.cs" />
     <Compile Include="Extensions\Converters\Converter.cs" />
     <Compile Include="Extensions\Converters\ConverterBooleanOption.cs" />
     <Compile Include="Extensions\Converters\ConverterDateTime.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Patterns\Repository\Executes\ExecuteT1.cs" />
     <Compile Include="Patterns\Repository\Executes\ExecuteUser.cs" />
     <Compile Include="Patterns\Repository\IRepository.cs" />
+    <Compile Include="Patterns\Specification\Entity\Implementation\AndCheckValue.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndIsValid.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndIsNotEmpty.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndIsValidRegex.cs" />
