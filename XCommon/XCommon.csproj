@@ -67,7 +67,7 @@
     <Compile Include="Extensions\String\CompareType.cs" />
     <Compile Include="Extensions\String\Utity.cs" />
     <Compile Include="Extensions\String\Validation.cs" />
-    <Compile Include="Extensions\Util\AtributoDetalhe.cs" />
+    <Compile Include="Extensions\Util\AttributeDetail.cs" />
     <Compile Include="Extensions\Util\EnumerationExtensions.cs" />
     <Compile Include="Extensions\Util\Indexer.cs" />
     <Compile Include="Extensions\Util\Reflaction.cs" />
@@ -76,7 +76,6 @@
     <Compile Include="Patterns\Ioc\Map.cs" />
     <Compile Include="Patterns\Ioc\RepositoryManager.cs" />
     <Compile Include="Patterns\Ioc\RepositoryType.cs" />
-    <Compile Include="Patterns\Repository\Defaults\RepositoryRest.cs" />
     <Compile Include="Patterns\Repository\Entity\EntityAction.cs" />
     <Compile Include="Patterns\Repository\Entity\EntityBase.cs" />
     <Compile Include="Patterns\Repository\Entity\EntityData.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="Patterns\Specification\Entity\Implementation\AndSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\NotSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\OrSpecification.cs" />
-    <Compile Include="Patterns\Specification\Entity\Implementation\SpecificationEntity.cs" />
     <Compile Include="Patterns\Specification\Entity\ISpecificationEntity.cs" />
     <Compile Include="Patterns\Specification\Entity\PredicateSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\SpecificationEntityExtensions.cs" />

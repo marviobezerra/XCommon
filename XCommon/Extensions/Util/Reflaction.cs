@@ -28,7 +28,7 @@ namespace XCommon.Extensions.Util
             return propriedades.Where(c => c.Name == name).FirstOrDefault();
         }
 
-        public static List<AtributoDetalhe<T>> GetAtributos<T>(this object objeto)
+        public static List<AttributeDetail<T>> GetAtributos<T>(this object objeto)
             where T : Attribute
         {
             var propriedades = objeto.GetType().GetProperties();
@@ -36,10 +36,10 @@ namespace XCommon.Extensions.Util
             var query = from p in propriedades
                         let attr = p.GetCustomAttributes(typeof(T), true)
                         where attr.Count() == 1
-                        select new AtributoDetalhe<T>
+                        select new AttributeDetail<T>
                         {
-                            Propriedade = p,
-                            Atributo = (T)attr.FirstOrDefault()
+                            Property = p,
+                            Attribute = (T)attr.FirstOrDefault()
                         };
 
             return query.ToList();

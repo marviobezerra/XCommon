@@ -1,12 +1,12 @@
-﻿using XCommon.Patterns.Ioc;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Repository.Executes;
 using XCommon.Web.MVC.Filters;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace XCommon.Web.MVC.Controllers
 {
@@ -36,23 +36,23 @@ namespace XCommon.Web.MVC.Controllers
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult GetNew()
+        public virtual async Task<JsonResult> GetNew()
         {
-            return Json(Business.GetNew(), JsonRequestBehavior.DenyGet);
+            return Json(await Business.GetNewAsync(), JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult GetByKey(Guid key)
+        public virtual async Task<JsonResult> GetByKey(Guid key)
         {
-            return Json(Business.GetByKey(key), JsonRequestBehavior.DenyGet);
+            return Json(await Business.GetByKeyAsync(key), JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult GetByFilter(TFilter filter)
+        public virtual async Task<JsonResult> GetByFilter(TFilter filter)
         {
-            return Json(Business.GetByFilter(filter), JsonRequestBehavior.DenyGet);
+            return Json(await Business.GetByFilterAsync(filter), JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
@@ -60,49 +60,41 @@ namespace XCommon.Web.MVC.Controllers
         public virtual JsonResult GetFilterDefault()
         {
             var filter = new TFilter();
-
             return Json(filter, JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult Save(TEntity entity)
+        public virtual async Task<JsonResult> Save(TEntity entity)
         {
             var execute = GetExecute(entity);
-            execute = Business.Save(execute);
+            execute = await Business.SaveAsync(execute);
             return Json(execute, JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult SaveMany(List<TEntity> entitys)
+        public virtual async Task<JsonResult> SaveMany(List<TEntity> entitys)
         {
             var execute = GetExecute(entitys);
-            execute = Business.SaveMany(execute);
+            execute = await Business.SaveManyAsync(execute);
             return Json(execute, JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult Validate(TEntity entity)
+        public virtual async Task<JsonResult> Validate(TEntity entity)
         {
-            return Json(Business.Validate(entity), JsonRequestBehavior.DenyGet);
+            return Json(await Business.ValidateAsync(entity), JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
         [JsonValidateAntiForgeryToken]
-        public virtual JsonResult ValidateMany(List<TEntity> entitys)
+        public virtual async Task<JsonResult> ValidateMany(List<TEntity> entitys)
         {
-            return Json(Business.ValidateMany(entitys), JsonRequestBehavior.DenyGet);
+            return Json(await Business.ValidateManyAsync(entitys), JsonRequestBehavior.DenyGet);
         }
-
-        [HttpPost]
-        [JsonValidateAntiForgeryToken]
-        public virtual JsonResult CanDelete(Guid key)
-        {
-            return Json(Business.CanDelete(key), JsonRequestBehavior.DenyGet);
-        }
-
+        
         protected virtual Execute<TEntity> GetExecute(TEntity entity)
         {
             return new Execute<TEntity>

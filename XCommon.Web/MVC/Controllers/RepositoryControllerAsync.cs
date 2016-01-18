@@ -96,13 +96,6 @@ namespace XCommon.Web.MVC.Controllers
             return Json(await Business.ValidateManyAsync(entitys), JsonRequestBehavior.DenyGet);
         }
 
-        [HttpPost]
-        [JsonValidateAntiForgeryToken]
-        public virtual async Task<JsonResult> CanDelete(Guid key)
-        {
-            return Json(await Business.CanDeleteAsync(key), JsonRequestBehavior.DenyGet);
-        }
-
         protected virtual Execute<TEntity> GetExecute(TEntity entity)
         {
             return new Execute<TEntity>

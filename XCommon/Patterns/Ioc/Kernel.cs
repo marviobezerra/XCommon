@@ -31,9 +31,9 @@ namespace XCommon.Patterns.Ioc
 
         public static void Resolve(object target)
         {
-            foreach (AtributoDetalhe<InjectAttribute> item in target.GetAtributos<InjectAttribute>())
+            foreach (AttributeDetail<InjectAttribute> item in target.GetAtributos<InjectAttribute>())
             {
-                item.Propriedade.SetValue(target, RepositoryManager.Resolve(item.Propriedade.PropertyType, item.Atributo.CanCache, item.Atributo.ForceResolve), null);
+                item.Property.SetValue(target, RepositoryManager.Resolve(item.Property.PropertyType, item.Attribute.CanCache, item.Attribute.ForceResolve), null);
             }
         }
 

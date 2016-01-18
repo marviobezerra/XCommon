@@ -12,14 +12,14 @@ namespace XCommon.Patterns.Repository.Entity
             PageNumber = 1;
             PageSize = 100;
 
-            Ids = new List<Guid>();
+            Keys = new List<Guid>();
         }
 
         [DataMember]
-        public Guid? Id { get; set; }
+        public Guid? Key { get; set; }
 
         [DataMember]
-        public List<Guid> Ids { get; set; }
+        public List<Guid> Keys { get; set; }
 
         [DataMember]
         public int PageNumber { get; set; }
