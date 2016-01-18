@@ -10,6 +10,8 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
 {
     internal class EntityProperty
     {
+        public bool Valid { get; set; }
+
         public bool Nullable { get; set; }
 
         public string NameSpace { get; set; }
@@ -20,7 +22,7 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
 
         public string Type { get; set; }
     }
-    
+
     public abstract class EntityInterface : IExecuteOnBuild
     {
         public EntityInterface(string module, params Assembly[] assemblys)
@@ -39,34 +41,44 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
 
         public void Execute(string assemblyPath)
         {
-            var actions = Assemblys.SelectMany(c => c.GetTypes())
-                .Where(type => !type.IsAbstract)
-                .SelectMany(type => type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy))
-                .Select(x => new EntityProperty
-                {
-                    Class = x.DeclaringType.Name,
-                    NameSpace = GetNameSpace(x.DeclaringType.Namespace),
-                    Name = x.Name,
-                    Nullable = Nullable.GetUnderlyingType(x.PropertyType) != null,
-                    Type = GetPropertyType(x.PropertyType)
-                })
-                .OrderBy(x => x.NameSpace)
-                .ThenBy(x => x.Class)
-                .ToList();
+            List<EntityProperty> actions = new List<EntityProperty>();
 
-            var dir = Directory.GetParent(Path.GetDirectoryName(assemblyPath)).FullName;
-            var file = GetFileName(dir);
+            foreach (var type in Assemblys.SelectMany(c => c.GetTypes()).Where(c => !c.IsAbstract && !c.IsInterface))
+            {
+                foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
+                {
+                    actions.Add(new EntityProperty
+                    {
+                        Class = type.Name,
+                        NameSpace = GetNameSpace(type.Namespace),
+                        Name = property.Name,
+                        Nullable = Nullable.GetUnderlyingType(property.PropertyType) != null,
+                        Type = GetPropertyType(property.PropertyType)
+                    });
+                }
+            }
+
+            var filePath = Directory.GetParent(Path.GetDirectoryName(assemblyPath)).FullName;
+            var file = GetFileName(filePath);
+
+            var commonPath = GetPathCommon(filePath);
+
+            if (!Directory.Exists(commonPath))
+                Directory.CreateDirectory(commonPath);
+
             File.WriteAllText(file, Build(actions), Encoding.UTF8);
+            File.WriteAllBytes(Path.Combine(commonPath, "Guid.ts"), XCommon.Web.Properties.Resources.Guid);
+            File.WriteAllBytes(Path.Combine(commonPath, "Util.ts"), XCommon.Web.Properties.Resources.Util);
         }
 
         protected virtual string GetFileName(string basePath)
         {
-            var dir = Path.Combine(basePath, "Scripts", "Common");
+            return Path.Combine(basePath, "Scripts", "Entity", "EntityInterface.ts");
+        }
 
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            return Path.Combine(dir, "AppEntityInterface.ts");
+        protected virtual string GetPathCommon(string basePath)
+        {
+            return Path.Combine(basePath, "Scripts", "Common");
         }
 
         protected virtual string GetNameSpace(string nameSpace)
@@ -109,6 +121,7 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
                 case "Single":
                     return "number";
                 case "Guid":
+                    return "Guid";
                 case "String":
                     return "string";
                 case "DateTime":
@@ -133,7 +146,7 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
 
                     foreach (var property in actions.Where(c => c.NameSpace == nameSpace && c.Class == className))
                     {
-                        result.AppendLine(string.Format("\t\t{0}: {1}; ", property.Name, property.Type));
+                        result.AppendLine(string.Format("\t\t{0}{1}: {2}; ", property.Name, property.Nullable ? "?" : "", property.Type));
                     }
 
                     result.AppendLine("\t}");
