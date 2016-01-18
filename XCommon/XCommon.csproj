@@ -90,6 +90,7 @@
     <Compile Include="Patterns\Repository\Executes\ExecuteUser.cs" />
     <Compile Include="Patterns\Repository\IRepository.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndIsValid.cs" />
+    <Compile Include="Patterns\Specification\Entity\Implementation\AndIsNotEmpty.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndIsValidRegex.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\AndSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\NotSpecification.cs" />

@@ -33,77 +33,126 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             return result;
         }
 
+        #region Helper
+        private string GetPropertyName<TValue>(Expression<Func<TEntity, TValue>> selector)
+        {
+            var memberSelector = (MemberExpression)selector.Body;
+            var propertyName = (memberSelector as MemberExpression).Member.Name;
+            return propertyName;
+        }
+        #endregion
+
         #region Implentations
-        public SpecificationEntity<TEntity> AndIsEmail<TValue>(Expression<Func<TEntity, TValue>> selector)
+        public SpecificationEntity<TEntity> AndIsEmail(Expression<Func<TEntity, string>> selector)
         {
             return AndIsEmail(selector, null, null);
         }
 
-        public SpecificationEntity<TEntity> AndIsEmail<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        public SpecificationEntity<TEntity> AndIsEmail(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            var memberSelector = (MemberExpression)selector.Body;
-            var property = (memberSelector as MemberExpression).Member.Name;
-            Specifications.Add(new AndIsValidRegex<TEntity>(property, LibraryRegex.Email, message, args));
-
+            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.Email, message, args));
             return this;
         }
 
-        public SpecificationEntity<TEntity> AndIsCPF<TValue>(Expression<Func<TEntity, TValue>> selector)
+        public SpecificationEntity<TEntity> AndIsCPF(Expression<Func<TEntity, string>> selector)
         {
             return AndIsCPF(selector, null, null);
         }
 
-        public SpecificationEntity<TEntity> AndIsCPF<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        public SpecificationEntity<TEntity> AndIsCPF(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            var memberSelector = (MemberExpression)selector.Body;
-            var property = (memberSelector as MemberExpression).Member.Name;
-
-            Specifications.Add(new AndIsValidRegex<TEntity>(property, LibraryRegex.CPF, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.CPF, message, args));
             return this;
         }
 
-        public SpecificationEntity<TEntity> AndIsCNPJ<TValue>(Expression<Func<TEntity, TValue>> selector)
+        public SpecificationEntity<TEntity> AndIsCNPJ(Expression<Func<TEntity, string>> selector)
         {
             return AndIsCNPJ(selector, null, null);
         }
 
-        public SpecificationEntity<TEntity> AndIsCNPJ<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        public SpecificationEntity<TEntity> AndIsCNPJ(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            var memberSelector = (MemberExpression)selector.Body;
-            var property = (memberSelector as MemberExpression).Member.Name;
-
-            Specifications.Add(new AndIsValidRegex<TEntity>(property, LibraryRegex.CNPJ, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.CNPJ, message, args));
             return this;
         }
 
-        public SpecificationEntity<TEntity> AndIsURL<TValue>(Expression<Func<TEntity, TValue>> selector)
+        public SpecificationEntity<TEntity> AndIsURL(Expression<Func<TEntity, string>> selector)
         {
             return AndIsURL(selector, null, null);
         }
 
-        public SpecificationEntity<TEntity> AndIsURL<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        public SpecificationEntity<TEntity> AndIsURL(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            var memberSelector = (MemberExpression)selector.Body;
-            var property = (memberSelector as MemberExpression).Member.Name;
-
-            Specifications.Add(new AndIsValidRegex<TEntity>(property, LibraryRegex.URL, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.URL, message, args));
             return this;
         }
 
-        public SpecificationEntity<TEntity> AndIsPhone<TValue>(Expression<Func<TEntity, TValue>> selector)
+        public SpecificationEntity<TEntity> AndIsPhone(Expression<Func<TEntity, string>> selector)
         {
             return AndIsPhone(selector, null, null);
         }
 
-        public SpecificationEntity<TEntity> AndIsPhone<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        public SpecificationEntity<TEntity> AndIsPhone(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            var memberSelector = (MemberExpression)selector.Body;
-            var property = (memberSelector as MemberExpression).Member.Name;
-
-            Specifications.Add(new AndIsValidRegex<TEntity>(property, LibraryRegex.Phone, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.Phone, message, args));
             return this;
         }
 
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, string>> selector)
+        {
+            return AndIsNotEmpty(selector, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, string>> selector, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.String, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, int?>> selector)
+        {
+            return AndIsNotEmpty(selector, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, int?>> selector, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Int, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, decimal?>> selector)
+        {
+            return AndIsNotEmpty(selector, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, decimal?>> selector, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Decimal, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, DateTime?>> selector)
+        {
+            return AndIsNotEmpty(selector, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, DateTime?>> selector, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Date, message, args));
+            return this;
+        }       
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty<TValue>(Expression<Func<TEntity, TValue>> selector)
+        {
+            return AndIsNotEmpty(selector, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsNotEmpty<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsNotEmpty<TEntity>(GetPropertyName(selector), AndIsNotEmptyType.Object, message, args));
+            return this;
+        }
+        
         public SpecificationEntity<TEntity> AndIsValid(Func<TEntity, bool> selector)
         {
             return AndIsValid(selector, null, null);
