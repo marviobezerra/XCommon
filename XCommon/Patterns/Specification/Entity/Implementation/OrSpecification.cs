@@ -28,7 +28,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             var result2 = Spec2.IsSatisfiedBy(entity, executeInternal2);
             var result = result1 || result2;
 
-            if (!result)
+            if (!result && execute != null)
             {
                 execute.AddMessage(executeInternal1);
                 execute.AddMessage(executeInternal2);

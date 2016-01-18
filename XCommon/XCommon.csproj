@@ -95,8 +95,7 @@
     <Compile Include="Patterns\Specification\Entity\Implementation\NotSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\OrSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\ISpecificationEntity.cs" />
-    <Compile Include="Patterns\Specification\Entity\PredicateSpecification.cs" />
-    <Compile Include="Patterns\Specification\Entity\SpecificationEntityExtensions.cs" />
+    <Compile Include="Patterns\Specification\Entity\Implementation\SpecificationEntity.cs" />
     <Compile Include="Patterns\Specification\Query\Implementation\SpecificationQueryBase.cs" />
     <Compile Include="Patterns\Specification\Query\ISpecificationQuery.cs" />
     <Compile Include="Patterns\Specification\Query\QueryBuilder.cs" />

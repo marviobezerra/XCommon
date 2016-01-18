@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>XCommon.Classic</id>
+    <id>XCommon.Classic.EF</id>
     <version>1.0.0</version>
     <authors>Márvio André B. Silverio</authors>
     <owners>Márvio André B. Silverio</owners>
@@ -9,7 +9,7 @@
     <description>Classic XCommon to Entity Framework library</description>
     <releaseNotes>Classic (Entity Framework) package for XCommon Library.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Prospect Classic</tags>
+    <tags>Prospect Classic EF</tags>
     <dependencies>
       <group targetFramework="net45">
         <dependency id="XCommon" version="1.0.0" />
