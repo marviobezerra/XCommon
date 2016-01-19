@@ -18,11 +18,10 @@ namespace XCommon.Patterns.Repository.Executes
             User = execute.User;
             HasWarning = execute.HasWarning;
             HasErro = execute.HasErro;
-            Message = execute.Message;
             Messages = execute.Messages ?? new List<ExecuteMessage>();
         }
 
-        #region Propriedades
+        #region Propertys
 
         [DataMember]
         public ExecuteUser User { get; set; }
@@ -32,17 +31,15 @@ namespace XCommon.Patterns.Repository.Executes
 
         [DataMember]
         public bool HasWarning { get; private set; }
-
-        public string Message { get; set; }
-
+        
         [DataMember]
         public List<ExecuteMessage> Messages { get; private set; }
         #endregion
 
-        #region Metodos publicos
-        public virtual void AddMessage(ExecuteMessageType tipo, string message, params object[] parametros)
+        #region public
+        public virtual void AddMessage(ExecuteMessageType type, string message, params object[] args)
         {
-            AddMessage(tipo, string.Format(message, parametros));
+            AddMessage(type, string.Format(message, args));
         }
 
         public virtual void AddMessage(ExecuteMessageType type, string message)
@@ -63,9 +60,9 @@ namespace XCommon.Patterns.Repository.Executes
             CheckMessage();
         }
 
-        public virtual void AddMessage(Exception ex, string message, params object[] paramiters)
+        public virtual void AddMessage(Exception ex, string message, params object[] args)
         {
-            AddMessage(ex, string.Format(message, paramiters));
+            AddMessage(ex, string.Format(message, args));
         }
 
         public virtual void AddMessage(params Execute[] execute)
@@ -90,7 +87,7 @@ namespace XCommon.Patterns.Repository.Executes
         }
         #endregion
 
-        #region Metodos privados
+        #region private
         private void CheckMessage()
         {
             if (!HasWarning)

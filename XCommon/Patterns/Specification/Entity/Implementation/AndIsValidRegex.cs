@@ -1,28 +1,28 @@
-﻿using XCommon.Extensions.String;
-using XCommon.Patterns.Repository.Executes;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using System;
+using XCommon.Extensions.String;
+using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
     public class AndIsValidRegex<TEntity> : ISpecificationEntity<TEntity>
     {
         private string RegexExpression { get; set; }
-        private string PropertyName { get; set; }
+        private Expression<Func<TEntity, string>> Selector { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        internal AndIsValidRegex(string propertyName, string regexExpression)
+        internal AndIsValidRegex(Expression<Func<TEntity, string>> propertyName, string regexExpression)
             : this(propertyName, regexExpression, "")
         {
 
         }
 
-        internal AndIsValidRegex(string propertyName, string regexExpression, string message, params object[] args)
+        internal AndIsValidRegex(Expression<Func<TEntity, string>> selector, string regexExpression, string message, params object[] args)
         {
             RegexExpression = regexExpression;
-            PropertyName = propertyName;
+            Selector = selector;
             Message = message;
             MessageArgs = args;
         }
@@ -34,10 +34,22 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var property = typeof(TEntity).GetProperty(PropertyName);
-            var value = (string)property.GetValue(entity);
-            Regex regex = new Regex(RegexExpression);
-            
+            var property = Selector.Compile();
+            var value = property(entity);
+            Regex regex = null;
+
+            try
+            {
+                regex = new Regex(RegexExpression);
+            }
+            catch (Exception ex)
+            {
+                if (execute != null)
+                    execute.AddMessage(ex, Properties.Resources.InvalidRegex, RegexExpression);
+
+                return false;
+            }
+
             var result = value.IsNotEmpty() && regex.IsMatch(value);
 
             if (!result && execute != null)

@@ -151,14 +151,14 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             switch (CompareType)
             {
                 case AndCheckCompareType.BiggerThan:
-                    result = value.BiggerThan(start);
+                    result = value.BiggerThan(start, RemoveTime);
                     break;
                 case AndCheckCompareType.LessThan:
-                    result = value.LessThan(start);
+                    result = value.LessThan(start, RemoveTime);
                     break;
                 case AndCheckCompareType.InRange:
                 default:
-                    result = value.InRange(start, end);
+                    result = value.InRange(start, end, RemoveTime);
 
                     break;
             }
@@ -167,30 +167,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
                 execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
 
             return result;
-        }
-    }
-
-    public class AndCheckValueInt<TEntity> : AndCheckValue<TEntity, int>
-    {
-        internal AndCheckValueInt(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> start, Expression<Func<TEntity, int>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
-            : base(value, start, end, type, compareType, message, args)
-        {
-        }
-    }
-
-    public class AndCheckValueDecimal<TEntity> : AndCheckValue<TEntity, decimal>
-    {
-        internal AndCheckValueDecimal(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> start, Expression<Func<TEntity, decimal>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
-            : base(value, start, end, type, compareType, message, args)
-        {
-        }
-    }
-
-    public class AndCheckValueDate<TEntity> : AndCheckValue<TEntity, DateTime>
-    {
-        internal AndCheckValueDate(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
-            : base(value, start, end, type, compareType, message, args)
-        {
         }
     }
 }

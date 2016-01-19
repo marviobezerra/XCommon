@@ -32,16 +32,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
             return result;
         }
-
-        #region Helper
-        private string GetPropertyName<TValue>(Expression<Func<TEntity, TValue>> selector)
-        {
-            var memberSelector = (MemberExpression)selector.Body;
-            var propertyName = (memberSelector as MemberExpression).Member.Name;
-            return propertyName;
-        }
-        #endregion
-
+        
         #region Custom
         public SpecificationEntity<TEntity> AndIsEmail(Expression<Func<TEntity, string>> selector)
         {
@@ -50,7 +41,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsEmail(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.Email, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, LibraryRegex.Email, message, args));
             return this;
         }
 
@@ -61,7 +52,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsCPF(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.CPF, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, LibraryRegex.CPF, message, args));
             return this;
         }
 
@@ -72,7 +63,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsCNPJ(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.CNPJ, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, LibraryRegex.CNPJ, message, args));
             return this;
         }
 
@@ -83,7 +74,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsURL(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.URL, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, LibraryRegex.URL, message, args));
             return this;
         }
 
@@ -94,7 +85,19 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsPhone(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsValidRegex<TEntity>(GetPropertyName(selector), LibraryRegex.Phone, message, args));
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, LibraryRegex.Phone, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsValidRegex(Expression<Func<TEntity, string>> selector, string regex)
+        {
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, regex, null, null));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsValidRegex(Expression<Func<TEntity, string>> selector, string regex, string message, params object[] args)
+        {
+            Specifications.Add(new AndIsValidRegex<TEntity>(selector, regex, message, args));
             return this;
         }
 
@@ -108,7 +111,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmptyString<TEntity>(selector, message, args));
+            Specifications.Add(new AndIsNotEmpty<TEntity, string>(selector, AndIsNotEmptyType.String, message, args));
             return this;
         }
 
@@ -119,7 +122,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, int?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmptyInt<TEntity>(selector, message, args));
+            Specifications.Add(new AndIsNotEmpty<TEntity, int?>(selector, AndIsNotEmptyType.Int, message, args));
             return this;
         }
 
@@ -130,7 +133,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, decimal?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmptyDecimal<TEntity>(selector, message, args));
+            Specifications.Add(new AndIsNotEmpty<TEntity, decimal?>(selector, AndIsNotEmptyType.Decimal, message, args));
             return this;
         }
 
@@ -141,7 +144,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty(Expression<Func<TEntity, DateTime?>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmptyDate<TEntity>(selector, message, args));
+            Specifications.Add(new AndIsNotEmpty<TEntity, DateTime?>(selector, AndIsNotEmptyType.Date, message, args));
             return this;
         }       
 
@@ -152,7 +155,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public SpecificationEntity<TEntity> AndIsNotEmpty<TValue>(Expression<Func<TEntity, TValue>> selector, string message, params object[] args)
         {
-            Specifications.Add(new AndIsNotEmptyObject<TEntity, TValue>(selector, message, args));
+            Specifications.Add(new AndIsNotEmpty<TEntity, TValue>(selector, AndIsNotEmptyType.Object, message, args));
             return this;
         }
         #endregion

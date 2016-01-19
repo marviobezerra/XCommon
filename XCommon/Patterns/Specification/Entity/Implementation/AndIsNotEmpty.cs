@@ -20,7 +20,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private Expression<Func<TEntity, TValue>> PropertyName { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
-        
+
         internal AndIsNotEmpty(Expression<Func<TEntity, TValue>> propertyName, AndIsNotEmptyType type, string message, params object[] args)
         {
             Type = type;
@@ -65,41 +65,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
                 execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
 
             return result;
-        }
-    }
-
-    public class AndIsNotEmptyInt<TEntity> : AndIsNotEmpty<TEntity, int?>
-    {
-        internal AndIsNotEmptyInt(Expression<Func<TEntity, int?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Int, message, args)
-        {
-        }
-    }
-
-    public class AndIsNotEmptyDecimal<TEntity> : AndIsNotEmpty<TEntity, decimal?>
-    {
-        internal AndIsNotEmptyDecimal(Expression<Func<TEntity, decimal?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Decimal, message, args)
-        {
-        }
-    }
-
-    public class AndIsNotEmptyDate<TEntity> : AndIsNotEmpty<TEntity, DateTime?>
-    {
-        internal AndIsNotEmptyDate(Expression<Func<TEntity, DateTime?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Date, message, args)
-        {
-        }
-    }
-
-    public class AndIsNotEmptyString<TEntity> : AndIsNotEmpty<TEntity, string>
-    {
-        internal AndIsNotEmptyString(Expression<Func<TEntity, string>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.String, message, args)
-        {
-        }
-    }
-
-    public class AndIsNotEmptyObject<TEntity, TValue> : AndIsNotEmpty<TEntity, TValue>
-    {
-        internal AndIsNotEmptyObject(Expression<Func<TEntity, TValue>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Object, message, args)
-        {
         }
     }
 }

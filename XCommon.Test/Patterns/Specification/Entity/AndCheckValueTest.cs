@@ -736,5 +736,71 @@ namespace XCommon.Test.Patterns.Specification.Entity
             Assert.AreEqual(message, execute.Messages[0].Message);
         }
         #endregion
+
+        #region Out of Box
+        [TestMethod]
+        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_OutOfBox()
+        {
+            int value = 5;
+            int max = 4;
+
+            AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
+
+            SpecificationEntity<AndCheckValueEntity> spec = new SpecificationEntity<AndCheckValueEntity>()
+                .AndIsBiggerThan(c => value, c => max);
+
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_OutOfBox()
+        {
+            int value = 4;
+            int max = 5;
+
+            AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
+
+            SpecificationEntity<AndCheckValueEntity> spec = new SpecificationEntity<AndCheckValueEntity>()
+                .AndIsBiggerThan(c => value, c => max);
+
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_Valid_OutOfBox()
+        {
+            int value = 9;
+            int max = 10;
+
+            AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
+
+            SpecificationEntity<AndCheckValueEntity> spec = new SpecificationEntity<AndCheckValueEntity>()
+                .AndIsLessThan(c => value, c => max);
+
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_InValid_OutOfBox()
+        {
+            int value = 11;
+            int max = 10;
+
+            AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
+
+            SpecificationEntity<AndCheckValueEntity> spec = new SpecificationEntity<AndCheckValueEntity>()
+                .AndIsLessThan(c => value, c => max);
+
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.AreEqual(false, result);
+        }
+        #endregion
     }
 }

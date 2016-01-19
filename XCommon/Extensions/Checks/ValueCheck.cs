@@ -5,9 +5,9 @@ namespace XCommon.Extensions.Checks
     public static class ValueCheck
     {
         #region BiggerThan
-        public static bool BiggerThan(this DateTime value, DateTime reference, bool removeMinutes = false)
+        public static bool BiggerThan(this DateTime value, DateTime reference, bool removeTime = false)
         {
-            if (removeMinutes)
+            if (removeTime)
             {
                 return value.Date > reference.Date;
             }
@@ -27,9 +27,9 @@ namespace XCommon.Extensions.Checks
         #endregion
 
         #region LessThan
-        public static bool LessThan(this DateTime value, DateTime reference, bool removeMinutes = false)
+        public static bool LessThan(this DateTime value, DateTime reference, bool removeTime = false)
         {
-            if (removeMinutes)
+            if (removeTime)
             {
                 return value.Date < reference.Date;
             }
@@ -49,9 +49,9 @@ namespace XCommon.Extensions.Checks
         #endregion
 
         #region InRange
-        public static bool InRange(this DateTime value, DateTime start, DateTime end, bool removeMinutes = false)
+        public static bool InRange(this DateTime value, DateTime start, DateTime end, bool removeTime = false)
         {
-            if (removeMinutes)
+            if (removeTime)
             {
                 return (start.Date <= value.Date) && (value.Date <= end.Date);
             }
