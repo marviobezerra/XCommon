@@ -50,8 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Patterns\Specification\Entity\AndCheckValueTest.cs" />
     <Compile Include="Patterns\Specification\Entity\AndIsNotEmptyTest.cs" />
-    <Compile Include="Patterns\Specification\Helper\HelperSpecificationEntity.cs" />
+    <Compile Include="Patterns\Specification\Helper\AndCheckValueEntity.cs" />
+    <Compile Include="Patterns\Specification\Helper\AndIsNotEmptyEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

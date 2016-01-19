@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using XCommon.Patterns.Repository.Executes;
+using XCommon.Extensions.Converters;
+using XCommon.Extensions.Checks;
+using XCommon.Extensions.String;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
@@ -14,46 +14,183 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         Date
     }
 
-    public class AndCheckValue<TEntity> : ISpecificationEntity<TEntity>
+    public enum AndCheckCompareType
+    {
+        BiggerThan,
+        LessThan,
+        InRange
+    }
+
+    public class AndCheckValue<TEntity, TValue> : ISpecificationEntity<TEntity>
     {
         private AndCheckValueType Type { get; set; }
-        private string PropertyName { get; set; }
+        private AndCheckCompareType CompareType { get; set; }
+        private Expression<Func<TEntity, TValue>> PropertyValue { get; set; }
+        private Expression<Func<TEntity, TValue>> PropertyStart { get; set; }
+        private Expression<Func<TEntity, TValue>> PropertyEnd { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
-
-        internal AndCheckValue(string propertyName, AndCheckValueType type)
-            : this(propertyName, type, "")
+        private bool RemoveTime { get; set; }
+        
+        internal AndCheckValue(Expression<Func<TEntity, TValue>> value, Expression<Func<TEntity, TValue>> start, Expression<Func<TEntity, TValue>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
+            : this(value, start, end, type, compareType, false, message, args)
         {
-
+            
         }
 
-        internal AndCheckValue(string propertyName, AndCheckValueType type, string message, params object[] args)
+        internal AndCheckValue(Expression<Func<TEntity, TValue>> value, Expression<Func<TEntity, TValue>> start, Expression<Func<TEntity, TValue>> end, AndCheckValueType type, AndCheckCompareType compareType, bool removeTime, string message, params object[] args)
         {
             Type = type;
-            PropertyName = propertyName;
+            CompareType = compareType;
+            PropertyValue = value;
+            PropertyStart = start;
+            PropertyEnd = end;
             Message = message;
             MessageArgs = args;
+            RemoveTime = removeTime;
         }
 
         public bool IsSatisfiedBy(TEntity entity)
         {
-            return IsSatisfiedBy(entity, null);
+            return IsSatisfiedBy(entity, new Execute());
         }
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var property = typeof(TEntity).GetProperty(PropertyName);
-            var value = property.GetValue(entity);
+            switch (Type)
+            {
+                case AndCheckValueType.Int:
+                    return IsSatisfiedByInt(entity, execute);
+                case AndCheckValueType.Decimal:
+                    return IsSatisfiedByDecimal(entity, execute);
+                case AndCheckValueType.Date:
+                default:
+                    return IsSatisfiedByDate(entity, execute);
+            }
+        }
+
+        private TValue Resolve(Expression<Func<TEntity, TValue>> expression, TEntity entity)
+        {
+            var result = default(TValue);
+
+            if (expression == null)
+                return result;
+
+            var func = expression.Compile();
+            var value = func(entity);
+
+            return value;
+        }
+
+        private bool IsSatisfiedByInt(TEntity entity, Execute execute)
+        {
+            int value = Resolve(PropertyValue, entity).ToInt32();
+            int start = Resolve(PropertyStart, entity).ToInt32();
+            int end = Resolve(PropertyEnd, entity).ToInt32();
 
             bool result = true;
 
-            if (value is int)
+            switch (CompareType)
             {
+                case AndCheckCompareType.BiggerThan:
+                    result = value.BiggerThan(start);
+                    break;
+                case AndCheckCompareType.LessThan:
+                    result = value.LessThan(start);
+                    break;
+                case AndCheckCompareType.InRange:
+                default:
+                    result = value.InRange(start, end);
 
-
+                    break;
             }
 
+            if (!result && execute != null && Message.IsNotEmpty())
+                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+
             return result;
+        }
+
+        private bool IsSatisfiedByDecimal(TEntity entity, Execute execute)
+        {
+            decimal value = Resolve(PropertyValue, entity).ToDecimal();
+            decimal start = Resolve(PropertyStart, entity).ToDecimal();
+            decimal end = Resolve(PropertyEnd, entity).ToDecimal();
+
+            bool result = true;
+
+            switch (CompareType)
+            {
+                case AndCheckCompareType.BiggerThan:
+                    result = value.BiggerThan(start);
+                    break;
+                case AndCheckCompareType.LessThan:
+                    result = value.LessThan(start);
+                    break;
+                case AndCheckCompareType.InRange:
+                default:
+                    result = value.InRange(start, end);
+
+                    break;
+            }
+
+            if (!result && execute != null && Message.IsNotEmpty())
+                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+
+            return result;
+        }
+
+        private bool IsSatisfiedByDate(TEntity entity, Execute execute)
+        {
+            DateTime value = Resolve(PropertyValue, entity).ToDateTime();
+            DateTime start = Resolve(PropertyStart, entity).ToDateTime();
+            DateTime end = Resolve(PropertyEnd, entity).ToDateTime();
+
+            bool result = true;
+
+            switch (CompareType)
+            {
+                case AndCheckCompareType.BiggerThan:
+                    result = value.BiggerThan(start);
+                    break;
+                case AndCheckCompareType.LessThan:
+                    result = value.LessThan(start);
+                    break;
+                case AndCheckCompareType.InRange:
+                default:
+                    result = value.InRange(start, end);
+
+                    break;
+            }
+
+            if (!result && execute != null && Message.IsNotEmpty())
+                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+
+            return result;
+        }
+    }
+
+    public class AndCheckValueInt<TEntity> : AndCheckValue<TEntity, int>
+    {
+        internal AndCheckValueInt(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> start, Expression<Func<TEntity, int>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
+            : base(value, start, end, type, compareType, message, args)
+        {
+        }
+    }
+
+    public class AndCheckValueDecimal<TEntity> : AndCheckValue<TEntity, decimal>
+    {
+        internal AndCheckValueDecimal(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> start, Expression<Func<TEntity, decimal>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
+            : base(value, start, end, type, compareType, message, args)
+        {
+        }
+    }
+
+    public class AndCheckValueDate<TEntity> : AndCheckValue<TEntity, DateTime>
+    {
+        internal AndCheckValueDate(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
+            : base(value, start, end, type, compareType, message, args)
+        {
         }
     }
 }

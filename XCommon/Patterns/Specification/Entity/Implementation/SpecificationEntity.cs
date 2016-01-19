@@ -158,7 +158,137 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         #endregion
 
         #region AndCheckValue
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> compareTo)
+        {
+            return AndIsBiggerThan(value, compareTo, null, null);
+        }
 
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, int>(value, compareTo, null, AndCheckValueType.Int, AndCheckCompareType.BiggerThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> compareTo)
+        {
+            return AndIsBiggerThan(value, compareTo, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, decimal>(value, compareTo, null, AndCheckValueType.Decimal, AndCheckCompareType.BiggerThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo)
+        {
+            return AndIsBiggerThan(value, compareTo, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, compareTo, null, AndCheckValueType.Date, AndCheckCompareType.BiggerThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, bool removeTime)
+        {
+            return AndIsBiggerThan(value, compareTo, removeTime, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsBiggerThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, bool removeTime, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, compareTo, null, AndCheckValueType.Date, AndCheckCompareType.BiggerThan, removeTime, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> compareTo)
+        {
+            return AndIsLessThan(value, compareTo, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, int>(value, compareTo, null, AndCheckValueType.Int, AndCheckCompareType.LessThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> compareTo)
+        {
+            return AndIsLessThan(value, compareTo, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, decimal>(value, compareTo, null, AndCheckValueType.Decimal, AndCheckCompareType.LessThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo)
+        {
+            return AndIsLessThan(value, compareTo, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, compareTo, null, AndCheckValueType.Date, AndCheckCompareType.LessThan, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, bool removeTime)
+        {
+            return AndIsLessThan(value, compareTo, removeTime, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsLessThan(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> compareTo, bool removeTime, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, compareTo, null, AndCheckValueType.Date, AndCheckCompareType.LessThan, removeTime, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> start, Expression<Func<TEntity, int>> end)
+        {
+            return AndIsInRange(value, start, end, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, int>> value, Expression<Func<TEntity, int>> start, Expression<Func<TEntity, int>> end, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, int>(value, start, end, AndCheckValueType.Int, AndCheckCompareType.InRange, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> start, Expression<Func<TEntity, decimal>> end)
+        {
+            return AndIsInRange(value, start, end, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, decimal>> value, Expression<Func<TEntity, decimal>> start, Expression<Func<TEntity, decimal>> end, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, decimal>(value, start, end, AndCheckValueType.Decimal, AndCheckCompareType.InRange, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end)
+        {
+            return AndIsInRange(value, start, end, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, start, end, AndCheckValueType.Date, AndCheckCompareType.InRange, message, args));
+            return this;
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end, bool removeTime)
+        {
+            return AndIsInRange(value, start, end, removeTime, null, null);
+        }
+
+        public SpecificationEntity<TEntity> AndIsInRange(Expression<Func<TEntity, DateTime>> value, Expression<Func<TEntity, DateTime>> start, Expression<Func<TEntity, DateTime>> end, bool removeTime, string message, params object[] args)
+        {
+            Specifications.Add(new AndCheckValue<TEntity, DateTime>(value, start, end, AndCheckValueType.Date, AndCheckCompareType.InRange, removeTime, message, args));
+            return this;
+        }
         #endregion
 
         #region Others

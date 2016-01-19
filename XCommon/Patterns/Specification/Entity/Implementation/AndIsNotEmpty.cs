@@ -20,13 +20,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private Expression<Func<TEntity, TValue>> PropertyName { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
-
-        internal AndIsNotEmpty(Expression<Func<TEntity, TValue>> propertyName, AndIsNotEmptyType type)
-            : this(propertyName, type, "")
-        {
-
-        }
-
+        
         internal AndIsNotEmpty(Expression<Func<TEntity, TValue>> propertyName, AndIsNotEmptyType type, string message, params object[] args)
         {
             Type = type;
@@ -76,10 +70,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
     public class AndIsNotEmptyInt<TEntity> : AndIsNotEmpty<TEntity, int?>
     {
-        internal AndIsNotEmptyInt(Expression<Func<TEntity, int?>> propertyName) : base(propertyName, AndIsNotEmptyType.Int)
-        {
-        }
-
         internal AndIsNotEmptyInt(Expression<Func<TEntity, int?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Int, message, args)
         {
         }
@@ -87,10 +77,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
     public class AndIsNotEmptyDecimal<TEntity> : AndIsNotEmpty<TEntity, decimal?>
     {
-        internal AndIsNotEmptyDecimal(Expression<Func<TEntity, decimal?>> propertyName) : base(propertyName, AndIsNotEmptyType.Decimal)
-        {
-        }
-
         internal AndIsNotEmptyDecimal(Expression<Func<TEntity, decimal?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Decimal, message, args)
         {
         }
@@ -98,10 +84,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
     public class AndIsNotEmptyDate<TEntity> : AndIsNotEmpty<TEntity, DateTime?>
     {
-        internal AndIsNotEmptyDate(Expression<Func<TEntity, DateTime?>> propertyName) : base(propertyName, AndIsNotEmptyType.Date)
-        {
-        }
-
         internal AndIsNotEmptyDate(Expression<Func<TEntity, DateTime?>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Date, message, args)
         {
         }
@@ -109,10 +91,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
     public class AndIsNotEmptyString<TEntity> : AndIsNotEmpty<TEntity, string>
     {
-        internal AndIsNotEmptyString(Expression<Func<TEntity, string>> propertyName) : base(propertyName, AndIsNotEmptyType.String)
-        {
-        }
-
         internal AndIsNotEmptyString(Expression<Func<TEntity, string>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.String, message, args)
         {
         }
@@ -120,10 +98,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
     public class AndIsNotEmptyObject<TEntity, TValue> : AndIsNotEmpty<TEntity, TValue>
     {
-        internal AndIsNotEmptyObject(Expression<Func<TEntity, TValue>> propertyName) : base(propertyName, AndIsNotEmptyType.Object)
-        {
-        }
-
         internal AndIsNotEmptyObject(Expression<Func<TEntity, TValue>> propertyName, string message, params object[] args) : base(propertyName, AndIsNotEmptyType.Object, message, args)
         {
         }

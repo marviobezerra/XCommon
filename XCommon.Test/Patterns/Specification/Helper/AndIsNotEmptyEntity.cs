@@ -7,9 +7,9 @@ namespace XCommon.Test.Patterns.Specification.Helper
         public int Id { get; set; }
     }
 
-    public class HelperSpecificationEntity
+    public class AndIsNotEmptyEntity
     {
-        public HelperSpecificationEntity(bool initNull)
+        public AndIsNotEmptyEntity(bool initNull)
         {
             if (initNull)
                 return;
