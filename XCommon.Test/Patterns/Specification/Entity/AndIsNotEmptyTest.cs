@@ -9,6 +9,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
     public class AndIsNotEmptyTest
     {
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -20,6 +21,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -31,6 +33,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -42,6 +45,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -53,6 +57,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_Without_Execute()
         {
 
@@ -65,6 +70,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -76,6 +82,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -87,6 +94,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -98,6 +106,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -113,6 +122,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -128,6 +138,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -143,6 +154,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -158,6 +170,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -175,6 +188,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -192,6 +206,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -209,6 +224,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -224,9 +240,9 @@ namespace XCommon.Test.Patterns.Specification.Entity
             Assert.AreEqual(message, execute.Messages[0].Message);
             Assert.AreEqual(1, execute.Messages.Count);
         }
-
-
+        
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -245,6 +261,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -263,6 +280,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -281,6 +299,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute_Format()
         {
             Execute execute = new Execute();

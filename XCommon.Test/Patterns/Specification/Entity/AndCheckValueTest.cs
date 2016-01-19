@@ -5,11 +5,12 @@ using XCommon.Test.Patterns.Specification.Helper;
 
 namespace XCommon.Test.Patterns.Specification.Entity
 {
-    [TestClass]
+    [TestClass]    
     public class AndCheckValueTest
     {
         #region BiggerThan
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -23,6 +24,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -36,6 +38,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -49,6 +52,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -62,6 +66,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -75,6 +80,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -88,6 +94,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -101,6 +108,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -114,6 +122,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -131,6 +140,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -149,6 +159,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -166,6 +177,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_With_Execute()
         {
             Execute execute = new Execute();
@@ -183,6 +195,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -200,6 +213,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -217,6 +231,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -234,6 +249,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_With_Execute()
         {
             Execute execute = new Execute();
@@ -253,6 +269,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
         #region LessThan
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -266,6 +283,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -279,6 +297,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -292,6 +311,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -305,6 +325,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -318,6 +339,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -331,6 +353,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -344,6 +367,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -357,6 +381,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -374,6 +399,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -392,6 +418,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -409,6 +436,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -426,6 +454,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -443,6 +472,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -460,6 +490,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -477,6 +508,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -496,6 +528,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
         #region InRange
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -509,6 +542,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -522,6 +556,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -535,6 +570,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -548,6 +584,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -561,6 +598,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -574,6 +612,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -587,6 +626,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -600,6 +640,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -617,6 +658,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -635,6 +677,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -652,6 +695,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -669,6 +713,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -686,6 +731,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -703,6 +749,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -720,6 +767,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -739,6 +787,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
         #region Out of Box
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_OutOfBox()
         {
             int value = 5;
@@ -755,6 +804,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_OutOfBox()
         {
             int value = 4;
@@ -771,6 +821,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_Valid_OutOfBox()
         {
             int value = 9;
@@ -787,6 +838,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndCheckValue")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_InValid_OutOfBox()
         {
             int value = 11;

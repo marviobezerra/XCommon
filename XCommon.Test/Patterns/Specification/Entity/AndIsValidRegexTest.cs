@@ -14,6 +14,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
     public class AndIsValidRegexTest
     {
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_Email_Valid_With_Execute()
         {
             string regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -35,6 +36,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_Email_Valid_Without_Execute()
         {
             string regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -52,6 +54,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_Email_InValid_With_Execute()
         {
             string regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -75,6 +78,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_Email_InValid_Without_Execute()
         {
             string regex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -93,6 +97,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_InvalidRegex_With_Execute()
         {
             string regex = @"[0-9]++";
@@ -111,6 +116,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         }
 
         [TestMethod]
+        [TestCategory("Patterns Specification Entity AndIsValidRegex")]
         public void Patterns_Specification_Entity_AndIsValidRegex_InvalidRegex_Without_Execute()
         {
             string regex = @"[0-9]++";
