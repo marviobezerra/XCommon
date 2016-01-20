@@ -9,9 +9,19 @@ namespace XCommon.Patterns.Ioc
 
         static RepositoryManager()
         {
+            Init();
+        }
+
+        internal static void Init()
+        {
             Repository = new Dictionary<Type, RepositoryType>();
         }
 
+        internal static int GetMappedCount()
+        {
+            return Repository.Count;
+        }
+        
         internal static void Add(Type contract, Type concret, bool overrideExistence, bool canCache, object[] constructorParams)
         {
             Remove(contract);

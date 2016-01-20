@@ -1,16 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XCommon.Patterns.Repository.Executes;
+﻿using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
+using Xunit;
 
 namespace XCommon.Test.Patterns.Specification.Entity
 {
-    [TestClass]    
     public class AndCheckValueTest
     {
         #region BiggerThan
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -20,11 +19,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -34,11 +33,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -48,11 +47,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, true);
@@ -62,11 +61,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -76,11 +75,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -90,11 +89,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -104,11 +103,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.BiggerThan, false);
@@ -118,11 +117,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -134,13 +133,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -153,13 +152,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -171,13 +170,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_With_Execute()
         {
             Execute execute = new Execute();
@@ -189,13 +188,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -207,13 +206,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -225,13 +224,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -243,13 +242,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_With_Execute()
         {
             Execute execute = new Execute();
@@ -261,15 +260,15 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
         #endregion
 
         #region LessThan
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -279,11 +278,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -293,11 +292,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -307,11 +306,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, true);
@@ -321,11 +320,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -335,11 +334,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -349,11 +348,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -363,11 +362,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.LessThan, false);
@@ -377,11 +376,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -393,13 +392,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -412,13 +411,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -430,13 +429,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -448,13 +447,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -466,13 +465,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -484,13 +483,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -502,13 +501,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -520,15 +519,15 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
         #endregion
 
         #region InRange
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -538,11 +537,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -552,11 +551,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -566,11 +565,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, true);
@@ -580,11 +579,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -594,11 +593,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -608,11 +607,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -622,11 +621,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_Without_Execute()
         {
             AndCheckValueEntity entity = new AndCheckValueEntity(AndCheckCompareType.InRange, false);
@@ -636,11 +635,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -652,13 +651,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -671,13 +670,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -689,13 +688,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -707,13 +706,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
-            Assert.AreEqual(0, execute.Messages.Count);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
+            Assert.Equal(0, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -725,13 +724,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -743,13 +742,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_With_Execute()
         {
             Execute execute = new Execute();
@@ -761,13 +760,13 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
         public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_With_Execute()
         {
             Execute execute = new Execute();
@@ -779,15 +778,15 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity, execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
         }
         #endregion
 
         #region Out of Box
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_OutOfBox()
         {
             int value = 5;
@@ -800,11 +799,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_OutOfBox()
         {
             int value = 4;
@@ -817,11 +816,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_Valid_OutOfBox()
         {
             int value = 9;
@@ -834,11 +833,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndCheckValue")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
         public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_InValid_OutOfBox()
         {
             int value = 11;
@@ -851,7 +850,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
         #endregion
     }

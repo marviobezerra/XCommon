@@ -56,5 +56,15 @@ namespace XCommon.Patterns.Ioc
         {
             return RepositoryManager.Exists(typeof(TContract));
         }
+
+        public static void Reset()
+        {
+            RepositoryManager.Init();
+        }
+
+        public static int GetMappedCount()
+        {
+            return RepositoryManager.GetMappedCount();
+        }
     }
 }

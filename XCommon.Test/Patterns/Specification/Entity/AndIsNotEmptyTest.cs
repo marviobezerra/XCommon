@@ -1,15 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XCommon.Patterns.Repository.Executes;
+﻿using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
+using Xunit;
 
 namespace XCommon.Test.Patterns.Specification.Entity
 {
-    [TestClass]
     public class AndIsNotEmptyTest
     {
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -17,11 +16,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false));
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -29,11 +28,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false));
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -41,11 +40,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false));
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -53,11 +52,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false));
 
-            Assert.AreEqual(true, result);
+            Assert.Equal(true, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_Without_Execute()
         {
 
@@ -66,11 +65,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true));
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -78,11 +77,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true));
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -90,11 +89,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true));
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_Without_Execute()
         {
             SpecificationEntity<AndIsNotEmptyEntity> spec = new SpecificationEntity<AndIsNotEmptyEntity>()
@@ -102,11 +101,11 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true));
 
-            Assert.AreEqual(false, result);
+            Assert.Equal(false, result);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -117,12 +116,12 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false), execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -133,12 +132,12 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false), execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -149,12 +148,12 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false), execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_With_Execute()
         {
             Execute execute = new Execute();
@@ -165,12 +164,12 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(false), execute);
 
-            Assert.AreEqual(true, result);
-            Assert.AreEqual(false, execute.HasErro);
+            Assert.Equal(true, result);
+            Assert.Equal(false, execute.HasErro);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -181,14 +180,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -199,14 +198,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -217,14 +216,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute()
         {
             Execute execute = new Execute();
@@ -235,14 +234,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(message, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(message, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
         
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -254,14 +253,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(messageExpected, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(messageExpected, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -273,14 +272,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(messageExpected, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(messageExpected, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -292,14 +291,14 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(messageExpected, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(messageExpected, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
 
-        [TestMethod]
-        [TestCategory("Patterns Specification Entity AndIsNotEmpty")]
+        [Fact]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
         public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute_Format()
         {
             Execute execute = new Execute();
@@ -311,10 +310,10 @@ namespace XCommon.Test.Patterns.Specification.Entity
 
             var result = spec.IsSatisfiedBy(new AndIsNotEmptyEntity(true), execute);
 
-            Assert.AreEqual(false, result);
-            Assert.AreEqual(true, execute.HasErro);
-            Assert.AreEqual(messageExpected, execute.Messages[0].Message);
-            Assert.AreEqual(1, execute.Messages.Count);
+            Assert.Equal(false, result);
+            Assert.Equal(true, execute.HasErro);
+            Assert.Equal(messageExpected, execute.Messages[0].Message);
+            Assert.Equal(1, execute.Messages.Count);
         }
     }
 }
