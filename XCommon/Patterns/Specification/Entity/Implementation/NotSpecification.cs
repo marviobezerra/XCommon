@@ -2,7 +2,7 @@
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
-    public class NotSpecification<TEntity> : ISpecificationEntity<TEntity>
+    internal class NotSpecification<TEntity> : ISpecificationEntity<TEntity>
     {
         private ISpecificationEntity<TEntity> Spec1 { get; set; }
         private ISpecificationEntity<TEntity> Spec2 { get; set; }

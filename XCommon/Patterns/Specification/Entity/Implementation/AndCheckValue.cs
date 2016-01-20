@@ -21,7 +21,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         InRange
     }
 
-    public class AndCheckValue<TEntity, TValue> : ISpecificationEntity<TEntity>
+    internal class AndCheckValue<TEntity, TValue> : ISpecificationEntity<TEntity>
     {
         private AndCheckValueType Type { get; set; }
         private AndCheckCompareType CompareType { get; set; }

@@ -1,20 +1,21 @@
-﻿using XCommon.Patterns.Repository.Executes;
-using System;
+﻿using System;
+using System.Linq.Expressions;
+using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
-    public class AndIsValid<TEntity> : ISpecificationEntity<TEntity>
+    internal class AndIsValid<TEntity> : ISpecificationEntity<TEntity>
     {
-        private Func<TEntity, bool> Selector { get; set; }
+        private Expression<Func<TEntity, bool>> Selector { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        internal AndIsValid(Func<TEntity, bool> selector)
+        internal AndIsValid(Expression<Func<TEntity, bool>> selector)
             : this(selector, string.Empty)
         {
         }
 
-        internal AndIsValid(Func<TEntity, bool> selector, string message, params object[] args)
+        internal AndIsValid(Expression<Func<TEntity, bool>> selector, string message, params object[] args)
         {
             Selector = selector;
             Message = message;
@@ -28,12 +29,13 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var result = Selector(entity);
+            var func = Selector.Compile();
+            var value = func(entity);
 
-            if (!result && execute != null)
+            if (!value && execute != null)
                 execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
 
-            return result;
+            return value;
         }
     }
 }

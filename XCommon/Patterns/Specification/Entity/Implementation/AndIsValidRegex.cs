@@ -6,7 +6,7 @@ using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
-    public class AndIsValidRegex<TEntity> : ISpecificationEntity<TEntity>
+    internal class AndIsValidRegex<TEntity> : ISpecificationEntity<TEntity>
     {
         private string RegexExpression { get; set; }
         private Expression<Func<TEntity, string>> Selector { get; set; }

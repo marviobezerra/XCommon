@@ -1,5 +1,6 @@
 ﻿using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity.Implementation;
+using XCommon.Patterns.Specification.Entity.Extensions;
 using XCommon.Test.Patterns.Specification.Helper;
 using Xunit;
 

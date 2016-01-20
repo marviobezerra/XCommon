@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XCommon.Patterns.Specification.Entity.Implementation;
 
 namespace XCommon.Test.Patterns.Specification.Helper
 {
-    public class AndCheckValueEntity
+    public class SampleValueEntity
     {
-        public AndCheckValueEntity(AndCheckCompareType compareType, bool valid)
+        public SampleValueEntity(AndCheckCompareType compareType, bool valid)
         {
             switch (compareType)
             {

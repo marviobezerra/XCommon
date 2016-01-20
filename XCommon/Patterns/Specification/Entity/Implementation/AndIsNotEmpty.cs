@@ -14,7 +14,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         Object
     }
 
-    public class AndIsNotEmpty<TEntity, TValue> : ISpecificationEntity<TEntity>
+    internal class AndIsNotEmpty<TEntity, TValue> : ISpecificationEntity<TEntity>
     {
         private AndIsNotEmptyType Type { get; set; }
         private Expression<Func<TEntity, TValue>> PropertyName { get; set; }
