@@ -52,7 +52,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
             var result = value.IsNotEmpty() && regex.IsMatch(value);
 
-            if (!result && execute != null)
+            if (!result && execute != null && !string.IsNullOrEmpty(Message))
                 execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
 
             return result;

@@ -14,7 +14,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsEmail<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            return specification.AndIsEmail(selector, false, null, null);
+            return specification.AndIsEmail(selector, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsEmail<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, bool stopIfError, string message, params object[] args)
@@ -30,7 +30,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsCPF<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            return specification.AndIsCPF(selector, false, null, null);
+            return specification.AndIsCPF(selector, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsCPF<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, bool stopIfError, string message, params object[] args)
@@ -46,7 +46,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsCNPJ<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            return specification.AndIsCNPJ(selector, false, null, null);
+            return specification.AndIsCNPJ(selector, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsCNPJ<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, bool stopIfError, string message, params object[] args)
@@ -62,7 +62,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsURL<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            return specification.AndIsURL(selector, false, null, null);
+            return specification.AndIsURL(selector, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsURL<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, bool stopIfError, string message, params object[] args)
@@ -78,7 +78,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsPhone<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string message, params object[] args)
         {
-            return specification.AndIsPhone(selector, false, null, null);
+            return specification.AndIsPhone(selector, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsPhone<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, bool stopIfError, string message, params object[] args)
@@ -94,7 +94,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 
         public static SpecificationEntity<TEntity> AndIsValidRegex<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string regex, string message, params object[] args)
         {
-            return specification.AndIsValidRegex(selector, regex, false, null, null);
+            return specification.AndIsValidRegex(selector, regex, false, message, args);
         }
 
         public static SpecificationEntity<TEntity> AndIsValidRegex<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, string>> selector, string regex, bool stopIfError, string message, params object[] args)

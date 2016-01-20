@@ -17,10 +17,11 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
     {
         public SpecificationEntity()
         {
-            Specifications = new List<SpecificationList<TEntity>>();
+            SpecificationsList = new List<SpecificationList<TEntity>>();
+            Add(new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, "Entity {0} can't be null", typeof(TEntity).Name), true);
         }
 
-        private List<SpecificationList<TEntity>> Specifications { get; set; }
+        private List<SpecificationList<TEntity>> SpecificationsList { get; set; }
 
         public bool IsSatisfiedBy(TEntity entity)
         {
@@ -31,7 +32,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         {
             bool result = true;
 
-            foreach (var item in this.Specifications)
+            foreach (var item in SpecificationsList)
             {
                 var satisfied = item.Specification.IsSatisfiedBy(entity, execute);
                 result = result && satisfied;
@@ -45,7 +46,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public void Add(ISpecificationEntity<TEntity> specificartion, bool stopIfError = false)
         {
-            Specifications.Add(new SpecificationList<TEntity> { Specification = specificartion, StopIfError = stopIfError });
+            SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specificartion, StopIfError = stopIfError });
         }        
     }
 }

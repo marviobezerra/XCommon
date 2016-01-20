@@ -1,6 +1,7 @@
-﻿using XCommon.Patterns.Repository.Executes;
-using XCommon.Patterns.Specification.Entity.Implementation;
+﻿using System;
+using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity.Extensions;
+using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
 using Xunit;
 
@@ -8,264 +9,69 @@ namespace XCommon.Test.Patterns.Specification.Entity
 {
     public class AndCheckValueTest
     {
-        #region BiggerThan
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData(0, 0, false)]
+        [InlineData(5, 6, false)]
+        [InlineData(-1, 0, false)]
+        [InlineData(-1, -1, false)]
+        [InlineData(-10, -1, false)]
+        [InlineData(1, 0, true)]
+        [InlineData(10, 0, true)]
+        [InlineData(-1, -2, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Int")]
+        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_Int_Without_Execute(int value, int compare, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
+            BiggerThanEntity<int> entity = new BiggerThanEntity<int>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.IntValue, c => c.IntStart);
+            var spec = new SpecificationEntity<BiggerThanEntity<int>>()
+                .AndIsBiggerThan(c => c.Value, c => c.Compare);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData(0, 0, false)]
+        [InlineData(0, 0.1, false)]
+        [InlineData(0.001, 0.002, false)]
+        [InlineData(-0.002, -0.002, false)]
+        [InlineData(-1, 0, false)]
+        [InlineData(-1, -1, false)]
+        [InlineData(1, 0, true)]
+        [InlineData(10, 9.999, true)]
+        [InlineData(0.1, 0, true)]
+        [InlineData(0.002, 0.001, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Decimal")]
+        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_Decimal_Without_Execute(decimal value, decimal compare, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
+            BiggerThanEntity<decimal> entity = new BiggerThanEntity<decimal>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DecimalValue, c => c.DecimalStart);
+            var spec = new SpecificationEntity<BiggerThanEntity<decimal>>()
+                .AndIsBiggerThan(c => c.Value, c => c.Compare);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData("2015-01-01", "2015-01-01", false, false)]
+        [InlineData("2015-01-01 00:00:00", "2015-01-01 00:00:01", false, false)]
+        [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", false, true)]
+        [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", true, false)]
+        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan DateTime")]
+        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_DateTime_Without_Execute(DateTime value, DateTime compare, bool valid, bool removeTime)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
+            BiggerThanEntity<DateTime> entity = new BiggerThanEntity<DateTime>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart);
+            var spec = new SpecificationEntity<BiggerThanEntity<DateTime>>()
+                .AndIsBiggerThan(c => c.Value, c => c.Compare, removeTime);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, true);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.IntValue, c => c.IntStart);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DecimalValue, c => c.DecimalStart);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, true);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-            string message = "Int Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.IntValue, c => c.IntStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-            string message = "Decimal Valid";
-
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DecimalValue, c => c.DecimalStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_Valid_RemoveTime_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-            string message = "Int InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.IntValue, c => c.IntStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_BiggerThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-            string message = "Decimal InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DecimalValue, c => c.DecimalStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-            string message = "DateTime InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_BiggerThan_InValid_RemoveTime_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, false);
-            string message = "Date InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => c.DateTimeValue, c => c.DateTimeStart, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-        #endregion
 
         #region LessThan
         [Fact]
