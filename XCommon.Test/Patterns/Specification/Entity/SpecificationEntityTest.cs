@@ -10,8 +10,8 @@ namespace XCommon.Test.Patterns.Specification.Entity
         [Fact]
         public void Patterns_Specification_Entity_SpecificationEntity_Whit_Null_Entity()
         {
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsNotEmpty(c => c.IntEnd);
+            SpecificationEntity<GenerictValueEntity<int>> spec = new SpecificationEntity<GenerictValueEntity<int>>()
+                .AndIsNotEmpty(c => c.Value);
 
             var result = spec.IsSatisfiedBy(null);            
             Assert.False(result);

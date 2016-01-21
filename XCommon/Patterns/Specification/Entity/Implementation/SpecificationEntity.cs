@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using XCommon.Patterns.Repository.Executes;
-using XCommon.Util;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
@@ -10,7 +7,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
     {
         public ISpecificationEntity<TEntity> Specification { get; set; }
 
-        public bool StopIfError { get; set; }
+        public bool StopIfInvalid { get; set; }
     }
 
     public class SpecificationEntity<TEntity> : ISpecificationEntity<TEntity>
@@ -37,16 +34,16 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
                 var satisfied = item.Specification.IsSatisfiedBy(entity, execute);
                 result = result && satisfied;
 
-                if (!result && item.StopIfError)
+                if (!result && item.StopIfInvalid)
                     break;
             }
 
             return result;
         }
 
-        public void Add(ISpecificationEntity<TEntity> specificartion, bool stopIfError = false)
+        public void Add(ISpecificationEntity<TEntity> specificartion, bool stopIfInvalid = false)
         {
-            SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specificartion, StopIfError = stopIfError });
+            SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specificartion, StopIfInvalid = stopIfInvalid });
         }        
     }
 }

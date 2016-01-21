@@ -1,6 +1,7 @@
-﻿using XCommon.Patterns.Repository.Executes;
-using XCommon.Patterns.Specification.Entity.Implementation;
+﻿using System;
+using System.Collections.Generic;
 using XCommon.Patterns.Specification.Entity.Extensions;
+using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
 using Xunit;
 
@@ -8,313 +9,77 @@ namespace XCommon.Test.Patterns.Specification.Entity
 {
     public class AndIsNotEmptyTest
     {
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_Without_Execute()
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData(1, true)]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "Int")]
+        public void NotEmpty_Int_NotNull_Without_Execute(int? value, bool valid)
         {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Int);
+            GenerictValueEntity<int?> entity = new GenerictValueEntity<int?>(value);
 
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false));
+            SpecificationEntity<GenerictValueEntity<int?>> spec = new SpecificationEntity<GenerictValueEntity<int?>>()
+                .AndIsNotEmpty(c => c.Value);
 
-            Assert.Equal(true, result);
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_Without_Execute()
+        [Theory]
+        [MemberData(nameof(GetNotEmpty_Date_NotNull_Without_Execute))]
+        public void NotEmpty_Date_NotNull_Without_Execute(DateTime? value, bool valid)
         {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.DateTime);
+            GenerictValueEntity<DateTime?> entity = new GenerictValueEntity<DateTime?>(value);
 
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false));
+            SpecificationEntity<GenerictValueEntity<DateTime?>> spec = new SpecificationEntity<GenerictValueEntity<DateTime?>>()
+                .AndIsNotEmpty(c => c.Value);
 
-            Assert.Equal(true, result);
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_Without_Execute()
+        /// <summary>
+        /// Provide data to NotEmpty_Date_NotNull_Without_Execute
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<object[]> GetNotEmpty_Date_NotNull_Without_Execute()
         {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.String);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false));
-
-            Assert.Equal(true, result);
+            yield return new object[] { (DateTime?)null, false };
+            yield return new object[] { (DateTime?)new DateTime(2015, 1, 1), true };
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_Without_Execute()
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData("Hello word!", true)]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "String")]
+        public void NotEmpty_String_NotNull_Without_Execute(string value, bool valid)
         {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Item);
+            GenerictValueEntity<string> entity = new GenerictValueEntity<string>(value);
 
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false));
+            SpecificationEntity<GenerictValueEntity<string>> spec = new SpecificationEntity<GenerictValueEntity<string>>()
+                .AndIsNotEmpty(c => c.Value);
 
-            Assert.Equal(true, result);
+            var result = spec.IsSatisfiedBy(entity);
+
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_Without_Execute()
+        [InlineData(false, false)]
+        [InlineData(true, true)]
+        [Trait("Patterns Specification Entity AndIsNotEmpty", "Object")]
+        public void NotEmpty_Object_NotNull_Without_Execute(bool create, bool valid)
         {
+            GenerictValueEntity<object> entity = create 
+                ? new GenerictValueEntity<object>("X")
+                : null;
 
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Int);
+            SpecificationEntity<GenerictValueEntity<object>> spec = new SpecificationEntity<GenerictValueEntity<object>>()
+                .AndIsNotEmpty(c => c);
 
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true));
+            var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_Without_Execute()
-        {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.DateTime);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true));
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_Without_Execute()
-        {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.String);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true));
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_Without_Execute()
-        {
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.Item);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true));
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Int_NotNull_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "Int not null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Int, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false), execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Date_NotNull_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "Date not null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.DateTime, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false), execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_String_NotNull_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "String not null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.String, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false), execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Object_NotNull_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "Object not null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Item, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(false), execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "Int null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Int, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "DateTime null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.DateTime, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "String null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.String, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute()
-        {
-            Execute execute = new Execute();
-            string message = "Object null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.Item, message);
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-        
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Int_Null_With_Execute_Format()
-        {
-            Execute execute = new Execute();
-            string message = "{0} null";
-            string messageExpected = "Int null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-                .AndIsNotEmpty(c => c.Int, message, "Int");
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(messageExpected, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Date_Null_With_Execute_Format()
-        {
-            Execute execute = new Execute();
-            string message = "{0} null";
-            string messageExpected = "DateTime null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.DateTime, message, "DateTime");
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(messageExpected, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_String_Null_With_Execute_Format()
-        {
-            Execute execute = new Execute();
-            string message = "{0} null";
-            string messageExpected = "String null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.String, message, "String");
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(messageExpected, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndIsNotEmpty", "AndIsNotEmpty")]
-        public void Patterns_Specification_Entity_AndIsNotEmpty_Object_Null_With_Execute_Format()
-        {
-            Execute execute = new Execute();
-            string message = "{0} null";
-            string messageExpected = "Object null";
-
-            SpecificationEntity<SampleEmptyEntity> spec = new SpecificationEntity<SampleEmptyEntity>()
-               .AndIsNotEmpty(c => c.Item, message, "Object");
-
-            var result = spec.IsSatisfiedBy(new SampleEmptyEntity(true), execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(messageExpected, execute.Messages[0].Message);
-            Assert.Equal(1, execute.Messages.Count);
+            Assert.Equal(valid, result);
         }
     }
 }

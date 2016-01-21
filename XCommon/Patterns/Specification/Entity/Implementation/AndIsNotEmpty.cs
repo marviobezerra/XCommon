@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
@@ -17,14 +16,14 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
     internal class AndIsNotEmpty<TEntity, TValue> : ISpecificationEntity<TEntity>
     {
         private AndIsNotEmptyType Type { get; set; }
-        private Expression<Func<TEntity, TValue>> PropertyName { get; set; }
+        private Func<TEntity, TValue> Selector { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        internal AndIsNotEmpty(Expression<Func<TEntity, TValue>> propertyName, AndIsNotEmptyType type, string message, params object[] args)
+        internal AndIsNotEmpty(Func<TEntity, TValue> selector, AndIsNotEmptyType type, string message, params object[] args)
         {
             Type = type;
-            PropertyName = propertyName;
+            Selector = selector;
             Message = message;
             MessageArgs = args;
         }
@@ -36,8 +35,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var func = PropertyName.Compile();
-            var value = func(entity);
+            var value = Selector(entity);
 
             bool result = true;
 

@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Linq.Expressions;
 using XCommon.Patterns.Specification.Entity.Implementation;
 
 namespace XCommon.Patterns.Specification.Entity.Extensions
 {
     public static class SpecificationUtils
     {
-        public static SpecificationEntity<TEntity> AndIsValid<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, bool>> selector)
+        public static SpecificationEntity<TEntity> AndIsValid<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, bool> selector, bool stopIfInvalid = false)
         {
-            return specification.AndIsValid(selector, null, null);
+            return specification.AndIsValid(selector, stopIfInvalid, null, null);
         }
 
-        public static SpecificationEntity<TEntity> AndIsValid<TEntity>(this SpecificationEntity<TEntity> specification, Expression<Func<TEntity, bool>> selector, string message, params object[] args)
+        public static SpecificationEntity<TEntity> AndIsValid<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, bool> selector, string message, params object[] args)
         {
-            specification.Add(new AndIsValid<TEntity>(selector, message, args));
+            return specification.AndIsValid(selector, false, message, args);
+        }
+
+        public static SpecificationEntity<TEntity> AndIsValid<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, bool> selector, bool stopIfInvalid, string message, params object[] args)
+        {
+            specification.Add(new AndIsValid<TEntity>(selector, message, args), stopIfInvalid);
             return specification;
         }
 

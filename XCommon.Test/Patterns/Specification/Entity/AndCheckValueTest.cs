@@ -1,5 +1,4 @@
 ﻿using System;
-using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity.Extensions;
 using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
@@ -19,7 +18,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         [InlineData(10, 0, true)]
         [InlineData(-1, -2, true)]
         [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Int")]
-        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_Int_Without_Execute(int value, int compare, bool valid)
+        public void BiggerThan_Int_Without_Execute(int value, int compare, bool valid)
         {
             BiggerThanEntity<int> entity = new BiggerThanEntity<int>(value, compare);
 
@@ -43,7 +42,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
         [InlineData(0.1, 0, true)]
         [InlineData(0.002, 0.001, true)]
         [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Decimal")]
-        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_Decimal_Without_Execute(decimal value, decimal compare, bool valid)
+        public void BiggerThan_Decimal_Without_Execute(decimal value, decimal compare, bool valid)
         {
             BiggerThanEntity<decimal> entity = new BiggerThanEntity<decimal>(value, compare);
 
@@ -59,606 +58,161 @@ namespace XCommon.Test.Patterns.Specification.Entity
         [InlineData("2015-01-01", "2015-01-01", false, false)]
         [InlineData("2015-01-01 00:00:00", "2015-01-01 00:00:01", false, false)]
         [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", false, true)]
-        [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", true, false)]
+        [InlineData("2015-01-02 00:00:00", "2015-01-01 00:00:00", true, false)]
         [Trait("Patterns Specification Entity AndCheckValue", "BiggerThan DateTime")]
-        public void Patterns_Specification_Entity_AndCheckValue_BiggerThan_DateTime_Without_Execute(DateTime value, DateTime compare, bool valid, bool removeTime)
+        public void BiggerThan_DateTime_Without_Execute(DateTime value, DateTime compare, bool valid, bool removeTime)
         {
             BiggerThanEntity<DateTime> entity = new BiggerThanEntity<DateTime>(value, compare);
 
             var spec = new SpecificationEntity<BiggerThanEntity<DateTime>>()
-                .AndIsBiggerThan(c => c.Value, c => c.Compare, removeTime);
+                .AndIsBiggerThan(c => c.Value, c => c.Compare, true);
 
             var result = spec.IsSatisfiedBy(entity);
 
             Assert.Equal(valid, result);
         }
 
-        #region LessThan
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData(0, 0, false)]
+        [InlineData(6, 5, false)]
+        [InlineData(0, -1, false)]
+        [InlineData(-1, -1, false)]
+        [InlineData(-1, -10, false)]
+        [InlineData(0, 1, true)]
+        [InlineData(0, 10, true)]
+        [InlineData(-2, -1, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan Int")]
+        public void LessThan_Int_Without_Execute(int value, int compare, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
+            LessThanEntity<int> entity = new LessThanEntity<int>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.IntValue, c => c.IntStart);
+            var spec = new SpecificationEntity<LessThanEntity<int>>()
+                .AndIsLessThan(c => c.Value, c => c.Compare);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData(0, 0, false)]
+        [InlineData(0.1, 0, false)]
+        [InlineData(0.002, 0.001, false)]
+        [InlineData(-0.001, -0.001, false)]
+        [InlineData(-0, -1, false)]
+        [InlineData(-1, -1, false)]
+        [InlineData(0, 1, true)]
+        [InlineData(9.999, 100, true)]
+        [InlineData(0, 0.1, true)]
+        [InlineData(0.001, 0.002, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan Decimal")]
+        public void LessThan_Decimal_Without_Execute(decimal value, decimal compare, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
+            LessThanEntity<decimal> entity = new LessThanEntity<decimal>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DecimalValue, c => c.DecimalStart);
+            var spec = new SpecificationEntity<LessThanEntity<decimal>>()
+                .AndIsLessThan(c => c.Value, c => c.Compare);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData("2015-01-01", "2015-01-01", false, false)]
+        [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", false, false)]
+        [InlineData("2015-01-01 00:00:00", "2015-01-01 00:00:01", false, true)]
+        [InlineData("2015-01-01 00:00:00", "2015-01-01 00:00:01", true, false)]
+        [Trait("Patterns Specification Entity AndCheckValue", "LessThan DateTime")]
+        public void LessThan_DateTime_Without_Execute(DateTime value, DateTime compare, bool valid, bool removeTime)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
+            LessThanEntity<DateTime> entity = new LessThanEntity<DateTime>(value, compare);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart);
+            var spec = new SpecificationEntity<LessThanEntity<DateTime>>()
+                .AndIsLessThan(c => c.Value, c => c.Compare, removeTime);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_Without_Execute()
+        [Theory]
+        [InlineData(1, 0, 0, false)]
+        [InlineData(0, 1, 1, false)]
+        [InlineData(2, -1, -10, false)]
+        [InlineData(-2, -1, 0, false)]
+        [InlineData(0, 0, 1, true)]
+        [InlineData(-1, -1, 0, true)]
+        [InlineData(-1, -1, -1, true)]
+        [InlineData(1, 1, 1, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange Int")]
+        public void InRange_Int_Without_Execute(int value, int start, int end, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
+            InRangeEntity<int> entity = new InRangeEntity<int>(value, start, end);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, true);
+            var spec = new SpecificationEntity<InRangeEntity<int>>()
+                .AndIsInRange(c => c.Value, c => c.Start, c => c.End);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_Without_Execute()
+        [Theory]
+        [InlineData(0.1, 0, 0, false)]
+        [InlineData(0.001, 0, 0, false)]
+        [InlineData(2, -1, -10, false)]
+        [InlineData(-0.001, 0, 1, false)]
+        [InlineData(0, 0, 1, true)]
+        [InlineData(-0.001, -0.001, 0, true)]
+        [InlineData(-1, -1, -1, true)]
+        [InlineData(1, 1, 1, true)]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange Decimal")]
+        public void InRange_Decimal_Without_Execute(decimal value, decimal start, decimal end, bool valid)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
+            InRangeEntity<decimal> entity = new InRangeEntity<decimal>(value, start, end);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.IntValue, c => c.IntStart);
+            var spec = new SpecificationEntity<InRangeEntity<decimal>>()
+                .AndIsInRange(c => c.Value, c => c.Start, c => c.End);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(false, result);
+            Assert.Equal(valid, result);
         }
 
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_Without_Execute()
+        [Theory]        
+        [InlineData("2015-01-01 00:00:01", "2015-01-01 00:00:00", "2015-01-01 00:00:00", false, false)]        
+        [InlineData("2015-01-01 00:00:00", "2015-01-01 00:00:01", "2015-01-01 00:00:01", false, false)]
+        [InlineData("2015-01-01 00:00:00", "2015-01-01 23:59:50", "2015-01-01 00:00:00", true, true)]
+        [InlineData("2015-01-01", "2015-01-01", "2015-01-01", true, false)]
+        [InlineData("2015-06-01", "2015-01-01", "2015-12-31", true, false)]
+        [Trait("Patterns Specification Entity AndCheckValue", "InRange DateTime")]
+        public void InRange_DateTime_Without_Execute(DateTime value, DateTime start, DateTime end, bool valid, bool removeTime)
         {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
+            InRangeEntity<DateTime> entity = new InRangeEntity<DateTime>(value, start, end);
 
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DecimalValue, c => c.DecimalStart);
+            var spec = new SpecificationEntity<InRangeEntity<DateTime>>()
+                .AndIsInRange(c => c.Value, c => c.Start, c => c.End, removeTime);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(false, result);
+            Assert.Equal(valid, result);
         }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, true);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
-            string message = "Int Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.IntValue, c => c.IntStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
-            string message = "Decimal Valid";
-
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DecimalValue, c => c.DecimalStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_LessThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_LessThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-            string message = "Int InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.IntValue, c => c.IntStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_LessThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-            string message = "Decimal InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DecimalValue, c => c.DecimalStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_LessThan_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-            string message = "DateTime InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "LessThan")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InLessThan_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.LessThan, false);
-            string message = "Date InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => c.DateTimeValue, c => c.DateTimeStart, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-        #endregion
-
-        #region InRange
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.IntValue, c => c.IntStart, c => c.IntEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DecimalValue, c => c.DecimalStart, c => c.DecimalEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, true);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.IntValue, c => c.IntStart, c => c.IntEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DecimalValue, c => c.DecimalStart, c => c.DecimalEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_Without_Execute()
-        {
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, true);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-            string message = "Int Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.IntValue, c => c.IntStart, c => c.IntEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-            string message = "Decimal Valid";
-
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DecimalValue, c => c.DecimalStart, c => c.DecimalEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InRange_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, true);
-            string message = "DateTime Valid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(true, result);
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_InRange_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-            string message = "Int InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.IntValue, c => c.IntStart, c => c.IntEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_Decimal_InRange_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-            string message = "Decimal InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DecimalValue, c => c.DecimalStart, c => c.DecimalEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_InRange_InValid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-            string message = "DateTime InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "InRange")]
-        public void Patterns_Specification_Entity_AndCheckValue_DateTime_RemoveTime_InInRange_Valid_With_Execute()
-        {
-            Execute execute = new Execute();
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.InRange, false);
-            string message = "Date InValid";
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsInRange(c => c.DateTimeValue, c => c.DateTimeStart, c => c.DateTimeEnd, true, message);
-
-            var result = spec.IsSatisfiedBy(entity, execute);
-
-            Assert.Equal(false, result);
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(message, execute.Messages[0].Message);
-        }
-        #endregion
-
-        #region Out of Box
-        [Fact]
+        
+        [Theory]
+        [InlineData(-10, -1, false)]
+        [InlineData(1, 0, true)]
         [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_Valid_OutOfBox()
+        public void Int_BiggerThan_InValid_OutOfBox(int value, int compare, bool valid)
         {
-            int value = 5;
-            int max = 4;
+            BiggerThanEntity<int> entity = new BiggerThanEntity<int>(0, 0);
 
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => value, c => max);
+            SpecificationEntity<BiggerThanEntity<int>> spec = new SpecificationEntity<BiggerThanEntity<int>>()
+                .AndIsBiggerThan(c => value, c => compare);
 
             var result = spec.IsSatisfiedBy(entity);
 
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_BiggerThan_InValid_OutOfBox()
-        {
-            int value = 4;
-            int max = 5;
-
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsBiggerThan(c => value, c => max);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_Valid_OutOfBox()
-        {
-            int value = 9;
-            int max = 10;
-
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => value, c => max);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(true, result);
-        }
-
-        [Fact]
-        [Trait("Patterns Specification Entity AndCheckValue", "Out of Box")]
-        public void Patterns_Specification_Entity_AndCheckValue_Int_AndIsLessThan_InValid_OutOfBox()
-        {
-            int value = 11;
-            int max = 10;
-
-            SampleValueEntity entity = new SampleValueEntity(AndCheckCompareType.BiggerThan, true);
-
-            SpecificationEntity<SampleValueEntity> spec = new SpecificationEntity<SampleValueEntity>()
-                .AndIsLessThan(c => value, c => max);
-
-            var result = spec.IsSatisfiedBy(entity);
-
-            Assert.Equal(false, result);
-        }
-        #endregion
+            Assert.Equal(valid, result);
+        }        
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq.Expressions;
-using XCommon.Patterns.Repository.Executes;
-using XCommon.Extensions.Converters;
 using XCommon.Extensions.Checks;
+using XCommon.Extensions.Converters;
 using XCommon.Extensions.String;
+using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
 {
@@ -25,20 +24,20 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
     {
         private AndCheckValueType Type { get; set; }
         private AndCheckCompareType CompareType { get; set; }
-        private Expression<Func<TEntity, TValue>> PropertyValue { get; set; }
-        private Expression<Func<TEntity, TValue>> PropertyStart { get; set; }
-        private Expression<Func<TEntity, TValue>> PropertyEnd { get; set; }
+        private Func<TEntity, TValue> PropertyValue { get; set; }
+        private Func<TEntity, TValue> PropertyStart { get; set; }
+        private Func<TEntity, TValue> PropertyEnd { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
         private bool RemoveTime { get; set; }
         
-        internal AndCheckValue(Expression<Func<TEntity, TValue>> value, Expression<Func<TEntity, TValue>> start, Expression<Func<TEntity, TValue>> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
+        internal AndCheckValue(Func<TEntity, TValue> value, Func<TEntity, TValue> start, Func<TEntity, TValue> end, AndCheckValueType type, AndCheckCompareType compareType, string message, params object[] args)
             : this(value, start, end, type, compareType, false, message, args)
         {
             
         }
 
-        internal AndCheckValue(Expression<Func<TEntity, TValue>> value, Expression<Func<TEntity, TValue>> start, Expression<Func<TEntity, TValue>> end, AndCheckValueType type, AndCheckCompareType compareType, bool removeTime, string message, params object[] args)
+        internal AndCheckValue(Func<TEntity, TValue> value, Func<TEntity, TValue> start, Func<TEntity, TValue> end, AndCheckValueType type, AndCheckCompareType compareType, bool removeTime, string message, params object[] args)
         {
             Type = type;
             CompareType = compareType;
@@ -69,15 +68,14 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             }
         }
 
-        private TValue Resolve(Expression<Func<TEntity, TValue>> expression, TEntity entity)
+        private TValue Resolve(Func<TEntity, TValue> expression, TEntity entity)
         {
             var result = default(TValue);
 
             if (expression == null)
                 return result;
-
-            var func = expression.Compile();
-            var value = func(entity);
+            
+            var value = expression(entity);
 
             return value;
         }
