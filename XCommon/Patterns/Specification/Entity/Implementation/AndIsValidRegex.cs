@@ -27,11 +27,9 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         }
 
         public bool IsSatisfiedBy(TEntity entity)
-        {
-            return IsSatisfiedBy(entity, null);
-        }
+			=> IsSatisfiedBy(entity, null);
 
-        public bool IsSatisfiedBy(TEntity entity, Execute execute)
+		public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
             var value = Selector(entity);
             Regex regex = null;
