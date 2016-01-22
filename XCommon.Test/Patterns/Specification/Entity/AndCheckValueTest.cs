@@ -43,10 +43,10 @@ namespace XCommon.Test.Patterns.Specification.Entity
 		[ExcludeFromCodeCoverage]
 		public static IEnumerable<object[]> GetDateBiggerThanlValues()
 		{
-			yield return new object[] { "2015-01-01", "2015-01-01", false, false, "Value decimal is not valid" };
-			yield return new object[] { "2015-01-01 00:00:00", "2015-01-01 00:00:01", false, false, "Value decimal is not valid" };
-			yield return new object[] { "2015-01-01 00:00:01", "2015-01-01 00:00:00", false, true, "Value decimal is not valid" };
-			yield return new object[] { "2015-01-02 00:00:00", "2015-01-01 00:00:00", true, false, "Value decimal is not valid" };
+			yield return new object[] { "2015-01-01", "2015-01-01", false, false, "Value DateTime is not valid" };
+			yield return new object[] { "2015-01-01 00:00:00", "2015-01-01 00:00:01", false, false, "Value DateTime is not valid" };
+			yield return new object[] { "2015-01-01 00:00:01", "2015-01-01 00:00:00", false, true, "Value DateTime is not valid" };
+			yield return new object[] { "2015-01-02 00:00:00", "2015-01-01 00:00:00", true, false, "Value DateTime is not valid" };
 		}
 		//ncrunch: no coverage end
 		#endregion
