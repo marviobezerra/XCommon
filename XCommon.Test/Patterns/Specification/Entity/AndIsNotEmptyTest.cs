@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using XCommon.Patterns.Specification.Entity.Extensions;
 using XCommon.Patterns.Specification.Entity.Implementation;
 using XCommon.Test.Patterns.Specification.Helper;
@@ -9,7 +10,16 @@ namespace XCommon.Test.Patterns.Specification.Entity
 {
     public class AndIsNotEmptyTest
     {
-        [Theory]
+		//ncrunch: no coverage start
+		[ExcludeFromCodeCoverage]
+		public static IEnumerable<object[]> GetNotEmpty_Date_NotNull_Without_Execute()
+		{
+			yield return new object[] { null, false };
+			yield return new object[] { (DateTime?)new DateTime(2015, 1, 1), true };
+		}
+		//ncrunch: no coverage end
+
+		[Theory]
         [InlineData(null, false)]
         [InlineData(1, true)]
         [Trait("Patterns Specification Entity AndIsNotEmpty", "Int")]
@@ -39,16 +49,6 @@ namespace XCommon.Test.Patterns.Specification.Entity
             Assert.Equal(valid, result);
         }
 
-        /// <summary>
-        /// Provide data to NotEmpty_Date_NotNull_Without_Execute
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<object[]> GetNotEmpty_Date_NotNull_Without_Execute()
-        {
-            yield return new object[] { (DateTime?)null, false };
-            yield return new object[] { (DateTime?)new DateTime(2015, 1, 1), true };
-        }
-
         [Theory]
         [InlineData(null, false)]
         [InlineData("Hello word!", true)]
@@ -65,7 +65,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
             Assert.Equal(valid, result);
         }
 
-        [Theory]
+		[Theory]
         [InlineData(false, false)]
         [InlineData(true, true)]
         [Trait("Patterns Specification Entity AndIsNotEmpty", "Object")]
