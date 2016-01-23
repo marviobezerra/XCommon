@@ -23,16 +23,7 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 			return specification;
 		}
 
-		public static SpecificationEntity<TEntity> AndIsLessThan<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> compareTo)
-			=> specification.AndIsLessThan(value, compareTo, null, null);
-
-		public static SpecificationEntity<TEntity> AndIsLessThan<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> compareTo, string message, params object[] args)
-		{
-			specification.Add(new AndCheckValue<TEntity, DateTime>(value, compareTo, null, AndCheckValueType.Date, AndCheckCompareType.LessThan, message, args));
-			return specification;
-		}
-
-		public static SpecificationEntity<TEntity> AndIsLessThan<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> compareTo, bool removeTime)
+		public static SpecificationEntity<TEntity> AndIsLessThan<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> compareTo, bool removeTime = false)
 			=> specification.AndIsLessThan(value, compareTo, removeTime, null, null);
 
 		public static SpecificationEntity<TEntity> AndIsLessThan<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> compareTo, bool removeTime, string message, params object[] args)

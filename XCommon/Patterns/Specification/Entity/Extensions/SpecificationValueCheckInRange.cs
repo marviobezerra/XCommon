@@ -22,17 +22,8 @@ namespace XCommon.Patterns.Specification.Entity.Extensions
 			specification.Add(new AndCheckValue<TEntity, decimal>(value, start, end, AndCheckValueType.Decimal, AndCheckCompareType.InRange, message, args));
 			return specification;
 		}
-
-		public static SpecificationEntity<TEntity> AndIsInRange<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> start, Func<TEntity, DateTime> end)
-			=> specification.AndIsInRange(value, start, end, null, null);
-
-		public static SpecificationEntity<TEntity> AndIsInRange<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> start, Func<TEntity, DateTime> end, string message, params object[] args)
-		{
-			specification.Add(new AndCheckValue<TEntity, DateTime>(value, start, end, AndCheckValueType.Date, AndCheckCompareType.InRange, message, args));
-			return specification;
-		}
-
-		public static SpecificationEntity<TEntity> AndIsInRange<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> start, Func<TEntity, DateTime> end, bool removeTime)
+		
+		public static SpecificationEntity<TEntity> AndIsInRange<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> start, Func<TEntity, DateTime> end, bool removeTime = false)
 			=> specification.AndIsInRange(value, start, end, removeTime, null, null);
 
 		public static SpecificationEntity<TEntity> AndIsInRange<TEntity>(this SpecificationEntity<TEntity> specification, Func<TEntity, DateTime> value, Func<TEntity, DateTime> start, Func<TEntity, DateTime> end, bool removeTime, string message, params object[] args)

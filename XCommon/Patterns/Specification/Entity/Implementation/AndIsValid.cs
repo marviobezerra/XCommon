@@ -1,4 +1,5 @@
 ﻿using System;
+using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Entity.Implementation
@@ -8,11 +9,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private Func<TEntity, bool> Selector { get; set; }
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
-
-        internal AndIsValid(Func<TEntity, bool> selector)
-            : this(selector, string.Empty)
-        {
-        }
 
         internal AndIsValid(Func<TEntity, bool> selector, string message, params object[] args)
         {
@@ -28,7 +24,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         {
             var value = Selector(entity);
 
-            if (!value && execute != null)
+            if (!value && execute != null && Message.IsNotEmpty())
                 execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
 
             return value;
