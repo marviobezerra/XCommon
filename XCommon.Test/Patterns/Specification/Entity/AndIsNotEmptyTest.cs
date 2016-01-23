@@ -65,6 +65,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
             Assert.Equal(valid, result);
         }
 
+        [Theory]
         [InlineData(false, false)]
         [InlineData(true, true)]
         [Trait("Patterns Specification Entity AndIsNotEmpty", "Object")]

@@ -12,12 +12,6 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         private string Message { get; set; }
         private object[] MessageArgs { get; set; }
 
-        internal AndIsValidRegex(Func<TEntity, string> propertyName, string regexExpression)
-            : this(propertyName, regexExpression, "")
-        {
-
-        }
-
         internal AndIsValidRegex(Func<TEntity, string> selector, string regexExpression, string message, params object[] args)
         {
             RegexExpression = regexExpression;
