@@ -226,6 +226,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 		}
 
 		[Theory, MemberData(nameof(GetDateBiggerThanlValues))]
+		[Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Date")]
 		public void BiggerThan_DateTime_Without_Execute(DateTime value, DateTime compare, bool valid, bool removeTime, string message)
 		{
 			BiggerThanEntity<DateTime> entity = new BiggerThanEntity<DateTime>(value, compare);
@@ -239,6 +240,7 @@ namespace XCommon.Test.Patterns.Specification.Entity
 		}
 
 		[Theory, MemberData(nameof(GetDateBiggerThanlValues))]
+		[Trait("Patterns Specification Entity AndCheckValue", "BiggerThan Date")]
 		public void BiggerThan_DateTime_With_Execute(DateTime value, DateTime compare, bool valid, bool removeTime, string message)
 		{
 			Execute execute = new Execute();

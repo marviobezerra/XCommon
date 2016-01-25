@@ -117,8 +117,8 @@ namespace XCommon.Test.Patterns.Specification.Entity
 			Assert.Equal(valid, result);
 		}
 
-		[Theory]
-		[MemberData(nameof(GetDateNotEmptyValues))]
+		[Theory, MemberData(nameof(GetDateNotEmptyValues))]
+		[Trait("Patterns Specification Entity AndIsNotEmpty", "Date")]
 		public void NotEmpty_Date_With_Execute(DateTime? value, bool valid, string message)
 		{
 			Execute execute = new Execute();
@@ -139,9 +139,9 @@ namespace XCommon.Test.Patterns.Specification.Entity
 			}
 		}
 
-		[Theory]
-        [MemberData(nameof(GetDateNotEmptyValues))]
-        public void NotEmpty_Date_Without_Execute(DateTime? value, bool valid, string message)
+		[Theory, MemberData(nameof(GetDateNotEmptyValues))]
+		[Trait("Patterns Specification Entity AndIsNotEmpty", "Date")]
+		public void NotEmpty_Date_Without_Execute(DateTime? value, bool valid, string message)
         {
             GenerictValueEntity<DateTime?> entity = new GenerictValueEntity<DateTime?>(value);
 
