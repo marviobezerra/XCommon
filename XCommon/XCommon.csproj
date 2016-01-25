@@ -105,9 +105,10 @@
     <Compile Include="Patterns\Specification\Entity\Implementation\OrSpecification.cs" />
     <Compile Include="Patterns\Specification\Entity\ISpecificationEntity.cs" />
     <Compile Include="Patterns\Specification\Entity\Implementation\SpecificationEntity.cs" />
-    <Compile Include="Patterns\Specification\Query\Implementation\SpecificationQueryBase.cs" />
-    <Compile Include="Patterns\Specification\Query\ISpecificationQuery.cs" />
+    <Compile Include="Patterns\Specification\Query\Implementation\QueryBuilderOrder.cs" />
+    <Compile Include="Patterns\Specification\Query\IQueryBuilder.cs" />
     <Compile Include="Patterns\Specification\Query\QueryBuilder.cs" />
+    <Compile Include="Patterns\Specification\Query\Implementation\QueryBuilderSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -121,9 +122,7 @@
     <Compile Include="Util\IExecuteOnBuild.cs" />
     <Compile Include="Util\LibraryRegex.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patterns\MVVM\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

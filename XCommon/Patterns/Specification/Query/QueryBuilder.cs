@@ -1,89 +1,98 @@
-﻿using XCommon.Patterns.Specification.Query.Implementation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using XCommon.Patterns.Specification.Query.Implementation;
 
 namespace XCommon.Patterns.Specification.Query
 {
-    public class QueryBuilder<TEntity, TFilter>
-    {
-        private List<ISpecificationQuery<TEntity, TFilter>> Specifications { get; set; }
+	public class QueryBuilder<TEntity, TFilter> : IQueryBuilder<TEntity, TFilter>
+	{
+		public QueryBuilder()
+		{
+			Specifications = new List<QueryBuilderSpecification<TEntity, TFilter>>();
+			Sort = new List<QueryBuilderOrder<TEntity, TFilter>>();
+		}
 
-        private Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Sort { get; set; }
+		private int Page { get; set; }
 
-        private int Page { get; set; }
+		private int PageSize { get; set; }
 
-        private int PageSize { get; set; }
+		private bool PageApply { get; set; }
 
-        private bool PageApply { get; set; }
+		private List<QueryBuilderSpecification<TEntity, TFilter>> Specifications { get; set; }
 
-        public QueryBuilder()
-        {
-            Specifications = new List<ISpecificationQuery<TEntity, TFilter>>();
-        }
+		private List<QueryBuilderOrder<TEntity, TFilter>> Sort { get; set; }
 
-        internal void AddSpecification(ISpecificationQuery<TEntity, TFilter> specification)
-        {
-            Specifications.Add(specification);
-        }
+		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate)
+			=> And(predicate, null);
 
-        internal void AddOrder<TProperty>(Expression<Func<TEntity, TProperty>> property)
-        {
-            if (Sort != null)
-                Sort = items => Sort(items).ThenBy(property);
-            else
-                Sort = items => items.OrderBy(property);
-        }
+		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate, Func<TFilter, bool> condition)
+		{
+			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>(predicate, condition));
+			return this;
+		}
 
-        public IQueryable<TEntity> Build(IList<TEntity> query, TFilter filter)
-        {
-            return Build(query.AsQueryable(), filter);
-        }
+		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option)
+			=> Or(predicate, option, null);
 
-        public IQueryable<TEntity> Build(IQueryable<TEntity> query, TFilter filter)
-        {
-            foreach (var specification in Specifications)
-            {
-                var predicate = specification.IsSatisfied();
-                var condition = specification.CanApllyBy();
+		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option, Func<TFilter, bool> condition)
+		{
+			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>(c => predicate.Compile().Invoke(c) || option.Compile().Invoke(c), condition));
+			return this;
+		}
 
-                if (predicate != null && condition.Compile().Invoke(filter))
-                    query = query.Where(predicate);
-            }
+		private QueryBuilder<TEntity, TFilter> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> property, Func<TFilter, bool> condition, bool descending)
+		{
+			if (descending)
+				Sort.Add(new QueryBuilderOrder<TEntity, TFilter>(items => items.OrderByDescending(property), condition ?? (c => true)));
+			else
+				Sort.Add(new QueryBuilderOrder<TEntity, TFilter>(items => items.OrderBy(property), condition ?? (c => true)));
 
-            if (Sort != null)
-                query = Sort(query);
+			return this;
+		}
 
-            if (PageApply)
-                query = query.Skip((Page - 1) * PageSize).Take(PageSize);
+		public QueryBuilder<TEntity, TFilter> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> property)
+			=> OrderBy(property, null, false);
 
-            return query;
-        }
+		public QueryBuilder<TEntity, TFilter> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> property, Func<TFilter, bool> condition)
+			=> OrderBy(property, condition, false);
 
-        public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate)
-        {
-            return And(predicate, c => true);
-        }
+		public QueryBuilder<TEntity, TFilter> OrderByDesc<TProperty>(Expression<Func<TEntity, TProperty>> property)
+			=> OrderBy(property, null, true);
 
-        public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate, Expression<Func<TFilter, bool>> conditon)
-        {
-            AddSpecification(new SpecificationQueryBase<TEntity, TFilter>(predicate, conditon));
-            return this;
-        }
+		public QueryBuilder<TEntity, TFilter> OrderByDesc<TProperty>(Expression<Func<TEntity, TProperty>> property, Func<TFilter, bool> condition)
+			=> OrderBy(property, condition, true);
 
-        public QueryBuilder<TEntity, TFilter> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> predicate)
-        {
-            AddOrder(predicate);
-            return this;
-        }
+		public QueryBuilder<TEntity, TFilter> Take(int page, int pageSize)
+		{
+			Page = page;
+			PageSize = pageSize;
+			PageApply = true;
+			return this;
+		}
 
-        public QueryBuilder<TEntity, TFilter> Take(int page, int pageSize)
-        {
-            Page = page;
-            PageSize = pageSize;
-            PageApply = true;
-            return this;
-        }
-    }
+		public IQueryable<TEntity> Build(IEnumerable<TEntity> query, TFilter filter)
+			=> Build(query.AsQueryable(), filter);
+
+		public IQueryable<TEntity> Build(IQueryable<TEntity> query, TFilter filter)
+		{
+			foreach (var specification in Specifications)
+			{
+				if (specification.Condition(filter))
+					query = query.Where(specification.Predicate);
+			}
+
+			foreach (var item in Sort)
+			{
+				if (item.Condition(filter))
+					query = item.Sort(query);
+			}
+			
+			if (PageApply)
+				query = query.Skip((Page - 1) * PageSize).Take(PageSize);
+
+			return query;
+		}
+	}
 }

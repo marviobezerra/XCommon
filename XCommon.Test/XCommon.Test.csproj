@@ -67,7 +67,9 @@
     <Compile Include="Patterns\Specification\Entity\NotSpecificationTest.cs" />
     <Compile Include="Patterns\Specification\Entity\OrSpecificationTest.cs" />
     <Compile Include="Patterns\Specification\Entity\SpecificationEntityTest.cs" />
-    <Compile Include="Patterns\Specification\Helper\ValueCheckEntity.cs" />
+    <Compile Include="Patterns\Specification\Helper\SpecificationEntity.cs" />
+    <Compile Include="Patterns\Specification\Helper\SpecificationQuery.cs" />
+    <Compile Include="Patterns\Specification\Query\QueryBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
