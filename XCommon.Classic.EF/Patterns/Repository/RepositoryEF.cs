@@ -10,27 +10,24 @@ using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity;
+using XCommon.Patterns.Specification.Query;
 
 namespace XCommon.Patterns.Repository.Defaults
 {
-    public abstract class RepositoryEF<TEntity, TFilter, TData, TContext> : IRepository<TEntity, TFilter>
+	public abstract class RepositoryEF<TEntity, TFilter, TData, TContext> : IRepository<TEntity, TFilter>
         where TEntity : EntityBase, new()
         where TFilter : FilterBase, new()
         where TData : class, new()
         where TContext : DbContext
     {
-        public RepositoryEF()
-        {
-            Kernel.Resolve(this);
-        }
+		
+		protected virtual IContextFactory<TContext> Context => Kernel.Resolve<IContextFactory<TContext>>();
+		
+		protected virtual ISpecificationEntity<TEntity> SpecificationValidate => Kernel.Resolve<ISpecificationEntity<TEntity>>();
 
-        [Inject]
-        protected IContextFactory<TContext> Context { get; set; }
+		protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery => Kernel.Resolve<IQueryBuilder<TData, TFilter>>();
 
-        [Inject]
-        protected ISpecificationEntity<TEntity> ValidateSpecification { get; set; }
-
-        protected virtual string GetEntityName()
+		protected virtual string GetEntityName()
         {
             return typeof(TEntity).Name.Remove("Entity");
         }
@@ -128,7 +125,21 @@ namespace XCommon.Patterns.Repository.Defaults
             return result.FirstOrDefault();
         }
 
-        public abstract Task<List<TEntity>> GetByFilterAsync(TFilter filter);
+		public virtual async Task<List<TEntity>> GetByFilterAsync(TFilter filter)
+		{
+			List<TEntity> result = new List<TEntity>();
+
+			using (var db = await Context.CreateAsync())
+			{
+				var query = SpecificationQuery.Build(db.Set<TData>(), filter);
+				await query.ForEachAsync(data => 
+				{
+					result.Add(data.Convert<TEntity>());
+				});
+			}
+
+			return result;
+		}
 
         public virtual async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute)
         {
@@ -178,7 +189,7 @@ namespace XCommon.Patterns.Repository.Defaults
             {
                 Execute result = new Execute();
 
-                entity.ForEach(c => ValidateSpecification.IsSatisfiedBy(c, result));
+                entity.ForEach(c => SpecificationValidate.IsSatisfiedBy(c, result));
 
                 return result;
             });

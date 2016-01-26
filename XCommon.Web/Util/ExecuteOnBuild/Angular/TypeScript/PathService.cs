@@ -48,7 +48,7 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            return Path.Combine(dir, "AppPathService.ts");
+            return Path.Combine(dir, "PathService.ts");
         }
 
         public void Execute(string assemblyPath)

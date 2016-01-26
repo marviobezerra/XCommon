@@ -62,13 +62,14 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             var file = GetFileName(filePath);
 
             var commonPath = GetPathCommon(filePath);
+			var utilPath = GetPathUtil(filePath);
 
-            if (!Directory.Exists(commonPath))
+			if (!Directory.Exists(commonPath))
                 Directory.CreateDirectory(commonPath);
 
             File.WriteAllText(file, Build(actions), Encoding.UTF8);
-            File.WriteAllBytes(Path.Combine(commonPath, "Guid.ts"), XCommon.Web.Properties.Resources.Guid);
-            File.WriteAllBytes(Path.Combine(commonPath, "Util.ts"), XCommon.Web.Properties.Resources.Util);
+            File.WriteAllBytes(Path.Combine(utilPath, "Guid.ts"), XCommon.Web.Properties.Resources.Guid);
+            File.WriteAllBytes(Path.Combine(utilPath, "Util.ts"), XCommon.Web.Properties.Resources.Util);
         }
 
         protected virtual string GetFileName(string basePath)
@@ -81,7 +82,12 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             return Path.Combine(basePath, "Scripts", "Common");
         }
 
-        protected virtual string GetNameSpace(string nameSpace)
+		protected virtual string GetPathUtil(string basePath)
+		{
+			return Path.Combine(basePath, "Scripts", "Util");
+		}
+
+		protected virtual string GetNameSpace(string nameSpace)
         {
             return nameSpace.Replace("Prospect.Pet.Business.Entity.", string.Empty);
         }
@@ -126,7 +132,9 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
                     return "string";
                 case "DateTime":
                     return "Date";
-                default:
+				case "Boolean":
+					return "boolean";
+				default:
                     return "Não identificado: " + currentType.Name;
             }
         }

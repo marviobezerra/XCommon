@@ -64,7 +64,7 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            return Path.Combine(dir, "AppResourceService.ts");
+            return Path.Combine(dir, "ResourceService.ts");
         }
 
         public void Execute(string assemblyPath)
