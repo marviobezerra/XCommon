@@ -47,8 +47,8 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             {
                 foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
                 {
-					if (property.GetCustomAttribute<IgnoreAttribute>(true) != null)
-						return;
+					if (property.GetCustomAttributes<IgnoreAttribute>().Count() > 0)
+						continue;
 
                     actions.Add(new EntityProperty
                     {
