@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{AC174FCF-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test", "XCommon.Test\XCommon.Test.csproj", "{113A9F75-4628-4178-B269-C5B17A537CDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Extra.AssemblyVersion", "XCommon.Extra.AssemblyVersion\XCommon.Extra.AssemblyVersion.csproj", "{2A427B92-0262-4E54-AA34-EBC3DFBC6929}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{113A9F75-4628-4178-B269-C5B17A537CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113A9F75-4628-4178-B269-C5B17A537CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113A9F75-4628-4178-B269-C5B17A537CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A427B92-0262-4E54-AA34-EBC3DFBC6929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A427B92-0262-4E54-AA34-EBC3DFBC6929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A427B92-0262-4E54-AA34-EBC3DFBC6929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A427B92-0262-4E54-AA34-EBC3DFBC6929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +94,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F569B286-6F8C-4BDA-BA39-673025F693C8} = {C6A518AC-CEB3-498F-BA2B-9CBEFB82BD20}
 		{113A9F75-4628-4178-B269-C5B17A537CDA} = {AC174FCF-EBC1-4342-A442-E7BBC81AC259}
+		{2A427B92-0262-4E54-AA34-EBC3DFBC6929} = {C6A518AC-CEB3-498F-BA2B-9CBEFB82BD20}
 	EndGlobalSection
 EndGlobal

@@ -47,6 +47,9 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             {
                 foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
                 {
+					if (property.GetCustomAttribute<IgnoreAttribute>(true) != null)
+						return;
+
                     actions.Add(new EntityProperty
                     {
                         Class = type.Name,
@@ -59,38 +62,37 @@ namespace XCommon.Web.Util.ExecuteOnBuild.Angular.TypeScript
             }
 
             var filePath = Directory.GetParent(Path.GetDirectoryName(assemblyPath)).FullName;
-            var file = GetFileName(filePath);
-
-            var commonPath = GetPathCommon(filePath);
+            var file = GetFileName(filePath);			
 			var utilPath = GetPathUtil(filePath);
-
-			if (!Directory.Exists(commonPath))
-                Directory.CreateDirectory(commonPath);
-
+			
             File.WriteAllText(file, Build(actions), Encoding.UTF8);
-            File.WriteAllBytes(Path.Combine(utilPath, "Guid.ts"), XCommon.Web.Properties.Resources.Guid);
-            File.WriteAllBytes(Path.Combine(utilPath, "Util.ts"), XCommon.Web.Properties.Resources.Util);
+            File.WriteAllBytes(Path.Combine(utilPath, "Guid.ts"), Web.Properties.Resources.Guid);
+            File.WriteAllBytes(Path.Combine(utilPath, "Util.ts"), Web.Properties.Resources.Util);
         }
 
         protected virtual string GetFileName(string basePath)
         {
-            return Path.Combine(basePath, "Scripts", "Entity", "EntityInterface.ts");
-        }
+			var dir = Path.Combine(basePath, "Scripts", "Entity");
 
-        protected virtual string GetPathCommon(string basePath)
-        {
-            return Path.Combine(basePath, "Scripts", "Common");
-        }
+			if (!Directory.Exists(dir))
+				Directory.CreateDirectory(dir);
 
+
+			return Path.Combine(dir, "EntityInterface.ts");
+        }
+		
 		protected virtual string GetPathUtil(string basePath)
 		{
-			return Path.Combine(basePath, "Scripts", "Util");
+			var dir = Path.Combine(basePath, "Scripts", "Util");
+
+			if (!Directory.Exists(dir))
+				Directory.CreateDirectory(dir);
+
+
+			return Path.Combine(dir, "Scripts", "Util");
 		}
 
-		protected virtual string GetNameSpace(string nameSpace)
-        {
-            return nameSpace.Replace("Prospect.Pet.Business.Entity.", string.Empty);
-        }
+		protected abstract string GetNameSpace(string nameSpace);
 
         private string GetPropertyType(Type type)
         {

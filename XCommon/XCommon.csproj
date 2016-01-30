@@ -119,6 +119,7 @@
     <Compile Include="System\Extensions\LinqExtensions.cs" />
     <Compile Include="System\Extensions\SystemExtensions.cs" />
     <Compile Include="Util\BooleanOption.cs" />
+    <Compile Include="Util\IgnoreAttribute.cs" />
     <Compile Include="Util\IExecuteOnBuild.cs" />
     <Compile Include="Util\LibraryRegex.cs" />
   </ItemGroup>
