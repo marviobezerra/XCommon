@@ -36,7 +36,7 @@ namespace XCommon.Extra.AssemblyVersion
 
 			if (fileName == "")
 			{
-				System.Console.WriteLine("Usage: AssemblyInfoUtil <path to AssemblyInfo.cs or AssemblyInfo.vb file> [options]");
+				System.Console.WriteLine("Usage: XCommon.Extra.AssemblyVersion <path to AssemblyInfo.cs or AssemblyInfo.vb file> [options]");
 				System.Console.WriteLine("Options: ");
 				System.Console.WriteLine("  -set:<new version number> - set new version number (in NN.NN.NN.NN format)");
 				System.Console.WriteLine("  -inc:<parameter index>  - increases the parameter with specified index (can be from 1 to 4)");

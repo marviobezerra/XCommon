@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Entity
 {
@@ -9,7 +10,7 @@ namespace XCommon.Patterns.Repository.Entity
         [DataMember]
         public EntityAction Action { get; set; }
 
-        [DataMember]
+        [DataMember, Ignore]
         public abstract Guid Key { get; set; }
     }
 }

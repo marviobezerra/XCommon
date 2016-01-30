@@ -9,7 +9,7 @@
     <description>Azure XCommon library</description>
     <releaseNotes>Azure package for XCommon Library.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Prospect Azure</tags>
+    <tags>XCommon Azure</tags>
     <dependencies>
       <group targetFramework="net45">
         <dependency id="XCommon" version="[1,2)" />
