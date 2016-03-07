@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    [DataContract]
     public class ExecuteUser
     {
         public ExecuteUser()
@@ -13,20 +12,15 @@ namespace XCommon.Patterns.Repository.Executes
             Propertys = new Dictionary<string, object>();
             Values = new Indexer<string, object>(GetValue, SetValue);
         }
-
-        [DataMember]
+		
         public object Key { get; set; }
-
-        [DataMember]
+		
         public string Name { get; set; }
-
-        [DataMember]
+		
         public string Login { get; set; }
-
-        [IgnoreDataMember]
+		
         public Indexer<string, object> Values { get; private set; }
-
-        [DataMember]
+		
         private Dictionary<string, object> Propertys { get; set; }
 
         public T GetValue<T>(string index)

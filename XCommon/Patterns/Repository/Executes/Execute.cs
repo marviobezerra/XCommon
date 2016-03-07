@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    [DataContract]
     public class Execute
     {
         public Execute()
@@ -22,17 +21,13 @@ namespace XCommon.Patterns.Repository.Executes
         }
 
         #region Propertys
-
-        [DataMember]
+		
         public ExecuteUser User { get; set; }
-
-        [DataMember]
+		
         public bool HasErro { get; private set; }
-
-        [DataMember]
+		
         public bool HasWarning { get; private set; }
         
-        [DataMember]
         public List<ExecuteMessage> Messages { get; private set; }
         #endregion
 

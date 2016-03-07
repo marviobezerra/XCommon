@@ -11,11 +11,9 @@ namespace XCommon.Patterns.Repository.Executes
             MessageException = new List<string>();
             StackTracers = new List<string>();
         }
-
-        [DataMember]
+		
         public List<string> MessageException { get; set; }
-
-        [DataMember]
+		
         public List<string> StackTracers { get; set; }
 
         public void AddException(Exception e)

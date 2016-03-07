@@ -1,8 +1,5 @@
-﻿using System.Runtime.Serialization;
-
-namespace XCommon.Patterns.Repository.Executes
+﻿namespace XCommon.Patterns.Repository.Executes
 {
-    [DataContract]
     public class Execute<T> : Execute
         where T : new()
     {
@@ -33,8 +30,7 @@ namespace XCommon.Patterns.Repository.Executes
             User = user;
             Entity = entity;
         }
-
-        [DataMember]
+		
         public T Entity { get; set; }
     }
 }
