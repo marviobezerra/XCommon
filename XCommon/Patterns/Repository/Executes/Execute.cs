@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    [DataContract]
-    public class Execute
+	public class Execute
     {
         public Execute()
         {
+			
             Messages = new List<ExecuteMessage>();
         }
 
@@ -18,21 +19,21 @@ namespace XCommon.Patterns.Repository.Executes
             User = execute.User;
             HasWarning = execute.HasWarning;
             HasErro = execute.HasErro;
+			HasException = execute.HasException;
             Messages = execute.Messages ?? new List<ExecuteMessage>();
         }
 
         #region Propertys
-
-        [DataMember]
+		
+		[IgnoreDataMember, Ignore]
         public ExecuteUser User { get; set; }
 
-        [DataMember]
         public bool HasErro { get; private set; }
 
-        [DataMember]
+		public bool HasException { get; private set; }
+
         public bool HasWarning { get; private set; }
         
-        [DataMember]
         public List<ExecuteMessage> Messages { get; private set; }
         #endregion
 
@@ -53,7 +54,7 @@ namespace XCommon.Patterns.Repository.Executes
             ExecuteMessage executeMessage = new ExecuteMessage();
             executeMessage.MessageInternal.AddException(ex);
             executeMessage.Message = message;
-            executeMessage.Type = ExecuteMessageType.Excessao;
+            executeMessage.Type = ExecuteMessageType.Exception;
 
             Messages.Add(executeMessage);
 
@@ -91,11 +92,14 @@ namespace XCommon.Patterns.Repository.Executes
         private void CheckMessage()
         {
             if (!HasWarning)
-                HasWarning = Messages.Any(c => c.Type == ExecuteMessageType.Aviso);
+                HasWarning = Messages.Any(c => c.Type == ExecuteMessageType.Warning);
 
             if (!HasErro)
-                HasErro = Messages.Any(c => c.Type == ExecuteMessageType.Erro || c.Type == ExecuteMessageType.Excessao);
-        }
+                HasErro = Messages.Any(c => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
+
+			if (!HasException)
+				HasException = Messages.Any(c => c.Type == ExecuteMessageType.Exception);
+		}
         #endregion
     }
 }

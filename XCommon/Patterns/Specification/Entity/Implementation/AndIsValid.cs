@@ -25,7 +25,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             var value = Selector(entity);
 
             if (!value && execute != null && Message.IsNotEmpty())
-                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
 
             return value;
         }

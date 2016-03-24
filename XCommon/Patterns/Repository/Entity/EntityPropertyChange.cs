@@ -2,12 +2,10 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace XCommon.Patterns.Repository.Entity
 {
-    [DataContract]
-    public abstract class EntityPropertyChange : INotifyPropertyChanged
+	public abstract class EntityPropertyChange : INotifyPropertyChanged
     {
         protected void RaisePropertyChanged([CallerMemberName] string caller = "")
         {

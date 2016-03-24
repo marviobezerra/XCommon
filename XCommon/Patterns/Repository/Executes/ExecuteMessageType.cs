@@ -3,9 +3,9 @@ namespace XCommon.Patterns.Repository.Executes
 {
     public enum ExecuteMessageType
     {
-        Erro,
-        Aviso,
-        Excessao,
+        Error,
+        Warning,
+        Exception,
         Normal
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
+using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    [DataContract]
     public class ExecuteMessage
     {
         public ExecuteMessage()
@@ -10,13 +10,11 @@ namespace XCommon.Patterns.Repository.Executes
             MessageInternal = new ExecuteMessageInternal();
         }
 
-        [DataMember]
         public ExecuteMessageType Type { get; set; }
 
-        [DataMember]
         public string Message { get; set; }
 
-        [DataMember]
+        [IgnoreDataMember, Ignore]
         public ExecuteMessageInternal MessageInternal { get; set; }
     }
 }

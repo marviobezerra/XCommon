@@ -102,7 +102,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             }
 
             if (!result && execute != null && Message.IsNotEmpty())
-                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
 
             return result;
         }
@@ -131,7 +131,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             }
 
             if (!result && execute != null && Message.IsNotEmpty())
-                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
 
             return result;
         }
@@ -160,7 +160,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             }
 
             if (!result && execute != null && Message.IsNotEmpty())
-                execute.AddMessage(ExecuteMessageType.Erro, Message, MessageArgs);
+                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
 
             return result;
         }

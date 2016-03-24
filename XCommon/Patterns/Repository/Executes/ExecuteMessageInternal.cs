@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    public class ExecuteMessageInternal
+	public class ExecuteMessageInternal
     {
         public ExecuteMessageInternal()
         {
@@ -12,10 +11,8 @@ namespace XCommon.Patterns.Repository.Executes
             StackTracers = new List<string>();
         }
 
-        [DataMember]
         public List<string> MessageException { get; set; }
 
-        [DataMember]
         public List<string> StackTracers { get; set; }
 
         public void AddException(Exception e)
