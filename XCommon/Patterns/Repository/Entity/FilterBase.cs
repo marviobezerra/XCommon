@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace XCommon.Patterns.Repository.Entity
 {
-	public abstract class FilterBase
+    public abstract class FilterBase
     {
         public FilterBase()
         {

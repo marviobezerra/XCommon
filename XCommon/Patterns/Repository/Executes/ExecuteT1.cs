@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace XCommon.Patterns.Repository.Executes
+﻿namespace XCommon.Patterns.Repository.Executes
 {
     public class Execute<T> : Execute
         where T : new()

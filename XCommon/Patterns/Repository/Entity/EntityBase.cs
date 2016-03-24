@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Entity
