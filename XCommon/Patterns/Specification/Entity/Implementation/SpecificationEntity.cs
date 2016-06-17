@@ -39,9 +39,9 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 			return result;
 		}
 
-		public void Add(ISpecificationEntity<TEntity> specificartion, bool stopIfInvalid = false)
+		public void Add(ISpecificationEntity<TEntity> specification, bool stopIfInvalid = false)
 		{
-			SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specificartion, StopIfInvalid = stopIfInvalid });
+			SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specification, StopIfInvalid = stopIfInvalid });
 		}
 	}
 }
