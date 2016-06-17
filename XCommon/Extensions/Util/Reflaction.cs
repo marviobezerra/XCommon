@@ -57,14 +57,5 @@ namespace XCommon.Extensions.Util
 
             return null;
         }
-
-        public static string GetAttributeDescription(this Enum value)
-        {
-            DescriptionAttribute description = GetAttribute<DescriptionAttribute>(value);
-
-            return description == null
-                ? string.Empty
-                : description.Description;
-        }
     }
 }

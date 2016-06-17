@@ -1,11 +1,9 @@
-﻿using XCommon.Extensions.Util;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using XCommon.Extensions.Util;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    public class ExecuteUser
+	public class ExecuteUser
     {
         public ExecuteUser()
         {

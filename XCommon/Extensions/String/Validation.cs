@@ -1,11 +1,11 @@
-﻿using XCommon.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using XCommon.Util;
 
 namespace XCommon.Extensions.String
 {
-    public static class Validation
+	public static class Validation
     {
         #region Valida Email
         public static bool EmailValido(this string email)

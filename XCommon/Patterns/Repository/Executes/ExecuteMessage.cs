@@ -3,7 +3,7 @@ using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-    public class ExecuteMessage
+	public class ExecuteMessage
     {
         public ExecuteMessage()
         {

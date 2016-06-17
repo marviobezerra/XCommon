@@ -3,123 +3,123 @@ using System.Collections.Generic;
 
 namespace XCommon.Patterns.Ioc
 {
-    internal static class RepositoryManager
-    {
-        private static Dictionary<Type, RepositoryType> Repository { get; set; }
+	internal static class RepositoryManager
+	{
+		private static Dictionary<Type, RepositoryType> Repository { get; set; }
 
-        static RepositoryManager()
-        {
-            Init();
-        }
+		static RepositoryManager()
+		{
+			Init();
+		}
 
-        internal static void Init()
-        {
-            Repository = new Dictionary<Type, RepositoryType>();
-        }
+		internal static void Init()
+		{
+			Repository = new Dictionary<Type, RepositoryType>();
+		}
 
-        internal static int GetMappedCount()
-        {
-            return Repository.Count;
-        }
-        
-        internal static void Add(Type contract, Type concret, bool overrideExistence, bool canCache, object[] constructorParams)
-        {
-            Remove(contract);
+		internal static int GetMappedCount()
+		{
+			return Repository.Count;
+		}
 
-            lock (Repository)
-            {
-                if (Repository.ContainsKey(contract))
-                {
-                    if (overrideExistence)
-                        return;
+		internal static void Add(Type contract, Type concret, bool overrideExistence, bool canCache, object[] constructorParams)
+		{
+			Remove(contract);
 
-                    Repository.Remove(contract);
-                }
+			lock (Repository)
+			{
+				if (Repository.ContainsKey(contract))
+				{
+					if (overrideExistence)
+						return;
 
-                Repository.Add(contract, new RepositoryType(concret, canCache, constructorParams));
-            }
-        }
+					Repository.Remove(contract);
+				}
 
-        internal static void Add(Type contract, Type concret, object instance, bool overrideExistence, bool canCache, object[] constructorParams)
-        {
-            Remove(contract);
+				Repository.Add(contract, new RepositoryType(concret, canCache, constructorParams));
+			}
+		}
 
-            lock (Repository)
-            {
-                if (Repository.ContainsKey(contract))
-                {
-                    if (overrideExistence)
-                        return;
+		internal static void Add(Type contract, Type concret, object instance, bool overrideExistence, bool canCache, object[] constructorParams)
+		{
+			Remove(contract);
 
-                    Repository.Remove(contract);
-                }
+			lock (Repository)
+			{
+				if (Repository.ContainsKey(contract))
+				{
+					if (overrideExistence)
+						return;
 
-                Repository.Add(contract, new RepositoryType(concret, instance, true, constructorParams));
-            }
-        }
+					Repository.Remove(contract);
+				}
 
-        internal static void Add<T>(Type contract, Func<object> resolver)
-        {
-            Remove(contract);
+				Repository.Add(contract, new RepositoryType(concret, instance, true, constructorParams));
+			}
+		}
 
-            lock (Repository)
-            {
-                if (Repository.ContainsKey(contract))
-                    Repository.Remove(contract);
+		internal static void Add<T>(Type contract, Func<object> resolver)
+		{
+			Remove(contract);
 
-                Repository.Add(contract, new RepositoryType(contract, resolver));
-            }
-        }
+			lock (Repository)
+			{
+				if (Repository.ContainsKey(contract))
+					Repository.Remove(contract);
 
-        internal static void Remove(Type contract)
-        {
-            lock (Repository)
-            {
-                if (Repository.ContainsKey(contract))
-                    Repository.Remove(contract);
-            }
-        }
+				Repository.Add(contract, new RepositoryType(contract, resolver));
+			}
+		}
 
-        internal static bool Exists(Type contract)
-        {
-            lock (Repository)
-            {
-                return Repository.ContainsKey(contract);
-            }
-        }
+		internal static void Remove(Type contract)
+		{
+			lock (Repository)
+			{
+				if (Repository.ContainsKey(contract))
+					Repository.Remove(contract);
+			}
+		}
 
-        internal static object Resolve(Type contract, bool canCache, bool forceResolve)
-        {
-            lock (Repository)
-            {
-                RepositoryType repository = null;
+		internal static bool Exists(Type contract)
+		{
+			lock (Repository)
+			{
+				return Repository.ContainsKey(contract);
+			}
+		}
 
-                if (!Repository.TryGetValue(contract, out repository))
-                {
-                    if (forceResolve)
-                    {
-                        throw new Exception(string.Format("Não é possivel resolver o tipo: {0}", contract.FullName));
-                    }
+		internal static object Resolve(Type contract, bool canCache, bool forceResolve)
+		{
+			lock (Repository)
+			{
+				RepositoryType repository = null;
 
-                    return null;
-                }
+				if (!Repository.TryGetValue(contract, out repository))
+				{
+					if (forceResolve)
+					{
+						throw new Exception(string.Format("Não é possivel resolver o tipo: {0}", contract.FullName));
+					}
 
-                if (repository.UseResolver)
-                    return repository.Resolver();
+					return null;
+				}
 
-                if (!canCache || !repository.CanCache)
-                    return Activator.CreateInstance(repository.Type);
+				if (repository.UseResolver)
+					return repository.Resolver();
 
-                if (repository.Instance == null)
-                    repository.Instance = Activator.CreateInstance(repository.Type, repository.Params);
+				if (!canCache || !repository.CanCache)
+					return Activator.CreateInstance(repository.Type);
 
-                return repository.Instance;
-            }
-        }
+				if (repository.Instance == null)
+					repository.Instance = Activator.CreateInstance(repository.Type, repository.Params);
 
-        internal static T Resolve<T>(bool canCache = true, bool forceResolve = true)
-        {
-            return (T)Resolve(typeof(T), canCache, forceResolve);
-        }
-    }
+				return repository.Instance;
+			}
+		}
+
+		internal static T Resolve<T>(bool canCache = true, bool forceResolve = true)
+		{
+			return (T)Resolve(typeof(T), canCache, forceResolve);
+		}
+	}
 }

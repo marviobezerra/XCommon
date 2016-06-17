@@ -35,7 +35,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
             catch (Exception ex)
             {
                 if (execute != null)
-                    execute.AddMessage(ex, Properties.Resources.InvalidRegex, RegexExpression);
+                    execute.AddMessage(ex, "Invalid regex", RegexExpression);
 
                 return false;
             }
