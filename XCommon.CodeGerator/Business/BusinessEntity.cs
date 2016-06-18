@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using XCommon.CodeGerator.Configuration;
 using XCommon.CodeGerator.Entity;
 using XCommon.CodeGerator.Extensions;
 using XCommon.Util;
@@ -10,7 +11,7 @@ namespace XCommon.CodeGerator.Business
 {
 	internal class BusinessEntity
     {
-		private Configuration.ConfigBusiness Config => Generator.Configuration.Business;
+		private ConfigBusiness Config => Generator.Configuration.Business;
 
 		public void Run()
 		{
