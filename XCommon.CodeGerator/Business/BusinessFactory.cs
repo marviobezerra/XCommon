@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XCommon.CodeGerator.Config
+namespace XCommon.CodeGerator.Business
 {
-    public class CodeGeneratorConfig
+	internal class BusinessFactory
     {
-    }
+		public void Run()
+		{
+
+		}
+	}
 }
