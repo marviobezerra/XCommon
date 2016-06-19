@@ -5,6 +5,7 @@ using XCommon.CodeGerator.Business;
 using XCommon.CodeGerator.Configuration;
 using XCommon.CodeGerator.DataBaseReader;
 using XCommon.CodeGerator.Entity;
+using XCommon.CodeGerator.TypeScript;
 
 namespace XCommon.CodeGerator
 {
@@ -48,8 +49,8 @@ namespace XCommon.CodeGerator
 
 			var help = app.HelpOption("-?|--help");
 			var angular = app.Option("-a|--angular", "Angular code generation", CommandOptionType.NoValue);
-			var csharp = app.Option("-c#|--csharp", "C# code generarion", CommandOptionType.NoValue);
-			var typeScript = app.Option("-ts|--typescript", "TypeScript code generarion", CommandOptionType.NoValue);
+			var csharp = app.Option("-c|--csharp", "C# code generarion", CommandOptionType.NoValue);
+			var typeScript = app.Option("-t|--typescript", "TypeScript code generarion", CommandOptionType.NoValue);
 
 			app.OnExecute(() => {
 
@@ -63,6 +64,12 @@ namespace XCommon.CodeGerator
 				{
 					AngularHelper angularHelper = new AngularHelper();
 					return angularHelper.Run(args);
+				}
+
+				if (typeScript.HasValue())
+				{
+					TypeScriptHelper typeScriptHelper = new TypeScriptHelper();
+					return typeScriptHelper.Run();
 				}
 
 				app.ShowHelp();

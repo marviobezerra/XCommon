@@ -5,12 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Text;
-using System.Threading.Tasks;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript
 {
-	public class GeneratorResource
+	public class Resource
 	{
 		private Configuration.ConfigResource Config => Generator.Configuration.Resource;
 
