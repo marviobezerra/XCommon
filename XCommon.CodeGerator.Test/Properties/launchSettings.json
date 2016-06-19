@@ -2,7 +2,7 @@
   "profiles": {
     "XCommon.CodeGerator.Test": {
       "commandName": "Project",
-      "commandLineArgs": "-c#"
+      "commandLineArgs": "-a -c -f Person Person PersonList PersonSearch"
     }
   }
 }

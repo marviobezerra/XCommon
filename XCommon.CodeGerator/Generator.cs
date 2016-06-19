@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using XCommon.Application.CommandLine;
+using XCommon.CodeGerator.Angular2;
 using XCommon.CodeGerator.Business;
 using XCommon.CodeGerator.Configuration;
 using XCommon.CodeGerator.DataBaseReader;
@@ -56,6 +57,12 @@ namespace XCommon.CodeGerator
 				{
 					BusinessHelper businessHelper = new BusinessHelper();
 					return businessHelper.RunAll();
+				}
+
+				if (angular.HasValue())
+				{
+					AngularHelper angularHelper = new AngularHelper();
+					return angularHelper.Run(args);
 				}
 
 				app.ShowHelp();

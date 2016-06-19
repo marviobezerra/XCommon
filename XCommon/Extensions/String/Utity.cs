@@ -49,7 +49,7 @@ namespace XCommon.Extensions.String
             return Encoding.UTF8.GetBytes(value);
         }
 
-        public static string RemoveAcento(this string value)
+        public static string RemoveAcent(this string value)
         {
             if (value.IsEmpty())
                 return value;
@@ -76,7 +76,7 @@ namespace XCommon.Extensions.String
         public static string StringNormalize(this string value)
         {
             value = value.ToLower();
-            value = value.RemoveAcento();
+            value = value.RemoveAcent();
             value = value.RemoveExtraSpace();
             return value;
         }
@@ -107,7 +107,10 @@ namespace XCommon.Extensions.String
                 }
             }
 
-            return result.Distinct().ToList();
+            return result
+				.Distinct()
+				.OrderBy(c => c)
+				.ToList();
         }
 
         public static bool ValueContains(this string value, string strB)
@@ -123,7 +126,7 @@ namespace XCommon.Extensions.String
             if (type == CompareType.Default)
                 return value.Contains(strB);
 
-            return value.RemoveAcento().ToLower().Contains(strB.RemoveAcento().ToLower());
+            return value.RemoveAcent().ToLower().Contains(strB.RemoveAcent().ToLower());
         }
 
         public static bool ValueEquals(this string value, string strB)
@@ -142,7 +145,21 @@ namespace XCommon.Extensions.String
             if (!value.IsEmpty() && strB.IsEmpty())
                 return false;
 
-            return value.RemoveAcento().ToLower().Trim().Equals(strB.RemoveAcento().ToLower().Trim());
+            return value.RemoveAcent().ToLower().Trim().Equals(strB.RemoveAcent().ToLower().Trim());
         }
-    }
+
+		public static string Replace(this string str, string from, string to, bool ignoreCase)
+		{
+			return Regex.Replace(str, from, to, RegexOptions.IgnoreCase);
+		}
+
+		internal static string SafeString(this string name)
+		{
+			return name
+				.RemoveAcent()
+				.Replace("-", string.Empty)
+				.Replace(".", string.Empty)
+				.Trim();
+		}
+	}
 }

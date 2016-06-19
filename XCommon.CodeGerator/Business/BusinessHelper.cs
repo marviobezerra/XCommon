@@ -1,8 +1,8 @@
 ﻿namespace XCommon.CodeGerator.Business
 {
-	public class BusinessHelper
+	internal class BusinessHelper
     {
-		public BusinessHelper()
+		internal BusinessHelper()
 		{
 			Contract = new BusinessContract();
 			Concret = new BusinessConcret();
@@ -21,7 +21,7 @@
 
 		private BusinessFactory Factory { get; set; }
 
-		public int RunAll()
+		internal int RunAll()
 		{
 			Data.Run();
 			Entity.Run();

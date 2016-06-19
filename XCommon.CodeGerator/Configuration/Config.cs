@@ -9,5 +9,7 @@
 		public ConfigResource Resource { get; set; }
 
 		public ConfigBusiness Business { get; set; }
+
+		public ConfigEntity Entity { get; set; }
 	}
 }
