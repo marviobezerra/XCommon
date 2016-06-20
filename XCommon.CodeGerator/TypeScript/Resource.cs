@@ -15,17 +15,19 @@ namespace XCommon.CodeGerator.TypeScript
 
 
 		private List<GeneratorResourceEntity> Resources { get; set; }
-
-		private Dictionary<Type, ResourceManager> ResourcesTypes { get; set; }
-
+		
 		internal void Run()
 		{
 			StringBuilderIndented builder = new StringBuilderIndented();
 
+			builder
+				.AppendLine("import { Injectable } from '@angular/core';")
+				.AppendLine();
+
 			Resources = new List<GeneratorResourceEntity>();
 
 			GetResouces();
-			BuildLanguageSuported(builder);
+			BuildLanguageSuported(builder);			
 			BuildInterface(builder);
 			BuildClass(builder);
 			BuidService(builder);
@@ -47,7 +49,7 @@ namespace XCommon.CodeGerator.TypeScript
 
 		private void GetResouces()
 		{
-			foreach (var manager in ResourcesTypes)
+			foreach (var manager in Config.Resources)
 			{
 				GeneratorResourceEntity resource = new GeneratorResourceEntity
 				{
@@ -86,7 +88,8 @@ namespace XCommon.CodeGerator.TypeScript
 
 				builder
 					.DecrementIndent()
-					.AppendLine("}");
+					.AppendLine("}")
+					.AppendLine();
 			}
 		}
 
@@ -108,7 +111,8 @@ namespace XCommon.CodeGerator.TypeScript
 
 					builder
 						.DecrementIndent()
-						.AppendLine("}");
+						.AppendLine("}")
+						.AppendLine();
 				}
 			}
 		}
@@ -116,8 +120,6 @@ namespace XCommon.CodeGerator.TypeScript
 		private string BuidService(StringBuilderIndented builder)
 		{
 			builder
-				.AppendLine("import { Injectable } from '@angular/core';")
-				.AppendLine()
 				.AppendLine("@Injectable()")
 				.AppendLine("export class ResourceService {")
 				.IncrementIndent()
@@ -197,7 +199,8 @@ namespace XCommon.CodeGerator.TypeScript
 
 			builder
 				.DecrementIndent()
-				.AppendLine("}");
+				.AppendLine("}")
+				.AppendLine();
 		}
 	}
 }

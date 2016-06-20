@@ -6,9 +6,9 @@
 
 		public string ContractNameSpace { get; set; }
 
-		public string ConcretPath { get; set; }
+		public string ConcretePath { get; set; }
 
-		public string ConcretNameSpace { get; set; }
+		public string ConcreteNameSpace { get; set; }
 
 		public string FactoryPath { get; set; }
 

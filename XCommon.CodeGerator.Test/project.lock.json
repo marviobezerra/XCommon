@@ -2097,14 +2097,14 @@
           "netstandard1.5/XCommon.dll": {}
         }
       },
-      "XCommon.CodeGerator/1.0.17": {
+      "XCommon.CodeGerator/1.0.18": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
           "NETStandard.Library": "1.5.0-rc2-24027",
           "Newtonsoft.Json": "8.0.3",
           "System.Data.SqlClient": "4.1.0-rc2-24027",
-          "XCommon": "1.0.17"
+          "XCommon": "1.0.18"
         },
         "compile": {
           "netstandard1.5/XCommon.CodeGerator.dll": {}
@@ -6839,7 +6839,7 @@
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
     },
-    "XCommon.CodeGerator/1.0.17": {
+    "XCommon.CodeGerator/1.0.18": {
       "type": "project",
       "path": "../XCommon.CodeGerator/project.json",
       "msbuildProject": "../XCommon.CodeGerator/XCommon.CodeGerator.xproj"
@@ -6848,8 +6848,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.App >= 1.0.0-rc2-3002702",
-      "XCommon >= 1.0.17-*",
-      "XCommon.CodeGerator >= 1.0.17-*"
+      "XCommon >= 1.0.18-*",
+      "XCommon.CodeGerator >= 1.0.18-*"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

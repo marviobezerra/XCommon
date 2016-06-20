@@ -46,7 +46,7 @@ namespace XCommon.CodeGerator.Business
 
 		private void GenerateContext()
 		{
-			List<string> nameSpaces = new List<string> { "System", "Microsoft.Data.Entity", "XCommon.Patterns.Ioc", "Prospect.MyPetLife.Business.Entity.System" };
+			List<string> nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "XCommon.Patterns.Ioc", "XCommon.Application" };
 			nameSpaces.AddRange(ItemsGroup.Select(c => $"{Config.DataNameSpace}.{c.Name}"));
 			nameSpaces.AddRange(ItemsGroup.Select(c => $"{Config.DataNameSpace}.{c.Name}.Map"));
 
@@ -116,7 +116,7 @@ namespace XCommon.CodeGerator.Business
 					var nameSpace = new List<string> { "System", "System.Collections.Generic" };
 					nameSpace.AddRange(item.Relationships.Where(c => c.ItemGroupFK != group.Name).Select(c => $"{Config.DataNameSpace}.{c.ItemGroupFK}").Distinct());
 					nameSpace.AddRange(item.Relationships.Where(c => c.ItemGroupPK != group.Name).Select(c => $"{Config.DataNameSpace}.{c.ItemGroupPK}").Distinct());
-					nameSpace.AddRange(item.Properties.Select(c => c.NameGroup));
+					nameSpace.AddRange(item.Properties.Where(c => c.NameGroup != group.Name).Select(c => c.NameGroup));
 
 					StringBuilderIndented builder = new StringBuilderIndented();
 
@@ -136,7 +136,8 @@ namespace XCommon.CodeGerator.Business
 						string relationShipName = ProcessRelationShipName(relationShip, relationShip.ItemPK);
 
 						builder
-							.AppendLine($"public virtual {relationShip.ItemPK} {relationShipName} {{ get; set; }}");
+							.AppendLine($"public virtual {relationShip.ItemPK} {relationShipName} {{ get; set; }}")
+							.AppendLine();
 					}
 
 					foreach (var relationShip in item.Relationships.Where(c => c.RelationshipType == ItemRelationshipType.Many))
@@ -144,7 +145,8 @@ namespace XCommon.CodeGerator.Business
 						string relationShipName = ProcessRelationShipName(relationShip, relationShip.ItemFK);
 
 						builder
-							.AppendLine($"public virtual ICollection<{relationShip.ItemFK}> {relationShipName} {{ get; set; }}");
+							.AppendLine($"public virtual ICollection<{relationShip.ItemFK}> {relationShipName} {{ get; set; }}")
+							.AppendLine();
 					}
 
 					builder
@@ -171,7 +173,7 @@ namespace XCommon.CodeGerator.Business
 
 					builder
 						.GenerateFileMessage()
-						.ClassInit($"{item.Name}Map", null, $"{Config.DataNameSpace}.{group.Name}.Map", ClassVisility.Internal, "System", "Microsoft.Data.Entity")
+						.ClassInit($"{item.Name}Map", null, $"{Config.DataNameSpace}.{group.Name}.Map", ClassVisility.Internal, "System", "Microsoft.EntityFrameworkCore")
 						.AppendLine("internal static void Map(ModelBuilder modelBuilder, bool unitTest)")
 						.AppendLine("{")
 						// = 0 + 1 = 1
@@ -250,8 +252,8 @@ namespace XCommon.CodeGerator.Business
 		{
 			foreach (var relationShip in item.Relationships.Where(c => c.RelationshipType == ItemRelationshipType.Single))
 			{
-				string relationShipNamePK = ProcessRelationShipName(relationShip, relationShip.ItemGroupPK);
-				string relationShipNameFK = ProcessRelationShipName(relationShip, relationShip.ItemGroupFK);
+				string relationShipNamePK = ProcessRelationShipName(relationShip, relationShip.ItemPK);
+				string relationShipNameFK = ProcessRelationShipName(relationShip, relationShip.ItemFK);
 
 				builder
 					.AppendLine("entity")

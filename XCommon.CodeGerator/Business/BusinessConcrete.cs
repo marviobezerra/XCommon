@@ -9,7 +9,7 @@ using XCommon.Util;
 
 namespace XCommon.CodeGerator.Business
 {
-	internal class BusinessConcret
+	internal class BusinessConcrete
     {
 		private ConfigBusiness Config => Generator.Configuration.Business;
 
@@ -17,7 +17,7 @@ namespace XCommon.CodeGerator.Business
 
 		public void Run()
 		{
-			GenerateConcret();
+			GenerateConcrete();
 			GenerateValidation();
 			GenerateQuery();
 		}
@@ -28,7 +28,7 @@ namespace XCommon.CodeGerator.Business
 			{
 				foreach (var item in group.Items)
 				{
-					string path = Path.Combine(Config.ConcretPath, group.Name, "Validate");
+					string path = Path.Combine(Config.ConcretePath, group.Name, "Validate");
 					string file = Path.Combine(path, $"{item.Name}Validate.cs");
 
 					if (File.Exists(file))
@@ -40,7 +40,7 @@ namespace XCommon.CodeGerator.Business
 					StringBuilderIndented builder = new StringBuilderIndented();
 
 					builder
-						.ClassInit($"{item.Name}Validate", $"ISpecificationEntity<{item.Name}Entity>", $"{Config.ConcretNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())
+						.ClassInit($"{item.Name}Validate", $"ISpecificationEntity<{item.Name}Entity>", $"{Config.ConcreteNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())
 						.AppendLine($"public bool IsSatisfiedBy({item.Name}Entity entity)")
 						.AppendLine("{")
 						.IncrementIndent()
@@ -71,7 +71,7 @@ namespace XCommon.CodeGerator.Business
 			{
 				foreach (var table in group.Items)
 				{
-					string path = Path.Combine(Config.ConcretPath, group.Name, "Query");
+					string path = Path.Combine(Config.ConcretePath, group.Name, "Query");
 					string file = Path.Combine(path, $"{table.Name}Query.cs");
 
 					if (File.Exists(file))
@@ -79,7 +79,7 @@ namespace XCommon.CodeGerator.Business
 
 					var nameSpace = new List<string> { "System", "System.Linq", "System.Collections.Generic", "XCommon.Patterns.Specification.Query", "XCommon.Extensions.String" };
 					nameSpace.Add($"{Generator.Configuration.DataBase.DataNameSpace}.{group.Name}");
-					nameSpace.Add($"{Generator.Configuration.DataBase.DataNameSpace}.{group.Name}.Filter");
+					nameSpace.Add($"{Generator.Configuration.Business.EntrityNameSpace}.{group.Name}.Filter");
 
 					StringBuilderIndented builder = new StringBuilderIndented();
 
@@ -88,7 +88,7 @@ namespace XCommon.CodeGerator.Business
 						: table.NameKey;
 
 					builder
-						.ClassInit($"{table.Name}Query", $"IQueryBuilder<{table.Name}, {table.Name}Filter>", $"{Config.ConcretNameSpace}.{group.Name}.Query", ClassVisility.Public, nameSpace.ToArray())
+						.ClassInit($"{table.Name}Query", $"IQueryBuilder<{table.Name}, {table.Name}Filter>", $"{Config.ConcreteNameSpace}.{group.Name}.Query", ClassVisility.Public, nameSpace.ToArray())
 						.AppendLine($"public IQueryable<{table.Name}> Build(IQueryable<{table.Name}> query, {table.Name}Filter filter)")
 						.AppendLine("{")
 						.IncrementIndent()
@@ -120,29 +120,29 @@ namespace XCommon.CodeGerator.Business
 			}
 		}
 
-		private void GenerateConcret()
+		private void GenerateConcrete()
 		{
 			foreach (var group in ItemsGroup)
 			{
 				foreach (var item in group.Items)
 				{
-					string path = Path.Combine(Config.ConcretPath, group.Name);
+					string path = Path.Combine(Config.ConcretePath, group.Name);
 					string file = Path.Combine(path, $"{item.Name}Business.cs");
 
 					if (File.Exists(file))
 						continue;
 
-					var nameSpace = new List<string> { "System", "Prospect.MyPetLife.Business.Concret.Base" };
+					var nameSpace = new List<string> { "System", " XCommon.Patterns.Repository" };
 					nameSpace.Add($"{Config.EntrityNameSpace}.{group.Name}");
 					nameSpace.Add($"{Config.EntrityNameSpace}.{group.Name}.Filter");
 					nameSpace.Add($"{Config.ContractNameSpace}.{group.Name}");
-					nameSpace.Add($"{Generator.Configuration.DataBase.ContextName}");
-					nameSpace.Add($"{Generator.Configuration.DataBase.ContextName}.{group.Name}");
+					nameSpace.Add($"{Generator.Configuration.DataBase.DataNameSpace}");
+					nameSpace.Add($"{Generator.Configuration.DataBase.DataNameSpace}.{group.Name}");
 
 					StringBuilderIndented builder = new StringBuilderIndented();
 
 					builder
-						.ClassInit($"{item.Name}Business", $"RepositoryBase<{item.Name}Entity, {item.Name}Filter, {item.Name}, {Generator.Configuration.DataBase.ContextName}>, I{item.Name}Business", $"{Config.ConcretNameSpace}.{group.Name}", ClassVisility.Public, nameSpace.ToArray())
+						.ClassInit($"{item.Name}Business", $"RepositoryEFBase<{item.Name}Entity, {item.Name}Filter, {item.Name}, {Generator.Configuration.DataBase.ContextName}>, I{item.Name}Business", $"{Config.ConcreteNameSpace}.{group.Name}", ClassVisility.Public, nameSpace.ToArray())
 						.ClassEnd();
 
 					if (!Directory.Exists(path))

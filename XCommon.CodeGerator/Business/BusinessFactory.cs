@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,33 @@ namespace XCommon.CodeGerator.Business
 		
 		public void Run()
 		{
+			GenerateFactoryCuston();
 			GenerateFactory();
+		}
+
+		private void GenerateFactoryCuston()
+		{
+			string path = Path.Combine(Config.FactoryPath);
+			string file = Path.Combine(path, $"Register.cs");
+
+			if (File.Exists(file))
+				return;
+
+			var nameSpace = new List<string> { "XCommon.Patterns.Ioc" };
+
+			StringBuilderIndented builder = new StringBuilderIndented();
+
+			builder
+				.ClassInit("Register", null, $"{Config.FacotryNameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
+				.AppendLine("public static void RegisterCustom(bool unitTest)")
+				.AppendLine("{")
+				.AppendLine("}")
+				.ClassEnd();
+
+			if (!Directory.Exists(path))
+				Directory.CreateDirectory(path);
+
+			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 		}
 
 		private void GenerateFactory()
@@ -25,14 +52,14 @@ namespace XCommon.CodeGerator.Business
 			string path = Path.Combine(Config.FactoryPath);
 			string file = Path.Combine(path, $"Register.Auto.cs");
 
-			var nameSpace = new List<string> { "XCommon.Patterns.Ioc", " XCommon.Patterns.Specification.Entity", "XCommon.Patterns.Specification.Query" };
+			var nameSpace = new List<string> { "XCommon.Patterns.Ioc", "XCommon.Patterns.Specification.Entity", "XCommon.Patterns.Specification.Query" };
 
 			ItemsGroup.ForEach(group =>
 			{
 				nameSpace.Add($"{Config.ContractNameSpace}.{group.Name}");
-				nameSpace.Add($"{Config.ConcretNameSpace}.{group.Name}");
-				nameSpace.Add($"{Config.ConcretNameSpace}.{group.Name}.Query");
-				nameSpace.Add($"{Config.ConcretNameSpace}.{group.Name}.Validate");
+				nameSpace.Add($"{Config.ConcreteNameSpace}.{group.Name}");
+				nameSpace.Add($"{Config.ConcreteNameSpace}.{group.Name}.Query");
+				nameSpace.Add($"{Config.ConcreteNameSpace}.{group.Name}.Validate");
 				nameSpace.Add($"{Config.EntrityNameSpace}.{group.Name}");
 				nameSpace.Add($"{Config.EntrityNameSpace}.{group.Name}.Filter");
 				nameSpace.Add($"{Generator.Configuration.DataBase.DataNameSpace}.{group.Name}");
@@ -48,7 +75,7 @@ namespace XCommon.CodeGerator.Business
 				.AppendLine("RegisterRepository();")
 				.AppendLine("RegisterValidate();")
 				.AppendLine("RegisterQuery();")
-				.AppendLine("RegisterCuston();")
+				.AppendLine("RegisterCustom(unitTest);")
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine();
@@ -64,7 +91,6 @@ namespace XCommon.CodeGerator.Business
 				Directory.CreateDirectory(path);
 
 			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
-
 		}
 
 		private void GenerateFactoryValidate(StringBuilderIndented builder)

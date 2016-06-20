@@ -38,8 +38,8 @@ namespace XCommon.CodeGerator.Test
 					FacotryNameSpace = "Prospect.MyPetLife.Business.Facotry",
 					ContractPath = @"D:\A\Contract",
 					ContractNameSpace = "Prospect.MyPetLife.Business.Contract",
-					ConcretPath = @"D:\A\Concret",
-					ConcretNameSpace = "Prospect.MyPetLife.Business.Concret",
+					ConcretePath = @"D:\A\Concret",
+					ConcreteNameSpace = "Prospect.MyPetLife.Business.Concret",
 				}
 			};
 		}

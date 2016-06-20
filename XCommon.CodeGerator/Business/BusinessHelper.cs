@@ -1,17 +1,21 @@
-﻿namespace XCommon.CodeGerator.Business
+﻿using System;
+
+namespace XCommon.CodeGerator.Business
 {
 	internal class BusinessHelper
     {
 		internal BusinessHelper()
 		{
 			Contract = new BusinessContract();
-			Concret = new BusinessConcret();
+			Concret = new BusinessConcrete();
 			Data = new BusinessData();
 			Entity = new BusinessEntity();
 			Factory = new BusinessFactory();
+
+			Console.WriteLine("C# code completed");
 		}
 
-		private BusinessConcret Concret { get; set; }
+		private BusinessConcrete Concret { get; set; }
 
 		private BusinessContract Contract { get; set; }
 

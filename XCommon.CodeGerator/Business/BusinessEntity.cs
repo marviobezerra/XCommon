@@ -10,7 +10,7 @@ using XCommon.Util;
 namespace XCommon.CodeGerator.Business
 {
 	internal class BusinessEntity
-    {
+	{
 		private ConfigBusiness Config => Generator.Configuration.Business;
 
 		public void Run()
@@ -53,7 +53,7 @@ namespace XCommon.CodeGerator.Business
 			string file = Path.Combine(path, $"{item.Name}Entity.cs");
 
 			var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Entity", "XCommon.Util" };
-			nameSpace.AddRange(item.Properties.Select(c => c.NameGroup));
+			nameSpace.AddRange(item.Properties.Where(c => c.NameGroup != group.Name).Select(c => c.NameGroup));
 
 			StringBuilderIndented builder = new StringBuilderIndented();
 

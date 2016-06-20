@@ -185,7 +185,7 @@ namespace XCommon.CodeGerator.TypeScript
 				StringBuilderIndented builder = new StringBuilderIndented();
 
 				builder
-					.AppendLine($"import {{{import}}} from \"./Enum\";")
+					.AppendLine($"import {{ {import} }} from \"./Enum\";")
 					.AppendLine();
 
 				foreach (var className in AssemblyProperties.Where(c => c.FileName == file).Select(c => c.Class).Distinct().OrderBy(c => c))
