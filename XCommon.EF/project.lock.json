@@ -290,7 +290,7 @@
           "System.Threading": "4.0.11-rc2-24027"
         },
         "compile": {
-          "lib/netstandard1.1/_._": {}
+          "lib/netstandard1.1/System.Buffers.dll": {}
         },
         "runtime": {
           "lib/netstandard1.1/System.Buffers.dll": {}
@@ -396,7 +396,7 @@
           "System.Threading": "4.0.11-rc2-24027"
         },
         "compile": {
-          "lib/netstandard1.3/_._": {}
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
@@ -561,7 +561,7 @@
           "runtime.native.System": "4.0.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.IO.FileSystem.Watcher.dll": {}
         },
         "runtimeTargets": {
           "runtimes/linux/lib/netstandard1.3/System.IO.FileSystem.Watcher.dll": {
@@ -943,7 +943,7 @@
           "System.Text.Encoding": "4.0.11-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.4/System.Security.Cryptography.Algorithms.dll": {
@@ -970,7 +970,7 @@
           "System.Text.Encoding": "4.0.11-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.4/System.Security.Cryptography.Cng.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.4/System.Security.Cryptography.Cng.dll": {
@@ -1000,7 +1000,7 @@
           "System.Threading": "4.0.11-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Security.Cryptography.Csp.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Security.Cryptography.Csp.dll": {
@@ -1030,7 +1030,7 @@
           "runtime.native.System.Security.Cryptography": "4.0.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Security.Cryptography.Encoding.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Security.Cryptography.Encoding.dll": {
@@ -1061,7 +1061,7 @@
           "runtime.native.System.Security.Cryptography": "4.0.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.4/System.Security.Cryptography.OpenSsl.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.4/System.Security.Cryptography.OpenSsl.dll": {
@@ -1086,7 +1086,7 @@
           "System.Threading.Tasks": "4.0.11-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Security.Cryptography.Primitives.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Security.Cryptography.Primitives.dll": {}
@@ -1122,7 +1122,7 @@
           "runtime.native.System.Security.Cryptography": "4.0.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.4/_._": {}
+          "ref/netstandard1.4/System.Security.Cryptography.X509Certificates.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.4/System.Security.Cryptography.X509Certificates.dll": {
@@ -1198,7 +1198,7 @@
           "System.Runtime.Handles": "4.0.1-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Threading.Overlapped.dll": {}
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Threading.Overlapped.dll": {
@@ -1231,7 +1231,7 @@
           "System.Threading.Tasks": "4.0.11-rc2-24027"
         },
         "compile": {
-          "lib/netstandard1.0/_._": {}
+          "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {}
         },
         "runtime": {
           "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {}
@@ -1243,7 +1243,7 @@
           "System.Runtime": "4.1.0-rc2-24027"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Threading.Thread.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Threading.Thread.dll": {}
@@ -1310,7 +1310,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "XCommon/1.0.17": {
+      "XCommon/1.0.19": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
@@ -4655,7 +4655,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.17": {
+    "XCommon/1.0.19": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
@@ -4665,7 +4665,7 @@
     "": [
       "Microsoft.EntityFrameworkCore >= 1.0.0-rc2-final",
       "NETStandard.Library >= 1.5.0-rc2-24027",
-      "XCommon >= 1.0.18-*"
+      "XCommon >= 1.0.19-*"
     ],
     ".NETStandard,Version=v1.5": []
   },

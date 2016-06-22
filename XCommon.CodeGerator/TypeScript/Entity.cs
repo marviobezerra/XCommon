@@ -70,7 +70,7 @@ namespace XCommon.CodeGerator.TypeScript
 
 			if (currentType.Name.Contains("Entity"))
 			{
-				return currentType.Name;
+				return $"I{currentType.Name}";
 			}
 
 			switch (currentType.Name)
