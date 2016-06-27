@@ -66,9 +66,13 @@ namespace XCommon.Patterns.Specification.Query
 
 		public QueryBuilder<TEntity, TFilter> Take(int page, int pageSize)
 		{
-			Page = page;
-			PageSize = pageSize;
-			PageApply = true;
+			if (page > 0 && pageSize > 0)
+			{
+				Page = page;
+				PageSize = pageSize;
+				PageApply = true;
+			}
+
 			return this;
 		}
 
@@ -88,7 +92,7 @@ namespace XCommon.Patterns.Specification.Query
 				if (item.Condition(filter))
 					query = item.Sort(query);
 			}
-			
+
 			if (PageApply)
 				query = query.Skip((Page - 1) * PageSize).Take(PageSize);
 

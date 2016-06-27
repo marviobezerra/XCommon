@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Text;
 using XCommon.Util;
 
@@ -123,7 +122,11 @@ namespace XCommon.CodeGerator.TypeScript
 				.AppendLine("@Injectable()")
 				.AppendLine("export class ResourceService {")
 				.IncrementIndent()
-				.AppendLine("constructor() { }")
+				.AppendLine("constructor() {")
+				.IncrementIndent()
+				.AppendLine($"this.SetLanguage(LanguageSuported.{GetCultureName(Config.CultureDefault)})")
+				.DecrementIndent()
+				.AppendLine("}")
 				.AppendLine()
 				.AppendLine("private Language: LanguageSuported;")
 				.AppendLine("OnCultureChange: Array<(name: string) => void> = [];")
@@ -186,7 +189,12 @@ namespace XCommon.CodeGerator.TypeScript
 				.AppendLine("export enum LanguageSuported {")
 				.IncrementIndent();
 
-			var cultures = Resources.SelectMany(c => c.Values.Select(x => x.Culture)).Distinct().OrderBy(c => c).ToList();
+			var cultures = Resources.SelectMany(c => c.Values
+				.Select(x => x.Culture))
+				.Distinct()
+				.OrderBy(c => c)
+				.ToList();
+
 			int count = 0;
 
 			foreach (var culture in cultures)
