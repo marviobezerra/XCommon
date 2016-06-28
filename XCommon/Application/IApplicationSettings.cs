@@ -2,9 +2,11 @@
 {
 	public interface IApplicationSettings
 	{
-		string ConnectionString { get; set; }
+		string ConnectionString { get; }
 
-		bool UnitTest { get; set; }
+		bool UnitTest { get; }
+
+		bool Production { get; }
 	}
 
 	public class ApplicationSettings : IApplicationSettings
@@ -12,5 +14,7 @@
 		public string ConnectionString { get; set; }
 
 		public bool UnitTest { get; set; }
+
+		public bool Production { get; set; }
 	}
 }
