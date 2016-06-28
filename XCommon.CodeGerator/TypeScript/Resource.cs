@@ -17,6 +17,9 @@ namespace XCommon.CodeGerator.TypeScript
 		
 		internal void Run()
 		{
+			if (Config.Resources == null || Config.Resources.Count <= 0)
+				return;
+
 			StringBuilderIndented builder = new StringBuilderIndented();
 
 			builder

@@ -1,8 +1,10 @@
-﻿namespace XCommon.Application.Login
+﻿using System;
+
+namespace XCommon.Application.Login
 {
     public class LoginChangePasswordEntity
     {
-        public object Key { get; set; }
+        public Guid Key { get; set; }
         
         public string PasswordCurrent { get; set; }
         

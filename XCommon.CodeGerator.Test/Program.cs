@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XCommon.CodeGerator.Configuration;
 
 namespace XCommon.CodeGerator.Test
@@ -40,6 +41,21 @@ namespace XCommon.CodeGerator.Test
 					ContractNameSpace = "Prospect.MyPetLife.Business.Contract",
 					ConcretePath = @"D:\A\Concret",
 					ConcreteNameSpace = "Prospect.MyPetLife.Business.Concret",
+				},
+				Entity = new ConfigEntity
+				{
+					Path = @"D:\A\Web\App\Entity",
+					TypesExtra = new List<Type>
+					{
+						typeof(Application.Login.LoginChangePasswordEntity),
+						typeof(Application.Login.SignInEntity),
+						typeof(Application.Login.SingUpEntity),
+						typeof(Application.Login.LoginStatus)
+					}
+				},
+				Resource = new ConfigResource
+				{
+
 				}
 			};
 		}

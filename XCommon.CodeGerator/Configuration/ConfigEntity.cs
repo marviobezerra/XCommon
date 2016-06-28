@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace XCommon.CodeGerator.Configuration
@@ -8,11 +9,14 @@ namespace XCommon.CodeGerator.Configuration
 		public ConfigEntity()
 		{
 			Assemblys = new List<Assembly>();
+			TypesExtra = new List<Type>();
 		}
 
 		public string Path { get; set; }
 
 		public List<Assembly> Assemblys { get; set; }
+
+		public List<Type> TypesExtra { get; set; }
 
 	}
 }

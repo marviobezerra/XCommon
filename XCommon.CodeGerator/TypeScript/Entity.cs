@@ -39,7 +39,7 @@ namespace XCommon.CodeGerator.TypeScript
 		private List<EntityProperty> AssemblyProperties { get; set; }
 
 		private List<EnumProperty> AssemblyEnums { get; set; }
-		
+
 		private string GetFileName(string nameSpace)
 		{
 			var result = nameSpace.Split('.').Last(c => c != "Filter");
@@ -91,10 +91,12 @@ namespace XCommon.CodeGerator.TypeScript
 					return "Não identificado: " + currentType.Name;
 			}
 		}
-		
+
 		private void LoadEnums()
 		{
 			var types = Config.Assemblys.SelectMany(c => c.GetTypes()).Where(c => c.GetTypeInfo().IsEnum).ToList();
+
+			types.AddRange(Config.TypesExtra.Where(c => c.GetTypeInfo().IsEnum));
 			types.Add(typeof(Patterns.Repository.Executes.ExecuteMessageType));
 			types.Add(typeof(Patterns.Repository.Entity.EntityAction));
 
@@ -122,7 +124,14 @@ namespace XCommon.CodeGerator.TypeScript
 		{
 			var nullablePropertys = new string[] { "Keys", "Keys", "PageNumber", "PageSize" };
 
-			foreach (var type in Config.Assemblys.SelectMany(c => c.GetTypes()).Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface()))
+			List<Type> types = Config.Assemblys
+				.SelectMany(c => c.GetTypes())
+				.Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface())
+				.ToList();
+
+			types.AddRange(Config.TypesExtra.Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface() && !c.GetTypeInfo().IsEnum));
+
+			foreach (var type in types.Distinct())
 			{
 				foreach (var property in type.GetProperties())
 				{
@@ -184,9 +193,12 @@ namespace XCommon.CodeGerator.TypeScript
 
 				StringBuilderIndented builder = new StringBuilderIndented();
 
-				builder
-					.AppendLine($"import {{ {import} }} from \"./Enum\";")
-					.AppendLine();
+				if (import.IsNotEmpty())
+				{
+					builder
+						.AppendLine($"import {{ {import} }} from \"./Enum\";")
+						.AppendLine();
+				}
 
 				foreach (var className in AssemblyProperties.Where(c => c.FileName == file).Select(c => c.Class).Distinct().OrderBy(c => c))
 				{

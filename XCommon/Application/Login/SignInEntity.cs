@@ -1,6 +1,6 @@
 ﻿namespace XCommon.Application.Login
 {
-    public class LoginEntity
+    public class SignInEntity
     {
         public string User { get; set; }
         

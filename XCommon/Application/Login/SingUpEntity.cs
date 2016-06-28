@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace XCommon.Application.Login
 {
-    public class LoginPersonEntity
+	public class SingUpEntity
     {
-        public object Key { get; set; }
+        public Guid Key { get; set; }
         
         public string FullName { get; set; }
-        
-        public string FirstName { get; set; }
-        
-        public string LastName { get; set; }
         
         public string SocialName { get; set; }
         
@@ -33,9 +27,5 @@ namespace XCommon.Application.Login
         public string ProviderKey { get; set; }
         
         public bool External { get; set; }
-        
-        public bool MakeService { get; set; }
-        
-        public string CityName { get; set; }
     }
 }
