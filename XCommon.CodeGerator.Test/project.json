@@ -1,5 +1,5 @@
 {
-  "version": "1.0.19-*",
+  "version": "1.0.20-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
@@ -7,10 +7,10 @@
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.0-rc2-3002702"
+      "version": "1.0.0"
     },
-    "XCommon": "1.0.19-*",
-    "XCommon.CodeGerator": "1.0.19-*"
+    "XCommon": "1.0.20-*",
+    "XCommon.CodeGerator": "1.0.20-*"
   },
 
   "frameworks": {
