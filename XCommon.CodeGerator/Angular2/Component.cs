@@ -130,7 +130,7 @@ namespace XCommon.CodeGerator.Angular2
 			File.WriteAllText(file, builder.ToString());
 		}
 
-		private void UpdateSassReference()
+		internal void UpdateSassReference()
 		{
 			var path = Config.StylePath;
 			var file = Path.Combine(path, Config.StyleMain);
