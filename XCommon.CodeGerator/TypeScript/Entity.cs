@@ -25,7 +25,9 @@ namespace XCommon.CodeGerator.TypeScript
 			public string Type { get; set; }
 
 			public string Import { get; set; }
-		}
+
+            public bool Generic { get; set; }
+        }
 
 		private class EnumProperty
 		{
@@ -46,7 +48,7 @@ namespace XCommon.CodeGerator.TypeScript
 			return $"{result}.ts";
 		}
 
-		private string GetPropertyType(Type type)
+		private string GetPropertyType(Type type, bool generic)
 		{
 			var underlyingType = Nullable.GetUnderlyingType(type);
 
@@ -59,7 +61,7 @@ namespace XCommon.CodeGerator.TypeScript
 				try
 				{
 					Type genericType = currentType.GenericTypeArguments.FirstOrDefault();
-					return string.Format("Array<{0}>", GetPropertyType(genericType));
+					return string.Format("Array<{0}>", GetPropertyType(genericType, generic));
 				}
 				catch (Exception ex)
 				{
@@ -68,7 +70,10 @@ namespace XCommon.CodeGerator.TypeScript
 
 			}
 
-			if (currentType.Name.Contains("Entity"))
+            if (generic)
+                return type.Name;
+
+            if (currentType.Name.Contains("Entity") || currentType.Name == "ExecuteMessage")
 			{
 				return $"I{currentType.Name}";
 			}
@@ -138,20 +143,23 @@ namespace XCommon.CodeGerator.TypeScript
 					if (property.GetCustomAttributes<IgnoreAttribute>().Count() > 0)
 						continue;
 
-					var enumProperty = AssemblyEnums.FirstOrDefault(c => c.Type == property.PropertyType);
+                    var isGeneric = property.PropertyType.IsGenericParameter && !property.Name.Contains("List");
+                    var enumProperty = AssemblyEnums.FirstOrDefault(c => c.Type == property.PropertyType);
+                    var typeName = enumProperty != null
+                            ? enumProperty.Name
+                            : GetPropertyType(property.PropertyType, isGeneric);
 
-					AssemblyProperties.Add(new EntityProperty
+                    AssemblyProperties.Add(new EntityProperty
 					{
 						Class = type.Name,
 						FileName = GetFileName(type.Namespace),
 						Name = property.Name,
 						Nullable = nullablePropertys.Contains(property.Name) || type.Name.EndsWith("Filter") || Nullable.GetUnderlyingType(property.PropertyType) != null,
+                        Generic = isGeneric,
 						Import = enumProperty != null
 							? enumProperty.Name
 							: string.Empty,
-						Type = enumProperty != null
-							? enumProperty.Name
-							: GetPropertyType(property.PropertyType)
+						Type = typeName
 					});
 				}
 			}
@@ -202,8 +210,23 @@ namespace XCommon.CodeGerator.TypeScript
 
 				foreach (var className in AssemblyProperties.Where(c => c.FileName == file).Select(c => c.Class).Distinct().OrderBy(c => c))
 				{
-					builder
-						.AppendLine($"export interface I{className} {{")
+                    var generics = AssemblyProperties
+                        .Where(c => c.FileName == file && c.Class == className && c.Generic)
+                        .Select(c => c.Type)
+                        .ToList();
+
+                    string classNamePrint = className;
+
+                    if (generics.Count > 0)
+                    {
+                        classNamePrint = classNamePrint.Substring(0, classNamePrint.IndexOf('`'));
+                        classNamePrint += "<";
+                        classNamePrint += string.Join(", ", generics);
+                        classNamePrint += ">";
+                    }
+                    
+                    builder
+						.AppendLine($"export interface I{classNamePrint} {{")
 						.IncrementIndent();
 
 					foreach (var property in AssemblyProperties.Where(c => c.FileName == file && c.Class == className))

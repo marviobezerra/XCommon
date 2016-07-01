@@ -47,10 +47,13 @@ namespace XCommon.CodeGerator.Test
 					Path = @"D:\A\Web\App\Entity",
 					TypesExtra = new List<Type>
 					{
-						typeof(Application.Login.LoginChangePasswordEntity),
-						typeof(Application.Login.SignInEntity),
-						typeof(Application.Login.SingUpEntity),
-						typeof(Application.Login.LoginStatus)
+                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
+                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
+                        typeof(XCommon.Patterns.Repository.Executes.Execute<>),
+                        //typeof(Application.Login.LoginChangePasswordEntity),
+						//typeof(Application.Login.SignInEntity),
+						//typeof(Application.Login.SingUpEntity),
+						//typeof(Application.Login.LoginStatus)
 					}
 				},
 				Resource = new ConfigResource
