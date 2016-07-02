@@ -10,5 +10,8 @@ namespace XCommon.CodeGerator.Test.Entity.Common
         public Guid IdState { get; set; }
 
         public string Name { get; set; }
+
+        public StatesEntity State { get; set; }
+
     }
 }

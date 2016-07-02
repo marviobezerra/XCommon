@@ -84,6 +84,7 @@ namespace XCommon.CodeGerator.TypeScript
             types.AddRange(Config.TypesExtra.Where(c => c.GetTypeInfo().IsEnum));
             types.Add(typeof(Patterns.Repository.Executes.ExecuteMessageType));
             types.Add(typeof(Patterns.Repository.Entity.EntityAction));
+            types = types.Distinct().ToList();
 
             foreach (var type in types)
             {
@@ -111,7 +112,7 @@ namespace XCommon.CodeGerator.TypeScript
 
             List<Type> types = Config.Assemblys
                 .SelectMany(c => c.GetTypes())
-                .Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface())
+                .Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface() && !c.GetTypeInfo().IsEnum)
                 .ToList();
 
             types.AddRange(Config.TypesExtra.Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface() && !c.GetTypeInfo().IsEnum));
@@ -201,7 +202,7 @@ namespace XCommon.CodeGerator.TypeScript
                     {
                         imported = true;
 
-                        var classes = importItems.Where(c => c.File == importFile).Select(c => c.Class).ToArray();
+                        var classes = importItems.Where(c => c.File == importFile).Select(c => c.Class).Distinct().ToArray();
                         var import = string.Join(", ", classes);
 
                         builder
