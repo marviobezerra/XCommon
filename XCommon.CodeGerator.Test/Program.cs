@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using XCommon.CodeGerator.Configuration;
 
 namespace XCommon.CodeGerator.Test
 {
-	public class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -45,6 +46,10 @@ namespace XCommon.CodeGerator.Test
 				Entity = new ConfigEntity
 				{
 					Path = @"D:\A\Web\App\Entity",
+                    Assemblys = new List<System.Reflection.Assembly>
+                    {
+                        typeof(Entity.Common.CitiesEntity).GetTypeInfo().Assembly
+                    },
 					TypesExtra = new List<Type>
 					{
                         typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),

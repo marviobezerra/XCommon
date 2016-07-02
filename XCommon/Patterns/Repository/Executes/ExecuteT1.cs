@@ -1,11 +1,11 @@
 ﻿namespace XCommon.Patterns.Repository.Executes
 {
-    public class Execute<T> : Execute
-        where T : new()
+    public class Execute<TEntity> : Execute
+        where TEntity : new()
     {
         public Execute()
         {
-            Entity = new T();
+            Entity = new TEntity();
         }
 
         public Execute(Execute execute)
@@ -14,23 +14,23 @@
 
         }
 
-        public Execute(Execute execute, T entity)
+        public Execute(Execute execute, TEntity entity)
             : base(execute)
         {
             Entity = entity;
         }
 
-        public Execute(T entity)
+        public Execute(TEntity entity)
         {
             Entity = entity;
         }
 
-        public Execute(T entity, ExecuteUser user)
+        public Execute(TEntity entity, ExecuteUser user)
         {
             User = user;
             Entity = entity;
         }
 		
-        public T Entity { get; set; }
+        public TEntity Entity { get; set; }
     }
 }

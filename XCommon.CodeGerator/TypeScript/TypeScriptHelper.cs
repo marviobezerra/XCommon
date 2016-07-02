@@ -4,11 +4,11 @@
     {
 		public TypeScriptHelper()
 		{
-			EntityGenerator = new Entity();
+			EntityGenerator = new Entities();
 			ResourceGenerator = new Resource();
 		}
 
-		internal Entity EntityGenerator { get; set; }
+		internal Entities EntityGenerator { get; set; }
 
 		internal Resource ResourceGenerator { get; set; }
 
