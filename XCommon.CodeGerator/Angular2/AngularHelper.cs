@@ -33,8 +33,6 @@ namespace XCommon.CodeGerator.Angular2
             var feature = AppCommand.Option("-f|--feature", "Feature", CommandOptionType.SingleValue);
             var component = AppCommand.Option("-c|--component", "Generate a new Component with HTML, TS and SCSS", CommandOptionType.NoValue);
             var service = AppCommand.Option("-s|--service", "Generate a new Angular service", CommandOptionType.NoValue);
-            var sass = AppCommand.Option("-u|--sass", "Update SASS references", CommandOptionType.NoValue);
-
 
             AppCommand.OnExecute(() =>
             {
@@ -43,13 +41,7 @@ namespace XCommon.CodeGerator.Angular2
                     AppCommand.ShowHelp();
                     return 0;
                 }
-
-                if (sass.HasValue())
-                {
-                    GeneratorComponent.UpdateSassReference();
-                    return 0;
-                }
-
+                
                 if (component.HasValue())
                 {
                     var erro = false;

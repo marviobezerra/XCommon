@@ -21,9 +21,8 @@ namespace XCommon.CodeGerator.Test
 					AppRoot = @"D:\A\Web\App",
 					ComponentPath = @"D:\A\Web\App\Component",
 					ServicePath = @"D:\A\Web\App\Service",
+                    HtmlRoot = "/html/components",
 					StyleInclude = new List<string>(),
-					StylePath = @"D:\A\Web\App\Style",
-					StyleMain = @"D:\A\Web\App\Style\Main.scss"
 				},
 				DataBase = new ConfigDataBase
 				{
