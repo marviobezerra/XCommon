@@ -10,10 +10,11 @@ using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity;
 using XCommon.Patterns.Specification.Query;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace XCommon.Patterns.Repository
 {
-	public abstract class RepositoryEFBase<TEntity, TFilter, TData, TContext> : IRepository<TEntity, TFilter>
+	public abstract class RepositoryEFBase<TEntity, TFilter, TData, TContext> : IRepositoryEF<TEntity, TFilter>
 		where TEntity : EntityBase, new()
 		where TFilter : FilterBase, new()
 		where TData : class, new()
@@ -36,47 +37,70 @@ namespace XCommon.Patterns.Repository
 			};
 		}
 
-		protected virtual async Task<Execute> SaveAsync(TEntity entity)
+		protected virtual async Task<Execute> SaveAsync(TEntity entity, IDbContextTransaction transaction)
 		{
-			return await SaveAsync(new List<TEntity> { entity });
+			return await SaveAsync(new List<TEntity> { entity }, transaction);
 		}
 
-		protected async Task<Execute> SaveAsync(List<TEntity> entitys)
+		protected async Task<Execute> SaveAsync(List<TEntity> entitys, IDbContextTransaction transaction)
 		{
 			Execute execute = new Execute();
 
 			using (var db = new TContext())
 			{
-				foreach (TEntity entidade in entitys)
-				{
-					TData dataEntity = entidade.Convert<TData>();
+                db.Database.UseTransaction(transaction.GetDbTransaction());
 
-					try
-					{
-						switch (entidade.Action)
-						{
-							case EntityAction.New:
-								db.Entry<TData>(dataEntity).State = EntityState.Added;
-								break;
-							case EntityAction.Update:
-								db.Entry<TData>(dataEntity).State = EntityState.Modified;
-								break;
-							case EntityAction.Delete:
-								db.Entry<TData>(dataEntity).State = EntityState.Deleted;
-								break;
-							case EntityAction.None:
-								break;
-						}
-					}
-					catch (Exception ex)
-					{
-						execute.AddMessage(ex, "Error on update info to: {0}", GetEntityName());
-					}
-				}
+                foreach (TEntity entidade in entitys.Where(c => c.Action == EntityAction.Delete))
+                {
+                    try
+                    {
+                        TData dataEntity = entidade.Convert<TData>();
+                        db.Entry<TData>(dataEntity).State = EntityState.Deleted;
+                    }
+                    catch (Exception ex)
+                    {
+                        execute.AddMessage(ex, "Error on delete info to: {0}", GetEntityName());
+                    }
+                }
 
-				if (!execute.HasErro)
-					await db.SaveChangesAsync();
-			}
+                foreach (TEntity entidade in entitys.Where(c => c.Action == EntityAction.New))
+                {
+                    try
+                    {
+                        TData dataEntity = entidade.Convert<TData>();
+                        db.Entry<TData>(dataEntity).State = EntityState.Added;
+                    }
+                    catch (Exception ex)
+                    {
+                        execute.AddMessage(ex, "Error on insert info to: {0}", GetEntityName());
+                    }
+                }
+
+                foreach (TEntity entidade in entitys.Where(c => c.Action == EntityAction.Update))
+                {
+                    try
+                    {
+                        TData dataEntity = entidade.Convert<TData>();
+                        db.Entry<TData>(dataEntity).State = EntityState.Modified;
+                    }
+                    catch (Exception ex)
+                    {
+                        execute.AddMessage(ex, "Error on update info to: {0}", GetEntityName());
+                    }
+                }
+
+                if (!execute.HasErro)
+                {
+                    try
+                    {
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        execute.AddMessage(ex, "Error on savechanges in: {0}", GetEntityName());
+                    }
+                }
+            }
 
 			return execute;
 		}
@@ -139,42 +163,52 @@ namespace XCommon.Patterns.Repository
 
 		public virtual async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute)
 		{
-			Execute<List<TEntity>> executeList = new Execute<List<TEntity>>(execute)
-			{
-				Entity = new List<TEntity> { execute.Entity }
-			};
-
-			executeList = await SaveManyAsync(executeList);
-
-			execute.Entity = executeList.Entity.FirstOrDefault();
-			execute.AddMessage(executeList);
-
-			return execute;
+            return await SaveAsync(execute, await GetTransaction());
 		}
 
-		public virtual async Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute)
+        public async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute, IDbContextTransaction transaction)
+        {
+            Execute<List<TEntity>> executeList = new Execute<List<TEntity>>(execute)
+            {
+                Entity = new List<TEntity> { execute.Entity }
+            };
+
+            executeList = await SaveManyAsync(executeList, transaction);
+
+            execute.Entity = executeList.Entity.FirstOrDefault();
+            execute.AddMessage(executeList);
+
+            return execute;
+        }
+
+        public virtual async Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute)
 		{
-			try
-			{
-				execute.AddMessage(await ValidateManyAsync(execute.Entity));
-
-				if (execute.HasErro)
-					return execute;
-
-				execute.AddMessage(await SaveAsync(execute.Entity));
-
-				if (!execute.HasErro)
-					await AfterExecuteAsync(execute.Entity);
-			}
-			catch (Exception ex)
-			{
-				execute.AddMessage(ex, string.Format("Erro on save: {0}", GetEntityName()));
-			}
-
-			return execute;
+            return await SaveManyAsync(execute, await GetTransaction());
 		}
 
-		public virtual async Task<Execute> ValidateAsync(TEntity entity)
+        public async Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute, IDbContextTransaction transaction)
+        {
+            try
+            {
+                execute.AddMessage(await ValidateManyAsync(execute.Entity));
+
+                if (execute.HasErro)
+                    return execute;
+
+                execute.AddMessage(await SaveAsync(execute.Entity, transaction));
+
+                if (!execute.HasErro)
+                    await AfterExecuteAsync(execute.Entity);
+            }
+            catch (Exception ex)
+            {
+                execute.AddMessage(ex, string.Format("Erro on save: {0}", GetEntityName()));
+            }
+
+            return execute;
+        }
+
+        public virtual async Task<Execute> ValidateAsync(TEntity entity)
 		{
 			return await ValidateManyAsync(new List<TEntity> { entity });
 		}
@@ -190,5 +224,13 @@ namespace XCommon.Patterns.Repository
 				return result;
 			});
 		}
-	}
+
+        public async Task<IDbContextTransaction> GetTransaction()
+        {
+            using (var db = new TContext())
+            {
+                return await db.Database.BeginTransactionAsync();
+            }
+        }
+    }
 }
