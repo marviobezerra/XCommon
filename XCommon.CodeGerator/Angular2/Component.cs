@@ -74,7 +74,7 @@ namespace XCommon.CodeGerator.Angular2
 			}
 
 			StringBuilderIndented builder = new StringBuilderIndented();
-            string templateUrl = $"templateUrl: \"{Config.HtmlRoot}/{feture}/{selector}.html\",";
+            string templateUrl = $"\"{Config.HtmlRoot}/{feture}/{selector}.html\",";
 
 			builder
 				.AppendLine("import { Component, OnInit } from \"@angular/core\";")
@@ -82,7 +82,7 @@ namespace XCommon.CodeGerator.Angular2
 				.AppendLine("@Component({")
 				.IncrementIndent()
 				.AppendLine($"selector: \"{selector}\",")
-				.AppendLine(templateUrl.ToLower())
+				.AppendLine("templateUrl: " + templateUrl.ToLower())
 				.AppendLine($"styles: [require(\"./{selector}.scss\")]")
                 .DecrementIndent()
 				.AppendLine("})")
