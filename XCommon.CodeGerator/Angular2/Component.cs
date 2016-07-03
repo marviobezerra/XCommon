@@ -30,7 +30,7 @@ namespace XCommon.CodeGerator.Angular2
 
 				var selector = GetSelector(component);
 
-				TypeScript(path, component, selector);
+				TypeScript(path, component, selector, feature);
 				Sass(path, component, selector);
 				Html(path, component, selector);
 
@@ -63,7 +63,7 @@ namespace XCommon.CodeGerator.Angular2
 			return result.ToLower();
 		}
 		
-		private void TypeScript(string path, string name, string selector)
+		private void TypeScript(string path, string name, string selector, string feture)
 		{
 			var file = Path.Combine(path, $"{selector}.component.ts");
 
@@ -74,6 +74,7 @@ namespace XCommon.CodeGerator.Angular2
 			}
 
 			StringBuilderIndented builder = new StringBuilderIndented();
+            string templateUrl = $"templateUrl: \"{Config.HtmlRoot}/{feture}/{selector}.html\",";
 
 			builder
 				.AppendLine("import { Component, OnInit } from \"@angular/core\";")
@@ -81,7 +82,7 @@ namespace XCommon.CodeGerator.Angular2
 				.AppendLine("@Component({")
 				.IncrementIndent()
 				.AppendLine($"selector: \"{selector}\",")
-				.AppendLine($"templateUrl: \"{Config.HtmlRoot}/{selector}.component.html\"")
+				.AppendLine(templateUrl.ToLower())
 				.AppendLine($"styles: [require(\"./{selector}.scss\")]")
                 .DecrementIndent()
 				.AppendLine("})")
