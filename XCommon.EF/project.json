@@ -1,11 +1,11 @@
 {
-  "version": "1.0.26-*",
+  "version": "1.0.27-*",
 
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
     "NETStandard.Library": "1.6.0",
-    "XCommon": "1.0.26-*"
+    "XCommon": "1.0.27-*"
   },
 
   "frameworks": {

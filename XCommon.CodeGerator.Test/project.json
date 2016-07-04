@@ -1,5 +1,5 @@
 {
-  "version": "1.0.26-*",
+  "version": "1.0.27-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
@@ -9,8 +9,8 @@
       "type": "platform",
       "version": "1.0.0"
     },
-    "XCommon": "1.0.26-*",
-    "XCommon.CodeGerator": "1.0.26-*"
+    "XCommon": "1.0.27-*",
+    "XCommon.CodeGerator": "1.0.27-*"
   },
 
   "frameworks": {

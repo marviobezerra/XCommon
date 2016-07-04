@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using XCommon.CodeGerator.TypeScript.Entity;
-using XCommon.Extensions.String;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript
