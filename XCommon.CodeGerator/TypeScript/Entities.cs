@@ -46,6 +46,9 @@ namespace XCommon.CodeGerator.TypeScript
             if (generic)
                 return type.Name;
 
+            if (currentType.GetTypeInfo().IsEnum)
+                return currentType.Name;
+
             if (currentType.Name.Contains("Entity") || currentType.Name == "ExecuteMessage")
             {
                 tsClass.Imports.Add(new TypeScriptImport
@@ -130,7 +133,7 @@ namespace XCommon.CodeGerator.TypeScript
                         continue;
 
                     var isGeneric = property.PropertyType.IsGenericParameter && !property.Name.Contains("List");
-                    var enumProperty = TSEnums.FirstOrDefault(c => c.Type == property.PropertyType);
+                    var enumProperty = TSEnums.FirstOrDefault(c => c.Type == (Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType));
                     var typeName = enumProperty != null
                             ? enumProperty.Name
                             : GetPropertyType(property.PropertyType, tsClass, isGeneric);
