@@ -11,6 +11,7 @@ using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Entity;
 using XCommon.Patterns.Specification.Query;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Data.Common;
 
 namespace XCommon.Patterns.Repository
 {
@@ -20,6 +21,12 @@ namespace XCommon.Patterns.Repository
 		where TData : class, new()
 		where TContext : DbContext, new()
 	{
+        private void Teste()
+        {
+            var options = new DbContextOptionsBuilder<TContext>()
+                .Options;
+        }
+
 		protected virtual ISpecificationEntity<TEntity> SpecificationValidate => Kernel.Resolve<ISpecificationEntity<TEntity>>();
 
 		protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery => Kernel.Resolve<IQueryBuilder<TData, TFilter>>();
@@ -42,7 +49,7 @@ namespace XCommon.Patterns.Repository
 			return await SaveAsync(new List<TEntity> { entity }, transaction);
 		}
 
-		protected async Task<Execute> SaveAsync(List<TEntity> entitys, IDbContextTransaction transaction)
+		protected virtual async Task<Execute> SaveAsync(List<TEntity> entitys, IDbContextTransaction transaction)
 		{
 			Execute execute = new Execute();
 
@@ -166,7 +173,7 @@ namespace XCommon.Patterns.Repository
             return await SaveAsync(execute, await GetTransaction());
 		}
 
-        public async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute, IDbContextTransaction transaction)
+        public virtual async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute, IDbContextTransaction transaction)
         {
             Execute<List<TEntity>> executeList = new Execute<List<TEntity>>(execute)
             {
@@ -186,7 +193,7 @@ namespace XCommon.Patterns.Repository
             return await SaveManyAsync(execute, await GetTransaction());
 		}
 
-        public async Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute, IDbContextTransaction transaction)
+        public virtual async Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute, IDbContextTransaction transaction)
         {
             try
             {
@@ -225,7 +232,7 @@ namespace XCommon.Patterns.Repository
 			});
 		}
 
-        public async Task<IDbContextTransaction> GetTransaction()
+        public virtual async Task<IDbContextTransaction> GetTransaction()
         {
             using (var db = new TContext())
             {

@@ -1270,7 +1270,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "XCommon/1.0.25": {
+      "XCommon/1.0.26": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
@@ -4680,7 +4680,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.25": {
+    "XCommon/1.0.26": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
@@ -4691,7 +4691,7 @@
       "Microsoft.EntityFrameworkCore >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Relational >= 1.0.0",
       "NETStandard.Library >= 1.6.0",
-      "XCommon >= 1.0.25-*"
+      "XCommon >= 1.0.26-*"
     ],
     ".NETStandard,Version=v1.5": []
   },
