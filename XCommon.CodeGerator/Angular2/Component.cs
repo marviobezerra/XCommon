@@ -6,6 +6,7 @@ using XCommon.Extensions.String;
 using XCommon.Util;
 using System.Linq;
 using System.Text.RegularExpressions;
+using XCommon.CodeGerator.Extensions;
 
 namespace XCommon.CodeGerator.Angular2
 {
@@ -28,7 +29,7 @@ namespace XCommon.CodeGerator.Angular2
                     continue;
                 }
 
-				var selector = GetSelector(component);
+				var selector = component.GetSelector();
 
 				TypeScript(path, component, selector, feature);
 				Sass(path, component, selector);
@@ -36,31 +37,6 @@ namespace XCommon.CodeGerator.Angular2
 
                 Console.WriteLine($"Generated component {selector}");
 			}
-		}
-        
-		private string GetSelector(string component)
-		{
-			var result = string.Empty;
-
-			foreach (var item in component)
-			{
-				if (result.IsEmpty())
-				{
-					result += item;
-					continue;
-				}
-
-				if (Char.IsUpper(item))
-				{
-					result += '-';
-					result += item;
-					continue;
-				}
-
-				result += item;
-			}
-
-			return result.ToLower();
 		}
 		
 		private void TypeScript(string path, string name, string selector, string feture)

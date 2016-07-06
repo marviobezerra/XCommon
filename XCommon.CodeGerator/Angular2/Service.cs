@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using XCommon.CodeGerator.Extensions;
+using XCommon.Extensions.String;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.Angular2
@@ -9,8 +11,8 @@ namespace XCommon.CodeGerator.Angular2
 	internal class Service
 	{
 		private Configuration.ConfigAngular Config => Generator.Configuration.Angular;
-
-		internal void Run(List<string> services)
+        
+        internal void Run(List<string> services)
 		{
 			string path = Path.Combine(Config.ServicePath);
 
@@ -19,7 +21,7 @@ namespace XCommon.CodeGerator.Angular2
 
 			foreach (string service in services)
 			{
-				var file = Path.Combine(path, $"{service}.service.ts").ToLower();
+				var file = Path.Combine(path, $"{service.GetSelector()}.service.ts").ToLower();
 
 				if (File.Exists(file))
 				{

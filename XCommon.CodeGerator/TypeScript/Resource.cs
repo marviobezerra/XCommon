@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using XCommon.CodeGerator.Extensions;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript
@@ -39,7 +40,7 @@ namespace XCommon.CodeGerator.TypeScript
 
 			var file = Path.Combine(Config.Path, Config.File);
 
-			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
+			File.WriteAllText(file.GetSelector(), builder.ToString(), Encoding.UTF8);
 			Console.WriteLine("Typescript resource messages now are up to date");
 		}
 

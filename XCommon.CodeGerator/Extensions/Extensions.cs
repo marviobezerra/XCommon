@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using XCommon.Extensions.String;
 using XCommon.Util;
@@ -11,56 +12,35 @@ namespace XCommon.CodeGerator.Extensions
 		Public,
 		Internal
 	}
-
-	internal enum MethodVisility
-	{
-		Private,
-		Public,
-		Internal,
-		Protected
-	}
-
+    
 	internal static class Extensions
 	{
-		//internal static string ConfigBasePath(string file)
-		//{
-		//	var appSettings = string.IsNullOrEmpty(file)
-		//			? Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "appsettings.json")
-		//			: file;
+        internal static string GetSelector(this string component)
+        {
+            var result = string.Empty;
 
-		//	return Path.GetDirectoryName(appSettings);
-		//}
+            foreach (var item in component)
+            {
+                if (result.IsEmpty())
+                {
+                    result += item;
+                    continue;
+                }
 
-		//internal static IConfigurationBuilder ConfigLoad(string file)
-		//{
-		//	var appSettings = string.IsNullOrEmpty(file)
-		//			? Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "appsettings.json")
-		//			: file;
+                if (Char.IsUpper(item))
+                {
+                    result += '-';
+                    result += item;
+                    continue;
+                }
 
-		//	var appDevSettings = appSettings
-		//			.Replace("appsettings.json", "appsettings.development.json");
+                result += item;
+            }
 
-		//	var basePath = Path.GetDirectoryName(appSettings);
+            return result.ToLower();
+        }
 
-		//	return new ConfigurationBuilder()
-		//		.AddJsonFile(appSettings)
-		//		.AddJsonFile(appDevSettings, true)
-		//		.AddEnvironmentVariables();
-		//}
-
-		internal static string SafeName(this string name)
-		{
-			return name.Replace("-", string.Empty)
-				.Replace(".", string.Empty);
-		}
-
-		internal static string Replace(this string str, string from, string to, bool ignoreCase)
-		{
-			str = Regex.Replace(str, from, to, RegexOptions.IgnoreCase);
-			return str;
-		}
-
-		internal static StringBuilderIndented AddUsing(this StringBuilderIndented builder, params string[] args)
+        internal static StringBuilderIndented AddUsing(this StringBuilderIndented builder, params string[] args)
 		{
 			foreach (var nameSpace in args.Distinct().OrderBy(c => c))
 			{
