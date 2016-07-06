@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using XCommon.CodeGerator.Extensions;
-using XCommon.Extensions.String;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.Angular2
 {
-	internal class Service
+    internal class Service
 	{
 		private Configuration.ConfigAngular Config => Generator.Configuration.Angular;
         

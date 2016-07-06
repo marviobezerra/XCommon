@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using XCommon.Extensions.String;
-using XCommon.Util;
-using System.Linq;
 using System.Text.RegularExpressions;
 using XCommon.CodeGerator.Extensions;
+using XCommon.Util;
 
 namespace XCommon.CodeGerator.Angular2
 {
-	internal class Component
+    internal class Component
     {
 		private Configuration.ConfigAngular Config => Generator.Configuration.Angular;
 

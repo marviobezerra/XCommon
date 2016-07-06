@@ -38,9 +38,9 @@ namespace XCommon.CodeGerator.TypeScript
 			if (!Directory.Exists(Config.Path))
 				Directory.CreateDirectory(Config.Path);
 
-			var file = Path.Combine(Config.Path, Config.File);
+			var file = Path.Combine(Config.Path, Config.File.GetSelector() + ".service.ts");
 
-			File.WriteAllText(file.GetSelector(), builder.ToString(), Encoding.UTF8);
+			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 			Console.WriteLine("Typescript resource messages now are up to date");
 		}
 

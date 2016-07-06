@@ -163,7 +163,7 @@ namespace XCommon.CodeGerator.TypeScript
 
         private void ProcessEnum()
         {
-            var fileName = Path.Combine(Config.Path, "Enum.ts");
+            var fileName = Path.Combine(Config.Path, "enum.ts");
             StringBuilderIndented builder = new StringBuilderIndented();
 
             foreach (var enumItem in TSEnums)
@@ -184,7 +184,7 @@ namespace XCommon.CodeGerator.TypeScript
                     .AppendLine();
             }
 
-            File.WriteAllText(fileName.GetSelector(), builder.ToString());
+            File.WriteAllText(fileName, builder.ToString());
         }
 
         private void ProcessTypes()
@@ -192,7 +192,7 @@ namespace XCommon.CodeGerator.TypeScript
 
             foreach (var file in TSClass.Select(c => c.FileName).Distinct().OrderBy(c => c))
             {
-                var fileName = Path.Combine(Config.Path, file);
+                var fileName = Path.Combine(Config.Path, file.GetSelector());
                 var importItems = TSClass.Where(c => c.FileName == file).SelectMany(c => c.Imports).ToList();
 
                 StringBuilderIndented builder = new StringBuilderIndented();
@@ -258,7 +258,7 @@ namespace XCommon.CodeGerator.TypeScript
                         .AppendLine();
                 }
 
-                File.WriteAllText(fileName.GetSelector(), builder.ToString());
+                File.WriteAllText(fileName, builder.ToString());
             }
         }
 
