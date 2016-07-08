@@ -2231,7 +2231,7 @@
       },
       "XCommon/1.0.27": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.5",
+        "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "System.Linq.Expressions": "4.1.0",
@@ -2239,15 +2239,15 @@
           "System.Runtime.Serialization.Primitives": "4.1.1"
         },
         "compile": {
-          "netstandard1.5/XCommon.dll": {}
+          "netstandard1.6/XCommon.dll": {}
         },
         "runtime": {
-          "netstandard1.5/XCommon.dll": {}
+          "netstandard1.6/XCommon.dll": {}
         }
       },
       "XCommon.CodeGerator/1.0.27": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.5",
+        "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
@@ -2255,10 +2255,10 @@
           "XCommon": "1.0.27"
         },
         "compile": {
-          "netstandard1.5/XCommon.CodeGerator.dll": {}
+          "netstandard1.6/XCommon.CodeGerator.dll": {}
         },
         "runtime": {
-          "netstandard1.5/XCommon.CodeGerator.dll": {}
+          "netstandard1.6/XCommon.CodeGerator.dll": {}
         }
       }
     }
