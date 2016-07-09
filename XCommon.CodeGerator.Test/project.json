@@ -1,21 +1,24 @@
 {
-  "version": "1.0.28-*",
+  "version": "1.0.29-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0"
-    },
-    "XCommon": "1.0.28-*",
-    "XCommon.CodeGerator": "1.0.28-*"
+    "XCommon": "1.0.29-*",
+    "XCommon.CodeGerator": "1.0.29-*"
   },
 
   "frameworks": {
+    "net452": {},
     "netcoreapp1.0": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      }
     }
   }
 }

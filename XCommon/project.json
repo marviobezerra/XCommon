@@ -1,16 +1,25 @@
 {
-  "version": "1.0.28-*",
+  "version": "1.0.29-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "System.Linq.Expressions": "4.1.0",
-    "System.Linq.Queryable": "4.0.1",
-    "System.Runtime.Serialization.Primitives": "4.1.1"
+    "NETStandard.Library": "1.6.0"
   },
 
   "frameworks": {
+    "net452": {
+      "dependencies": {
+      },
+      "frameworkAssemblies": {
+        "System.Runtime.Serialization": "4.0.0.0"
+      }
+    },
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Runtime.Serialization.Primitives": "4.1.1",
+        "System.Linq.Expressions": "4.1.0",
+        "System.Linq.Queryable": "4.0.1"
+      }
     }
   }
 }

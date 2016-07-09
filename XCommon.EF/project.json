@@ -1,19 +1,20 @@
 {
-  "version": "1.0.28-*",
+  "version": "1.0.29-*",
 
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
     "NETStandard.Library": "1.6.0",
-    "XCommon": "1.0.28-*"
+    "XCommon": "1.0.29-*"
   },
 
   "frameworks": {
+    "net452": {},
     "netstandard1.6": {
-					"imports": [
-						"dnxcore50",
-						"portable-net452+win81"
-					]
+      "imports": [
+        "dnxcore50",
+        "portable-net452+win81"
+      ]
     }
   }
 }
