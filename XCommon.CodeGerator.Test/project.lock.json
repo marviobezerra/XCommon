@@ -2262,7 +2262,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.5.2": {
+    ".NETFramework,Version=v4.5.1": {
       "Microsoft.NETCore.Platforms/1.0.1": {
         "type": "package",
         "compile": {
@@ -2699,7 +2699,7 @@
       },
       "XCommon/1.0.29": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
         },
@@ -2707,15 +2707,15 @@
           "System.Runtime.Serialization"
         ],
         "compile": {
-          "net452/XCommon.dll": {}
+          "net451/XCommon.dll": {}
         },
         "runtime": {
-          "net452/XCommon.dll": {}
+          "net451/XCommon.dll": {}
         }
       },
       "XCommon.CodeGerator/1.0.29": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
@@ -2723,10 +2723,10 @@
           "XCommon": "1.0.29"
         },
         "compile": {
-          "net452/XCommon.CodeGerator.dll": {}
+          "net451/XCommon.CodeGerator.dll": {}
         },
         "runtime": {
-          "net452/XCommon.CodeGerator.dll": {}
+          "net451/XCommon.CodeGerator.dll": {}
         }
       }
     }
@@ -7601,7 +7601,7 @@
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"
     ],
-    ".NETFramework,Version=v4.5.2": []
+    ".NETFramework,Version=v4.5.1": []
   },
   "tools": {},
   "projectFileToolGroups": {}

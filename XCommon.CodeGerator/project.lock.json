@@ -2,7 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.5.2": {
+    ".NETFramework,Version=v4.5.1": {
       "Microsoft.NETCore.Platforms/1.0.1": {
         "type": "package",
         "compile": {
@@ -439,7 +439,7 @@
       },
       "XCommon/1.0.29": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.2",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
         },
@@ -447,10 +447,10 @@
           "System.Runtime.Serialization"
         ],
         "compile": {
-          "net452/XCommon.dll": {}
+          "net451/XCommon.dll": {}
         },
         "runtime": {
-          "net452/XCommon.dll": {}
+          "net451/XCommon.dll": {}
         }
       }
     },
@@ -5775,7 +5775,7 @@
       "System.Data.SqlClient >= 4.1.0",
       "XCommon >= 1.0.29-*"
     ],
-    ".NETFramework,Version=v4.5.2": [],
+    ".NETFramework,Version=v4.5.1": [],
     ".NETStandard,Version=v1.6": []
   },
   "tools": {},
