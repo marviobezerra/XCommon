@@ -9938,7 +9938,8 @@
       "XCommon >= 1.0.29-*"
     ],
     ".NETFramework,Version=v4.5.1": [
-      "Microsoft.AspNetCore.Hosting.WindowsServices >= 1.0.0"
+      "Microsoft.AspNetCore.Hosting.WindowsServices >= 1.0.0",
+      "System.Configuration.Install >= 4.0.0"
     ],
     ".NETStandard,Version=v1.6": []
   },

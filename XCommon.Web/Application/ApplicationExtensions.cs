@@ -1,6 +1,7 @@
 ﻿#if NET451
 using Microsoft.AspNetCore.Hosting;
 using System.ServiceProcess;
+using XCommon.Web.Application.WindowsService;
 #endif
 
 namespace XCommon.Web.Application

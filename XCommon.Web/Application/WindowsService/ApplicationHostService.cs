@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.WindowsServices;
 #endif
 
-namespace XCommon.Web.Application
+namespace XCommon.Web.Application.WindowsService
 {
 #if NET451
     internal class ApplicationHostService : WebHostService

@@ -36,6 +36,8 @@ namespace XCommon.Application.CommandLine
 
         public List<CommandLineApplication> Commands { get; private set; }
 
+        public bool OptionHelpShowed { get; private set; }
+
         public CommandLineApplication Command(string name, Action<CommandLineApplication> configuration,
             bool addHelpCommand = true, bool throwOnUnexpectedArg = true)
         {
@@ -310,6 +312,7 @@ namespace XCommon.Application.CommandLine
         // Show full help
         public void ShowHelp(string commandName = null)
         {
+            OptionHelpShowed = true;
             var headerBuilder = new StringBuilder("Usage:");
             for (var cmd = this; cmd != null; cmd = cmd.Parent)
             {

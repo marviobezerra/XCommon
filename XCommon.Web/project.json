@@ -20,6 +20,9 @@
     "net451": {
       "dependencies": {
         "Microsoft.AspNetCore.Hosting.WindowsServices": "1.0.0"
+      },
+      "frameworkAssemblies": {
+        "System.Configuration.Install": "4.0.0.0"
       }
     },
     "netstandard1.6": {

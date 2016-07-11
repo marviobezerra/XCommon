@@ -5957,6 +5957,9 @@
           "NETStandard.Library": "1.6.0",
           "XCommon": "1.0.29"
         },
+        "frameworkAssemblies": [
+          "System.Configuration.Install"
+        ],
         "compile": {
           "net451/XCommon.Web.dll": {}
         },
