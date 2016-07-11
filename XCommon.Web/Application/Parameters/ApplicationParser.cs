@@ -1,19 +1,13 @@
 ﻿using System.IO;
 using XCommon.Application.CommandLine;
 using XCommon.Extensions.Converters;
-using XCommon.Patterns.Ioc;
 
 namespace XCommon.Web.Application.Parameters
 {
     internal static class ApplicationParser
     {
-        internal static IServiceParameters Parser(string serviceName, int defaultPort, string[] args)
+        internal static void Parser(ServiceParameters parameter, string[] args)
         {
-            ServiceParameters result = new ServiceParameters
-            {
-                Name = serviceName
-            };
-
             var webApp = new CommandLineApplication(false);
 
             var install = webApp.Option("-i|--install", "Install as service", CommandOptionType.NoValue);
@@ -29,30 +23,30 @@ namespace XCommon.Web.Application.Parameters
             webApp.OnExecute(() =>
             {
 
-                result.ContentPath = contentPath.HasValue() ? contentPath.Value() : Directory.GetCurrentDirectory();
-                result.HttpPort = port.HasValue() ? port.Value().ToInt32() : defaultPort.ToInt32();
+                parameter.ContentPath = contentPath.HasValue() ? contentPath.Value() : Directory.GetCurrentDirectory();
+                parameter.HttpPort = port.HasValue() ? port.Value().ToInt32() : parameter.HttpPort;
 
                 if (install.HasValue())
                 {
-                    result.ServiceInstall = true;
+                    parameter.ServiceInstall = true;
                     return 0;
                 }
 
                 if (uninstall.HasValue())
                 {
-                    result.ServiceUninstall = true;
+                    parameter.ServiceUninstall = true;
                     return 0;
                 }
 
                 if (application.HasValue())
                 {
-                    result.RunApplication = true;
+                    parameter.RunApplication = true;
                     return 0;
                 }
 
                 if (service.HasValue())
                 {
-                    result.RunService = true;
+                    parameter.RunService = true;
                     return 0;
                 }
 
@@ -62,17 +56,13 @@ namespace XCommon.Web.Application.Parameters
                     return 0;
                 }
 
-                result.RunApplication = !webApp.OptionHelpShowed;
+                parameter.RunApplication = !webApp.OptionHelpShowed;
                 return 0;
             });
 
             var x = webApp.Execute(args);
 
-            result.ShowHelp = webApp.OptionHelpShowed;
-
-            Kernel.Map<IServiceParameters>().To(result);
-
-            return result;
+            parameter.ShowHelp = webApp.OptionHelpShowed;            
         }
     }
 }

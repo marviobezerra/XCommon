@@ -1,11 +1,17 @@
-﻿namespace XCommon.Web.Application.Parameters
+﻿using System;
+
+namespace XCommon.Web.Application.Parameters
 {
-    public class ServiceParameters : IServiceParameters
+    public class ServiceParameters
     {
 
         public int HttpPort { get; set; }
 
         public string Name { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public string Description { get; set; }
 
         public string ContentPath { get; set; }
 

@@ -13,46 +13,48 @@ namespace XCommon.Web.Application
         where TStartup : class
     {
 
-        public static void Run(string serviceName, string serviceDisplayName, string serviceDescription, int defaultPort, string[] args)
+        public static void Run(ServiceParameters parameter, string[] args)
         {
-            var parameters = ApplicationParser.Parser(serviceName, defaultPort, args);
+            ApplicationParser.Parser(parameter, args);
 
-            if (parameters.ShowHelp)
+            if (parameter.ShowHelp)
                 return;
 
 #if NET451
-            if (parameters.ServiceInstall)
+            if (parameter.ServiceInstall)
             {
-                RunSC($"create {serviceName} binPath= \"{Process.GetCurrentProcess().MainModule.FileName} -s -p {parameters.HttpPort}\" DisplayName= \"{serviceDisplayName}\" start= auto");
-                Console.WriteLine($" - Service {serviceDescription} installer");
-                Console.WriteLine($" - Service {serviceDescription} listening on port {parameters.HttpPort}");
+                RunSC($"create {parameter.Name} binPath= \"{Process.GetCurrentProcess().MainModule.FileName} -s -p {parameter.HttpPort}\" DisplayName= \"{parameter.DisplayName}\" start= auto");
+                Console.WriteLine($" - Service {parameter.DisplayName} installer");
+                Console.WriteLine($" - Service {parameter.DisplayName} listening on port {parameter.HttpPort}");
 
-                RunSC($"description {serviceName} \"{serviceDescription}\"");
+                RunSC($"description {parameter.Name} \"{parameter.Description}\"");
 
-                RunSC($"start {serviceName}");
-                Console.WriteLine($" - Service {serviceDescription} started");
+                RunSC($"start {parameter.Name}");
+                Console.WriteLine($" - Service {parameter.DisplayName} started");
+
+                Process.Start($"http://localhost:{parameter.HttpPort}");
 
                 return;
             }
 
-            if (parameters.ServiceUninstall)
+            if (parameter.ServiceUninstall)
             {
-                RunSC($"stop {serviceName}");
-                Console.WriteLine($" - Service {serviceDescription} stoped");
+                RunSC($"stop {parameter.Name}");
+                Console.WriteLine($" - Service {parameter.DisplayName} stoped");
 
-                RunSC($"delete {serviceName}");
-                Console.WriteLine($" - Service {serviceDescription} removed");
+                RunSC($"delete {parameter.Name}");
+                Console.WriteLine($" - Service {parameter.DisplayName} removed");
 
                 return;
             }
 
-            if (parameters.RunService)
+            if (parameter.RunService)
             {
                 var exePath = Process.GetCurrentProcess().MainModule.FileName;
 
                 var directoryPath = Path.GetDirectoryName(exePath);
                 var host = new WebHostBuilder()
-                                .UseUrls($"http://+:{parameters.HttpPort}")
+                                .UseUrls($"http://+:{parameter.HttpPort}")
                                 .UseKestrel()
                                 .UseContentRoot(directoryPath)
                                 .UseStartup<TStartup>()
@@ -63,12 +65,12 @@ namespace XCommon.Web.Application
                 return;
             }
 
-            if (parameters.RunApplication)
+            if (parameter.RunApplication)
             {
                 var host = new WebHostBuilder()
-                                .UseUrls($"http://+:{parameters.HttpPort}")
+                                .UseUrls($"http://+:{parameter.HttpPort}")
                                 .UseKestrel()
-                                .UseContentRoot(parameters.ContentPath)
+                                .UseContentRoot(parameter.ContentPath)
                                 .UseIISIntegration()
                                 .UseStartup<TStartup>()
                                 .Build();
@@ -79,9 +81,9 @@ namespace XCommon.Web.Application
             }
 #else
             var host = new WebHostBuilder()
-                                .UseUrls($"http://+:{parameters.HttpPort}")
+                                .UseUrls($"http://+:{parameter.HttpPort}")
                                 .UseKestrel()
-                                .UseContentRoot(parameters.ContentPath)
+                                .UseContentRoot(parameter.ContentPath)
                                 .UseIISIntegration()
                                 .UseStartup<TStartup>()
                                 .Build();

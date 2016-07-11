@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using XCommon.Web.Application;
+using XCommon.Web.Application.Parameters;
 
 namespace XCommon.Web.Test
 {
@@ -6,8 +7,15 @@ namespace XCommon.Web.Test
     {
         public static void Main(string[] args)
         {
-            //@"D:\VSGit\XCommon\XCommon.Web.Test"
-            Run("XCommonWebTest", "XCommon Web Test", "XCommon Web Test - Just a service test", 81, args);
+            ServiceParameters parameter = new ServiceParameters
+            {
+                Name = "XCommonWebTest",
+                DisplayName = "XCommon Web Test",
+                Description = "XCommon Web Test - Just a service test",
+                HttpPort = 81
+            };
+
+            Run(parameter, args);
         }
     }
 }
