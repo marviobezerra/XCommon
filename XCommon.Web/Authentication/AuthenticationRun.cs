@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using XCommon.Patterns.Ioc;
 using XCommon.Web.Authentication.Base;
 using XCommon.Web.Authentication.Cookie;
 using XCommon.Web.Authentication.Facebook;
 using XCommon.Web.Authentication.Google;
 using XCommon.Web.Authentication.Map;
-using XCommon.Web.Extensions;
 
 namespace XCommon.Web.Authentication
 {

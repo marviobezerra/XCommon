@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using XCommon.Web.Authentication;
 
-namespace XCommon.Web.Authentication
+namespace XCommon.Web
 {
-    public static class AuthenticationExtension
+    public static class ApplicationBuilderExtension
     {
         private static AuthenticationRun Run { get; set; }
 

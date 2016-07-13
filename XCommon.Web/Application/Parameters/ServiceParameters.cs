@@ -4,7 +4,6 @@ namespace XCommon.Web.Application.Parameters
 {
     public class ServiceParameters
     {
-
         public int HttpPort { get; set; }
 
         public string Name { get; set; }

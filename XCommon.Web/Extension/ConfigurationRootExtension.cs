@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace XCommon.Web.Extensions
+namespace XCommon.Web
 {
     public static class ConfigurationRootExtension
     {

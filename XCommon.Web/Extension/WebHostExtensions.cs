@@ -4,16 +4,18 @@ using System.ServiceProcess;
 using XCommon.Web.Application.WindowsService;
 #endif
 
-namespace XCommon.Web.Application
+namespace XCommon.Web
 {
-#if NET451
-    public static class ApplicationExtensions
+
+    public static class WebHostExtensions
     {
+#if NET451
         public static void RunAsCustomService(this IWebHost host)
         {
             var webHostService = new ApplicationHostService(host);
             ServiceBase.Run(webHostService);
         }
-    }
 #endif
+    }
+
 }

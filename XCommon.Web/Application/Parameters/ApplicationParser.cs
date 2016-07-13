@@ -22,7 +22,6 @@ namespace XCommon.Web.Application.Parameters
 
             webApp.OnExecute(() =>
             {
-
                 parameter.ContentPath = contentPath.HasValue() ? contentPath.Value() : Directory.GetCurrentDirectory();
                 parameter.HttpPort = port.HasValue() ? port.Value().ToInt32() : parameter.HttpPort;
 
