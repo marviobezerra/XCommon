@@ -12,6 +12,7 @@ using XCommon.Patterns.Specification.Entity;
 using XCommon.Patterns.Specification.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.Common;
+using XCommon.Application.Logger;
 
 namespace XCommon.Patterns.Repository
 {
@@ -21,15 +22,19 @@ namespace XCommon.Patterns.Repository
         where TData : class, new()
         where TContext : DbContext, new()
     {
-        private void Teste()
+        public RepositoryEFBase()
         {
-            var options = new DbContextOptionsBuilder<TContext>()
-                .Options;
+            Kernel.Resolve(this);
         }
 
-        protected virtual ISpecificationEntity<TEntity> SpecificationValidate => Kernel.Resolve<ISpecificationEntity<TEntity>>();
+        [Inject]
+        protected virtual ISpecificationEntity<TEntity> SpecificationValidate { get; set; }
 
-        protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery => Kernel.Resolve<IQueryBuilder<TData, TFilter>>();
+        [Inject]
+        protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery { get; set; }
+
+        [Inject(forceResolve: false)]
+        protected virtual ILogger Logger { get; set; }
 
         protected virtual string GetEntityName()
         {
