@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Contract", "Prospect.MyPetLife.Business.Contract\Prospect.MyPetLife.Business.Contract.xproj", "{439033F7-9CB4-43FB-87C3-435E6EC88333}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Entity", "Prospect.MyPetLife.Business.Entity\Prospect.MyPetLife.Business.Entity.xproj", "{D88A8F8D-BCAC-462C-851A-E9DB8271EC19}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Factory", "Prospect.MyPetLife.Business.Factory\Prospect.MyPetLife.Business.Factory.xproj", "{BB8B58CC-7125-46C8-B0B4-92B6E66377BE}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Resource", "Prospect.MyPetLife.Business.Resource\Prospect.MyPetLife.Business.Resource.xproj", "{06FB78C4-BACA-4399-865B-74BFA91F0FCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{52804D56-13CC-46DB-88B0-AA156AFB81FC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Data", "Prospect.MyPetLife.Business.Data\Prospect.MyPetLife.Business.Data.xproj", "{C45E9BD3-C4B5-471F-8A03-1C1592B595DD}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.CodeGenerator", "Prospect.MyPetLife.CodeGenerator\Prospect.MyPetLife.CodeGenerator.xproj", "{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CodeGenerator", ".CodeGenerator", "{EFB4FA28-F4E6-45E6-ABC9-9F572AAC5DD3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.Business.Concrete", "Prospect.MyPetLife.Business.Concrete\Prospect.MyPetLife.Business.Concrete.xproj", "{C9215365-2B5C-475B-A739-774185E8E8D0}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Prospect.MyPetLife.View.Web", "Prospect.MyPetLife.View.Web\Prospect.MyPetLife.View.Web.xproj", "{0CC03C0A-364C-4752-9055-4D45533D4F94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{439033F7-9CB4-43FB-87C3-435E6EC88333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439033F7-9CB4-43FB-87C3-435E6EC88333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439033F7-9CB4-43FB-87C3-435E6EC88333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439033F7-9CB4-43FB-87C3-435E6EC88333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88A8F8D-BCAC-462C-851A-E9DB8271EC19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88A8F8D-BCAC-462C-851A-E9DB8271EC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88A8F8D-BCAC-462C-851A-E9DB8271EC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88A8F8D-BCAC-462C-851A-E9DB8271EC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8B58CC-7125-46C8-B0B4-92B6E66377BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8B58CC-7125-46C8-B0B4-92B6E66377BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8B58CC-7125-46C8-B0B4-92B6E66377BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8B58CC-7125-46C8-B0B4-92B6E66377BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06FB78C4-BACA-4399-865B-74BFA91F0FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FB78C4-BACA-4399-865B-74BFA91F0FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FB78C4-BACA-4399-865B-74BFA91F0FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FB78C4-BACA-4399-865B-74BFA91F0FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45E9BD3-C4B5-471F-8A03-1C1592B595DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45E9BD3-C4B5-471F-8A03-1C1592B595DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45E9BD3-C4B5-471F-8A03-1C1592B595DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45E9BD3-C4B5-471F-8A03-1C1592B595DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9215365-2B5C-475B-A739-774185E8E8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9215365-2B5C-475B-A739-774185E8E8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9215365-2B5C-475B-A739-774185E8E8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9215365-2B5C-475B-A739-774185E8E8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CC03C0A-364C-4752-9055-4D45533D4F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CC03C0A-364C-4752-9055-4D45533D4F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CC03C0A-364C-4752-9055-4D45533D4F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CC03C0A-364C-4752-9055-4D45533D4F94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{439033F7-9CB4-43FB-87C3-435E6EC88333} = {D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}
+		{D88A8F8D-BCAC-462C-851A-E9DB8271EC19} = {D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}
+		{BB8B58CC-7125-46C8-B0B4-92B6E66377BE} = {D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}
+		{06FB78C4-BACA-4399-865B-74BFA91F0FCD} = {D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}
+		{C45E9BD3-C4B5-471F-8A03-1C1592B595DD} = {52804D56-13CC-46DB-88B0-AA156AFB81FC}
+		{C58DC9F5-5FE1-4E0C-BACE-B6FAFCB72E77} = {EFB4FA28-F4E6-45E6-ABC9-9F572AAC5DD3}
+		{C9215365-2B5C-475B-A739-774185E8E8D0} = {D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}
+	EndGlobalSection
+EndGlobal

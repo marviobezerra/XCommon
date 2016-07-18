@@ -1,0 +1,51 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using XCommon.Application;
+using XCommon.Extensions.String;
+using XCommon.Patterns.Ioc;
+using XCommon.Web.Controllers;
+
+namespace [{namespace}]
+{
+    public class HomeController : BaseController
+    {
+        private readonly IHostingEnvironment _hostEnvironment;
+
+        private IApplicationSettings ApplicationSettings => Kernel.Resolve<IApplicationSettings>();
+
+        public HomeController(IHostingEnvironment hostEnvironment)
+        {
+            _hostEnvironment = hostEnvironment;
+        }
+
+        public IActionResult Index()
+        {
+            var path = Ticket.IsAuthenticated
+                ? _hostEnvironment.WebRootPath + "\\html\\Index.Private.html"
+                : _hostEnvironment.WebRootPath + "\\html\\Index.Public.html";
+
+            if (System.IO.File.Exists(path))
+            {
+                return File(Process(path), "text/html");
+            }
+
+            return NotFound(path);
+        }
+
+        private byte[] Process(string path)
+        {
+            var Authenticated = Ticket.IsAuthenticated;
+            var Production = ApplicationSettings.Production;
+
+            Func<bool, string> getBool = (value) => value ? "1" : "0";
+            var content = System.IO.File.ReadAllText(path);
+
+            var liveReload = "<script type=\"text/javascript\" src=\"//localhost:35729/livereload.js?snipver =1\" async defer></script>";
+            var info = string.Format("var x = {{ p: {0}, a: {1}}}", getBool(Production), getBool(Authenticated));
+
+            content = string.Format(content, info, Production ? string.Empty : liveReload);
+            return content.ToByte();
+        }
+    }
+}
