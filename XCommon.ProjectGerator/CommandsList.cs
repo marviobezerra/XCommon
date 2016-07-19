@@ -34,14 +34,14 @@ namespace XCommon.ProjectGerator
 
         public static CreateProject AddProjectWeb(this CreateSolution solution, string name)
         {
-            CreateProject project = new CreateProject(new CreateProjectParam(solution.Parameter, name) { Template = Properties.Resources.ProjectWeb });
+            CreateProject project = new CreateProject(new CreateProjectParam(solution.Parameter, name) { Template = Properties.Resources.ProjectWebXproj });
             solution.Add(project);
             return project;
         }
 
         public static CreateProject AddProjectClass(this CreateSolution solution, string name)
         {
-            CreateProject project = new CreateProject(new CreateProjectParam(solution.Parameter, name) { Template = Properties.Resources.ProjectClass });
+            CreateProject project = new CreateProject(new CreateProjectParam(solution.Parameter, name) { Template = Properties.Resources.ProjectClassXproj });
             solution.Add(project);
             return project;
         }
@@ -79,47 +79,47 @@ namespace XCommon.ProjectGerator
             switch (type)
             {
                 case ProjectJson.BusinessCodeGenerator:
-                    result = Resources.ProjectBusinessCodeGenerator;
+                    result = Resources.ProjectBusinessCodeGeneratorJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Resource");
                     break;
-                case ProjectJson.BusinessConcrect:
-                    result = Resources.ProjectBusinessConcrect;
+                case ProjectJson.BusinessConcrecte:
+                    result = Resources.ProjectBusinessConcrectJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Data");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Resource");
                     break;
                 case ProjectJson.BusinessContract:
-                    result = Resources.ProjectBusinessContract;
+                    result = Resources.ProjectBusinessContractJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     break;
                 case ProjectJson.BusinessData:
-                    result = Resources.ProjectBusinessData;
+                    result = Resources.ProjectBusinessDataJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     break;
                 case ProjectJson.BusinessEntity:
-                    result = Resources.ProjectBusinessEntity;
+                    result = Resources.ProjectBusinessEntityJson;
                     break;
                 case ProjectJson.BusinessFactory:
-                    result = Resources.ProjectBusinessFactory;
+                    result = Resources.ProjectBusinessFactoryJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Concrete");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Data");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     break;
                 case ProjectJson.BusinessResource:
-                    result = Resources.ProjectBusinessResource;
+                    result = Resources.ProjectBusinessResourceJson;
                     break;
                 case ProjectJson.ViewWeb:
-                    result = Resources.ProjectViewWeb;
+                    result = Resources.ProjectViewWebJson;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Factory");
                     break;
                 case ProjectJson.ViewWebSimple:
-                    result = Resources.ProjectViewWeb;
+                    result = Resources.ProjectViewWebJson;
                     break;
                 default:
                     break;
@@ -140,7 +140,7 @@ namespace XCommon.ProjectGerator
     {
         public static CreateProject AddAppStart(this CreateProject project, bool simple)
         {
-            string appStartUpTemplate = Resources.AppStartStartup
+            string appStartUpTemplate = Resources.WebAppStartStartup
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}");
 
             if (!simple)
@@ -150,11 +150,11 @@ namespace XCommon.ProjectGerator
                     .Replace("[{factoryInit}]", "Register.Do(appSettings.UnitTest);");
             }
 
-            string appProgramTemplate = Resources.AppStartProgram
+            string appProgramTemplate = Resources.WebAppStartProgram
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}");
 
 
-            string appControllerTemplate = Resources.AppStartHomeController
+            string appControllerTemplate = Resources.WebAppStartHomeController
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}.Controllers");
 
             CreateFile appStartUp = new CreateFile(new CreateFileParam(project.Parameter, "Code", "Startup.cs") { Template = appStartUpTemplate });
@@ -171,37 +171,43 @@ namespace XCommon.ProjectGerator
 
         public static CreateProject AddAppAngular(this CreateProject project)
         {
-            CreateFile appMain = new CreateFile(new CreateFileParam(project.Parameter, "App", "main.ts") { Template = Resources.AngularMain });
+            CreateFile appMain = new CreateFile(new CreateFileParam(project.Parameter, "App", "main.ts") { Template = Resources.WebAngularMain });
             project.Add(appMain);
 
-            CreateFile appPolyfill = new CreateFile(new CreateFileParam(project.Parameter, "App", "polyfills.ts") { Template = Resources.AngularPolyfills });
+            CreateFile appPolyfill = new CreateFile(new CreateFileParam(project.Parameter, "App", "polyfills.ts") { Template = Resources.WebAngularPolyfills });
             project.Add(appPolyfill);
 
-            CreateFile appVendor = new CreateFile(new CreateFileParam(project.Parameter, "App", "vendor.ts") { Template = Resources.AngularVendor });
+            CreateFile appVendor = new CreateFile(new CreateFileParam(project.Parameter, "App", "vendor.ts") { Template = Resources.WebAngularVendor });
             project.Add(appVendor);
 
-            CreateFile appIndex = new CreateFile(new CreateFileParam(project.Parameter, "App", "index.html") { Template = Resources.AngularIndex });
+            CreateFile appIndex = new CreateFile(new CreateFileParam(project.Parameter, "App", "index.html") { Template = Resources.WebAngularIndex });
             project.Add(appIndex);
 
-            CreateFile appComponentStyle = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.css") { Template = Resources.AppComponentStyle });
+            CreateFile appComponentStyle = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.scss") { Template = Resources.WebAppComponentStyle });
             project.Add(appComponentStyle);
 
-            CreateFile appComponentHtml = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.html") { Template = Resources.AppComponentHTML });
+            CreateFile appComponentHtml = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.html") { Template = Resources.WebAppComponentHTML });
             project.Add(appComponentHtml);
 
-            CreateFile appComponentType = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.ts") { Template = Resources.AppComponentType });
+            CreateFile appComponentType = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.component.ts") { Template = Resources.WebAppComponentType });
             project.Add(appComponentType);
 
-            CreateFile appComponentIndex = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "index.ts") { Template = Resources.AppComponentIndex });
+            CreateFile appComponentIndex = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "index.ts") { Template = Resources.WebAppComponentIndex });
             project.Add(appComponentIndex);
 
             return project;
         }
 
+        public static CreateProject AddAppStyles(this CreateProject project)
+        {
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, "Styles", "app.theme.scss") { Template = Resources.WebAppThemeScss });
+            project.Add(file);
+            return project;
+        }
 
         public static CreateProject AddAppSettings(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "appsettings.json") { Template = Resources.appsettings });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, "Styles", "app.variables.scss") { Template = Resources.WebAppVariablesScss });
             project.Add(file);
             return project;
         }
@@ -225,28 +231,28 @@ namespace XCommon.ProjectGerator
 
         public static CreateProject AddPackage(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "package.json") { Template = Resources.Package });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "package.json") { Template = Resources.PackageJson });
             project.Add(file);
             return project;
         }
 
         public static CreateProject AddTsConfig(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "tsconfig.json") { Template = Resources.TsConfig });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "tsconfig.json") { Template = Resources.TsConfigJson });
             project.Add(file);
             return project;
         }
 
         public static CreateProject AddTypings(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "typings.json") { Template = Resources.Typings });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "typings.json") { Template = Resources.TypingsJson });
             project.Add(file);
             return project;
         }
 
         public static CreateProject AddWebConfig(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "web.config") { Template = Resources.Web });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "web.config") { Template = Resources.WebConfig });
             project.Add(file);
             return project;
         }

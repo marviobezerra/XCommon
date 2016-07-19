@@ -1,0 +1,4 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+$Social-Google-Color: #dd4b39;
+$Social-Facebook-Color: #3b5998;

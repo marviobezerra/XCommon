@@ -118,97 +118,103 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="appsettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appsettings.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppStartHomeController" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appstarthomecontroller.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AppStartProgram" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appstartprogram.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AppStartStartup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appstartstartup.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="FactoryRegister" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\factoryregister.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="GulpFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gulpfile.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\resources\web\angular2\gulpfile.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="GulpFileSimple" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gulpfilesimple.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\resources\web\angular2\gulpfilesimple.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Package" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\package.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="PackageJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\packagejson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessCodeGenerator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinesscodegenerator.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessCodeGeneratorJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinesscodegeneratorjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessConcrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinessconcrect.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessConcrectJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinessconcrectjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessContract" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinesscontract.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessContractJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinesscontractjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessData" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinessdata.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessDataJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinessdatajson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessEntity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinessentity.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessEntityJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinessentityjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessFactory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinessfactory.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessFactoryJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinessfactoryjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectBusinessResource" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectbusinessresource.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectBusinessResourceJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectbusinessresourcejson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectClass" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectclass.xproj;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="ProjectClassXproj" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectclassxproj.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="ProjectViewWeb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectviewweb.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="ProjectViewWebJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectviewwebjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="ProjectWeb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\projectweb.xproj;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="ProjectWebXproj" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\projects\projectwebxproj.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Solution" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\solution.sln;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\resources\projects\solution.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="TsConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tsconfig.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="TsConfigJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\tsconfigjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Typings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\typings.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="TypingsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\typingsjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Web" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\web.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="WebAngularIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webangularindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAngularMain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webangularmain.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAngularPolyfills" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webangularpolyfills.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAngularVendor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webangularvendor.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAppComponentHTML" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappcomponenthtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppComponentIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappcomponentindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppComponentStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappcomponentstyle.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppComponentType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappcomponenttype.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\csharp\webappsettings.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppStartHomeController" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\csharp\webappstarthomecontroller.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAppStartProgram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\csharp\webappstartprogram.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAppStartStartup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\csharp\webappstartstartup.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WebAppThemeScss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappthemescss.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebAppVariablesScss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\angular2\webappvariablesscss.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="WebConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\web\webconfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="WebpackConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\webpackconfig.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="FactoryRegister" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\factoryregister.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AngularIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\angularindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AngularPolyfills" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\angularpolyfills.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AngularVendor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\angularvendor.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AppComponentHTML" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appcomponenthtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppComponentIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appcomponentindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppComponentStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appcomponentstyle.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppComponentType" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\appcomponenttype.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AngularMain" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\angularmain.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\resources\web\angular2\webpackconfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

@@ -14,8 +14,8 @@ namespace XCommon.ProjectGerator
                 .AddSolution(@"D:\Temp", "Prospect.Agnes");
 
             CreateProject businessConcret = solution
-                .AddProjectClass("Business.Concret")
-                .AddProjectJson(ProjectJson.BusinessContract);
+                .AddProjectClass("Business.Concrete")
+                .AddProjectJson(ProjectJson.BusinessConcrecte);
 
             CreateProject businessContract = solution
                 .AddProjectClass("Business.Contract")

@@ -3,7 +3,7 @@
     public enum ProjectJson
     {
         BusinessCodeGenerator,
-        BusinessConcrect,
+        BusinessConcrecte,
         BusinessContract,
         BusinessData,
         BusinessEntity,

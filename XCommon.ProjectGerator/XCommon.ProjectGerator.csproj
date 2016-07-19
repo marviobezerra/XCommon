@@ -53,36 +53,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="Resources\AngularMain.txt" />
-    <Content Include="Resources\AppComponentHTML.txt" />
-    <Content Include="Resources\AppComponentIndex.txt" />
-    <Content Include="Resources\AppComponentStyle.txt" />
-    <Content Include="Resources\AppComponentType.txt" />
-    <Content Include="Resources\AppStartProgram.txt" />
-    <Content Include="Resources\AppStartStartup.txt" />
-    <Content Include="Resources\AppStartHomeController.txt" />
-    <Content Include="Resources\FactoryRegister.txt" />
+    <Content Include="Resources\Web\Angular2\WebAngularMain.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppComponentHTML.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppComponentIndex.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppComponentStyle.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppComponentType.txt" />
+    <Content Include="Resources\Web\CSharp\WebAppStartProgram.txt" />
+    <Content Include="Resources\Web\CSharp\WebAppStartStartup.txt" />
+    <Content Include="Resources\Web\CSharp\WebAppStartHomeController.txt" />
+    <Content Include="Resources\Projects\FactoryRegister.txt" />
     <Compile Include="Steps\CreateFile.cs" />
     <Compile Include="Steps\CreateProject.cs" />
     <Compile Include="Steps\CreateSolution.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Resources\appsettings.json" />
-    <None Include="Resources\Package.json" />
-    <None Include="Resources\ProjectBusinessCodeGenerator.json" />
-    <None Include="Resources\ProjectBusinessConcrect.json" />
-    <None Include="Resources\ProjectBusinessContract.json" />
-    <None Include="Resources\ProjectBusinessData.json" />
-    <None Include="Resources\ProjectBusinessEntity.json" />
-    <None Include="Resources\ProjectBusinessFactory.json" />
-    <None Include="Resources\ProjectBusinessResource.json" />
-    <None Include="Resources\ProjectClass.xproj" />
-    <None Include="Resources\ProjectViewWeb.json" />
-    <None Include="Resources\ProjectWeb.xproj" />
-    <None Include="Resources\TsConfig.json" />
-    <None Include="Resources\Typings.json" />
-    <None Include="Resources\Web.config" />
+    <Content Include="Resources\Web\CSharp\WebAppSettings.txt" />
+    <Content Include="Resources\Web\Angular2\PackageJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessCodeGeneratorJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessConcrectJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessContractJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessDataJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessEntityJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessFactoryJson.txt" />
+    <Content Include="Resources\Projects\ProjectBusinessResourceJson.txt" />
+    <Content Include="Resources\Projects\ProjectClassXproj.txt" />
+    <Content Include="Resources\Projects\ProjectViewWebJson.txt" />
+    <Content Include="Resources\Projects\ProjectWebXproj.txt" />
+    <Content Include="Resources\Web\Angular2\TsConfigJson.txt" />
+    <Content Include="Resources\Web\Angular2\TypingsJson.txt" />
+    <Content Include="Resources\Web\WebConfig.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppThemeScss.txt" />
+    <Content Include="Resources\Web\Angular2\WebAppVariablesScss.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -91,15 +93,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\GulpFileSimple.js" />
-    <Content Include="Resources\GulpFile.js" />
-    <Content Include="Resources\AngularIndex.txt" />
-    <Content Include="Resources\Solution.sln" />
-    <Content Include="Resources\WebpackConfig.js" />
+    <Content Include="Resources\Web\Angular2\GulpFileSimple.txt" />
+    <Content Include="Resources\Web\Angular2\GulpFile.txt" />
+    <Content Include="Resources\Web\Angular2\WebAngularIndex.txt" />
+    <Content Include="Resources\Projects\Solution.txt" />
+    <Content Include="Resources\Web\Angular2\WebpackConfig.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AngularPolyfills.txt" />
-    <Content Include="Resources\AngularVendor.txt" />
+    <Content Include="Resources\Web\Angular2\WebAngularPolyfills.txt" />
+    <Content Include="Resources\Web\Angular2\WebAngularVendor.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,238 +61,6 @@ namespace XCommon.ProjectGerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-        ///    &lt;title&gt;My App&lt;/title&gt;
-        ///    &lt;base href=&quot;/&quot;&gt;
-        ///    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;&gt;
-        ///    &lt;link href=&quot;/assets/bundle.css&quot; rel=&quot;stylesheet&quot; /&gt;
-        ///    &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;app-root&gt;Whait&lt;/app-root&gt;
-        ///    &lt;script type=&quot;text/javascript&quot;&gt;{0}&lt;/script&gt;
-        ///    &lt;script type=&quot; [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AngularIndex {
-            get {
-                return ResourceManager.GetString("AngularIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import { bootstrap } from &quot;@angular/platform-browser-dynamic&quot;;
-        ///import { AppComponent } from &quot;./Components/&quot;;
-        ///
-        ///bootstrap(AppComponent)
-        ///    .catch((reason: any) =&gt; console.error(reason));
-        ///
-        ///.
-        /// </summary>
-        internal static string AngularMain {
-            get {
-                return ResourceManager.GetString("AngularMain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import &apos;core-js/es6&apos;;
-        ///import &apos;reflect-metadata&apos;;
-        ///require(&apos;zone.js/dist/zone&apos;);.
-        /// </summary>
-        internal static string AngularPolyfills {
-            get {
-                return ResourceManager.GetString("AngularPolyfills", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import &quot;@angular/platform-browser&quot;;
-        ///import &quot;@angular/platform-browser-dynamic&quot;;
-        ///import &quot;@angular/core&quot;;
-        ///import &quot;@angular/common&quot;;
-        ///import &quot;@angular/http&quot;;
-        ///import &quot;@angular/router&quot;;
-        ///import &quot;@angular/forms&quot;;
-        ///
-        ///import &quot;rxjs&quot;;
-        ///
-        ///import &quot;@angular2-material/core&quot;;
-        ///import &quot;@angular2-material/button&quot;;
-        ///import &quot;@angular2-material/card&quot;;
-        ///import &quot;@angular2-material/checkbox&quot;;
-        ///import &quot;@angular2-material/sidenav&quot;;
-        ///import &quot;@angular2-material/input&quot;;
-        ///import &quot;@angular2-material/list&quot;;
-        ///import &quot;@angular2-materia [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AngularVendor {
-            get {
-                return ResourceManager.GetString("AngularVendor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;
-        ///  {{ Title }}
-        ///&lt;/h1&gt;
-        ///.
-        /// </summary>
-        internal static string AppComponentHTML {
-            get {
-                return ResourceManager.GetString("AppComponentHTML", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to export * from &apos;./app.component&apos;;.
-        /// </summary>
-        internal static string AppComponentIndex {
-            get {
-                return ResourceManager.GetString("AppComponentIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string AppComponentStyle {
-            get {
-                return ResourceManager.GetString("AppComponentStyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import { Component } from &quot;@angular/core&quot;;
-        ///
-        ///@Component({
-        ///  selector: &quot;app-root&quot;,
-        ///  templateUrl: &quot;app.component.html&quot;,
-        ///  styleUrls: [&quot;app.component.css&quot;]
-        ///})
-        ///export class AppComponent {
-        ///  Title = &quot;App works!&quot;;
-        ///}
-        ///.
-        /// </summary>
-        internal static string AppComponentType {
-            get {
-                return ResourceManager.GetString("AppComponentType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///  &quot;MyPetLife&quot;: {
-        ///    &quot;UnitTest&quot;: false,
-        ///    &quot;Production&quot;: false,
-        ///    &quot;ConnectionString&quot;: &quot;Data Source={Server};Initial Catalog={DataBase};Integrated Security=False;User Id={UserName};Password={Password};MultipleActiveResultSets=True;Application Name=App-Dev;Connection Timeout=1200&quot;
-        ///  },
-        ///  &quot;XCommon&quot;: {
-        ///    &quot;Authentication&quot;: {
-        ///      &quot;Cookie&quot;: {
-        ///        &quot;CookieName&quot;: &quot;Auth&quot;
-        ///      },
-        ///      &quot;Google&quot;: {
-        ///       
-        ///      },
-        ///      &quot;Facebook&quot;: {
-        ///
-        ///      },
-        ///      &quot;Map&quot;: {
-        ///        &quot;UriLogin&quot;: &quot;/login&quot;, [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string appsettings {
-            get {
-                return ResourceManager.GetString("appsettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to using Microsoft.AspNetCore.Hosting;
-        ///using Microsoft.AspNetCore.Mvc;
-        ///using System;
-        ///using XCommon.Application;
-        ///using XCommon.Extensions.String;
-        ///using XCommon.Patterns.Ioc;
-        ///using XCommon.Web.Controllers;
-        ///
-        ///namespace [{namespace}]
-        ///{
-        ///    public class HomeController : BaseController
-        ///    {
-        ///        private readonly IHostingEnvironment _hostEnvironment;
-        ///
-        ///        public HomeController(IHostingEnvironment hostEnvironment)
-        ///        {
-        ///            _hostEnvironment = hostEnvironment;
-        ///        }
-        ///
-        ///        pu [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AppStartHomeController {
-            get {
-                return ResourceManager.GetString("AppStartHomeController", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to using System;
-        ///using System.Collections.Generic;
-        ///using System.IO;
-        ///using System.Linq;
-        ///using System.Threading.Tasks;
-        ///using Microsoft.AspNetCore.Hosting;
-        ///
-        ///namespace [{namespace}]
-        ///{
-        ///    public class Program
-        ///    {
-        ///        public static void Main(string[] args)
-        ///        {
-        ///            var host = new WebHostBuilder()
-        ///                .UseKestrel()
-        ///                .UseContentRoot(Directory.GetCurrentDirectory())
-        ///                .UseIISIntegration()
-        ///                .UseStartup&lt;Startup&gt;()
-        ///               [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AppStartProgram {
-            get {
-                return ResourceManager.GetString("AppStartProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to using Microsoft.AspNetCore.Builder;
-        ///using Microsoft.AspNetCore.Hosting;
-        ///using Microsoft.AspNetCore.Http;
-        ///using Microsoft.Extensions.Configuration;
-        ///using Microsoft.Extensions.DependencyInjection;
-        ///using Newtonsoft.Json.Serialization;
-        ///using XCommon.Application;
-        ///using XCommon.Application.Login;
-        ///using XCommon.Patterns.Ioc;
-        ///using XCommon.Web.Authentication;
-        ///using XCommon.Web.Authentication.Ticket;
-        ///using XCommon.Web.Extensions;
-        ///[{factoryUsing}]
-        ///
-        ///namespace [{namespace}]
-        ///{
-        ///    public class Startup
-        ///  [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string AppStartStartup {
-            get {
-                return ResourceManager.GetString("AppStartStartup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to using XCommon.Application.Login;
         ///using XCommon.Patterns.Ioc;
         ///
@@ -387,9 +155,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///    &quot;zone.js&quot;: &quot;0.6.12&quot;,
         ///    &quot;@angular2-material/button&quot;: &quot;^2.0 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Package {
+        internal static string PackageJson {
             get {
-                return ResourceManager.GetString("Package", resourceCulture);
+                return ResourceManager.GetString("PackageJson", resourceCulture);
             }
         }
         
@@ -418,9 +186,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessCodeGenerator {
+        internal static string ProjectBusinessCodeGeneratorJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessCodeGenerator", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessCodeGeneratorJson", resourceCulture);
             }
         }
         
@@ -446,9 +214,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessConcrect {
+        internal static string ProjectBusinessConcrectJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessConcrect", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessConcrectJson", resourceCulture);
             }
         }
         
@@ -471,9 +239,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessContract {
+        internal static string ProjectBusinessContractJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessContract", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessContractJson", resourceCulture);
             }
         }
         
@@ -501,9 +269,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessData {
+        internal static string ProjectBusinessDataJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessData", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessDataJson", resourceCulture);
             }
         }
         
@@ -524,9 +292,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessEntity {
+        internal static string ProjectBusinessEntityJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessEntity", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessEntityJson", resourceCulture);
             }
         }
         
@@ -551,9 +319,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessFactory {
+        internal static string ProjectBusinessFactoryJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessFactory", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessFactoryJson", resourceCulture);
             }
         }
         
@@ -573,9 +341,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectBusinessResource {
+        internal static string ProjectBusinessResourceJson {
             get {
-                return ResourceManager.GetString("ProjectBusinessResource", resourceCulture);
+                return ResourceManager.GetString("ProjectBusinessResourceJson", resourceCulture);
             }
         }
         
@@ -589,9 +357,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///
         ///  &lt;Import Project=&quot;$(VSToolsPath)\DotNet\Microsoft.DotNet.Props&quot; Condition=&quot;&apos;$(V [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string ProjectClass {
+        internal static string ProjectClassXproj {
             get {
-                return ResourceManager.GetString("ProjectClass", resourceCulture);
+                return ResourceManager.GetString("ProjectClassXproj", resourceCulture);
             }
         }
         
@@ -608,9 +376,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///    &quot;Microsoft.AspNetCore.Server.Kestrel&quot;: &quot;1.0.0&quot;,
         ///    &quot;Microsoft.AspNetCore.Stat [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string ProjectViewWeb {
+        internal static string ProjectViewWebJson {
             get {
-                return ResourceManager.GetString("ProjectViewWeb", resourceCulture);
+                return ResourceManager.GetString("ProjectViewWebJson", resourceCulture);
             }
         }
         
@@ -623,9 +391,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///  &lt;/PropertyGroup&gt;
         ///  &lt;Import Project=&quot;$(VSToolsPath)\DotNet\Microsoft.DotNet.Props&quot; Condition=&quot;&apos;$(VST [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string ProjectWeb {
+        internal static string ProjectWebXproj {
             get {
-                return ResourceManager.GetString("ProjectWeb", resourceCulture);
+                return ResourceManager.GetString("ProjectWebXproj", resourceCulture);
             }
         }
         
@@ -635,10 +403,18 @@ namespace XCommon.ProjectGerator.Properties {
         ///# Visual Studio 14
         ///VisualStudioVersion = 14.0.25420.1
         ///MinimumVisualStudioVersion = 10.0.40219.1
-        ///Project(&quot;{2150E333-8FDC-42A3-9474-1A3956D46DE8}&quot;) = &quot;Business&quot;, &quot;Business&quot;, &quot;{D7BCA6FC-0473-4EFC-A820-5E95DA0278E3}&quot;
-        ///EndProject
-        ///Project(&quot;{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}&quot;) = &quot;Prospect.MyPetLife.Business.Contract&quot;, &quot;Prospect.MyPetLife.Business.Contract\Prospect.MyPetLife.Business.Contract.xproj&quot;, &quot;{439033F7-9CB4-43FB-87C3-435E6EC88333}&quot;
-        ///End [rest of string was truncated]&quot;;.
+        ///[{projects}]
+        ///Global
+        ///	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        ///		Debug|Any CPU = Debug|Any CPU
+        ///		Release|Any CPU = Release|Any CPU
+        ///	EndGlobalSection
+        ///	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        ///[{link}]
+        ///	EndGlobalSection
+        ///	GlobalSection(SolutionProperties) = preSolution
+        ///		HideSolutionNode = FALSE
+        ///	EndGlob [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Solution {
             get {
@@ -662,9 +438,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string TsConfig {
+        internal static string TsConfigJson {
             get {
-                return ResourceManager.GetString("TsConfig", resourceCulture);
+                return ResourceManager.GetString("TsConfigJson", resourceCulture);
             }
         }
         
@@ -679,9 +455,284 @@ namespace XCommon.ProjectGerator.Properties {
         ///}
         ///.
         /// </summary>
-        internal static string Typings {
+        internal static string TypingsJson {
             get {
-                return ResourceManager.GetString("Typings", resourceCulture);
+                return ResourceManager.GetString("TypingsJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        ///    &lt;title&gt;My App&lt;/title&gt;
+        ///    &lt;base href=&quot;/&quot;&gt;
+        ///    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;&gt;
+        ///    &lt;link href=&quot;/assets/bundle.css&quot; rel=&quot;stylesheet&quot; /&gt;
+        ///    &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;app-root&gt;Whait&lt;/app-root&gt;
+        ///    &lt;script type=&quot;text/javascript&quot;&gt;{0}&lt;/script&gt;
+        ///    &lt;script type=&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAngularIndex {
+            get {
+                return ResourceManager.GetString("WebAngularIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { bootstrap } from &quot;@angular/platform-browser-dynamic&quot;;
+        ///import { AppComponent } from &quot;./Components/&quot;;
+        ///
+        ///bootstrap(AppComponent)
+        ///    .catch((reason: any) =&gt; console.error(reason));
+        ///
+        ///.
+        /// </summary>
+        internal static string WebAngularMain {
+            get {
+                return ResourceManager.GetString("WebAngularMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import &apos;core-js/es6&apos;;
+        ///import &apos;reflect-metadata&apos;;
+        ///require(&apos;zone.js/dist/zone&apos;);.
+        /// </summary>
+        internal static string WebAngularPolyfills {
+            get {
+                return ResourceManager.GetString("WebAngularPolyfills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import &quot;@angular/platform-browser&quot;;
+        ///import &quot;@angular/platform-browser-dynamic&quot;;
+        ///import &quot;@angular/core&quot;;
+        ///import &quot;@angular/common&quot;;
+        ///import &quot;@angular/http&quot;;
+        ///import &quot;@angular/router&quot;;
+        ///import &quot;@angular/forms&quot;;
+        ///
+        ///import &quot;rxjs&quot;;
+        ///
+        ///import &quot;@angular2-material/core&quot;;
+        ///import &quot;@angular2-material/button&quot;;
+        ///import &quot;@angular2-material/card&quot;;
+        ///import &quot;@angular2-material/checkbox&quot;;
+        ///import &quot;@angular2-material/sidenav&quot;;
+        ///import &quot;@angular2-material/input&quot;;
+        ///import &quot;@angular2-material/list&quot;;
+        ///import &quot;@angular2-materia [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAngularVendor {
+            get {
+                return ResourceManager.GetString("WebAngularVendor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;
+        ///  {{ Title }}
+        ///&lt;/h1&gt;
+        ///.
+        /// </summary>
+        internal static string WebAppComponentHTML {
+            get {
+                return ResourceManager.GetString("WebAppComponentHTML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to export * from &apos;./app.component&apos;;.
+        /// </summary>
+        internal static string WebAppComponentIndex {
+            get {
+                return ResourceManager.GetString("WebAppComponentIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string WebAppComponentStyle {
+            get {
+                return ResourceManager.GetString("WebAppComponentStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { Component } from &quot;@angular/core&quot;;
+        ///
+        ///@Component({
+        ///  selector: &quot;app-root&quot;,
+        ///  templateUrl: &quot;/html/components/home/app.component.html&quot;,
+        ///  styleUrls: [require(&quot;./app.component.scss&quot;)]
+        ///})
+        ///export class AppComponent {
+        ///  Title = &quot;App works!&quot;;
+        ///}
+        ///.
+        /// </summary>
+        internal static string WebAppComponentType {
+            get {
+                return ResourceManager.GetString("WebAppComponentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;MyPetLife&quot;: {
+        ///    &quot;UnitTest&quot;: false,
+        ///    &quot;Production&quot;: false,
+        ///    &quot;ConnectionString&quot;: &quot;Data Source={Server};Initial Catalog={DataBase};Integrated Security=False;User Id={UserName};Password={Password};MultipleActiveResultSets=True;Application Name=App-Dev;Connection Timeout=1200&quot;
+        ///  },
+        ///  &quot;XCommon&quot;: {
+        ///    &quot;Authentication&quot;: {
+        ///      &quot;Cookie&quot;: {
+        ///        &quot;CookieName&quot;: &quot;Auth&quot;
+        ///      },
+        ///      &quot;Google&quot;: {
+        ///       
+        ///      },
+        ///      &quot;Facebook&quot;: {
+        ///
+        ///      },
+        ///      &quot;Map&quot;: {
+        ///        &quot;UriLogin&quot;: &quot;/login&quot;, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAppSettings {
+            get {
+                return ResourceManager.GetString("WebAppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using Microsoft.AspNetCore.Hosting;
+        ///using Microsoft.AspNetCore.Mvc;
+        ///using System;
+        ///using XCommon.Application;
+        ///using XCommon.Extensions.String;
+        ///using XCommon.Patterns.Ioc;
+        ///using XCommon.Web.Controllers;
+        ///
+        ///namespace [{namespace}]
+        ///{
+        ///    public class HomeController : BaseController
+        ///    {
+        ///        private readonly IHostingEnvironment _hostEnvironment;
+        ///
+        ///        public HomeController(IHostingEnvironment hostEnvironment)
+        ///        {
+        ///            _hostEnvironment = hostEnvironment;
+        ///        }
+        ///
+        ///        pu [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAppStartHomeController {
+            get {
+                return ResourceManager.GetString("WebAppStartHomeController", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using System;
+        ///using System.Collections.Generic;
+        ///using System.IO;
+        ///using System.Linq;
+        ///using System.Threading.Tasks;
+        ///using Microsoft.AspNetCore.Hosting;
+        ///
+        ///namespace [{namespace}]
+        ///{
+        ///    public class Program
+        ///    {
+        ///        public static void Main(string[] args)
+        ///        {
+        ///            var host = new WebHostBuilder()
+        ///                .UseKestrel()
+        ///                .UseContentRoot(Directory.GetCurrentDirectory())
+        ///                .UseIISIntegration()
+        ///                .UseStartup&lt;Startup&gt;()
+        ///               [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAppStartProgram {
+            get {
+                return ResourceManager.GetString("WebAppStartProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using Microsoft.AspNetCore.Builder;
+        ///using Microsoft.AspNetCore.Hosting;
+        ///using Microsoft.AspNetCore.Http;
+        ///using Microsoft.Extensions.Configuration;
+        ///using Microsoft.Extensions.DependencyInjection;
+        ///using Newtonsoft.Json.Serialization;
+        ///using XCommon.Application;
+        ///using XCommon.Application.Login;
+        ///using XCommon.Patterns.Ioc;
+        ///using XCommon.Web.Authentication;
+        ///using XCommon.Web.Authentication.Ticket;
+        ///using XCommon.Web.Extensions;
+        ///[{factoryUsing}]
+        ///
+        ///namespace [{namespace}]
+        ///{
+        ///    public class Startup
+        ///  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WebAppStartStartup {
+            get {
+                return ResourceManager.GetString("WebAppStartStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /// &lt;reference path=&quot;App.Variables.scss&quot; /&gt;
+        ///@import &quot;App.Variables.scss&quot;;
+        ///
+        ///body {
+        ///	margin: 0;
+        ///	padding: 0;
+        ///    font-family: Roboto, &quot;Helvetica Neue&quot;, sans-serif;
+        ///}
+        ///
+        ///* {
+        ///	-webkit-font-smoothing: antialiased;
+        ///	-moz-osx-font-smoothing: grayscale;
+        ///}
+        ///
+        ///.facebook {
+        ///	background-color: $Social-Facebook-Color !important;
+        ///}
+        ///
+        ///.google {
+        ///	background-color: $Social-Google-Color !important;
+        ///}
+        ///.
+        /// </summary>
+        internal static string WebAppThemeScss {
+            get {
+                return ResourceManager.GetString("WebAppThemeScss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $font-stack: Helvetica, sans-serif;
+        ///$primary-color: #333;
+        ///$Social-Google-Color: #dd4b39;
+        ///$Social-Facebook-Color: #3b5998;
+        ///.
+        /// </summary>
+        internal static string WebAppVariablesScss {
+            get {
+                return ResourceManager.GetString("WebAppVariablesScss", resourceCulture);
             }
         }
         
@@ -699,9 +750,9 @@ namespace XCommon.ProjectGerator.Properties {
         ///    &lt;/handlers&gt;
         ///    &lt;aspNetCore processPath=&quot;%LAUNCHER_PATH%&quot; arguments=&quot;%LAUNCHER_ARGS%&quot; stdoutLogEnabled=&quot;false&quot; stdoutLogFile=&quot;.\logs\stdout&quot; forwardWindowsAuthToken=&quot;f [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Web {
+        internal static string WebConfig {
             get {
-                return ResourceManager.GetString("Web", resourceCulture);
+                return ResourceManager.GetString("WebConfig", resourceCulture);
             }
         }
         
@@ -712,10 +763,10 @@ namespace XCommon.ProjectGerator.Properties {
         ///
         ///module.exports = {
         ///	entry: [
-        ///		&quot;./App/Polyfills.ts&quot;,
-        ///		&quot;./App/Vendor.ts&quot;,
-        ///		&quot;./App/App.Component.ts&quot;,
-        ///        &quot;./App/Styles/App.Theme.scss&quot;
+        ///		&quot;./app/polyfills.ts&quot;,
+        ///		&quot;./app/vendor.ts&quot;,
+        ///		&quot;./app/main.ts&quot;,
+        ///        &quot;./app/styles/app.theme.scss&quot;
         ///	],
         ///	output: {
         ///		path: path.join(__dirname, &quot;wwwroot&quot;, &quot;asserts&quot;),
@@ -729,7 +780,8 @@ namespace XCommon.ProjectGerator.Properties {
         ///		extensions: [&quot;&quot;, &quot;.js&quot;, &quot;.ts&quot;, &quot;.scss&quot;, &quot;.css&quot;]
         ///	},
         ///
-        ///	module: {        /// [rest of string was truncated]&quot;;.
+        ///	module: {
+        ///		loader [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string WebpackConfig {
             get {
