@@ -61,6 +61,130 @@ namespace XCommon.ProjectGerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        ///    &lt;title&gt;My App&lt;/title&gt;
+        ///    &lt;base href=&quot;/&quot;&gt;
+        ///    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;&gt;
+        ///    &lt;link href=&quot;/assets/bundle.css&quot; rel=&quot;stylesheet&quot; /&gt;
+        ///    &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;app-root&gt;Whait&lt;/app-root&gt;
+        ///    &lt;script type=&quot;text/javascript&quot;&gt;{0}&lt;/script&gt;
+        ///    &lt;script type=&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AngularIndex {
+            get {
+                return ResourceManager.GetString("AngularIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { bootstrap } from &quot;@angular/platform-browser-dynamic&quot;;
+        ///import { AppComponent } from &quot;./Components/&quot;;
+        ///
+        ///bootstrap(AppComponent)
+        ///    .catch((reason: any) =&gt; console.error(reason));
+        ///
+        ///.
+        /// </summary>
+        internal static string AngularMain {
+            get {
+                return ResourceManager.GetString("AngularMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import &apos;core-js/es6&apos;;
+        ///import &apos;reflect-metadata&apos;;
+        ///require(&apos;zone.js/dist/zone&apos;);.
+        /// </summary>
+        internal static string AngularPolyfills {
+            get {
+                return ResourceManager.GetString("AngularPolyfills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import &quot;@angular/platform-browser&quot;;
+        ///import &quot;@angular/platform-browser-dynamic&quot;;
+        ///import &quot;@angular/core&quot;;
+        ///import &quot;@angular/common&quot;;
+        ///import &quot;@angular/http&quot;;
+        ///import &quot;@angular/router&quot;;
+        ///import &quot;@angular/forms&quot;;
+        ///
+        ///import &quot;rxjs&quot;;
+        ///
+        ///import &quot;@angular2-material/core&quot;;
+        ///import &quot;@angular2-material/button&quot;;
+        ///import &quot;@angular2-material/card&quot;;
+        ///import &quot;@angular2-material/checkbox&quot;;
+        ///import &quot;@angular2-material/sidenav&quot;;
+        ///import &quot;@angular2-material/input&quot;;
+        ///import &quot;@angular2-material/list&quot;;
+        ///import &quot;@angular2-materia [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AngularVendor {
+            get {
+                return ResourceManager.GetString("AngularVendor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;
+        ///  {{ Title }}
+        ///&lt;/h1&gt;
+        ///.
+        /// </summary>
+        internal static string AppComponentHTML {
+            get {
+                return ResourceManager.GetString("AppComponentHTML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to export * from &apos;./app.component&apos;;.
+        /// </summary>
+        internal static string AppComponentIndex {
+            get {
+                return ResourceManager.GetString("AppComponentIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AppComponentStyle {
+            get {
+                return ResourceManager.GetString("AppComponentStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { Component } from &quot;@angular/core&quot;;
+        ///
+        ///@Component({
+        ///  selector: &quot;app-root&quot;,
+        ///  templateUrl: &quot;app.component.html&quot;,
+        ///  styleUrls: [&quot;app.component.css&quot;]
+        ///})
+        ///export class AppComponent {
+        ///  Title = &quot;App works!&quot;;
+        ///}
+        ///.
+        /// </summary>
+        internal static string AppComponentType {
+            get {
+                return ResourceManager.GetString("AppComponentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///  &quot;MyPetLife&quot;: {
         ///    &quot;UnitTest&quot;: false,
@@ -102,9 +226,12 @@ namespace XCommon.ProjectGerator.Properties {
         ///    {
         ///        private readonly IHostingEnvironment _hostEnvironment;
         ///
-        ///        private IApplicationSettings ApplicationSettings =&gt; Kernel.Resolve&lt;IApplicationSettings&gt;();
+        ///        public HomeController(IHostingEnvironment hostEnvironment)
+        ///        {
+        ///            _hostEnvironment = hostEnvironment;
+        ///        }
         ///
-        ///        public HomeController(IHostingEnvironmen [rest of string was truncated]&quot;;.
+        ///        pu [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AppStartHomeController {
             get {

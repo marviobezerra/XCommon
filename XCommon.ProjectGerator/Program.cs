@@ -48,7 +48,8 @@ namespace XCommon.ProjectGerator
                 .AddTsConfig()
                 .AddTypings()
                 .AddWebConfig()
-                .AddWebpackConfig();
+                .AddWebpackConfig()
+                .AddAppAngular();
 
             appCommand.Run();
 

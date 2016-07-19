@@ -53,6 +53,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="Resources\AngularMain.txt" />
+    <Content Include="Resources\AppComponentHTML.txt" />
+    <Content Include="Resources\AppComponentIndex.txt" />
+    <Content Include="Resources\AppComponentStyle.txt" />
+    <Content Include="Resources\AppComponentType.txt" />
     <Content Include="Resources\AppStartProgram.txt" />
     <Content Include="Resources\AppStartStartup.txt" />
     <Content Include="Resources\AppStartHomeController.txt" />
@@ -88,8 +93,13 @@
   <ItemGroup>
     <Content Include="Resources\GulpFileSimple.js" />
     <Content Include="Resources\GulpFile.js" />
+    <Content Include="Resources\AngularIndex.txt" />
     <Content Include="Resources\Solution.sln" />
     <Content Include="Resources\WebpackConfig.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\AngularPolyfills.txt" />
+    <Content Include="Resources\AngularVendor.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

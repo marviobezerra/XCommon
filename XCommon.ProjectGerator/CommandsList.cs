@@ -169,6 +169,36 @@ namespace XCommon.ProjectGerator
             return project;
         }
 
+        public static CreateProject AddAppAngular(this CreateProject project)
+        {
+            CreateFile appMain = new CreateFile(new CreateFileParam(project.Parameter, "App", "main.ts") { Template = Resources.AngularMain });
+            project.Add(appMain);
+
+            CreateFile appPolyfill = new CreateFile(new CreateFileParam(project.Parameter, "App", "polyfills.ts") { Template = Resources.AngularPolyfills });
+            project.Add(appPolyfill);
+
+            CreateFile appVendor = new CreateFile(new CreateFileParam(project.Parameter, "App", "vendor.ts") { Template = Resources.AngularVendor });
+            project.Add(appVendor);
+
+            CreateFile appIndex = new CreateFile(new CreateFileParam(project.Parameter, "App", "index.html") { Template = Resources.AngularIndex });
+            project.Add(appIndex);
+
+            CreateFile appComponentStyle = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.css") { Template = Resources.AppComponentStyle });
+            project.Add(appComponentStyle);
+
+            CreateFile appComponentHtml = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.html") { Template = Resources.AppComponentHTML });
+            project.Add(appComponentHtml);
+
+            CreateFile appComponentType = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "app.component.ts") { Template = Resources.AppComponentType });
+            project.Add(appComponentType);
+
+            CreateFile appComponentIndex = new CreateFile(new CreateFileParam(project.Parameter, "App\\Component", "index.ts") { Template = Resources.AppComponentIndex });
+            project.Add(appComponentIndex);
+
+            return project;
+        }
+
+
         public static CreateProject AddAppSettings(this CreateProject project)
         {
             CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "appsettings.json") { Template = Resources.appsettings });
@@ -227,5 +257,7 @@ namespace XCommon.ProjectGerator
             project.Add(file);
             return project;
         }
+
+
     }
 }

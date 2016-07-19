@@ -44,18 +44,19 @@ namespace XCommon.ProjectGerator.Steps
         public CreateProjectParam(CreateSolutionParam solutionParam, string projectName)
         {
             Id = Guid.NewGuid();
+            IdRelationShip = Guid.NewGuid();
             SolutionParam = solutionParam;
             ProjectName = $"{solutionParam.SolutionName}.{projectName}";
         }
 
         public Guid Id { get; set; }
 
-
+        public Guid IdRelationShip { get; set; }
 
         public CreateSolutionParam SolutionParam { get; private set; }
 
         public string ProjectName { get; private set; }
-
+        
         public string Template { get; set; }
     }
 }

@@ -187,4 +187,28 @@
   <data name="FactoryRegister" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\factoryregister.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="AngularIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\angularindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AngularPolyfills" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\angularpolyfills.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AngularVendor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\angularvendor.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AppComponentHTML" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\appcomponenthtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AppComponentIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\appcomponentindex.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AppComponentStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\appcomponentstyle.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AppComponentType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\appcomponenttype.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AngularMain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\angularmain.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

@@ -4,10 +4,10 @@ var path = require('path'),
 
 module.exports = {
 	entry: [
-		"./App/Polyfills.ts",
-		"./App/Vendor.ts",
-		"./App/App.Component.ts",
-        "./App/Styles/App.Theme.scss"
+		"./app/polyfills.ts",
+		"./app/vendor.ts",
+		"./app/main.ts",
+        "./app/styles/app.theme.scss"
 	],
 	output: {
 		path: path.join(__dirname, "wwwroot", "asserts"),

@@ -1,0 +1,6 @@
+﻿import { bootstrap } from "@angular/platform-browser-dynamic";
+import { AppComponent } from "./Components/";
+
+bootstrap(AppComponent)
+    .catch((reason: any) => console.error(reason));
+
