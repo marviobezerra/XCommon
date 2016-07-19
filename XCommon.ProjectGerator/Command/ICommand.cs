@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace XCommon.ProjectGerator.Command
+﻿namespace XCommon.ProjectGerator.Command
 {
     public interface ICommand
     {

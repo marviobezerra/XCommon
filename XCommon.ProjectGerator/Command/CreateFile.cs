@@ -1,8 +1,7 @@
 ﻿using System;
-using XCommon.ProjectGerator.Command;
 using System.IO;
 
-namespace XCommon.ProjectGerator.Steps
+namespace XCommon.ProjectGerator.Command
 {
     public class CreateFile : Command<CreateFileParam>
     {

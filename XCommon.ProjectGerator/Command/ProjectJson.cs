@@ -1,4 +1,4 @@
-﻿namespace XCommon.ProjectGerator.Enumeration
+﻿namespace XCommon.ProjectGerator.Command
 {
     public enum ProjectJson
     {
@@ -9,7 +9,6 @@
         BusinessEntity,
         BusinessFactory,
         BusinessResource,
-        ViewWeb,
         ViewWebSimple
     }
 }

@@ -1,10 +1,8 @@
-﻿using XCommon.ProjectGerator.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace XCommon.ProjectGerator.Steps
+namespace XCommon.ProjectGerator.Command
 {
     public class CreateSolution : Command<CreateSolutionParam>
     {
@@ -22,7 +20,7 @@ namespace XCommon.ProjectGerator.Steps
                 Directory.CreateDirectory(param.Path);
 
             string file = Path.Combine(param.Path, param.SolutionName + ".sln");
-            string template = Process(Properties.Resources.Solution);
+            string template = Process(Resources.CSharp.Solution);
 
             File.WriteAllText(file, template);
 

@@ -1,9 +1,8 @@
-﻿using XCommon.ProjectGerator.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace XCommon.ProjectGerator.Steps
+namespace XCommon.ProjectGerator.Command
 {
     public class CreateProject : Command<CreateProjectParam>
     {

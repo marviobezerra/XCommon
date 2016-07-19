@@ -43,66 +43,103 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandsList.cs" />
+    <Compile Include="..\XCommon\Application\CommandLine\CommandArgument.cs">
+      <Link>CommandLine\CommandArgument.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\CommandLine\CommandLineApplication.cs">
+      <Link>CommandLine\CommandLineApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\CommandLine\CommandOption.cs">
+      <Link>CommandLine\CommandOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\CommandLine\CommandOptionType.cs">
+      <Link>CommandLine\CommandOptionType.cs</Link>
+    </Compile>
+    <Compile Include="Command\CommandExtencionsCommon.cs" />
+    <Compile Include="Command\CommandExtencionsPacks.cs" />
+    <Compile Include="Command\CommandsList.cs" />
+    <Compile Include="Command\CommandExtencionsAngular.cs" />
+    <Compile Include="Command\CommandExtencionsCSharp.cs" />
+    <Compile Include="Command\CommandExtencionsWeb.cs" />
+    <Compile Include="Command\CommandsParams.cs" />
     <Compile Include="Command\ICommand.cs" />
-    <Compile Include="Enumeration\ProjectJson.cs" />
+    <Compile Include="Command\ProjectJson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Content Include="Resources\Angular2\MainApp.txt" />
+    <Content Include="Resources\Angular2\ComponentHTML.txt" />
+    <Content Include="Resources\Angular2\ComponentIndex.txt" />
+    <Content Include="Resources\Angular2\ComponentStyle.txt" />
+    <Content Include="Resources\Angular2\ComponentTypeScript.txt" />
+    <Content Include="Resources\AspNet\Program.txt" />
+    <Content Include="Resources\AspNet\Startup.txt" />
+    <Content Include="Resources\AspNet\HomeController.txt" />
+    <Content Include="Resources\CSharp\FactoryRegister.txt" />
+    <Compile Include="Resources\Angular2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Angular2.resx</DependentUpon>
     </Compile>
-    <Content Include="Resources\Web\Angular2\WebAngularMain.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppComponentHTML.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppComponentIndex.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppComponentStyle.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppComponentType.txt" />
-    <Content Include="Resources\Web\CSharp\WebAppStartProgram.txt" />
-    <Content Include="Resources\Web\CSharp\WebAppStartStartup.txt" />
-    <Content Include="Resources\Web\CSharp\WebAppStartHomeController.txt" />
-    <Content Include="Resources\Projects\FactoryRegister.txt" />
-    <Compile Include="Steps\CreateFile.cs" />
-    <Compile Include="Steps\CreateProject.cs" />
-    <Compile Include="Steps\CreateSolution.cs" />
+    <Compile Include="Resources\AspNet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AspNet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CSharp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSharp.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Command\CreateFile.cs" />
+    <Compile Include="Command\CreateProject.cs" />
+    <Compile Include="Command\CreateSolution.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Resources\Web\CSharp\WebAppSettings.txt" />
-    <Content Include="Resources\Web\Angular2\PackageJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessCodeGeneratorJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessConcrectJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessContractJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessDataJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessEntityJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessFactoryJson.txt" />
-    <Content Include="Resources\Projects\ProjectBusinessResourceJson.txt" />
-    <Content Include="Resources\Projects\ProjectClassXproj.txt" />
-    <Content Include="Resources\Projects\ProjectViewWebJson.txt" />
-    <Content Include="Resources\Projects\ProjectWebXproj.txt" />
-    <Content Include="Resources\Web\Angular2\TsConfigJson.txt" />
-    <Content Include="Resources\Web\Angular2\TypingsJson.txt" />
-    <Content Include="Resources\Web\WebConfig.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppThemeScss.txt" />
-    <Content Include="Resources\Web\Angular2\WebAppVariablesScss.txt" />
+    <Content Include="Resources\AspNet\AppSettings.txt" />
+    <Content Include="Resources\Angular2\PackageJson.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonCodeGenerator.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonConcrecte.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonContract.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonData.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonEntity.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonFactory.txt" />
+    <Content Include="Resources\CSharp\ProjectJsonResource.txt" />
+    <Content Include="Resources\CSharp\ProjectClassXproj.txt" />
+    <Content Include="Resources\AspNet\ProjecJson.txt" />
+    <Content Include="Resources\AspNet\ProjectXproj.txt" />
+    <Content Include="Resources\Angular2\TsConfigJson.txt" />
+    <Content Include="Resources\Angular2\TypingsJson.txt" />
+    <Content Include="Resources\AspNet\WebConfig.txt" />
+    <Content Include="Resources\Angular2\AppThemeScss.txt" />
+    <Content Include="Resources\Angular2\AppVariablesScss.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Resources\Angular2.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Angular2.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AspNet.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AspNet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CSharp.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CSharp.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Web\Angular2\GulpFileSimple.txt" />
-    <Content Include="Resources\Web\Angular2\GulpFile.txt" />
-    <Content Include="Resources\Web\Angular2\WebAngularIndex.txt" />
-    <Content Include="Resources\Projects\Solution.txt" />
-    <Content Include="Resources\Web\Angular2\WebpackConfig.txt" />
+    <Content Include="Resources\Angular2\GulpFileSimple.txt" />
+    <Content Include="Resources\Angular2\GulpFile.txt" />
+    <Content Include="Resources\Angular2\IndexHtml.txt" />
+    <Content Include="Resources\CSharp\Solution.txt" />
+    <Content Include="Resources\Angular2\WebpackConfig.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Web\Angular2\WebAngularPolyfills.txt" />
-    <Content Include="Resources\Web\Angular2\WebAngularVendor.txt" />
+    <Content Include="Resources\Angular2\Polyfills.txt" />
+    <Content Include="Resources\Angular2\Vendor.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

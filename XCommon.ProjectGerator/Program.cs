@@ -1,60 +1,76 @@
-﻿using XCommon.ProjectGerator.Enumeration;
-using XCommon.ProjectGerator.Steps;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using XCommon.Application.CommandLine;
+using XCommon.ProjectGerator.Command;
 
 namespace XCommon.ProjectGerator
 {
     class Program
     {
+        private static CommandsList Commands { get; set; } = new CommandsList();
+
+        private static CommandsParams Params { get; set; } = new CommandsParams();
+
         static void Main(string[] args)
         {
-            CommandsList appCommand = new CommandsList();
+            if (SetUp(args))
+            {
+                Commands = Params.Full
+                    ? Commands.WebFull(Params.Path, Params.Name)
+                    : Commands.WebSimple(Params.Path, Params.Name);
+                
+                Commands.Run();
+            }
+        }
 
-            var solution = appCommand
-                .AddSolution(@"D:\Temp", "Prospect.Agnes");
+        private static bool SetUp(string[] args)
+        {
+            CommandLineApplication result = new CommandLineApplication(false)
+            {
+                Name = "XCommon Project Generator",
+                FullName = "XCommon Project Generator",
+                Description = "Generate new C# project with support to Angular2 and Material Designe",
+            };
 
-            CreateProject businessConcret = solution
-                .AddProjectClass("Business.Concrete")
-                .AddProjectJson(ProjectJson.BusinessConcrecte);
+            var full = result.Option("-f|--full", "Create the new application with N layers", CommandOptionType.NoValue);
+            var simple = result.Option("-s|--simple", "Create the new application with only the web layers", CommandOptionType.NoValue);
+            var path = result.Option("-p|--path", "Set the path to the new application", CommandOptionType.SingleValue);
+            var name = result.Option("-n|--name", "Set the name of the new application", CommandOptionType.SingleValue);
 
-            CreateProject businessContract = solution
-                .AddProjectClass("Business.Contract")
-                .AddProjectJson(ProjectJson.BusinessContract);
+            result.OnExecute(() =>
+            {
+                bool error = false;
+                List<string> messages = new List<string>();
 
-            CreateProject businessEntity = solution
-                .AddProjectClass("Business.Entity")
-                .AddProjectJson(ProjectJson.BusinessEntity);
+                if ((full.HasValue() && simple.HasValue()) || (!full.HasValue() && !simple.HasValue()))
+                {
+                    messages.Add("Choose FULL (-f) or SIMPLE (-s) to generate your new project");
+                    error = true;
+                }
 
-            CreateProject businessData = solution
-                .AddProjectClass("Business.Data")
-                .AddProjectJson(ProjectJson.BusinessData);
+                if (!name.HasValue())
+                {
+                    messages.Add("Choose the NAME (-n 'MyProject') to generate your new project");
+                    error = true;
+                }
 
-            CreateProject businessFactory = solution
-                .AddProjectClass("Business.Factory")
-                .AddProjectJson(ProjectJson.BusinessFactory)
-                .AddFactoryDo();
+                if (error)
+                {
+                    result.ShowHelp();
+                    Console.WriteLine();
+                    Console.WriteLine("  - Errors");
+                    messages.ForEach(msg => Console.WriteLine($"    * {msg}"));
+                    return -1;
+                }
 
-            CreateProject businessResource = solution
-                .AddProjectClass("Business.Resource")
-                .AddProjectJson(ProjectJson.BusinessResource);
-            
-            CreateProject viewWeb = solution
-                .AddProjectWeb("View.Web")
-                .AddProjectJson(ProjectJson.ViewWeb)
-                .AddAppStart(false)
-                .AddAppSettings()
-                .AddGulp(false)
-                .AddPackage()
-                .AddTsConfig()
-                .AddTypings()
-                .AddWebConfig()
-                .AddWebpackConfig()
-                .AddAppAngular()
-                .AddAppStyles();
+                Params.Full = full.HasValue();
+                Params.Name = name.Value();
+                Params.Path = path.HasValue() ? path.Value() : Environment.CurrentDirectory;
 
-            appCommand.Run();
+                return 0;
+            });
 
-            Console.ReadKey();
+            return result.Execute(args) == 0;
         }
     }
 }
