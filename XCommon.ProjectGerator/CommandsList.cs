@@ -183,16 +183,16 @@ namespace XCommon.ProjectGerator
             CreateFile appIndex = new CreateFile(new CreateFileParam(project.Parameter, "App", "index.html") { Template = Resources.WebAngularIndex });
             project.Add(appIndex);
 
-            CreateFile appComponentStyle = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.scss") { Template = Resources.WebAppComponentStyle });
+            CreateFile appComponentStyle = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components\\Home", "app-home.scss") { Template = Resources.WebAppComponentStyle });
             project.Add(appComponentStyle);
 
-            CreateFile appComponentHtml = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.html") { Template = Resources.WebAppComponentHTML });
+            CreateFile appComponentHtml = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components\\Home", "app-home.html") { Template = Resources.WebAppComponentHTML });
             project.Add(appComponentHtml);
 
-            CreateFile appComponentType = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "app.component.ts") { Template = Resources.WebAppComponentType });
+            CreateFile appComponentType = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components\\Home", "app-home.component.ts") { Template = Resources.WebAppComponentType });
             project.Add(appComponentType);
 
-            CreateFile appComponentIndex = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components", "index.ts") { Template = Resources.WebAppComponentIndex });
+            CreateFile appComponentIndex = new CreateFile(new CreateFileParam(project.Parameter, "App\\Components\\Home", "index.ts") { Template = Resources.WebAppComponentIndex });
             project.Add(appComponentIndex);
 
             return project;
@@ -200,14 +200,17 @@ namespace XCommon.ProjectGerator
 
         public static CreateProject AddAppStyles(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, "Styles", "app.theme.scss") { Template = Resources.WebAppThemeScss });
-            project.Add(file);
+            CreateFile appTheme = new CreateFile(new CreateFileParam(project.Parameter, "App\\Styles", "app.theme.scss") { Template = Resources.WebAppThemeScss });
+            project.Add(appTheme);
+
+            CreateFile appVariables = new CreateFile(new CreateFileParam(project.Parameter, "App\\Styles", "app.variables.scss") { Template = Resources.WebAppVariablesScss });
+            project.Add(appVariables);
             return project;
         }
 
         public static CreateProject AddAppSettings(this CreateProject project)
         {
-            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, "Styles", "app.variables.scss") { Template = Resources.WebAppVariablesScss });
+            CreateFile file = new CreateFile(new CreateFileParam(project.Parameter, ".", "appsettings.json") { Template = Resources.WebAppSettings });
             project.Add(file);
             return project;
         }
