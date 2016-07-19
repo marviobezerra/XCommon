@@ -34,7 +34,7 @@
 
             CreateProject viewWeb = solution
                 .AddAspNetProject("View.Web")
-                .AddAspNetProjectJson()
+                .AddAspNetProjectJson(false)
                 .AddAspNetWebConfig()
                 .AddAspNetStart(false)
                 .AddAspNetSettings()
@@ -46,6 +46,8 @@
                 .AddAngularApp()
                 .AddAngularStyles();
 
+            AddPostRun(commandList, solution, viewWeb);
+
             return commandList;
         }
 
@@ -53,10 +55,10 @@
         {
             var solution = commandList
                 .AddCSharpSolution(path, name);
-            
+
             CreateProject viewWeb = solution
                 .AddAspNetProject("View.Web")
-                .AddAspNetProjectJson()
+                .AddAspNetProjectJson(true)
                 .AddAspNetWebConfig()
                 .AddAspNetStart(true)
                 .AddAspNetSettings()
@@ -68,7 +70,16 @@
                 .AddAngularApp()
                 .AddAngularStyles();
 
+            AddPostRun(commandList, solution, viewWeb);
+
             return commandList;
+        }
+
+        private static void AddPostRun(CommandsList commandList, CreateSolution solution, CreateProject viewWeb)
+        {
+            commandList.PostRun.Add(new CommandPostRun { Name = "Restoring DotNet packages", Command = "dotnet", Arguments = "restore", Directory = solution.Parameter.Path });
+            commandList.PostRun.Add(new CommandPostRun { Name = "Restoring NPM packages", Command = "npm", Arguments = "install", Directory = viewWeb.Parameter.Path });
+            commandList.PostRun.Add(new CommandPostRun { Name = "Running Gulp", Command = "gulp", Arguments = "default:dev", Directory = viewWeb.Parameter.Path });
         }
     }
 }

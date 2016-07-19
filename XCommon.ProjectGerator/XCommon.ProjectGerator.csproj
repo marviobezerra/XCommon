@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Command\CommandExtencionsCommon.cs" />
     <Compile Include="Command\CommandExtencionsPacks.cs" />
+    <Compile Include="Command\CommandPostRun.cs" />
     <Compile Include="Command\CommandsList.cs" />
     <Compile Include="Command\CommandExtencionsAngular.cs" />
     <Compile Include="Command\CommandExtencionsCSharp.cs" />

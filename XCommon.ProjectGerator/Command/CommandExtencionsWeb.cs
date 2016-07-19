@@ -16,16 +16,12 @@ namespace XCommon.ProjectGerator.Command
             string appStartUpTemplate = Resources.AspNet.Startup
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}");
 
-            if (!simple)
-            {
-                appStartUpTemplate = appStartUpTemplate
-                    .Replace("[{factoryUsing}]", $"using {project.Parameter.SolutionParam.SolutionName}.Business.Factory;")
-                    .Replace("[{factoryInit}]", "Register.Do(appSettings.UnitTest);");
-            }
+            appStartUpTemplate = appStartUpTemplate
+                    .Replace("[{factoryUsing}]", simple ? string.Empty : $"using {project.Parameter.SolutionParam.SolutionName}.Business.Factory;")
+                    .Replace("[{factoryInit}]", simple ? string.Empty : "Register.Do(appSettings.UnitTest);");
 
             string appProgramTemplate = Resources.AspNet.Program
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}");
-
 
             string appControllerTemplate = Resources.AspNet.HomeController
                 .Replace("[{namespace}]", $"{project.Parameter.ProjectName}.Controllers");
@@ -56,13 +52,16 @@ namespace XCommon.ProjectGerator.Command
             return project;
         }
 
-        public static CreateProject AddAspNetProjectJson(this CreateProject project)
+        public static CreateProject AddAspNetProjectJson(this CreateProject project, bool simple)
         {
             var references = new List<string>();
 
-            references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
-            references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
-            references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Factory");
+            if (!simple)
+            {
+                references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
+                references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
+                references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Factory");
+            }
 
             var template = CommandExtencionsCommon.MergeProjectJson(Resources.AspNet.ProjecJson, references);
 

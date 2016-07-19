@@ -18,8 +18,6 @@ namespace XCommon.ProjectGerator.Command
             var file = Path.Combine(param.Path, param.FileName);
 
             File.WriteAllText(file, param.Template);
-
-            Console.WriteLine($"\t\tCreateFile: {file}");
         }
     }
 

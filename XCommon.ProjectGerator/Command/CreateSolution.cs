@@ -14,7 +14,7 @@ namespace XCommon.ProjectGerator.Command
 
         protected override void Run(CreateSolutionParam param)
         {
-            Console.WriteLine($"CreateSolution: {param.SolutionName}");
+            Console.WriteLine($"  - Created solution: {param.SolutionName}");
 
             if (!Directory.Exists(param.Path))
                 Directory.CreateDirectory(param.Path);

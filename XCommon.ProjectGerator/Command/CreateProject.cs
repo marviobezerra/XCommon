@@ -14,14 +14,13 @@ namespace XCommon.ProjectGerator.Command
 
         protected override void Run(CreateProjectParam param)
         {
-            Console.WriteLine($"\tCreateProject {param.SolutionParam.SolutionName}.{param.ProjectName}");
+            Console.WriteLine($"    -> Created project: {param.ProjectName}");
 
-            string path = Path.Combine(param.SolutionParam.Path, param.ProjectName);
-            string file = Path.Combine(path, param.ProjectName + ".xproj");
+            string file = Path.Combine(param.Path, param.ProjectName + ".xproj");
             string content = string.Format(param.Template, param.Id, param.ProjectName);
 
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            if (!Directory.Exists(param.Path))
+                Directory.CreateDirectory(param.Path);
 
             File.WriteAllText(file, content);
 
@@ -46,7 +45,10 @@ namespace XCommon.ProjectGerator.Command
             IdRelationShip = Guid.NewGuid();
             SolutionParam = solutionParam;
             ProjectName = $"{solutionParam.SolutionName}.{projectName}";
+            Path = System.IO.Path.Combine(solutionParam.Path, ProjectName);
         }
+
+        public string Path { get; set; }
 
         public Guid Id { get; set; }
 

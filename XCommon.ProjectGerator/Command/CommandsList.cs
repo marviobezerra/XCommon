@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace XCommon.ProjectGerator.Command
 {
@@ -7,13 +9,48 @@ namespace XCommon.ProjectGerator.Command
         public CommandsList()
         {
             Commands = new List<ICommand>();
+            PostRun = new List<CommandPostRun>();
         }
 
         public List<ICommand> Commands { get; set; }
 
+        public List<CommandPostRun> PostRun { get; set; }
+
         public void Run()
         {
             Commands.ForEach(c => c.Run());
+            Console.WriteLine();
+            
+            PostRun.ForEach(pr =>
+            {
+                Console.WriteLine($"  * {pr.Name}");
+
+                ProcessStartInfo processInfo = new ProcessStartInfo(pr.Command, pr.Arguments)
+                {
+                    WorkingDirectory = pr.Directory,
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Hidden                  
+                };
+
+                try
+                {
+                    var proc = Process.Start(processInfo);
+                    proc.WaitForExit();
+
+                    if (proc.ExitCode != 0)
+                    {
+                        Console.WriteLine($"  ** Warn **: {pr.Name} exists with code diff then 0");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"  ** Error **: {pr.Name}: {ex.Message}");
+                }
+            });
+
+            Console.WriteLine();
+            Console.WriteLine("Done!");
         }
     }
 }
