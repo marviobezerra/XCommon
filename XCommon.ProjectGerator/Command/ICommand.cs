@@ -1,4 +1,6 @@
-﻿namespace XCommon.ProjectGerator.Command
+﻿using XCommon.ProjectGerator.Util;
+
+namespace XCommon.ProjectGerator.Command
 {
     public interface ICommand
     {
@@ -12,6 +14,8 @@
 
     public abstract class Command<TParam> : ICommand<TParam>
     {
+        protected IConsoleX Console { get; set; } = new ConsoleX();
+        
         public Command(TParam param)
         {
             Parameter = param;

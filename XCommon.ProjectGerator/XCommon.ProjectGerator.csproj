@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XCommon.ProjectGerator</RootNamespace>
-    <AssemblyName>XCommon.ProjectGerator</AssemblyName>
+    <AssemblyName>xpg</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -55,6 +55,7 @@
     <Compile Include="..\XCommon\Application\CommandLine\CommandOptionType.cs">
       <Link>CommandLine\CommandOptionType.cs</Link>
     </Compile>
+    <Compile Include="IConsoleX.cs" />
     <Compile Include="Command\CommandExtencionsCommon.cs" />
     <Compile Include="Command\CommandExtencionsPacks.cs" />
     <Compile Include="Command\CommandPostRun.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Command\ProjectJson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Extensions.cs" />
     <Content Include="Resources\Angular2\MainApp.txt" />
     <Content Include="Resources\Angular2\ComponentHTML.txt" />
     <Content Include="Resources\Angular2\ComponentIndex.txt" />

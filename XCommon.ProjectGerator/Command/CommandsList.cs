@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using XCommon.ProjectGerator.Util;
 
 namespace XCommon.ProjectGerator.Command
 {
     public class CommandsList
     {
+        private IConsoleX Console { get; set; } = new ConsoleX();
+
         public CommandsList()
         {
             Commands = new List<ICommand>();
@@ -18,12 +21,16 @@ namespace XCommon.ProjectGerator.Command
 
         public void Run()
         {
+            Console.WriteLineBlue("  XCommon Project Generator");
+            Console.WriteLine();
+
             Commands.ForEach(c => c.Run());
+
             Console.WriteLine();
             
             PostRun.ForEach(pr =>
             {
-                Console.WriteLine($"  * {pr.Name}");
+                Console.WriteLineGreen($"  * {pr.Name}");
 
                 ProcessStartInfo processInfo = new ProcessStartInfo(pr.Command, pr.Arguments)
                 {
@@ -39,13 +46,13 @@ namespace XCommon.ProjectGerator.Command
 
                     if (proc.ExitCode != 0)
                     {
-                        Console.WriteLine($"  ** Warn **: {pr.Name} exists with code diff then 0");
+                        Console.WriteLineYellow($"  ** Warn **: {pr.Name} exists with code diff then 0");
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"  ** Error **: {pr.Name}: {ex.Message}");
+                    Console.WriteLineRed($"  ** Error **: {pr.Name}: {ex.Message}");
                 }
             });
 

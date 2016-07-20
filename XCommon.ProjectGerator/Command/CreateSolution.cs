@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using XCommon.ProjectGerator.Util;
 
 namespace XCommon.ProjectGerator.Command
 {
@@ -14,7 +15,7 @@ namespace XCommon.ProjectGerator.Command
 
         protected override void Run(CreateSolutionParam param)
         {
-            Console.WriteLine($"  - Created solution: {param.SolutionName}");
+            Console.WriteLineGreen($"  - Created solution: {param.SolutionName}");
 
             if (!Directory.Exists(param.Path))
                 Directory.CreateDirectory(param.Path);

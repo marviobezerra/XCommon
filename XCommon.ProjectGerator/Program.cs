@@ -18,8 +18,12 @@ namespace XCommon.ProjectGerator
                 Commands = Params.Full
                     ? Commands.WebFull(Params.Path, Params.Name)
                     : Commands.WebSimple(Params.Path, Params.Name);
-                
-                Commands.Run();
+
+                using (Spinner sp = new Spinner(SpinnerSequence.Dots))
+                {
+                    sp.Start();
+                    Commands.Run();
+                }
             }
         }
 
