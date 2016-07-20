@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using XCommon.ProjectGerator.Util;
+using XCommon.Application.ConsoleX;
 
 namespace XCommon.ProjectGerator.Command
 {
@@ -11,19 +11,25 @@ namespace XCommon.ProjectGerator.Command
 
         public CommandsList()
         {
+            PrintLogo();
             Commands = new List<ICommand>();
             PostRun = new List<CommandPostRun>();
         }
-
+        
         public List<ICommand> Commands { get; set; }
 
         public List<CommandPostRun> PostRun { get; set; }
 
+        private void PrintLogo()
+        {
+            foreach (var item in Resources.CSharp.Logo.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None))
+            {
+                Console.WriteLineBlue($"  {item}");
+            }
+        }
+
         public void Run()
         {
-            Console.WriteLineBlue("  XCommon Project Generator");
-            Console.WriteLine();
-
             Commands.ForEach(c => c.Run());
 
             Console.WriteLine();
@@ -46,13 +52,13 @@ namespace XCommon.ProjectGerator.Command
 
                     if (proc.ExitCode != 0)
                     {
-                        Console.WriteLineYellow($"  ** Warn **: {pr.Name} exists with code diff then 0");
+                        Console.WriteLineYellow($"    ## WARN ##: {pr.Name} exists with code diff then 0");
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLineRed($"  ** Error **: {pr.Name}: {ex.Message}");
+                    Console.WriteLineRed($"    ## ERROR ##: {pr.Name}: {ex.Message}");
                 }
             });
 

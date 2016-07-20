@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using XCommon.ProjectGerator.Util;
 
 namespace XCommon.ProjectGerator.Command
 {
     public class CreateProject : Command<CreateProjectParam>
     {
-
         public CreateProject(CreateProjectParam param) 
             : base(param)
         {

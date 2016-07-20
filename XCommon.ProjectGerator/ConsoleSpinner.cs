@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using XCommon.ProjectGerator.Util;
+using XCommon.Application.ConsoleX;
 
 namespace XCommon.ProjectGerator
 {
@@ -16,45 +16,54 @@ namespace XCommon.ProjectGerator
 
     public class Spinner : IDisposable
     {
-        protected IConsoleX Console { get; set; } = new ConsoleX();
+        private IConsoleX Console { get; set; }
 
-        /*
-                     delay = iDelay;
-            if (sSequence == "dots")
-            {
-                sequence = new string[] { ".   ", "..  ", "... ", "...." };
-                loop = true;
-            }
-            else if (sSequence == "slashes")
-                sequence = new string[] { "/", "-", "\\", "|" };
-            else if (sSequence == "circles")
-                sequence = new string[] ;
-            else if (sSequence == "crosses")
-                sequence = new string[] { "+", "x" };
-            else if (sSequence == "arrows")
-                sequence = new string[] { "V", "<", "^", ">" };
-             
-             */
+        private List<string> Sequence { get; set; }
 
-        private List<string> Sequence = new List<string>();
-        private int counter = 0;
-        private int left = System.Console.CursorLeft;
-        private int top = System.Console.CursorTop;
-        private int delay = 100;
-        private bool active;
-        private readonly Thread thread;
+        private int Counter { get; set; }
 
-        public Spinner(SpinnerSequence sequence = SpinnerSequence.Crosses)
+        private int Left { get; set; }
+
+        private int Top { get; set; }
+
+        private int Delay { get; set; }
+
+        private bool Active { get; set; }
+
+        private Thread SpinnerThread { get; set; }
+
+        public Spinner(SpinnerSequence sequence = SpinnerSequence.Dots)
+            : this(sequence, true, System.Console.CursorLeft)
         {
+        }
+
+        public Spinner(SpinnerSequence sequence = SpinnerSequence.Dots, bool autoStart = true)
+            : this(sequence, autoStart, System.Console.CursorLeft)
+        {
+        }
+
+        public Spinner(SpinnerSequence sequence = SpinnerSequence.Dots, bool autoStart = true, int left = 2)
+        {
+            Console = new ConsoleX();
+            SpinnerThread = new Thread(Spin);
+            Sequence = new List<string>();
+
+            Delay = 100;
+            Counter = 0;
+            Top = System.Console.CursorTop;
+            Left = left;
+
             SetSequence(sequence);
-            thread = new Thread(Spin);
+
+            if (autoStart)
+                Start();
         }
 
         public void Start()
         {
-            active = true;
-            if (!thread.IsAlive)
-                thread.Start();
+            Active = true;
+            if (!SpinnerThread.IsAlive)
+                SpinnerThread.Start();
         }
 
         private void SetSequence(SpinnerSequence sequence)
@@ -63,8 +72,8 @@ namespace XCommon.ProjectGerator
             {
                 case SpinnerSequence.Dots:
                     Sequence = GetSequenceDots(9);
-                        break;
-                
+                    break;
+
                 case SpinnerSequence.Circles:
                     Sequence = new List<string> { ".", "o", "0", "o" };
                     break;
@@ -85,19 +94,18 @@ namespace XCommon.ProjectGerator
         {
             List<string> result = new List<string>();
 
-            var s1 = '.';
-            var s2 = ' ';
+            var char1 = '.';
+            var char2 = ' ';
 
-            result.AddRange(SequenceDtosBuild(size, s1, s2, false));
-            result.AddRange(SequenceDtosBuild(size, s2, s1, false));
-            result.AddRange(SequenceDtosBuild(size, s1, s2, true));
-            result.AddRange(SequenceDtosBuild(size, s2, s1, true));
-
+            result.AddRange(SequenceDotsBuild(size, char1, char2, false));
+            result.AddRange(SequenceDotsBuild(size, char2, char1, false));
+            result.AddRange(SequenceDotsBuild(size, char1, char2, true));
+            result.AddRange(SequenceDotsBuild(size, char2, char1, true));
 
             return result;
         }
 
-        private List<string> SequenceDtosBuild(int size, char s1, char s2, bool reverse)
+        private List<string> SequenceDotsBuild(int size, char s1, char s2, bool reverse)
         {
             List<string> result = new List<string>();
 
@@ -120,31 +128,31 @@ namespace XCommon.ProjectGerator
 
         public void Stop()
         {
-            active = false;
-            Draw(" ");
+            Active = false;
+            Console.ClearLine();
         }
 
         private void Spin()
         {
-            while (active)
+            while (Active)
             {
                 Turn();
-                Thread.Sleep(delay);
+                Thread.Sleep(Delay);
             }
         }
 
         private void Draw(string c)
         {
-            if (System.Console.CursorTop != top)
-                top = System.Console.CursorTop;
+            if (System.Console.CursorTop != Top)
+                Top = System.Console.CursorTop;
 
-            System.Console.SetCursorPosition(left, top);
+            System.Console.SetCursorPosition(Left, Top);
             Console.Write(c.ToString());
         }
 
         private void Turn()
         {
-            Draw(Sequence[++counter % Sequence.Count]);
+            Draw(Sequence[++Counter % Sequence.Count]);
         }
 
         public void Dispose()

@@ -1,59 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace XCommon.ProjectGerator.Util
+namespace XCommon.Application.ConsoleX
 {
-    public interface IConsoleX
-    {
-        IConsoleX WriteLine();
-
-        IConsoleX Clear();
-
-        IConsoleX ClearLine();
-
-        IConsoleX Write(string format, params object[] arg);
-
-        IConsoleX WriteLine(string format, params object[] arg);
-    }
-
-    public class ConsoleX : IConsoleX
-    {
-        public IConsoleX Clear()
-        {
-            Console.Clear();
-            return this;
-        }
-
-        public IConsoleX ClearLine()
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor);
-            return this;
-        }
-        
-        public IConsoleX Write(string format, params object[] arg)
-        {
-            Console.Write(format, arg);
-            return this;
-        }
-
-        public IConsoleX WriteLine()
-        {
-            ClearLine();
-            WriteLine(string.Empty);
-            return this;
-        }
-
-        public IConsoleX WriteLine(string format, params object[] arg)
-        {
-            ClearLine();
-            Console.WriteLine(format, arg);
-            return this;
-        }
-    }
-
-    public static class Extensions
+    public static class ConsoleXExtensions
     {
         private static IConsoleX Write(this IConsoleX console, ConsoleColor color, string format, params object[] arg)
         {

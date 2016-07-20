@@ -19,9 +19,8 @@ namespace XCommon.ProjectGerator
                     ? Commands.WebFull(Params.Path, Params.Name)
                     : Commands.WebSimple(Params.Path, Params.Name);
 
-                using (Spinner sp = new Spinner(SpinnerSequence.Dots))
+                using (Spinner sp = new Spinner(SpinnerSequence.Dots, true, 2))
                 {
-                    sp.Start();
                     Commands.Run();
                 }
             }
@@ -31,7 +30,7 @@ namespace XCommon.ProjectGerator
         {
             CommandLineApplication result = new CommandLineApplication(false)
             {
-                Name = "XCommon Project Generator",
+                Name = "xpg",
                 FullName = "XCommon Project Generator",
                 Description = "Generate new C# project with support to Angular2 and Material Designe",
             };

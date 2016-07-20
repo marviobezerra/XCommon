@@ -55,7 +55,19 @@
     <Compile Include="..\XCommon\Application\CommandLine\CommandOptionType.cs">
       <Link>CommandLine\CommandOptionType.cs</Link>
     </Compile>
-    <Compile Include="IConsoleX.cs" />
+    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleSpinner.cs">
+      <Link>ConsoleX\ConsoleSpinner.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleX.cs">
+      <Link>ConsoleX\ConsoleX.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleXExtensions.cs">
+      <Link>ConsoleX\ConsoleXExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Application\ConsoleX\IConsoleX.cs">
+      <Link>ConsoleX\IConsoleX.cs</Link>
+    </Compile>
+    <Compile Include="ConsoleSpinner.cs" />
     <Compile Include="Command\CommandExtencionsCommon.cs" />
     <Compile Include="Command\CommandExtencionsPacks.cs" />
     <Compile Include="Command\CommandPostRun.cs" />
@@ -68,7 +80,6 @@
     <Compile Include="Command\ProjectJson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Extensions.cs" />
     <Content Include="Resources\Angular2\MainApp.txt" />
     <Content Include="Resources\Angular2\ComponentHTML.txt" />
     <Content Include="Resources\Angular2\ComponentIndex.txt" />
@@ -96,6 +107,7 @@
     <Compile Include="Command\CreateFile.cs" />
     <Compile Include="Command\CreateProject.cs" />
     <Compile Include="Command\CreateSolution.cs" />
+    <Content Include="Resources\CSharp\Logo.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

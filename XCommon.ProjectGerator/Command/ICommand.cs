@@ -1,4 +1,4 @@
-﻿using XCommon.ProjectGerator.Util;
+﻿using XCommon.Application.ConsoleX;
 
 namespace XCommon.ProjectGerator.Command
 {

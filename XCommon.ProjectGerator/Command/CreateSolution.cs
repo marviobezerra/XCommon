@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using XCommon.ProjectGerator.Util;
+using XCommon.Application.ConsoleX;
 
 namespace XCommon.ProjectGerator.Command
 {
