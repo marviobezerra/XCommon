@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using XCommon.CodeGerator.Extensions;
 using XCommon.CodeGerator.TypeScript.Entity;
 using XCommon.Util;
@@ -184,7 +185,7 @@ namespace XCommon.CodeGerator.TypeScript
                     .AppendLine();
             }
 
-            File.WriteAllText(fileName, builder.ToString());
+            File.WriteAllText(fileName, builder.ToString(), Encoding.UTF8);
         }
 
         private void ProcessTypes()
@@ -258,7 +259,7 @@ namespace XCommon.CodeGerator.TypeScript
                         .AppendLine();
                 }
 
-                File.WriteAllText(fileName, builder.ToString());
+                File.WriteAllText(fileName, builder.ToString(), Encoding.UTF8);
             }
         }
 

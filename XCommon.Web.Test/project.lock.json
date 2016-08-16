@@ -12142,8 +12142,8 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
-      "XCommon >= 1.0.29-*",
-      "XCommon.Web >= 1.0.29-*"
+      "XCommon >= 1.0.30-*",
+      "XCommon.Web >= 1.0.30-*"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"

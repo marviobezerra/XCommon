@@ -92,7 +92,7 @@ namespace XCommon.CodeGerator.Angular2
 				.AppendLine($".{selector} {{")
 				.AppendLine("}");
 
-			File.WriteAllText(file, builder.ToString());
+			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 		}
 
 		private void Html(string path, string name, string selector)
@@ -110,7 +110,7 @@ namespace XCommon.CodeGerator.Angular2
 			builder
 				.AppendLine($"<h1>Hey! I\"m {selector}</h1>");
 
-			File.WriteAllText(file, builder.ToString());
+			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 		}
 	}
 }

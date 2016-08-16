@@ -9992,7 +9992,7 @@
       "Microsoft.Extensions.Configuration.FileExtensions >= 1.0.0",
       "Microsoft.Extensions.Configuration.Json >= 1.0.0",
       "NETStandard.Library >= 1.6.0",
-      "XCommon >= 1.0.29-*"
+      "XCommon >= 1.0.30-*"
     ],
     ".NETFramework,Version=v4.5.1": [
       "Microsoft.AspNetCore.Hosting.WindowsServices >= 1.0.0",
