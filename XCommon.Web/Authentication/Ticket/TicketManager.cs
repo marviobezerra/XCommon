@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using XCommon.Application.Login;
 using XCommon.Extensions.String;
+using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Web.Authentication.Ticket
 {
@@ -74,6 +75,23 @@ namespace XCommon.Web.Authentication.Ticket
                 Guid.TryParse(identifier, out result);
 
                 return result;
+            }
+        }
+
+        public ExecuteUser User
+        {
+            get
+            {
+                var userKey = UserKey;
+
+                if (userKey == Guid.Empty)
+                    return null;
+
+                return new ExecuteUser
+                {
+                    Key = userKey,
+                    Name = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                };
             }
         }
 
