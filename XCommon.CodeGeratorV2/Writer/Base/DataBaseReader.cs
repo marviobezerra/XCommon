@@ -11,24 +11,31 @@ namespace XCommon.CodeGeratorV2.Writer.Base
         {
             List<ItemGroup> result = new List<ItemGroup>();
 
-            using (SqlConnection cnx = new SqlConnection(Generator.Configuration.DataBase.ConnectionString))
+            try
             {
-                cnx.Open();
-
-                var dataBaseObjects = GetDataBaseObjects(cnx);
-
-                foreach (var schemaItem in dataBaseObjects.Select(c => c.Schema).OrderBy(c => c).Distinct())
+                using (SqlConnection cnx = new SqlConnection(Generator.Configuration.DataBase.ConnectionString))
                 {
-                    ItemGroup schema = new ItemGroup
+                    cnx.Open();
+
+                    var dataBaseObjects = GetDataBaseObjects(cnx);
+
+                    foreach (var schemaItem in dataBaseObjects.Select(c => c.Schema).OrderBy(c => c).Distinct())
                     {
-                        Name = schemaItem,
-                        Items = GetItems(cnx, dataBaseObjects, schemaItem)
-                    };
+                        ItemGroup schema = new ItemGroup
+                        {
+                            Name = schemaItem,
+                            Items = GetItems(cnx, dataBaseObjects, schemaItem)
+                        };
 
-                    result.Add(schema);
-                }
-            };
-
+                        result.Add(schema);
+                    }
+                };
+            }
+            catch
+            {
+                
+            }
+            
             return result;
         }
 

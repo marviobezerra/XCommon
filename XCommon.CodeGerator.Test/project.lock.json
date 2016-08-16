@@ -2246,7 +2246,7 @@
           "netstandard1.6/XCommon.dll": {}
         }
       },
-      "XCommon.CodeGerator/1.0.29": {
+      "XCommon.CodeGeratorV2/1.0.29": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -2256,10 +2256,10 @@
           "XCommon": "1.0.29"
         },
         "compile": {
-          "netstandard1.6/XCommon.CodeGerator.dll": {}
+          "netstandard1.6/XCommon.CodeGeratorV2.dll": {}
         },
         "runtime": {
-          "netstandard1.6/XCommon.CodeGerator.dll": {}
+          "netstandard1.6/XCommon.CodeGeratorV2.dll": {}
         }
       }
     },
@@ -2714,7 +2714,7 @@
           "net451/XCommon.dll": {}
         }
       },
-      "XCommon.CodeGerator/1.0.29": {
+      "XCommon.CodeGeratorV2/1.0.29": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2724,10 +2724,10 @@
           "XCommon": "1.0.29"
         },
         "compile": {
-          "net451/XCommon.CodeGerator.dll": {}
+          "net451/XCommon.CodeGeratorV2.dll": {}
         },
         "runtime": {
-          "net451/XCommon.CodeGerator.dll": {}
+          "net451/XCommon.CodeGeratorV2.dll": {}
         }
       }
     }
@@ -7588,16 +7588,16 @@
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
     },
-    "XCommon.CodeGerator/1.0.29": {
+    "XCommon.CodeGeratorV2/1.0.29": {
       "type": "project",
-      "path": "../XCommon.CodeGerator/project.json",
-      "msbuildProject": "../XCommon.CodeGerator/XCommon.CodeGerator.xproj"
+      "path": "../XCommon.CodeGeratorV2/project.json",
+      "msbuildProject": "../XCommon.CodeGeratorV2/XCommon.CodeGeratorV2.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "XCommon >= 1.0.29-*",
-      "XCommon.CodeGerator >= 1.0.29-*"
+      "XCommon.CodeGeratorV2 >= 1.0.29-*"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"

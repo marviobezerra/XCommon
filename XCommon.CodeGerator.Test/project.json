@@ -6,7 +6,7 @@
 
   "dependencies": {
     "XCommon": "1.0.29-*",
-    "XCommon.CodeGerator": "1.0.29-*"
+    "XCommon.CodeGeratorV2": "1.0.29-*"
   },
 
   "frameworks": {

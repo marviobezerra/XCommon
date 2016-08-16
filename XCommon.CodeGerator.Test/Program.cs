@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using XCommon.CodeGerator.Configuration;
+using XCommon.CodeGeratorV2;
+using XCommon.CodeGeratorV2.Configuration;
 
 namespace XCommon.CodeGerator.Test
 {
@@ -31,8 +32,8 @@ namespace XCommon.CodeGerator.Test
 					DataNameSpace = "Prospect.MyPetLife.Business.Data",
 					DataPath = @"D:\A\Data",
 				},
-				Business = new ConfigBusiness
-				{
+                CSharp = new ConfigCSharp
+                {
 					EntrityPath = @"D:\A\Entity",
 					EntrityNameSpace = "Prospect.MyPetLife.Business.Entity",
 					FactoryPath = @"D:\A\Factory",
@@ -42,28 +43,32 @@ namespace XCommon.CodeGerator.Test
 					ConcretePath = @"D:\A\Concret",
 					ConcreteNameSpace = "Prospect.MyPetLife.Business.Concret",
 				},
-				Entity = new ConfigEntity
-				{
-					Path = @"D:\A\Web\App\Entity",
-                    Assemblys = new List<System.Reflection.Assembly>
+                TypeScript = new ConfigTypeScript
+                {
+					Entity = new ConfigEntity
                     {
-                        typeof(Entity.Common.CitiesEntity).GetTypeInfo().Assembly
+                        Path = @"D:\A\Web\App\Entity",
+                        Assemblys = new List<System.Reflection.Assembly>
+                        {
+                            typeof(Entity.Common.CitiesEntity).GetTypeInfo().Assembly
+                        },
+                        TypesExtra = new List<Type>
+                        {
+                            typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
+                            typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
+                            typeof(XCommon.Patterns.Repository.Executes.Execute<>),
+                            //typeof(Application.Login.LoginChangePasswordEntity),
+						    //typeof(Application.Login.SignInEntity),
+						    //typeof(Application.Login.SingUpEntity),
+						    //typeof(Application.Login.LoginStatus)
+					    }
                     },
-					TypesExtra = new List<Type>
-					{
-                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
-                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
-                        typeof(XCommon.Patterns.Repository.Executes.Execute<>),
-                        //typeof(Application.Login.LoginChangePasswordEntity),
-						//typeof(Application.Login.SignInEntity),
-						//typeof(Application.Login.SingUpEntity),
-						//typeof(Application.Login.LoginStatus)
-					}
-				},
-				Resource = new ConfigResource
-				{
+                    Resource = new ConfigResource
+                    {
 
-				}
+                    }
+                },
+				
 			};
 		}
     }

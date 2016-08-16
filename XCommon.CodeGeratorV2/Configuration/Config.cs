@@ -6,16 +6,16 @@
         {
             Angular = new ConfigAngular();
             DataBase = new ConfigDataBase();
-            Entity = new ConfigEntity();
-            Resource = new ConfigResource();
+            CSharp = new ConfigCSharp();
+            TypeScript = new ConfigTypeScript();
         }
 
         public ConfigAngular Angular { get; set; }
 
+        public ConfigCSharp CSharp { get; set; }
+
         public ConfigDataBase DataBase { get; set; }
 
-        public ConfigEntity Entity { get; set; }
-
-        public ConfigResource Resource { get; set; }
+        public ConfigTypeScript TypeScript { get; set; }
     }
 }
