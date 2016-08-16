@@ -24,21 +24,21 @@ namespace XCommon.Patterns.Specification.Query
 
 		private List<QueryBuilderOrder<TEntity, TFilter>> Sort { get; set; }
 
-		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate)
+		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, TFilter, bool>> predicate)
 			=> And(predicate, null);
 
-		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate, Func<TFilter, bool> condition)
+		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, TFilter, bool>> predicate, Func<TFilter, bool> condition)
 		{
 			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>(predicate, condition));
 			return this;
 		}
 
-		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option)
+		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, TFilter, bool>> predicate, Expression<Func<TEntity, TFilter, bool>> option)
 			=> Or(predicate, option, null);
 
-		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option, Func<TFilter, bool> condition)
+		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, TFilter, bool>> predicate, Expression<Func<TEntity, TFilter, bool>> option, Func<TFilter, bool> condition)
 		{
-			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>(c => predicate.Compile().Invoke(c) || option.Compile().Invoke(c), condition));
+			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>((e, f) => predicate.Compile().Invoke(e, f) || option.Compile().Invoke(e, f), condition));
 			return this;
 		}
 
@@ -84,7 +84,7 @@ namespace XCommon.Patterns.Specification.Query
 			foreach (var specification in Specifications)
 			{
 				if (specification.Condition(filter))
-					query = query.Where(specification.Predicate);
+					query = query.Where(specification.PredicateX(filter));
 			}
 
 			foreach (var item in Sort)
