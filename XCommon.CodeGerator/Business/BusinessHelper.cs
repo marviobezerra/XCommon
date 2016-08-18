@@ -12,7 +12,7 @@ namespace XCommon.CodeGerator.Business
 			Entity = new BusinessEntity();
 			Factory = new BusinessFactory();
 
-			Console.WriteLine("C# code completed");
+            TypeScript = new CodeGerator.TypeScript.TypeScriptHelper();
 		}
 
 		private BusinessConcrete Concret { get; set; }
@@ -25,7 +25,9 @@ namespace XCommon.CodeGerator.Business
 
 		private BusinessFactory Factory { get; set; }
 
-		internal int RunAll()
+        private TypeScript.TypeScriptHelper TypeScript { get; set; }
+
+        internal int Run()
 		{
 			Data.Run();
 			Entity.Run();
@@ -33,7 +35,11 @@ namespace XCommon.CodeGerator.Business
 			Concret.Run();
 			Factory.Run();
 
-			return 0;
+            Console.WriteLine("C# code completed");
+
+            TypeScript.Run();
+            
+            return 0;
 		}
     }
 }

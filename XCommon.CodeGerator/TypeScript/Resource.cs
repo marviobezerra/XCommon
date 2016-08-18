@@ -41,7 +41,6 @@ namespace XCommon.CodeGerator.TypeScript
 			var file = Path.Combine(Config.Path, Config.File.GetSelector() + ".service.ts");
 
 			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
-			Console.WriteLine("Typescript resource messages now are up to date");
 		}
 
 		private string GetCultureName(string culture)

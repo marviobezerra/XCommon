@@ -57,7 +57,7 @@ namespace XCommon.CodeGerator
 				if (csharp.HasValue())
 				{
 					BusinessHelper businessHelper = new BusinessHelper();
-					return businessHelper.RunAll();
+					return businessHelper.Run();
 				}
 
 				if (angular.HasValue())

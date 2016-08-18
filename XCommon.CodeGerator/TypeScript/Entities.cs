@@ -276,8 +276,6 @@ namespace XCommon.CodeGerator.TypeScript
 
             ProcessEnum();
             ProcessTypes();
-
-            Console.WriteLine("Typescript entity interfaces are up to date");
         }
     }
 }

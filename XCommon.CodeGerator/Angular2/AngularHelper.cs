@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using XCommon.Application.CommandLine;
+using XCommon.CodeGerator.TypeScript;
 using XCommon.Extensions.String;
 
 namespace XCommon.CodeGerator.Angular2
@@ -12,11 +13,14 @@ namespace XCommon.CodeGerator.Angular2
         {
             GeneratorComponent = new Component();
             GeneratorService = new Service();
+            TypeScrip = new TypeScriptHelper();
         }
 
         private Service GeneratorService { get; set; }
 
         private Component GeneratorComponent { get; set; }
+
+        private TypeScriptHelper TypeScrip { get; set; }
 
         internal int Run(string[] args)
         {
@@ -65,6 +69,8 @@ namespace XCommon.CodeGerator.Angular2
 
 
                     GeneratorComponent.Run(feature.Value(), GetItems(AppCommand, name));
+                    TypeScrip.Run();
+
                     return 0;
                 }
 
@@ -77,6 +83,8 @@ namespace XCommon.CodeGerator.Angular2
                     }
 
                     GeneratorService.Run(GetItems(AppCommand, name));
+                    TypeScrip.Run();
+
                     return 0;
                 }
 

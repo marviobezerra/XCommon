@@ -16,7 +16,9 @@ namespace XCommon.CodeGerator.Configuration
 		
 		public string ComponentPath { get; set; }
 
-		public string ServicePath { get; set; }
+		public string DirectivePath { get; set; }
+
+        public string ServicePath { get; set; }
 
         public string HtmlRoot { get; set; }
     }
