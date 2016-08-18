@@ -10,7 +10,7 @@ namespace XCommon.Patterns.Specification.Query
 	{
 		public QueryBuilder()
 		{
-			Specifications = new List<QueryBuilderSpecification<TEntity, TFilter>>();
+			Specifications = new List<QueryBuilderSpecification<TEntity>>();
 			Sort = new List<QueryBuilderOrder<TEntity, TFilter>>();
 		}
 
@@ -20,25 +20,25 @@ namespace XCommon.Patterns.Specification.Query
 
 		private bool PageApply { get; set; }
 
-		private List<QueryBuilderSpecification<TEntity, TFilter>> Specifications { get; set; }
+		private List<QueryBuilderSpecification<TEntity>> Specifications { get; set; }
 
 		private List<QueryBuilderOrder<TEntity, TFilter>> Sort { get; set; }
 
-		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, TFilter, bool>> predicate)
-			=> And(predicate, null);
+		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate)
+			=> And(predicate, true);
 
-		public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, TFilter, bool>> predicate, Func<TFilter, bool> condition)
+        public QueryBuilder<TEntity, TFilter> And(Expression<Func<TEntity, bool>> predicate, bool apply)
+        {
+            Specifications.Add(new QueryBuilderSpecification<TEntity>(predicate, apply));
+            return this;
+        }
+
+        public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option)
+			=> Or(predicate, option, true);
+
+		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, bool>> option, bool apply)
 		{
-			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>(predicate, condition));
-			return this;
-		}
-
-		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, TFilter, bool>> predicate, Expression<Func<TEntity, TFilter, bool>> option)
-			=> Or(predicate, option, null);
-
-		public QueryBuilder<TEntity, TFilter> Or(Expression<Func<TEntity, TFilter, bool>> predicate, Expression<Func<TEntity, TFilter, bool>> option, Func<TFilter, bool> condition)
-		{
-			Specifications.Add(new QueryBuilderSpecification<TEntity, TFilter>((e, f) => predicate.Compile().Invoke(e, f) || option.Compile().Invoke(e, f), condition));
+			Specifications.Add(new QueryBuilderSpecification<TEntity>(e => predicate.Compile().Invoke(e) || option.Compile().Invoke(e), apply));
 			return this;
 		}
 
@@ -83,8 +83,8 @@ namespace XCommon.Patterns.Specification.Query
 		{
 			foreach (var specification in Specifications)
 			{
-				if (specification.Condition(filter))
-					query = query.Where(specification.PredicateX(filter));
+				if (specification.Apply)
+					query = query.Where(specification.Predicate);
 			}
 
 			foreach (var item in Sort)
