@@ -64,7 +64,7 @@ namespace XCommon.CodeGerator.Angular2
 				.IncrementIndent()
 				.AppendLine("constructor() { }")
 				.AppendLine()
-				.AppendLine("ngOnInit() { }")
+				.AppendLine("ngOnInit(): void { }")
 				.DecrementIndent()
 				.AppendLine("}");
 
