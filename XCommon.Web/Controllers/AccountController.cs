@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using XCommon.Application.Login;
@@ -28,7 +29,7 @@ namespace XCommon.Web.Controllers
         {
             return await LoginBusiness.SignUpAsync(signUp);
         }
-
+        
         [HttpGet("signout")]
         public virtual async Task<Execute<TicketStatus>> SignOut()
         {
@@ -65,9 +66,11 @@ namespace XCommon.Web.Controllers
             return await LoginBusiness.RecoveryPasswordValidateTokenAsync(token);
         }
 
+        [Authorize]
         [HttpPost("changepassword")]
         public virtual async Task<Execute> ChangePassword([FromBody] PasswordChangeEntity info)
         {
+            info.Key = Ticket.UserKey;
             return await LoginBusiness.ChangePasswordAsync(info);
         }
     }
