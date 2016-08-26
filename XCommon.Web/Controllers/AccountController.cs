@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 using XCommon.Application.Login;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Executes;
+using XCommon.Web.Authentication.Ticket;
 
 namespace XCommon.Web.Controllers
 {
     public abstract class AccountController : BaseController
     {
         protected ILoginBusiness LoginBusiness => Kernel.Resolve<ILoginBusiness>();
+
+        private ITicketManagerWeb TicketManagerWeb => Kernel.Resolve<ITicketManagerWeb>();
 
         [HttpPost("signin")]
         public virtual async Task<Execute<TicketStatus>> SignIn([FromBody] SignInEntity login)
@@ -72,6 +75,12 @@ namespace XCommon.Web.Controllers
         {
             info.Key = Ticket.UserKey;
             return await LoginBusiness.ChangePasswordAsync(info);
+        }
+
+        [HttpGet("setculture/{culture}")]
+        public virtual bool SetCulture(string culture)
+        {
+            return TicketManagerWeb.SetCookieCulture(culture);
         }
     }
 }

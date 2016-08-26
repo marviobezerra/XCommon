@@ -15,16 +15,6 @@ namespace XCommon.Patterns.Repository.Entity
             where T : FilterBase
         {
             return filtro.Keys != null && filtro.Keys.Where(c => c != Guid.Empty).Count() > 0;
-        }
-
-        public static bool IsNull(this string valor)
-        {
-            return string.IsNullOrEmpty(valor);
-        }
-
-        public static bool IsNotNull(this string valor)
-        {
-            return !string.IsNullOrEmpty(valor);
-        }
+        }        
     }
 }

@@ -7,5 +7,7 @@ namespace XCommon.Web.Authentication.Ticket
     public interface ITicketManagerWeb : ITicketManager
     {
         Task<AuthenticationTicket> GetTicketAsync(TicketEntity signUpTicket);
+
+        bool SetCookieCulture(string culture);
     }
 }

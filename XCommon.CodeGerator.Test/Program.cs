@@ -45,6 +45,7 @@ namespace XCommon.CodeGerator.Test
                 },
                 Entity = new ConfigEntity
                 {
+                    IncludeEntityUtil = true,
                     Path = @"D:\A\Web\App\Entity",
                     Assemblys = new List<System.Reflection.Assembly>
                     {

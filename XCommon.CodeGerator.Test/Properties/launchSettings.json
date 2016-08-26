@@ -2,7 +2,7 @@
   "profiles": {
     "XCommon.CodeGerator.Test": {
       "commandName": "Project",
-      "commandLineArgs": "-c --newproject"
+      "commandLineArgs": "-t"
     }
   }
 }

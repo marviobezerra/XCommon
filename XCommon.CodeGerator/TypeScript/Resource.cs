@@ -13,7 +13,6 @@ namespace XCommon.CodeGerator.TypeScript
 	{
 		private Configuration.ConfigResource Config => Generator.Configuration.Resource;
 
-
 		private List<GeneratorResourceEntity> Resources { get; set; }
 		
 		internal void Run()
@@ -24,8 +23,9 @@ namespace XCommon.CodeGerator.TypeScript
 			StringBuilderIndented builder = new StringBuilderIndented();
 
 			builder
-				.AppendLine("import { Injectable } from '@angular/core';")
-				.AppendLine();
+				.AppendLine("import { Injectable } from \"@angular/core\";")
+				.AppendLine("import { Map } from \"../Entity\";")
+                .AppendLine();
 
 			Resources = new List<GeneratorResourceEntity>();
 
@@ -121,36 +121,51 @@ namespace XCommon.CodeGerator.TypeScript
 
 		private string BuidService(StringBuilderIndented builder)
 		{
-			builder
-				.AppendLine("@Injectable()")
-				.AppendLine("export class ResourceService {")
-				.IncrementIndent()
-				.AppendLine("constructor() {")
-				.IncrementIndent()
+            builder
+                .AppendLine("@Injectable()")
+                .AppendLine("export class ResourceService {")
+                .IncrementIndent()
+                .AppendLine("constructor() {")
+                .IncrementIndent();
+
+            BuildLanguageSuportedContructor(builder);
+
+            builder
 				.AppendLine($"this.SetLanguage(LanguageSuported.{GetCultureName(Config.CultureDefault)})")
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine()
+                .AppendLine("public Languages: Map<LanguageSuported> = {};")
 				.AppendLine("private Language: LanguageSuported;")
-				.AppendLine("OnCultureChange: Array<(name: string) => void> = [];")
+                .AppendLine()
+				.AppendLine("public OnCultureChange: Array<(name: string) => void> = [];")
 				.AppendLine();
 
 			foreach (var resource in Resources)
 			{
-				builder.AppendLine($"{resource.ResourceName}: I{resource.ResourceName};");
+				builder.AppendLine($"public {resource.ResourceName}: I{resource.ResourceName};");
 			}
 
 			builder
 				.AppendLine()
-				.AppendLine("GetLanguage(): LanguageSuported {")
+				.AppendLine("public GetLanguage(): LanguageSuported {")
 				.IncrementIndent()
 				.AppendLine("return this.Language;")
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine()
-				.AppendLine("SetLanguage(language: LanguageSuported): void {")
+				.AppendLine("public SetLanguage(language: LanguageSuported | string): void {")
 				.IncrementIndent()
-				.AppendLine("this.Language = language;")
+                .AppendLine("if (typeof language === \"string\") {")
+                .IncrementIndent()
+                .AppendLine("this.Language = this.Languages[language];")
+                .DecrementIndent()
+                .AppendLine("} else {")
+                .IncrementIndent()
+                .AppendLine("this.Language = language;")
+                .DecrementIndent()
+                .AppendLine("}")
+                .AppendLine()
 				.AppendLine("this.OnCultureChange.forEach(notify => notify(LanguageSuported[language]));")
 				.AppendLine()
 				.AppendLine("switch (this.Language) {")
@@ -184,10 +199,22 @@ namespace XCommon.CodeGerator.TypeScript
 			return builder.ToString();
 		}
 
-		private void BuildLanguageSuported(StringBuilderIndented builder)
+        private void BuildLanguageSuportedContructor(StringBuilderIndented builder)
+        {
+            var cultures = Resources.SelectMany(c => c.Values
+                .Select(x => x.Culture))
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+            foreach (var culture in cultures)
+            {
+                builder.AppendLine($"this.Languages[\"{culture}\"] = LanguageSuported.{GetCultureName(culture)};");
+            }
+        }
+
+        private void BuildLanguageSuported(StringBuilderIndented builder)
 		{
-
-
 			builder
 				.AppendLine("export enum LanguageSuported {")
 				.IncrementIndent();

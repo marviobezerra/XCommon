@@ -12,7 +12,9 @@ namespace XCommon.CodeGerator.Configuration
 			TypesExtra = new List<Type>();
 		}
 
-		public string Path { get; set; }
+        public bool IncludeEntityUtil { get; set; }
+
+        public string Path { get; set; }
 
 		public List<Assembly> Assemblys { get; set; }
 

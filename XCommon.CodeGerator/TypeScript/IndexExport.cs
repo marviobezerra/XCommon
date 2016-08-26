@@ -19,6 +19,9 @@ namespace XCommon.CodeGerator.TypeScript
             Process(ConfigAngular.DirectivePath);
             Process(ConfigAngular.ComponentPath);
 
+            if (!Directory.Exists(ConfigAngular.ComponentPath))
+                return;
+
             foreach (var dir in Directory.GetDirectories(ConfigAngular.ComponentPath))
             {
                 Process(dir);

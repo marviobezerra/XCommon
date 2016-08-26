@@ -7,15 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using XCommon.Application;
 using XCommon.Application.Login;
 using XCommon.Extensions.String;
+using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Web.Authentication.Ticket
 {
     public class TicketManager : ITicketManager, ITicketManagerWeb
     {
-        const string Issuer = "http://www.mypetlife.com";
+        private IApplicationSettings ApplicationSettings => Kernel.Resolve<IApplicationSettings>();
+
+        private string CookieCulture => "culture";
+
         private IHttpContextAccessor HttpContextAccessor { get; set; }
 
         public TicketManager(IHttpContextAccessor accessor)
@@ -40,8 +45,9 @@ namespace XCommon.Web.Authentication.Ticket
 
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, signUpTicket.Name, ClaimValueTypes.String, Issuer),
-                new Claim(ClaimTypes.NameIdentifier, signUpTicket.Key.ToString(), ClaimValueTypes.String, Issuer)
+                new Claim(ClaimTypes.Country, signUpTicket.Culture, ApplicationSettings.Name),
+                new Claim(ClaimTypes.Name, signUpTicket.Name, ClaimValueTypes.String, ApplicationSettings.Name),
+                new Claim(ClaimTypes.NameIdentifier, signUpTicket.Key.ToString(), ClaimValueTypes.String, ApplicationSettings.Name)
             };
 
             userIdentity.AddClaims(claims);
@@ -95,6 +101,23 @@ namespace XCommon.Web.Authentication.Ticket
             }
         }
 
+        public string Culture
+        {
+            get
+            {
+                if (!IsAuthenticated)
+                {
+                    return HttpContextAccessor.HttpContext.Request
+                        ?.Cookies
+                        ?.Where(c => c.Key == CookieCulture)
+                        ?.FirstOrDefault()
+                        .Value ?? ApplicationSettings.Culture;
+                }
+
+                return HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Country)?.Value;
+            }
+        }
+
         public async Task<AuthenticationTicket> GetTicketAsync(TicketEntity signUpTicket)
         {
             return await Task.Run(() =>
@@ -112,6 +135,22 @@ namespace XCommon.Web.Authentication.Ticket
         {
             await HttpContextAccessor.HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
+        }
+
+        public bool SetCookieCulture(string culture)
+        {
+            if (!ApplicationSettings.Cultures.Contains(culture))
+                return false;
+
+            try
+            {
+                HttpContextAccessor.HttpContext.Response.Cookies.Append(CookieCulture, culture);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -9,5 +9,7 @@ namespace XCommon.Application.Login
         public Guid Key { get; set; }
 
         public string Name { get; set; }
+
+        public string Culture { get; set; }
     }
 }

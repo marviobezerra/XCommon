@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using XCommon.CodeGerator.Extensions;
 using XCommon.CodeGerator.TypeScript.Entity;
@@ -263,11 +264,25 @@ namespace XCommon.CodeGerator.TypeScript
             }
         }
 
+        private void ProcessUtil()
+        {
+            var util = new StringBuilderIndented();
+
+            util
+                .AppendLine("export interface Map<T> {")
+                .IncrementIndent()
+                .AppendLine("[K: string]: T;")
+                .DecrementIndent()
+                .AppendLine("}");
+
+            File.WriteAllText(Path.Combine(Config.Path, "entity-util.ts"), util.ToString(), Encoding.UTF8);
+        }
+
         internal void Run()
         {
             TSClass = new List<TypeScriptClass>();
             TSEnums = new List<TypeScriptEnum>();
-
+            
             LoadEnums();
             LoadProperties();
 
@@ -276,6 +291,9 @@ namespace XCommon.CodeGerator.TypeScript
 
             ProcessEnum();
             ProcessTypes();
+
+            if (Config.IncludeEntityUtil)
+                ProcessUtil();
         }
     }
 }
