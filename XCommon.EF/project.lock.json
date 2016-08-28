@@ -640,7 +640,7 @@
           "lib/net45/_._": {}
         }
       },
-      "XCommon/1.0.31": {
+      "XCommon/1.0.32": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2167,7 +2167,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "XCommon/1.0.31": {
+      "XCommon/1.0.32": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -5768,7 +5768,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.31": {
+    "XCommon/1.0.32": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
@@ -5779,7 +5779,7 @@
       "Microsoft.EntityFrameworkCore >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Relational >= 1.0.0",
       "NETStandard.Library >= 1.6.0",
-      "XCommon >= 1.0.31-*"
+      "XCommon >= 1.0.32-*"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETStandard,Version=v1.6": []
