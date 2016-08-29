@@ -1,0 +1,32 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using XCommon.Application;
+using XCommon.Extensions.String;
+using XCommon.Patterns.Ioc;
+using XCommon.Web.Controllers;
+
+namespace [{namespace}]
+{
+    public class HomeController : BaseController
+    {
+        private readonly IHostingEnvironment _hostEnvironment;
+
+        public HomeController(IHostingEnvironment hostEnvironment)
+        {
+            _hostEnvironment = hostEnvironment;
+        }
+
+        public IActionResult Index()
+        {
+            var path = _hostEnvironment.WebRootPath + "\\html\\Index.html";
+
+            if (System.IO.File.Exists(path))
+            {
+				return File(System.IO.File.ReadAllBytes(path), "text/html");
+            }
+
+            return NotFound(path);
+        }
+    }
+}

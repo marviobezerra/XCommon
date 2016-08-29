@@ -1,0 +1,32 @@
+{
+  "[{name}]": {
+    "Name": "[{name}]",
+    "Version": "0.0.1",
+    "Culture": "pt-BR",
+    "Cultures": [
+      "pt-BR"
+    ],
+    "UnitTest": false,
+    "Production": false,
+    "ConnectionString": "Data Source={Server};Initial Catalog={DataBase};Integrated Security=False;User Id={UserName};Password={Password};MultipleActiveResultSets=True;Application Name=App-Dev;Connection Timeout=1200"
+  },
+  "XCommon": {
+    "Authentication": {
+      "Cookie": {
+        "CookieName": "[{name}]"
+      },
+      "Google": {
+        "ClientId": "",
+        "ClientSecret": ""
+      },
+      "Facebook": {
+
+      },
+      "Map": {
+        "UriLogin": "/login",
+        "UriRedirect": "/",
+        "UriParam": "authscheme"
+      }
+    }
+  }
+}

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.ProjectGerator", "X
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.DataBaseCompare", "XCommon.DataBaseCompare\XCommon.DataBaseCompare.csproj", "{DE6164A8-1A40-48A3-9A08-756427F98593}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.ProjectGeratorV2", "XCommon.ProjectGeratorV2\XCommon.ProjectGeratorV2.csproj", "{3DE46359-0E17-4D45-97B4-82CC87848089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{DE6164A8-1A40-48A3-9A08-756427F98593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE6164A8-1A40-48A3-9A08-756427F98593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE6164A8-1A40-48A3-9A08-756427F98593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE46359-0E17-4D45-97B4-82CC87848089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE46359-0E17-4D45-97B4-82CC87848089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE46359-0E17-4D45-97B4-82CC87848089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE46359-0E17-4D45-97B4-82CC87848089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

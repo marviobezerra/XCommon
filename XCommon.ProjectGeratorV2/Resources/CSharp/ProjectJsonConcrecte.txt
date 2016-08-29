@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+[{include}]
+    "XCommon": "1.0.28",
+    "XCommon.EF": "1.0.28"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+					"imports": [
+						"dnxcore50",
+						"portable-net452+win81"
+					]
+    }
+  }
+}

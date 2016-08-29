@@ -1,0 +1,49 @@
+var path = require("path"),
+	ExtractTextPlugin = require("extract-text-webpack-plugin"),
+	webpack = require("webpack");
+
+module.exports = {
+	entry: [
+		"./App/polyfills.ts",
+		"./App/vendors.ts",
+		"./App/main.ts",
+        "./App/Styles/app-theme.scss"
+	],
+	output: {
+		path: path.join(__dirname, "[{output}]", "asserts"),
+		filename: "bundle.js"
+	},
+	plugins: [
+		new ExtractTextPlugin("bundle.css")
+	],
+
+	resolve: {
+	    extensions: ["", ".js", ".ts", ".scss", ".css"]
+	},
+
+	module: {
+		loaders: [
+			{
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+			},
+            {
+                test: /\app-theme.scss$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+            },
+			{
+			    exclude: /Styles/,
+			    test: /\.scss$/,
+			    loaders: ["raw-loader", "sass-loader?sourceMap"]
+			},
+			{
+				test: /\.ts$/,
+				loader: "ts-loader"
+			},
+			{
+				test: /\.js$/,
+				loader: "strip-sourcemap"
+			}
+		]
+	}
+};

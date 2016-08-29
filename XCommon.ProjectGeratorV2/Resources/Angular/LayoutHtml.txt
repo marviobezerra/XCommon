@@ -1,0 +1,2 @@
+﻿<h1>Hey! I"m layout</h1>
+<router-outlet></router-outlet>

@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Resources;
+using Microsoft.Extensions.Configuration;
+using XCommon.Application.Login;
+using XCommon.CodeGerator;
+using XCommon.CodeGerator.Configuration;
+using XCommon.Application;
+using XCommon.Web;
+
+namespace [{name}].CodeGenerator
+{
+	public class Program
+	{
+        private static IApplicationSettings ApplicationSettings { get; set;  }
+        
+        public static void Main(string[] args)
+		{
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..", "[{name}].View.Web"))
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            var config = builder.Build();
+            ApplicationSettings = config.Get<ApplicationSettings>("[{nameSafe}]");
+
+
+            Generator.LoadConfig(GetConfig());
+			Generator.Run(args);
+		}
+
+		private static Config GetConfig()
+		{
+			string basePath = Path.Combine(Directory.GetCurrentDirectory(), "..");
+
+			var web = "[{name}].View.Web";
+			var entity = "[{name}].Business.Entity";
+			var contract = "[{name}].Business.Contract";
+			var concrete = "[{name}].Business.Concrete";
+			var factory = "[{name}].Business.Factory";
+			var data = "[{name}].Business.Data";
+
+            return new Config
+            {
+                Angular = new ConfigAngular
+                {
+                    AppRoot = Path.Combine(basePath, web, "App"),
+                    ComponentPath = Path.Combine(basePath, web, "App", "Components"),
+                    ServicePath = Path.Combine(basePath, web, "App", "Services"),
+                    StyleInclude = new List<string>(),
+                    HtmlRoot = "/html/components"
+                },
+                Entity = new ConfigEntity
+                {
+                    IncludeEntityUtil = true,
+                    Path = Path.Combine(basePath, web, "App", "Entity"),
+                    Assemblys = new List<Assembly>
+                    {
+						// Set Type for one class on entity assembly
+                        //typeof(Business.Entity.Gallery.AlbumsEntity).GetTypeInfo().Assembly
+                    },
+                    TypesExtra = new List<Type>
+                    {
+                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
+                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
+                        typeof(XCommon.Patterns.Repository.Executes.Execute<>),
+                        typeof(XCommon.Patterns.Repository.Entity.EntityBase),
+                        typeof(PasswordChangeEntity),
+                        typeof(PasswordRecoveryEntity),
+                        typeof(SignInEntity),
+                        typeof(SignUpInternalEntity),
+                        typeof(TicketEntity),
+                        typeof(TicketStatus),
+                        typeof(UserProvider),
+                    }
+				},
+				Resource = new ConfigResource
+				{
+					CultureDefault = ApplicationSettings.Culture,
+					Cultures = ApplicationSettings.Cultures,
+					File = "Resource",
+					Path = Path.Combine(basePath, web, "App", "Services"),
+					Resources = GetResources()
+				},
+				DataBase = new ConfigDataBase
+				{
+					ConnectionString = ApplicationSettings.ConnectionString,
+					ContextName = "[{nameSafe}]Context",
+					DataNameSpace = data,
+					DataPath = Path.Combine(basePath, data),
+					Rewrite = GetRewrite(),
+					Remap = GetRemap()
+				},
+				Business = new ConfigBusiness
+				{
+					EntrityPath = Path.Combine(basePath, entity),
+					EntrityNameSpace = entity,
+					FactoryPath = Path.Combine(basePath, factory),
+					FacotryNameSpace = factory,
+					ContractPath = Path.Combine(basePath, contract),
+					ContractNameSpace = contract,
+					ConcretePath = Path.Combine(basePath, concrete),
+					ConcreteNameSpace = concrete,
+				}
+			};
+		}
+
+		private static Dictionary<Type, ResourceManager> GetResources()
+		{
+			Dictionary<Type, ResourceManager> result = new Dictionary<Type, ResourceManager>();
+
+			//result.Add(typeof(Business.Resource.Message), Business.Resource.Message.ResourceManager);
+
+			return result;
+		}
+
+		private static List<ConfigDataBaseRewrite> GetRewrite()
+		{
+			List<ConfigDataBaseRewrite> result = new List<ConfigDataBaseRewrite>();
+
+			return result;
+		}
+
+		private static List<ConfigDataBaseRemap> GetRemap()
+		{
+			List<ConfigDataBaseRemap> result = new List<ConfigDataBaseRemap>();
+
+			
+			return result;
+		}
+	}
+}

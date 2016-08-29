@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "description": "",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "",
+  "scripts": {
+    "postinstall": "typings install"
+  },
+  "version": "1.0.0"
+}

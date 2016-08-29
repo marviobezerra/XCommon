@@ -1,0 +1,27 @@
+﻿import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpModule } from "@angular/http";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+
+import { AppComponents, AppRoutes } from "./Components";
+import { LayoutComponent } from "./Components/Layout";
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule
+    ],
+    providers: [
+        AppRoutes
+    ],
+    declarations: [
+        AppComponents
+    ],
+    bootstrap: [LayoutComponent]
+})
+export class AppModule {
+
+}
