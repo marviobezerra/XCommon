@@ -15,7 +15,13 @@ namespace XCommon.CodeGerator.Extensions
     
 	internal static class Extensions
 	{
-        internal static string GetSelector(this string component)
+		internal static bool GetOutLet(this string component)
+		{
+			return component.Contains("?o");
+		}
+
+
+		internal static string GetSelector(this string component)
         {
             var result = string.Empty;
 

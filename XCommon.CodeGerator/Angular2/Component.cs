@@ -8,8 +8,8 @@ using XCommon.Util;
 
 namespace XCommon.CodeGerator.Angular2
 {
-    internal class Component
-    {
+	internal class Component
+	{
 		private Configuration.ConfigAngular Config => Generator.Configuration.Angular;
 
 		internal void Run(string feature, List<string> components)
@@ -21,22 +21,25 @@ namespace XCommon.CodeGerator.Angular2
 
 			foreach (string component in components)
 			{
-                if (!Regex.IsMatch(component, @"^[a-zA-Z]+$"))
-                {
-                    Console.WriteLine($"Invalid component name: {component}");
-                    continue;
-                }
+				var outlet = component.GetOutLet();
+				var componentName = component.Replace("?o", string.Empty);
+				var selector = componentName.GetSelector();
 
-				var selector = component.GetSelector();
 
-				TypeScript(path, component, selector, feature);
-				Sass(path, component, selector);
-				Html(path, component, selector);
+				if (!Regex.IsMatch(componentName, @"^[a-zA-Z]+$"))
+				{
+					Console.WriteLine($"Invalid component name: {component}");
+					continue;
+				}
 
-                Console.WriteLine($"Generated component {selector}");
+				TypeScript(path, componentName, selector, feature);
+				Sass(path, componentName, selector);
+				Html(path, componentName, selector, outlet);
+
+				Console.WriteLine($"Generated component {selector}");
 			}
 		}
-		
+
 		private void TypeScript(string path, string name, string selector, string feture)
 		{
 			var file = Path.Combine(path, $"{selector}.component.ts");
@@ -48,7 +51,7 @@ namespace XCommon.CodeGerator.Angular2
 			}
 
 			StringBuilderIndented builder = new StringBuilderIndented();
-            string templateUrl = $"\"{Config.HtmlRoot}/{feture}/{selector}.html\",";
+			string templateUrl = $"\"{Config.HtmlRoot}/{feture}/{selector}.html\",";
 
 			builder
 				.AppendLine("import { Component, OnInit } from \"@angular/core\";")
@@ -58,7 +61,7 @@ namespace XCommon.CodeGerator.Angular2
 				.AppendLine($"selector: \"{selector}\",")
 				.AppendLine("templateUrl: " + templateUrl.ToLower())
 				.AppendLine($"styles: [require(\"./{selector}.scss\")]")
-                .DecrementIndent()
+				.DecrementIndent()
 				.AppendLine("})")
 				.AppendLine($"export class {name}Component implements OnInit {{")
 				.IncrementIndent()
@@ -95,7 +98,7 @@ namespace XCommon.CodeGerator.Angular2
 			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 		}
 
-		private void Html(string path, string name, string selector)
+		private void Html(string path, string name, string selector, bool outlet)
 		{
 			var file = Path.Combine(path, $"{selector}.html");
 
@@ -108,7 +111,20 @@ namespace XCommon.CodeGerator.Angular2
 			StringBuilderIndented builder = new StringBuilderIndented();
 
 			builder
+				.AppendLine($"<div class=\"{selector}\">")
+				.IncrementIndent()
 				.AppendLine($"<h1>Hey! I\"m {selector}</h1>");
+
+
+			if (outlet)
+			{
+				builder
+					.AppendLine("<router-outlet></router-outlet>");
+			}
+
+			builder
+				.DecrementIndent()
+				.AppendLine("</div>");
 
 			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 		}

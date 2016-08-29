@@ -48,8 +48,8 @@ namespace XCommon.ProjectGeratorV2.Application.Angular
             Commands.Add(new CreateFile(new CreateFileParam(BasePath, "App\\Components\\Layout", "app-layout.component.ts") { Template = Resources.Angular2.LayoutComponent }));
             Commands.Add(new CreateFile(new CreateFileParam(BasePath, "App\\Components\\Layout", "app-layout.html") { Template = Resources.Angular2.LayoutHtml }));
             Commands.Add(new CreateFile(new CreateFileParam(BasePath, "App\\Components\\Layout", "app-layout.scss") { Template = Resources.Angular2.LayoutSCSS }));
-            
-            
+
+
             Commands.Add(new CreateFile(new CreateFileParam(BasePath, "App\\Styles", "app-theme.scss") { Template = Resources.Angular2.AppThemeScss }));
             Commands.Add(new CreateFile(new CreateFileParam(BasePath, "App\\Styles", "app-variables.scss") { Template = Resources.Angular2.AppVariablesScss }));
 
@@ -74,10 +74,9 @@ namespace XCommon.ProjectGeratorV2.Application.Angular
             CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Creating basic Angular 'About' components", Command = "dotnet", Arguments = initialAboutComponents, Directory = Path.Combine(BasePath, "..", $"{Name}.CodeGenerator") }));
             CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Creating basic Angular 'System' components", Command = "dotnet", Arguments = "run -- -a -f System -c NotFound", Directory = Path.Combine(BasePath, "..", $"{Name}.CodeGenerator") }));
 
-            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing NPM packages", Command = "npm", Arguments = argumentsNPM, Directory = BasePath }));
-            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing Typings", Command = "typings", Arguments = argumentsTyping, Directory = BasePath }));
-            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Running Gulp", Command = "gulp", Arguments = "default:dev", Directory = BasePath }));
-        }
+			CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing NPM packages", Command = "npm", Arguments = argumentsNPM, Directory = BasePath }));
+			CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing Typings", Command = "typings", Arguments = argumentsTyping, Directory = BasePath }));
+		}
 
         public List<string> AngularPackages()
         {
@@ -155,9 +154,9 @@ namespace XCommon.ProjectGeratorV2.Application.Angular
         {
             List<string> result = new List<string>();
 
-            result.Add("About");
-            result.Add("AboutHome");
-            result.Add("Privacy");
+            result.Add("AboutHome?o");
+			result.Add("About");
+			result.Add("Privacy");
             result.Add("Terms");
             result.Add("Contact");
 
