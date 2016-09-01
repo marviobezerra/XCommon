@@ -61,28 +61,82 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /// &lt;reference path=&quot;App.Variables.scss&quot; /&gt;
-        ///@import &quot;App.Variables.scss&quot;;
+        ///   Looks up a localized string similar to import { HomeComponent } from &quot;./Home&quot;;
+        ///import { AboutHomeComponent, AboutComponent, ContactComponent, PrivacyComponent, TermsComponent } from &quot;./About&quot;;
+        ///import { NotFoundComponent } from &quot;./System&quot;;
+        ///import { LayoutComponent } from &quot;./Layout&quot;;
         ///
-        ///body {
+        ///export const AppComponents: any[] = [
+        ///    LayoutComponent,
+        ///    HomeComponent,
+        ///    AboutHomeComponent, AboutComponent, ContactComponent, PrivacyComponent, TermsComponent,
+        ///    NotFoundComponent
+        ///];.
+        /// </summary>
+        internal static string AppComponents {
+            get {
+                return ResourceManager.GetString("AppComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { NgModule } from &quot;@angular/core&quot;;
+        ///import { BrowserModule } from &quot;@angular/platform-browser&quot;;
+        ///import { HttpModule } from &quot;@angular/http&quot;;
+        ///import { FormsModule } from &quot;@angular/forms&quot;;
+        ///import { RouterModule } from &quot;@angular/router&quot;;
+        ///
+        ///import { AppComponents, AppRoutes } from &quot;./Components&quot;;
+        ///import { LayoutComponent } from &quot;./Components/Layout&quot;;
+        ///
+        ///@NgModule({
+        ///    imports: [
+        ///        BrowserModule,
+        ///        FormsModule,
+        ///        HttpModule,
+        ///        RouterModule
+        ///    ],
+        ///    providers: [
+        ///       [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AppModule {
+            get {
+                return ResourceManager.GetString("AppModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { provideRouter, RouterConfig } from &quot;@angular/router&quot;;
+        ///
+        ///import { HomeComponent } from &quot;./Home&quot;;
+        ///import { AboutHomeComponent, AboutComponent, ContactComponent, PrivacyComponent, TermsComponent } from &quot;./About&quot;;
+        ///import { NotFoundComponent } from &quot;./System&quot;;
+        ///
+        ///
+        ///const Routes: RouterConfig = [
+        ///    {
+        ///        path: &quot;&quot;, component: HomeComponent
+        ///    },
+        ///    {
+        ///        path: &quot;about&quot;, component: AboutHomeComponent, children: [
+        ///            { path: &quot;&quot;, component: AboutComponent },
+        ///            { path:  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AppRoutes {
+            get {
+                return ResourceManager.GetString("AppRoutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /// &lt;reference path=&quot;app-variables.scss&quot; /&gt;
+        ///@import &quot;app-variables.scss&quot;;
+        ///
+        ///html, body {
         ///	margin: 0;
         ///	padding: 0;
-        ///    font-family: Roboto, &quot;Helvetica Neue&quot;, sans-serif;
-        ///}
-        ///
-        ///* {
-        ///	-webkit-font-smoothing: antialiased;
-        ///	-moz-osx-font-smoothing: grayscale;
-        ///}
-        ///
-        ///.facebook {
-        ///	background-color: $Social-Facebook-Color !important;
-        ///}
-        ///
-        ///.google {
-        ///	background-color: $Social-Google-Color !important;
-        ///}
-        ///.
+        ///    font-family: $font;
+        ///}.
         /// </summary>
         internal static string AppThemeScss {
             get {
@@ -91,11 +145,7 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to $font-stack: Helvetica, sans-serif;
-        ///$primary-color: #333;
-        ///$Social-Google-Color: #dd4b39;
-        ///$Social-Facebook-Color: #3b5998;
-        ///.
+        ///   Looks up a localized string similar to $font: Roboto, &quot;Helvetica Neue&quot;, sans-serif;.
         /// </summary>
         internal static string AppVariablesScss {
             get {
@@ -104,75 +154,24 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;
-        ///  {{ Title }}
-        ///&lt;/h1&gt;
-        ///.
-        /// </summary>
-        internal static string ComponentHTML {
-            get {
-                return ResourceManager.GetString("ComponentHTML", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to export * from &quot;./app-home.component&quot;;.
-        /// </summary>
-        internal static string ComponentIndex {
-            get {
-                return ResourceManager.GetString("ComponentIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string ComponentStyle {
-            get {
-                return ResourceManager.GetString("ComponentStyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import { Component } from &quot;@angular/core&quot;;
-        ///
-        ///@Component({
-        ///  selector: &quot;app-root&quot;,
-        ///  templateUrl: &quot;/html/components/home/app-home.html&quot;,
-        ///  styleUrls: [require(&quot;./app-home.scss&quot;)]
-        ///})
-        ///export class AppComponent {
-        ///  Title = &quot;App works!&quot;;
-        ///}
-        ///.
-        /// </summary>
-        internal static string ComponentTypeScript {
-            get {
-                return ResourceManager.GetString("ComponentTypeScript", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /// &lt;binding ProjectOpened=&apos;dev:watch&apos; /&gt;
-        ///var gulp = require(&apos;gulp&apos;),
-        ///	gutil = require(&apos;gulp-util&apos;),
-        ///	webpack = require(&apos;webpack&apos;),
-        ///	htmlmin = require(&apos;gulp-htmlmin&apos;),
-        ///	shell = require(&apos;gulp-shell&apos;),
+        ///   Looks up a localized string similar to /// &lt;binding ProjectOpened=&quot;dev:watch&quot; /&gt;
+        ///var gulp = require(&quot;gulp&quot;),
+        ///	gutil = require(&quot;gulp-util&quot;),
+        ///	webpack = require(&quot;webpack&quot;),
+        ///	htmlmin = require(&quot;gulp-htmlmin&quot;),
+        ///	shell = require(&quot;gulp-shell&quot;),
         ///	livereload = require(&quot;gulp-livereload&quot;),
         ///	rimraf = require(&quot;gulp-rimraf&quot;),
         ///	webpackStream = require(&quot;webpack-stream&quot;),
-        ///	merge = require(&apos;webpack-merge&apos;);
+        ///	merge = require(&quot;webpack-merge&quot;);
         ///
         ///var helper = {
-        ///	tasks: {
-        ///		clear: &quot;clear&quot;,
-        ///		watch: &quot;dev:watch&quot;,
-        ///		html: {
-        ///			page: &quot;dev:html:page&quot;
-        ///		},
-        ///		dnx: {
-        ///		    ts: &quot;dnx:typescri [rest of string was truncated]&quot;;.
+        ///    tasks: {
+        ///        clear: &quot;clear&quot;,
+        ///        watch: &quot;dev:watch&quot;,
+        ///        html: {
+        ///            page: &quot;dev:html:page&quot;
+        ///        } [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GulpFile {
             get {
@@ -181,26 +180,24 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /// &lt;binding ProjectOpened=&apos;dev:watch&apos; /&gt;
-        ///var gulp = require(&apos;gulp&apos;),
-        ///	gutil = require(&apos;gulp-util&apos;),
-        ///	webpack = require(&apos;webpack&apos;),
-        ///	htmlmin = require(&apos;gulp-htmlmin&apos;),
-        ///	shell = require(&apos;gulp-shell&apos;),
+        ///   Looks up a localized string similar to /// &lt;binding ProjectOpened=&quot;dev:watch&quot; /&gt;
+        ///var gulp = require(&quot;gulp&quot;),
+        ///	gutil = require(&quot;gulp-util&quot;),
+        ///	webpack = require(&quot;webpack&quot;),
+        ///	htmlmin = require(&quot;gulp-htmlmin&quot;),
+        ///	shell = require(&quot;gulp-shell&quot;),
         ///	livereload = require(&quot;gulp-livereload&quot;),
         ///	rimraf = require(&quot;gulp-rimraf&quot;),
         ///	webpackStream = require(&quot;webpack-stream&quot;),
-        ///	merge = require(&apos;webpack-merge&apos;);
+        ///	merge = require(&quot;webpack-merge&quot;);
         ///
         ///var helper = {
-        ///	tasks: {
-        ///		clear: &quot;clear&quot;,
-        ///		watch: &quot;dev:watch&quot;,
-        ///		html: {
-        ///			page: &quot;dev:html:page&quot;
-        ///		},
-        ///		default: {
-        ///			dev: &quot;default:de [rest of string was truncated]&quot;;.
+        ///    tasks: {
+        ///        clear: &quot;clear&quot;,
+        ///        watch: &quot;dev:watch&quot;,
+        ///        html: {
+        ///            page: &quot;dev:html:page&quot;
+        ///        } [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GulpFileSimple {
             get {
@@ -221,9 +218,9 @@ namespace XCommon.ProjectGerator.Resources {
         ///    &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
-        ///    &lt;app-root&gt;Whait&lt;/app-root&gt;
+        ///    &lt;layout&gt;Whait&lt;/layout&gt;
         ///    &lt;script type=&quot;text/javascript&quot;&gt;{0}&lt;/script&gt;
-        ///    &lt;script type=&quot; [rest of string was truncated]&quot;;.
+        ///    &lt;script type=&quot;text [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string IndexHtml {
             get {
@@ -232,13 +229,62 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to import { bootstrap } from &quot;@angular/platform-browser-dynamic&quot;;
-        ///import { AppComponent } from &quot;./Components/Home/&quot;;
+        ///   Looks up a localized string similar to import { Component, OnInit } from &quot;@angular/core&quot;;
         ///
-        ///bootstrap(AppComponent)
-        ///    .catch((reason: any) =&gt; console.error(reason));
+        ///@Component({
+        ///    selector: &quot;layout&quot;,
+        ///    templateUrl: &quot;/html/components/layout/app-layout.html&quot;,
+        ///    styles: [require(&quot;./app-layout.scss&quot;)]
+        ///})
+        ///export class LayoutComponent implements OnInit {
+        ///    constructor() { }
         ///
+        ///    ngOnInit(): void { }
+        ///}
         ///.
+        /// </summary>
+        internal static string LayoutComponent {
+            get {
+                return ResourceManager.GetString("LayoutComponent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;app-layout&quot;&gt;
+        ///	&lt;h1&gt;Hey! I&quot;m layout&lt;/h1&gt;
+        ///	
+        ///	&lt;a [routerLink]=&quot;[&apos;/about&apos;]&quot;&gt;About&lt;/a&gt;
+        ///	&lt;a [routerLink]=&quot;[&apos;/about/contact&apos;]&quot;&gt;Contact&lt;/a&gt;
+        ///	&lt;a [routerLink]=&quot;[&apos;/about/terms&apos;]&quot;&gt;Terms&lt;/a&gt;
+        ///	&lt;a [routerLink]=&quot;[&apos;/about/privacy&apos;]&quot;&gt;Privacy&lt;/a&gt;
+        ///	&lt;a [routerLink]=&quot;[&apos;/zyx&apos;]&quot;&gt;Wrong route&lt;/a&gt;
+        ///
+        ///	&lt;router-outlet&gt;&lt;/router-outlet&gt;
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string LayoutHtml {
+            get {
+                return ResourceManager.GetString("LayoutHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .app-layout {
+        ///}
+        ///.
+        /// </summary>
+        internal static string LayoutSCSS {
+            get {
+                return ResourceManager.GetString("LayoutSCSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import { platformBrowserDynamic } from &quot;@angular/platform-browser-dynamic&quot;;
+        ///import { enableProdMode } from &quot;@angular/core&quot;;
+        ///
+        ///import { AppModule } from &quot;./app.module&quot;;
+        ///platformBrowserDynamic().bootstrapModule(AppModule);.
         /// </summary>
         internal static string MainApp {
             get {
@@ -251,18 +297,20 @@ namespace XCommon.ProjectGerator.Resources {
         ///  &quot;author&quot;: &quot;&quot;,
         ///  &quot;description&quot;: &quot;&quot;,
         ///  &quot;dependencies&quot;: {
-        ///    &quot;@angular/common&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/compiler&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/core&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/http&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/platform-browser&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/platform-browser-dynamic&quot;: &quot;2.0.0-rc.3&quot;,
-        ///    &quot;@angular/router&quot;: &quot;3.0.0-alpha.7&quot;,
-        ///    &quot;core-js&quot;: &quot;^2.4.0&quot;,
-        ///    &quot;reflect-metadata&quot;: &quot;^0.1.3&quot;,
-        ///    &quot;rxjs&quot;: &quot;5.0.0-beta.6&quot;,
-        ///    &quot;zone.js&quot;: &quot;0.6.12&quot;,
-        ///    &quot;@angular2-material/button&quot;: &quot;^2.0 [rest of string was truncated]&quot;;.
+        ///    
+        ///  },
+        ///  &quot;devDependencies&quot;: {
+        ///    
+        ///  },
+        ///  &quot;license&quot;: &quot;ISC&quot;,
+        ///  &quot;main&quot;: &quot;index.js&quot;,
+        ///  &quot;name&quot;: &quot;&quot;,
+        ///  &quot;scripts&quot;: {
+        ///    &quot;postinstall&quot;: &quot;typings install&quot;
+        ///  },
+        ///  &quot;version&quot;: &quot;1.0.0&quot;
+        ///}
+        ///.
         /// </summary>
         internal static string PackageJson {
             get {
@@ -347,19 +395,19 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to var path = require(&apos;path&apos;),
+        ///   Looks up a localized string similar to var path = require(&quot;path&quot;),
         ///	ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;),
-        ///	webpack = require(&apos;webpack&apos;);
+        ///	webpack = require(&quot;webpack&quot;);
         ///
         ///module.exports = {
         ///	entry: [
-        ///		&quot;./app/polyfills.ts&quot;,
-        ///		&quot;./app/vendor.ts&quot;,
-        ///		&quot;./app/main.ts&quot;,
-        ///        &quot;./app/styles/app.theme.scss&quot;
+        ///		&quot;./App/polyfills.ts&quot;,
+        ///		&quot;./App/vendors.ts&quot;,
+        ///		&quot;./App/main.ts&quot;,
+        ///        &quot;./App/Styles/app-theme.scss&quot;
         ///	],
         ///	output: {
-        ///		path: path.join(__dirname, &quot;wwwroot&quot;, &quot;asserts&quot;),
+        ///		path: path.join(__dirname, &quot;[{output}]&quot;, &quot;asserts&quot;),
         ///		filename: &quot;bundle.js&quot;
         ///	},
         ///	plugins: [
@@ -367,11 +415,11 @@ namespace XCommon.ProjectGerator.Resources {
         ///	],
         ///
         ///	resolve: {
-        ///		extensions: [&quot;&quot;, &quot;.js&quot;, &quot;.ts&quot;, &quot;.scss&quot;, &quot;.css&quot;]
+        ///	    extensions: [&quot;&quot;, &quot;.js&quot;, &quot;.ts&quot;, &quot;.scss&quot;, &quot;.css&quot;]
         ///	},
         ///
         ///	module: {
-        ///		loader [rest of string was truncated]&quot;;.
+        ///	 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string WebpackConfig {
             get {

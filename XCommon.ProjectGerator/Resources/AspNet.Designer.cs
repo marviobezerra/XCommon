@@ -62,7 +62,13 @@ namespace XCommon.ProjectGerator.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///  &quot;MyPetLife&quot;: {
+        ///  &quot;[{name}]&quot;: {
+        ///    &quot;Name&quot;: &quot;[{name}]&quot;,
+        ///    &quot;Version&quot;: &quot;0.0.1&quot;,
+        ///    &quot;Culture&quot;: &quot;pt-BR&quot;,
+        ///    &quot;Cultures&quot;: [
+        ///      &quot;pt-BR&quot;
+        ///    ],
         ///    &quot;UnitTest&quot;: false,
         ///    &quot;Production&quot;: false,
         ///    &quot;ConnectionString&quot;: &quot;Data Source={Server};Initial Catalog={DataBase};Integrated Security=False;User Id={UserName};Password={Password};MultipleActiveResultSets=True;Application Name=App-Dev;Connection Timeout=1200&quot;
@@ -70,16 +76,8 @@ namespace XCommon.ProjectGerator.Resources {
         ///  &quot;XCommon&quot;: {
         ///    &quot;Authentication&quot;: {
         ///      &quot;Cookie&quot;: {
-        ///        &quot;CookieName&quot;: &quot;Auth&quot;
-        ///      },
-        ///      &quot;Google&quot;: {
-        ///       
-        ///      },
-        ///      &quot;Facebook&quot;: {
-        ///
-        ///      },
-        ///      &quot;Map&quot;: {
-        ///        &quot;UriLogin&quot;: &quot;/login&quot;, [rest of string was truncated]&quot;;.
+        ///        &quot;CookieName&quot;: &quot;[{name}]&quot;
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AppSettings {
             get {

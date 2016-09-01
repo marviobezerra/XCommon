@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using XCommon.Application.CommandLine;
-using XCommon.ProjectGerator.Command;
+using XCommon.Application.ConsoleX;
+using XCommon.ProjectGerator.Application;
 
 namespace XCommon.ProjectGerator
 {
     class Program
     {
-        private static CommandsList Commands { get; set; } = new CommandsList();
-
-        private static CommandsParams Params { get; set; } = new CommandsParams();
+        private static ApplicationBase App { get; set; }
 
         static void Main(string[] args)
         {
             if (SetUp(args))
             {
-                Commands = Params.Full
-                    ? Commands.WebFull(Params.Path, Params.Name)
-                    : Commands.WebSimple(Params.Path, Params.Name);
-
                 using (Spinner sp = new Spinner(SpinnerSequence.Dots, true, 2))
                 {
-                    Commands.Run();
+                    App.Run();
                 }
             }
         }
@@ -32,43 +27,50 @@ namespace XCommon.ProjectGerator
             {
                 Name = "xpg",
                 FullName = "XCommon Project Generator",
-                Description = "Generate new C# project with support to Angular2 and Material Designe",
+                Description = "Generate new C# project with support to Angular2 and Material Design",
             };
 
-            var full = result.Option("-f|--full", "Create the new application with N layers", CommandOptionType.NoValue);
-            var simple = result.Option("-s|--simple", "Create the new application with only the web layers", CommandOptionType.NoValue);
-            var path = result.Option("-p|--path", "Set the path to the new application", CommandOptionType.SingleValue);
-            var name = result.Option("-n|--name", "Set the name of the new application", CommandOptionType.SingleValue);
-
+            var help = result.HelpOption("--help");
+            var csharp = result.Option("--csharp", "Create new C# application", CommandOptionType.NoValue);
+            var node = result.Option("--node", "Create new NODE application", CommandOptionType.NoValue);
+            
             result.OnExecute(() =>
             {
                 bool error = false;
                 List<string> messages = new List<string>();
 
-                if ((full.HasValue() && simple.HasValue()) || (!full.HasValue() && !simple.HasValue()))
+                if (!csharp.HasValue() && !node.HasValue())
                 {
-                    messages.Add("Choose FULL (-f) or SIMPLE (-s) to generate your new project");
+                    messages.Add("You need to chose which type of application you whant to create, use --node or --csharp");
                     error = true;
                 }
 
-                if (!name.HasValue())
+                if (!csharp.HasValue() && !node.HasValue())
                 {
-                    messages.Add("Choose the NAME (-n 'MyProject') to generate your new project");
+                    messages.Add("You can't create both, choose --node or --csharp");
                     error = true;
+                }
+
+                if (!error && csharp.HasValue())
+                {
+                    App = new Application.CSharp.CSharpApplication(args);
+                }
+
+                if (!error && node.HasValue())
+                {
+                    App = new Application.Node.NodeApplication(args);
                 }
 
                 if (error)
                 {
+                    ApplicationBase.PrintLogo();
+
                     result.ShowHelp();
                     Console.WriteLine();
                     Console.WriteLine("  - Errors");
                     messages.ForEach(msg => Console.WriteLine($"    * {msg}"));
                     return -1;
                 }
-
-                Params.Full = full.HasValue();
-                Params.Name = name.Value();
-                Params.Path = path.HasValue() ? path.Value() : Environment.CurrentDirectory;
 
                 return 0;
             });

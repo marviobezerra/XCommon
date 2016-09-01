@@ -43,76 +43,108 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\XCommon\Application\CommandLine\CommandArgument.cs">
+    <Compile Include="..\xcommon\application\commandline\CommandArgument.cs">
       <Link>CommandLine\CommandArgument.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\CommandLine\CommandLineApplication.cs">
+    <Compile Include="..\xcommon\application\commandline\CommandLineApplication.cs">
       <Link>CommandLine\CommandLineApplication.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\CommandLine\CommandOption.cs">
+    <Compile Include="..\xcommon\application\commandline\CommandOption.cs">
       <Link>CommandLine\CommandOption.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\CommandLine\CommandOptionType.cs">
+    <Compile Include="..\xcommon\application\commandline\CommandOptionType.cs">
       <Link>CommandLine\CommandOptionType.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleSpinner.cs">
+    <Compile Include="..\xcommon\application\consolex\ConsoleSpinner.cs">
       <Link>ConsoleX\ConsoleSpinner.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleX.cs">
+    <Compile Include="..\xcommon\application\consolex\ConsoleX.cs">
       <Link>ConsoleX\ConsoleX.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\ConsoleX\ConsoleXExtensions.cs">
+    <Compile Include="..\xcommon\application\consolex\ConsoleXExtensions.cs">
       <Link>ConsoleX\ConsoleXExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\XCommon\Application\ConsoleX\IConsoleX.cs">
+    <Compile Include="..\xcommon\application\consolex\IConsoleX.cs">
       <Link>ConsoleX\IConsoleX.cs</Link>
     </Compile>
-    <Compile Include="ConsoleSpinner.cs" />
-    <Compile Include="Command\CommandExtencionsCommon.cs" />
-    <Compile Include="Command\CommandExtencionsPacks.cs" />
-    <Compile Include="Command\CommandPostRun.cs" />
-    <Compile Include="Command\CommandsList.cs" />
-    <Compile Include="Command\CommandExtencionsAngular.cs" />
-    <Compile Include="Command\CommandExtencionsCSharp.cs" />
-    <Compile Include="Command\CommandExtencionsWeb.cs" />
-    <Compile Include="Command\CommandsParams.cs" />
-    <Compile Include="Command\ICommand.cs" />
-    <Compile Include="Command\ProjectJson.cs" />
+    <Compile Include="Application\Angular\AngularApplication.cs" />
+    <Compile Include="Application\ApplicationBase.cs" />
+    <Compile Include="Application\Commands\CommandShell.cs" />
+    <Compile Include="Application\Commands\CommandShellParam.cs" />
+    <Compile Include="Application\Commands\CommandT1.cs" />
+    <Compile Include="Application\Commands\ICommad.cs" />
+    <Compile Include="Application\Commands\ICommandT1.cs" />
+    <Compile Include="Application\CSharp\CSharpApplication.cs" />
+    <Compile Include="Application\CSharp\CSharpApplicationConfig.cs" />
+    <Compile Include="Application\CSharp\Enumeration\ProjectJson.cs" />
+    <Compile Include="Application\CSharp\Extension\CommandExtencionsCommon.cs" />
+    <Compile Include="Application\CSharp\Extension\CSharpExtension.cs" />
+    <Compile Include="Application\CSharp\Extension\CSharpWebExtension.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateFile.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateFileParam.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateProject.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateProjectParam.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateSolution.cs" />
+    <Compile Include="Application\CSharp\Writter\CreateSolutionParam.cs" />
+    <Compile Include="Application\Node\NodeApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\Angular2\MainApp.txt" />
-    <Content Include="Resources\Angular2\ComponentHTML.txt" />
-    <Content Include="Resources\Angular2\ComponentIndex.txt" />
-    <Content Include="Resources\Angular2\ComponentStyle.txt" />
-    <Content Include="Resources\Angular2\ComponentTypeScript.txt" />
-    <Content Include="Resources\AspNet\Program.txt" />
-    <Content Include="Resources\AspNet\Startup.txt" />
-    <Content Include="Resources\AspNet\HomeController.txt" />
-    <Content Include="Resources\CSharp\FactoryRegister.txt" />
     <Compile Include="Resources\Angular2.Designer.cs">
+      <DependentUpon>Angular2.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Angular2.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\AspNet.Designer.cs">
+      <DependentUpon>AspNet.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AspNet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common.Designer.cs">
+      <DependentUpon>Common.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\CSharp.Designer.cs">
+      <DependentUpon>CSharp.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CSharp.resx</DependentUpon>
     </Compile>
-    <Compile Include="Command\CreateFile.cs" />
-    <Compile Include="Command\CreateProject.cs" />
-    <Compile Include="Command\CreateSolution.cs" />
-    <Content Include="Resources\CSharp\Logo.txt" />
+    <Compile Include="Resources\Node.Designer.cs">
+      <DependentUpon>Node.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Content Include="Resources\Angular\AppComponents.txt" />
+    <Content Include="Resources\Angular\AppModule.txt" />
+    <Content Include="Resources\Angular\AppRoutes.txt" />
+    <Content Include="Resources\Angular\AppThemeScss.txt" />
+    <Content Include="Resources\Angular\AppVariablesScss.txt" />
+    <Content Include="Resources\Angular\GulpFile.txt" />
+    <Content Include="Resources\Angular\GulpFileSimple.txt" />
+    <Content Include="Resources\Angular\IndexHtml.txt" />
+    <Content Include="Resources\Angular\LayoutComponent.txt" />
+    <Content Include="Resources\Angular\LayoutHtml.txt" />
+    <Content Include="Resources\Angular\LayoutSCSS.txt" />
+    <Content Include="Resources\Angular\MainApp.txt" />
+    <Content Include="Resources\Angular\PackageJson.txt" />
+    <Content Include="Resources\Angular\Polyfills.txt" />
+    <Content Include="Resources\Angular\TsConfigJson.txt" />
+    <Content Include="Resources\Angular\TypingsJson.txt" />
+    <Content Include="Resources\Angular\Vendor.txt" />
+    <Content Include="Resources\Angular\WebpackConfig.txt" />
     <Content Include="Resources\AspNet\AppSettings.txt" />
-    <Content Include="Resources\Angular2\PackageJson.txt" />
+    <Content Include="Resources\AspNet\HomeController.txt" />
+    <Content Include="Resources\AspNet\Program.txt" />
+    <Content Include="Resources\AspNet\ProjecJson.txt" />
+    <Content Include="Resources\AspNet\ProjectXproj.txt" />
+    <Content Include="Resources\AspNet\Startup.txt" />
+    <Content Include="Resources\AspNet\WebConfig.txt" />
+    <Content Include="Resources\Common\Logo.txt" />
+    <Content Include="Resources\CSharp\FactoryRegister.txt" />
+    <Content Include="Resources\CSharp\GeneratorProgram.txt" />
+    <Content Include="Resources\CSharp\ProjectClassXproj.txt" />
     <Content Include="Resources\CSharp\ProjectJsonCodeGenerator.txt" />
     <Content Include="Resources\CSharp\ProjectJsonConcrecte.txt" />
     <Content Include="Resources\CSharp\ProjectJsonContract.txt" />
@@ -120,14 +152,7 @@
     <Content Include="Resources\CSharp\ProjectJsonEntity.txt" />
     <Content Include="Resources\CSharp\ProjectJsonFactory.txt" />
     <Content Include="Resources\CSharp\ProjectJsonResource.txt" />
-    <Content Include="Resources\CSharp\ProjectClassXproj.txt" />
-    <Content Include="Resources\AspNet\ProjecJson.txt" />
-    <Content Include="Resources\AspNet\ProjectXproj.txt" />
-    <Content Include="Resources\Angular2\TsConfigJson.txt" />
-    <Content Include="Resources\Angular2\TypingsJson.txt" />
-    <Content Include="Resources\AspNet\WebConfig.txt" />
-    <Content Include="Resources\Angular2\AppThemeScss.txt" />
-    <Content Include="Resources\Angular2\AppVariablesScss.txt" />
+    <Content Include="Resources\CSharp\Solution.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Angular2.resx">
@@ -138,23 +163,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AspNet.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\CSharp.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CSharp.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Node.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Node.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Angular2\GulpFileSimple.txt" />
-    <Content Include="Resources\Angular2\GulpFile.txt" />
-    <Content Include="Resources\Angular2\IndexHtml.txt" />
-    <Content Include="Resources\CSharp\Solution.txt" />
-    <Content Include="Resources\Angular2\WebpackConfig.txt" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Angular2\Polyfills.txt" />
-    <Content Include="Resources\Angular2\Vendor.txt" />
+    <Folder Include="Resources\Node\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

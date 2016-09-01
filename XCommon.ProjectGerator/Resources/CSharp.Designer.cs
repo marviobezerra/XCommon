@@ -82,16 +82,29 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to __  __  ___                                      
-        ///\ \/ / / __\___  _ __ ___  _ __ ___   ___  _ __  
-        /// \  / / /  / _ \| &apos;_ ` _ \| &apos;_ ` _ \ / _ \| &apos;_ \ 
-        /// /  \/ /__| (_) | | | | | | | | | | | (_) | | | |
-        ////_/\_\____/\___/|_| |_| |_|_| |_| |_|\___/|_| |_|
-        ///                                                 .
+        ///   Looks up a localized string similar to using System;
+        ///using System.Collections.Generic;
+        ///using System.IO;
+        ///using System.Reflection;
+        ///using System.Resources;
+        ///using Microsoft.Extensions.Configuration;
+        ///using XCommon.Application.Login;
+        ///using XCommon.CodeGerator;
+        ///using XCommon.CodeGerator.Configuration;
+        ///using XCommon.Application;
+        ///using XCommon.Web;
+        ///
+        ///namespace [{name}].CodeGenerator
+        ///{
+        ///	public class Program
+        ///	{
+        ///        private static IApplicationSettings ApplicationSettings { get; set;  }
+        ///        
+        ///        public static void Main(string[] a [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Logo {
+        internal static string GeneratorProgram {
             get {
-                return ResourceManager.GetString("Logo", resourceCulture);
+                return ResourceManager.GetString("GeneratorProgram", resourceCulture);
             }
         }
         
@@ -119,22 +132,17 @@ namespace XCommon.ProjectGerator.Resources {
         ///  },
         ///
         ///  &quot;dependencies&quot;: {
+        ///    &quot;Microsoft.Extensions.Configuration&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.Abstractions&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.FileExtensions&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.Json&quot;: &quot;1.0.0&quot;,
         ///    &quot;Microsoft.NETCore.App&quot;: {
         ///      &quot;type&quot;: &quot;platform&quot;,
         ///      &quot;version&quot;: &quot;1.0.0&quot;
         ///    },
         ///[{include}]
-        ///    &quot;XCommon&quot;: &quot;1.0.28&quot;,
-        ///    &quot;XCommon.CodeGerator&quot;: &quot;1.0.28&quot;
-        ///  },
-        ///
-        ///  &quot;frameworks&quot;: {
-        ///    &quot;netcoreapp1.0&quot;: {
-        ///      &quot;imports&quot;: &quot;dnxcore50&quot;
-        ///    }
-        ///  }
-        ///}
-        ///.
+        ///    &quot;XCommon&quot;: &quot;1.0.32&quot;,
+        ///    &quot;XCommon.CodeGerator&quot;: &quot;1.0.3 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ProjectJsonCodeGenerator {
             get {
