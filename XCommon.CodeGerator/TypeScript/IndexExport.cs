@@ -43,10 +43,17 @@ namespace XCommon.CodeGerator.TypeScript
                 if (Path.GetFileName(fileName) == "index.ts")
                     continue;
 
-                builder.AppendLine($"export * from \"./{Path.GetFileName(fileName)}\";");
+                builder.AppendLine($"export * from \"./{CheckFileName(fileName)}\";");
             }
 
             File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
         }
+
+		private string CheckFileName(string file)
+		{
+			var result = Path.GetFileName(file);
+			result = result.Replace(".ts", string.Empty);
+			return result;
+		}
     }
 }

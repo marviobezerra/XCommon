@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using XCommon.CodeGerator.Configuration;
+using XCommon.CodeGerator.TypeScript;
 
 namespace XCommon.CodeGerator.Test
 {
@@ -10,7 +11,10 @@ namespace XCommon.CodeGerator.Test
         public static void Main(string[] args)
         {
             Generator.LoadConfig(GetConfig());
-            Generator.Run(args);
+			IndexExport x = new IndexExport();
+			x.Run();
+
+			Generator.Run(args);
         }
 
         private static Config GetConfig()
@@ -19,9 +23,10 @@ namespace XCommon.CodeGerator.Test
             {
                 Angular = new ConfigAngular
                 {
-                    AppRoot = @"D:\A\Web\App",
-                    ComponentPath = @"D:\A\Web\App\Component",
-                    ServicePath = @"D:\A\Web\App\Service",
+                    AppRoot = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App",
+                    ComponentPath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Components",
+                    ServicePath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Services",
+                    DirectivePath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Directives",
                     HtmlRoot = "/html/components",
                     StyleInclude = new List<string>(),
                 },
