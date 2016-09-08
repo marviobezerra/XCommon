@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Resources;
+using XCommon.Application;
 using XCommon.CodeGerator.Configuration;
 using XCommon.CodeGerator.TypeScript;
 
@@ -11,9 +14,6 @@ namespace XCommon.CodeGerator.Test
         public static void Main(string[] args)
         {
             Generator.LoadConfig(GetConfig());
-			IndexExport x = new IndexExport();
-			x.Run();
-
 			Generator.Run(args);
         }
 
@@ -69,9 +69,35 @@ namespace XCommon.CodeGerator.Test
                 },
                 Resource = new ConfigResource
                 {
-
-                }
+					LazyLoad = false,
+					RequestAddress = "api/v1/resource",
+					CultureDefault = GetCultures()[0],
+					Cultures = GetCultures(),
+					File = "Resource",
+					Path = @"D:\A\Web\App\Services",
+					Resources = GetResources()
+				}
             };
         }
-    }
+
+		private static List<ApplicationCulture> GetCultures()
+		{
+			List<ApplicationCulture> result = new List<ApplicationCulture>();
+
+			result.Add(new ApplicationCulture { Name = "pt-BR", Description = "Portugues" });
+			result.Add(new ApplicationCulture { Name = "en-US", Description = "English" });
+
+			return result;
+		}
+
+		private static Dictionary<Type, ResourceManager> GetResources()
+		{
+			Dictionary<Type, ResourceManager> result = new Dictionary<Type, ResourceManager>();
+
+			result.Add(typeof(Resource.Form), Resource.Form.ResourceManager);
+			result.Add(typeof(Resource.Messages), Resource.Messages.ResourceManager);
+
+			return result;
+		}
+	}
 }

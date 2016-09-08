@@ -111,7 +111,7 @@ namespace XCommon.Web.Authentication.Ticket
                         ?.Cookies
                         ?.Where(c => c.Key == CookieCulture)
                         ?.FirstOrDefault()
-                        .Value ?? ApplicationSettings.Culture;
+                        .Value ?? ApplicationSettings.Culture.Name;
                 }
 
                 return HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Country)?.Value;
@@ -139,7 +139,7 @@ namespace XCommon.Web.Authentication.Ticket
 
         public bool SetCookieCulture(string culture)
         {
-            if (!ApplicationSettings.Cultures.Contains(culture))
+            if (!ApplicationSettings.Cultures.Any(c => c.Name == culture))
                 return false;
 
             try
