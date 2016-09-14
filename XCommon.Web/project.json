@@ -2,7 +2,6 @@
   "version": "1.0.33-*",
 
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
@@ -12,9 +11,10 @@
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "NETStandard.Library": "1.6.0",
     "XCommon": "1.0.33-*",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0"
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.1",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1"
   },
 
   "frameworks": {
