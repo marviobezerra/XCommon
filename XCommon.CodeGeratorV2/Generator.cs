@@ -1,11 +1,11 @@
 ﻿using System;
 using XCommon.Application.CommandLine;
-using XCommon.CodeGerator.Angular;
-using XCommon.CodeGerator.Core.DataBase;
-using XCommon.CodeGerator.CSharp;
-using XCommon.CodeGerator.TypeScript;
+using XCommon.CodeGeratorV2.Angular;
+using XCommon.CodeGeratorV2.Core.DataBase;
+using XCommon.CodeGeratorV2.CSharp;
+using XCommon.CodeGeratorV2.TypeScript;
 
-namespace XCommon.CodeGerator
+namespace XCommon.CodeGeratorV2
 {
 	public class Generator
     {

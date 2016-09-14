@@ -1,82 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using System.Resources;
 using XCommon.Application;
-using XCommon.CodeGerator.Configuration;
-using XCommon.CodeGerator.TypeScript;
+using XCommon.CodeGerator.Angular.Configuration;
+using XCommon.CodeGerator.CSharp.Configuration;
+using XCommon.CodeGerator.TypeScript.Configuration;
 
 namespace XCommon.CodeGerator.Test
 {
-    public class Program
+	public class Program
     {
         public static void Main(string[] args)
         {
-            Generator.LoadConfig(GetConfig());
-			Generator.Run(args);
+			Generator generator = new Generator(GetConfig());
+			generator.Run(args);
         }
 
-        private static Config GetConfig()
+        private static Configuration GetConfig()
         {
-            return new Config
-            {
-                Angular = new ConfigAngular
-                {
-                    AppRoot = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App",
-                    ComponentPath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Components",
-                    ServicePath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Services",
-                    DirectivePath = @"D:\VSGit\MyPetLife\Source\Prospect.MyPetLife.View.Web\App\Directives",
-                    HtmlRoot = "/html/components",
-                    StyleInclude = new List<string>(),
-                },
-                DataBase = new ConfigDataBase
-                {
-                    ConnectionString = "Data Source=(local);Initial Catalog=MyPetLife;Integrated Security=False;User Id=dev;Password=dev;MultipleActiveResultSets=True;Application Name=MyPetLife-Dev;Connection Timeout=1200",
-                    ContextName = "MyPetLifeContext",
-                    DataNameSpace = "Prospect.MyPetLife.Business.Data",
-                    DataPath = @"D:\A\Data",
-                },
-                Business = new ConfigBusiness
-                {
-                    EntrityPath = @"D:\A\Entity",
-                    EntrityNameSpace = "Prospect.MyPetLife.Business.Entity",
-                    FactoryPath = @"D:\A\Factory",
-                    FacotryNameSpace = "Prospect.MyPetLife.Business.Facotry",
-                    ContractPath = @"D:\A\Contract",
-                    ContractNameSpace = "Prospect.MyPetLife.Business.Contract",
-                    ConcretePath = @"D:\A\Concret",
-                    ConcreteNameSpace = "Prospect.MyPetLife.Business.Concret",
-                },
-                Entity = new ConfigEntity
-                {
-                    IncludeEntityUtil = true,
-                    Path = @"D:\A\Web\App\Entity",
-                    Assemblys = new List<System.Reflection.Assembly>
-                    {
-                        typeof(Entity.Common.CitiesEntity).GetTypeInfo().Assembly
-                    },
-                    TypesExtra = new List<Type>
-                    {
-                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
-                        typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
-                        typeof(XCommon.Patterns.Repository.Executes.Execute<>),
-                        //typeof(Application.Login.LoginChangePasswordEntity),
-						//typeof(Application.Login.SignInEntity),
-						//typeof(Application.Login.SingUpEntity),
-						//typeof(Application.Login.LoginStatus)
+            return new Configuration
+			{
+				Angular = new AngularConfig
+				{
+					ComponentPath = @"D:\A\App\Component",
+					DirectivePath = @"D:\A\App\Directive",
+					ServicePath = @"D:\A\App\Service",
+					PipePath = @"D:\A\App\Pipe",
+					HtmlRoot = "html"
+				},
+				CSharp = new CSharpConfig
+				{
+					DataBase = new DataBaseConfig
+					{
+						ConnectionString = "Data Source=(local);Initial Catalog=MyPetLife;Integrated Security=False;User Id=dev;Password=dev;MultipleActiveResultSets=True;Application Name=MyPetLife-Dev;Connection Timeout=1200",
+						ContextName = "MyPetLifeContext",
+						NameSpace = "Prospect.MyPetLife.Business.Data",
+						Path = @"D:\A\Data"
 					}
-                },
-                Resource = new ConfigResource
-                {
-					LazyLoad = false,
-					RequestAddress = "api/v1/resource",
-					CultureDefault = GetCultures()[0],
-					Cultures = GetCultures(),
-					File = "Resource",
-					Path = @"D:\A\Web\App\Services",
-					Resources = GetResources()
-				}
+				},
+				TypeScript = new TypeScriptConfig { }				
             };
         }
 
