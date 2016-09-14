@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.CSharp.Configuration;
@@ -34,6 +35,8 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					WriteFile(path, file, builder);
 				}
 			}
+
+			Console.WriteLine("Generate contract code - OK");
 		}
 	}
 }

@@ -11,6 +11,8 @@ namespace XCommon.CodeGerator.Angular.Writter
 	{
         internal void Run(string path, List<string> services)
 		{
+			path = path.ToLower();
+
 			foreach (string service in services)
 			{
 				var file = Path.Combine(path, $"{service.GetSelector()}.service.ts").ToLower();

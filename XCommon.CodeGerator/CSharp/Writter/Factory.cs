@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XCommon.CodeGerator.Core.Util;
@@ -14,6 +15,8 @@ namespace XCommon.CodeGerator.CSharp.Writter
 		{
 			GenerateFactoryCuston(config);
 			GenerateFactory(config);
+
+			Console.WriteLine("Generate factory code - OK");
 		}
 
 		private void GenerateFactoryCuston(CSharpConfig config)

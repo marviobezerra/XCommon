@@ -1,5 +1,4 @@
 ﻿using System;
-using XCommon.Extensions.String;
 
 namespace XCommon.CodeGerator.Angular.Extensions
 {
@@ -16,7 +15,7 @@ namespace XCommon.CodeGerator.Angular.Extensions
 
 			foreach (var item in component)
 			{
-				if (result.IsEmpty())
+				if (string.IsNullOrEmpty(result))
 				{
 					result += item;
 					continue;

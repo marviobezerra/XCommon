@@ -6,12 +6,13 @@ using System.Reflection;
 using System.Text;
 using XCommon.CodeGerator.Angular.Extensions;
 using XCommon.CodeGerator.Angular.Writter;
+using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.TypeScript.Configuration;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript.Writter
 {
-	public class Entities
+	public class Entities : FileWriter
     {
 		private IndexExport Index { get; set; } = new IndexExport();
 
@@ -165,7 +166,6 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 		private void ProcessEnum(TypeScriptEntity config)
 		{
-			var fileName = Path.Combine(config.Path, "enum.ts");
 			StringBuilderIndented builder = new StringBuilderIndented();
 
 			foreach (var enumItem in TSEnums)
@@ -186,7 +186,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 					.AppendLine();
 			}
 
-			File.WriteAllText(fileName, builder.ToString(), Encoding.UTF8);
+			WriteFile(config.Path.ToLower(), "enum.ts", builder);
 		}
 
 		private void ProcessTypes(TypeScriptEntity config)
@@ -194,7 +194,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 			foreach (var file in TSClass.Select(c => c.FileName).Distinct().OrderBy(c => c))
 			{
-				var fileName = Path.Combine(config.Path, file.GetSelector());
+				var fileName = file.GetSelector();
 				var importItems = TSClass.Where(c => c.FileName == file).SelectMany(c => c.Imports).ToList();
 
 				StringBuilderIndented builder = new StringBuilderIndented();
@@ -260,7 +260,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 						.AppendLine();
 				}
 
-				File.WriteAllText(fileName, builder.ToString(), Encoding.UTF8);
+				WriteFile(config.Path.ToLower(), fileName, builder);
 			}
 		}
 

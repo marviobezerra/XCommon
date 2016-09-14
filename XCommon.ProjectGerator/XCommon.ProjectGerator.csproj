@@ -43,6 +43,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\XCommon.CodeGerator\Angular\AngularRunner.cs">
+      <Link>Code\Angular\AngularRunner.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Configuration\AngularConfig.cs">
+      <Link>Code\Angular\Configuration\AngularConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Extensions\AngularExtensions.cs">
+      <Link>Code\Angular\Extensions\AngularExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Writter\Component.cs">
+      <Link>Code\Angular\Writter\Component.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Writter\IndexExport.cs">
+      <Link>Code\Angular\Writter\IndexExport.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Writter\ItemType.cs">
+      <Link>Code\Angular\Writter\ItemType.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Angular\Writter\Service.cs">
+      <Link>Code\Angular\Writter\Service.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon.CodeGerator\Core\Util\FileWriter.cs">
+      <Link>Code\Util\FileWriter.cs</Link>
+    </Compile>
     <Compile Include="..\xcommon\application\commandline\CommandArgument.cs">
       <Link>CommandLine\CommandArgument.cs</Link>
     </Compile>
@@ -66,6 +90,9 @@
     </Compile>
     <Compile Include="..\xcommon\application\consolex\IConsoleX.cs">
       <Link>ConsoleX\IConsoleX.cs</Link>
+    </Compile>
+    <Compile Include="..\XCommon\Util\StringBuilderIndented.cs">
+      <Link>Code\Util\StringBuilderIndented.cs</Link>
     </Compile>
     <Compile Include="Application\Angular\AngularApplication.cs" />
     <Compile Include="Application\ApplicationBase.cs" />

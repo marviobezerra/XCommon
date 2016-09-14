@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using XCommon.Application.CommandLine;
 using XCommon.CodeGerator.Angular.Configuration;
 using XCommon.CodeGerator.Angular.Writter;
-using XCommon.Extensions.String;
 
 namespace XCommon.CodeGerator.Angular
 {
@@ -48,7 +46,7 @@ namespace XCommon.CodeGerator.Angular
 						erro = true;
 					}
 
-					if (name.Value.IsEmpty() || !feature.HasValue())
+					if (string.IsNullOrEmpty(name.Value) || !feature.HasValue())
 					{
 						Console.WriteLine("Name of component doesn't specified");
 						erro = true;
@@ -61,7 +59,7 @@ namespace XCommon.CodeGerator.Angular
 
 					Component componentWritter = new Component();
 
-					string path = ParsePath(config, ItemType.Component);
+					string path = ParsePath(config, feature.Value(), ItemType.Component);
 
 					componentWritter.Run(path, feature.Value(), config.HtmlRoot, config.StyleInclude, GetItems(appCommand, name));
 					index.Run(path);
@@ -71,14 +69,14 @@ namespace XCommon.CodeGerator.Angular
 
 				if (service.HasValue())
 				{
-					if (name.Value.IsEmpty())
+					if (string.IsNullOrEmpty(name.Value))
 					{
 						Console.WriteLine("Name of component/feature doesn't specified");
 						return -1;
 					}
 
 					Service serviceWritter = new Service();
-					string path = ParsePath(config, ItemType.Service);
+					string path = ParsePath(config, string.Empty, ItemType.Service);
 
 					serviceWritter.Run(path, GetItems(appCommand, name));
 					index.Run(path);
@@ -96,7 +94,7 @@ namespace XCommon.CodeGerator.Angular
 			return appCommand.Execute(arguments.ToArray());
 		}
 
-		private string ParsePath(AngularConfig config, ItemType type)
+		private string ParsePath(AngularConfig config, string extra, ItemType type)
 		{
 			string currentPath = Directory.GetCurrentDirectory();
 
@@ -118,7 +116,7 @@ namespace XCommon.CodeGerator.Angular
 				case ItemType.Component:
 				default:
 					return string.IsNullOrEmpty(config.ComponentPath)
-						? Path.Combine(currentPath, "app", "component")
+						? Path.Combine(currentPath, "app", "component", extra)
 						: config.ComponentPath;
 			}			
 		}

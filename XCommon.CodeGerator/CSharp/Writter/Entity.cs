@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XCommon.CodeGerator.Core.Entity;
@@ -21,6 +22,9 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					GenerateFilter(config, group, item);
 				}
 			}
+
+			Console.WriteLine("Generate entity code - OK");
+			Console.WriteLine("Generate entity code [filter] - OK");
 		}
 
 		private void GenerateFilter(CSharpConfig config, ItemGroup group, Item item)

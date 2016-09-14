@@ -6,6 +6,7 @@ using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.CSharp.Configuration;
 using XCommon.Util;
 using XCommon.CodeGerator.CSharp.Extensions;
+using System;
 
 namespace XCommon.CodeGerator.CSharp.Writter
 {
@@ -16,6 +17,10 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			GenerateConcrete(config);
 			GenerateValidation(config);
 			GenerateQuery(config);
+
+			Console.WriteLine("Generate concrect code - OK");
+			Console.WriteLine("Generate concrect code [validation] - OK");
+			Console.WriteLine("Generate concrect code [query] - OK");
 		}
 
 		private void GenerateValidation(CSharpConfig config)
@@ -27,7 +32,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					string path = Path.Combine(config.ConcretePath, group.Name, "Validate");
 					string file = $"{item.Name}Validate.cs";
 
-					if (File.Exists(file))
+					if (File.Exists(Path.Combine(path, file)))
 						continue;
 
 					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Entity", "XCommon.Patterns.Specification.Entity.Implementation" };

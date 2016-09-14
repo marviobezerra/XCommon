@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using XCommon.CodeGerator.Angular.Extensions;
 using XCommon.CodeGerator.Angular.Writter;
+using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.TypeScript.Configuration;
 using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript
 {
-	public class Resource
+	public class Resource : FileWriter
 	{
 		private IndexExport Index { get; set; } = new IndexExport();
 		
@@ -52,9 +53,9 @@ namespace XCommon.CodeGerator.TypeScript
 			if (!Directory.Exists(config.Path))
 				Directory.CreateDirectory(config.Path);
 
-			var file = Path.Combine(config.Path, config.File.GetSelector() + ".service.ts");
+			var file = config.File.GetSelector() + ".service.ts";
 
-			File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
+			WriteFile(config.Path.ToLower(), file, builder);
 
 			Index.Run(config.Path);
 		}

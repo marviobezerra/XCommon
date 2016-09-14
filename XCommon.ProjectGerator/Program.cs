@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using XCommon.Application.CommandLine;
 using XCommon.Application.ConsoleX;
+using XCommon.CodeGerator.Angular;
+using XCommon.CodeGerator.Angular.Configuration;
 using XCommon.ProjectGerator.Application;
 
 namespace XCommon.ProjectGerator
@@ -14,6 +17,9 @@ namespace XCommon.ProjectGerator
         {
             if (SetUp(args))
             {
+				if (App == null)
+					return;
+
                 using (Spinner sp = new Spinner(SpinnerSequence.Dots, true, 2))
                 {
                     App.Run();
@@ -33,11 +39,21 @@ namespace XCommon.ProjectGerator
             var help = result.HelpOption("--help");
             var csharp = result.Option("--csharp", "Create new C# application", CommandOptionType.NoValue);
             var node = result.Option("--node", "Create new NODE application", CommandOptionType.NoValue);
+            var angular = result.Option("--angular", "Create angular resource", CommandOptionType.NoValue);
             
             result.OnExecute(() =>
             {
                 bool error = false;
                 List<string> messages = new List<string>();
+
+				if (angular.HasValue())
+				{
+					ApplicationBase.PrintLogo();
+					var param = args.ToList();
+					param.Remove("--angular");
+					AngularRunner runner = new AngularRunner();
+					return runner.Run(new AngularConfig(), param.ToArray());
+				}
 
                 if (!csharp.HasValue() && !node.HasValue())
                 {

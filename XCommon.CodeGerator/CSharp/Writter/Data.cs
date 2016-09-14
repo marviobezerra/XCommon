@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XCommon.CodeGerator.Core.Entity;
@@ -17,6 +18,10 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			GenerateContext(config);
 			GenerateEntity(config);
 			GenerateEntityMap(config);
+
+			Console.WriteLine("Generate data code - OK");
+			Console.WriteLine("Generate data code [entity] - OK");
+			Console.WriteLine("Generate data code [entity-map] - OK");
 		}
 
 		private void ClearFolder(CSharpConfig config)

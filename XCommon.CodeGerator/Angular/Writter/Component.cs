@@ -13,6 +13,8 @@ namespace XCommon.CodeGerator.Angular.Writter
 	{
 		internal void Run(string path, string feature, string htmlRoot, List<string> styleInclude, List<string> components)
 		{
+			path = path.ToLower();
+
 			foreach (string component in components)
 			{
 				var outlet = component.GetOutLet();
