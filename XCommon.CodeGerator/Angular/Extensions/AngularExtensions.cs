@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace XCommon.CodeGerator.Angular.Extensions
 {
@@ -32,6 +33,15 @@ namespace XCommon.CodeGerator.Angular.Extensions
 			}
 
 			return result.ToLower();
+		}
+
+		internal static string GetName(this string name)
+		{
+			var result = name.First().ToString().ToUpper() + name.Substring(1);
+			result = result.Replace("Service", string.Empty);
+			result = result.Replace("Component", string.Empty);
+			return result;
+
 		}
 	}
 }

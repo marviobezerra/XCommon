@@ -30,13 +30,15 @@ namespace XCommon.CodeGerator.Angular.Writter
 					.AppendLine("import { Http, Response } from \"@angular/http\"; ")
 					.AppendLine()
 					.AppendLine("@Injectable()")
-					.AppendLine($"export class {service}Service {{")
+					.AppendLine($"export class {service.GetName()}Service {{")
 					.IncrementIndent()
 					.AppendLine("constructor(private http: Http) { }")
 					.DecrementIndent()
 					.AppendLine("}");
 
 				WriteFile(path, file, builder);
+
+				Console.WriteLine($"Generated component {service.GetName()}");
 			}
 		}
 	}

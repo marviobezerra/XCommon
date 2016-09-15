@@ -8,6 +8,8 @@ namespace XCommon.CodeGerator.Angular.Writter
     {
         public void Run(string rootDir)
         {
+			Process(rootDir);
+
             foreach (var dir in Directory.GetDirectories(rootDir))
             {
                 Process(dir);

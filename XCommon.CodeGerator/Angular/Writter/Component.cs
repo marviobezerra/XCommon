@@ -20,7 +20,7 @@ namespace XCommon.CodeGerator.Angular.Writter
 				var outlet = component.GetOutLet();
 				var componentName = component.Replace("?o", string.Empty);
 				var selector = componentName.GetSelector();
-				
+
 				if (!Regex.IsMatch(componentName, @"^[a-zA-Z]+$"))
 				{
 					Console.WriteLine($"Invalid component name: {component}");
@@ -28,8 +28,8 @@ namespace XCommon.CodeGerator.Angular.Writter
 				}
 
 				TypeScript(path, componentName, selector, htmlRoot, feature);
-				Sass(path, componentName, selector, styleInclude);
-				Html(path, componentName, selector, outlet);
+				Sass(path, selector, styleInclude);
+				Html(path, selector, outlet);
 
 				Console.WriteLine($"Generated component {selector}");
 			}
@@ -45,6 +45,7 @@ namespace XCommon.CodeGerator.Angular.Writter
 				return;
 			}
 
+
 			StringBuilderIndented builder = new StringBuilderIndented();
 			string templateUrl = $"\"{htmlRoot}/{feture}/{selector}.html\",";
 
@@ -58,7 +59,7 @@ namespace XCommon.CodeGerator.Angular.Writter
 				.AppendLine($"styles: [require(\"./{selector}.scss\")]")
 				.DecrementIndent()
 				.AppendLine("})")
-				.AppendLine($"export class {name}Component implements OnInit {{")
+				.AppendLine($"export class {name.GetName()}Component implements OnInit {{")
 				.IncrementIndent()
 				.AppendLine("constructor() { }")
 				.AppendLine()
@@ -69,7 +70,7 @@ namespace XCommon.CodeGerator.Angular.Writter
 			WriteFile(path, file, builder);
 		}
 
-		private void Sass(string path, string name, string selector, List<string> styleInclude)
+		private void Sass(string path, string selector, List<string> styleInclude)
 		{
 			var file = $"{selector}.scss";
 
@@ -93,7 +94,7 @@ namespace XCommon.CodeGerator.Angular.Writter
 			WriteFile(path, file, builder);
 		}
 
-		private void Html(string path, string name, string selector, bool outlet)
+		private void Html(string path, string selector, bool outlet)
 		{
 			var file = $"{selector}.html";
 

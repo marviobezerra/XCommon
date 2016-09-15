@@ -108,7 +108,7 @@ namespace XCommon.CodeGerator.Angular
 				case ItemType.Service:
 					return string.IsNullOrEmpty(config.ServicePath)
 						? Path.Combine(currentPath, "app", "service")
-						: config.ComponentPath;
+						: config.ServicePath;
 				case ItemType.Pipe:
 					return string.IsNullOrEmpty(config.PipePath)
 						? Path.Combine(currentPath, "app", "pipe")
@@ -117,7 +117,7 @@ namespace XCommon.CodeGerator.Angular
 				default:
 					return string.IsNullOrEmpty(config.ComponentPath)
 						? Path.Combine(currentPath, "app", "component", extra)
-						: config.ComponentPath;
+						: Path.Combine(config.ComponentPath, extra);
 			}			
 		}
 
