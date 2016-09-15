@@ -103,20 +103,20 @@ namespace XCommon.CodeGerator.Angular
 
 				case ItemType.Directive:
 					return string.IsNullOrEmpty(config.DirectivePath)
-						? Path.Combine(currentPath, "app", "directive")
-						: config.ComponentPath;
+						? Path.Combine(currentPath, "app", "directives")
+						: config.DirectivePath;
 				case ItemType.Service:
 					return string.IsNullOrEmpty(config.ServicePath)
-						? Path.Combine(currentPath, "app", "service")
+						? Path.Combine(currentPath, "app", "services")
 						: config.ServicePath;
 				case ItemType.Pipe:
 					return string.IsNullOrEmpty(config.PipePath)
-						? Path.Combine(currentPath, "app", "pipe")
-						: config.ComponentPath;
+						? Path.Combine(currentPath, "app", "pipes")
+						: config.PipePath;
 				case ItemType.Component:
 				default:
 					return string.IsNullOrEmpty(config.ComponentPath)
-						? Path.Combine(currentPath, "app", "component", extra)
+						? Path.Combine(currentPath, "app", "components", extra)
 						: Path.Combine(config.ComponentPath, extra);
 			}			
 		}
