@@ -18,7 +18,7 @@ namespace XCommon.CodeGerator.TypeScript
 		
 		private List<GeneratorResourceEntity> Resources { get; set; }
 		
-		internal void Run(TypeScriptResource config)
+		internal void Run(TypeScriptResource config, IndexExport index)
 		{
 			if (config.Resources == null || config.Resources.Count <= 0)
 				return;
@@ -58,6 +58,9 @@ namespace XCommon.CodeGerator.TypeScript
 			WriteFile(config.Path.ToLower(), file, builder);
 
 			Index.Run(config.Path);
+
+			index.Run(config.Path);
+			Console.WriteLine("Generate resource typescript - OK");
 		}
 
 		private string GetCultureName(string culture)

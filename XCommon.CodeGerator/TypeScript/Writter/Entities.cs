@@ -264,7 +264,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			}
 		}
 
-		internal void Run(TypeScriptEntity config)
+		internal void Run(TypeScriptEntity config, IndexExport index)
 		{
 			TSClass = new List<TypeScriptClass>();
 			TSEnums = new List<TypeScriptEnum>();
@@ -278,7 +278,10 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			ProcessEnum(config);
 			ProcessTypes(config);
 
-			Index.Run(config.Path);	
+			Index.Run(config.Path);
+
+			index.Run(config.Path);
+			Console.WriteLine("Generate entity typescript - OK");
 		}
 	}
 }
