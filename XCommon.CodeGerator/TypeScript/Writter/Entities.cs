@@ -147,7 +147,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 						tsClass.Imports.Add(new TypeScriptImport
 						{
 							Class = enumProperty.Name,
-							File = "Enum.ts"
+							File = "enum.ts"
 						});
 					}
 

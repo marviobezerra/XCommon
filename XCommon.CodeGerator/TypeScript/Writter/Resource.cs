@@ -36,7 +36,7 @@ namespace XCommon.CodeGerator.TypeScript
 			}
 
 			builder
-				.AppendLine("import { Map } from \"../Entity\";")
+				.AppendLine("import { Map } from \"../entity\";")
 				.AppendLine();
 
 			Resources = new List<GeneratorResourceEntity>();
