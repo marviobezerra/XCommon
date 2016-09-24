@@ -21,12 +21,12 @@ namespace XCommon.Extensions.String
 
         public static bool IsEmpty(this string value)
         {
-            return string.IsNullOrEmpty(value);
+            return string.IsNullOrWhiteSpace(value.Trim());
         }
 
         public static bool IsNotEmpty(this string value)
         {
-            return !string.IsNullOrEmpty(value);
+            return !string.IsNullOrWhiteSpace(value);
         }
 
         public static string IfNull(this string value, string valueIfNull)
