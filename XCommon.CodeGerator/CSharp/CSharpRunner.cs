@@ -15,11 +15,13 @@ namespace XCommon.CodeGerator.CSharp
 			Data data = new Data();
 			Entity entity = new Entity();
 			Factory factory = new Factory();
+			Writter.UnitTest unitTest = new Writter.UnitTest();
 
 			data.Run(config);
 			entity.Run(config);
 			contract.Run(config);
 			concrete.Run(config);
+			unitTest.Run(config);
 			factory.Run(config);
 
 			return 0;

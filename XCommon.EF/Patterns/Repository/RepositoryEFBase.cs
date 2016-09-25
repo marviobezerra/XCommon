@@ -124,9 +124,8 @@ namespace XCommon.Patterns.Repository
                 foreach (TBase entity in entitys)
                 {
                     entity.Action = EntityAction.None;
-                    if (run != null)
-                        run(entity);
-                }
+					run?.Invoke(entity);
+				}
             });
         }
 

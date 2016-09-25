@@ -21,6 +21,10 @@ namespace XCommon.CodeGerator.CSharp.Configuration
 
 		public string EntrityNameSpace { get; set; }
 
+		public string UnitTestPath { get; set; }
+
+		public string UnitTestNameSpace { get; set; }
+
 		public DataBaseConfig DataBase { get; set; }
 
 		internal List<ItemGroup> DataBaseItems { get; set; }

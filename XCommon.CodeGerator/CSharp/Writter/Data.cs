@@ -78,7 +78,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				.AppendLine("if (AppSettings.UnitTest)")
 				.AppendLine("{")
 				.IncrementIndent()
-				.AppendLine($"options.UseSqlite(AppSettings.ConnectionString);")
+				.AppendLine($"options.UseInMemoryDatabase(\"{config.DataBase.ContextName}\");")
 				.AppendLine("return;")
 				.DecrementIndent()
 				.AppendLine("}")

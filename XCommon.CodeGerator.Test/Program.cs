@@ -30,6 +30,16 @@ namespace XCommon.CodeGerator.Test
 				},
 				CSharp = new CSharpConfig
 				{
+					ConcreteNameSpace = "MyPetLife.Business.Concret",
+					ConcretePath = @"D:\A\Business\Concret",
+					ContractNameSpace = "MyPetLife.Business.Contract",
+					ContractPath = @"D:\A\Business\Contract",
+					EntrityNameSpace = "MyPetLife.Business.Entity",
+					EntrityPath = @"D:\A\Business\Entity",
+					FacotryNameSpace = "MyPetLife.Business.Factory",
+					FactoryPath = @"D:\A\Business\Factory",
+					UnitTestNameSpace = "MyPetLife.Test",
+					UnitTestPath = @"D:\A\Test",
 					DataBase = new DataBaseConfig
 					{
 						ConnectionString = "Data Source=(local);Initial Catalog=MyPetLife;Integrated Security=False;User Id=dev;Password=dev;MultipleActiveResultSets=True;Application Name=MyPetLife-Dev;Connection Timeout=1200",
