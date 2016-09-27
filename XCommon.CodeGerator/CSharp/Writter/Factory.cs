@@ -46,7 +46,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			string path = Path.Combine(config.FactoryPath);
 			string file = $"Register.Auto.cs";
 
-			var nameSpace = new List<string> { "XCommon.Patterns.Ioc", "XCommon.Patterns.Specification.Entity", "XCommon.Patterns.Specification.Query" };
+			var nameSpace = new List<string> { "XCommon.Patterns.Ioc", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
 
 			config.DataBaseItems.ForEach(group =>
 			{
@@ -94,7 +94,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			foreach (var table in config.DataBaseItems.SelectMany(c => c.Items))
 			{
 				builder
-					.AppendLine($"Kernel.Map<ISpecificationEntity<{table.Name}Entity>>().To<{table.Name}Validate>();");
+					.AppendLine($"Kernel.Map<ISpecificationValidation<{table.Name}Entity>>().To<{table.Name}Validate>();");
 			}
 
 			builder
