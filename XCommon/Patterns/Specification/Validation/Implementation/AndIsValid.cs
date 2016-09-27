@@ -2,9 +2,9 @@
 using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-    internal class AndIsValid<TEntity> : ISpecificationEntity<TEntity>
+    internal class AndIsValid<TEntity> : ISpecificationValidation<TEntity>
     {
         private Func<TEntity, bool> Selector { get; set; }
         private string Message { get; set; }

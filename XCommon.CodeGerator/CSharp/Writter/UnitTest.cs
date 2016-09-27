@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using XCommon.CodeGerator.Core.Entity;
 using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.CSharp.Configuration;
@@ -11,7 +9,7 @@ using XCommon.Util;
 
 namespace XCommon.CodeGerator.CSharp.Writter
 {
-    internal class UnitTest : FileWriter
+	internal class UnitTest : FileWriter
 	{
 		public void Run(CSharpConfig config)
 		{
@@ -36,7 +34,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				return;
 
 			var className = $"{item.Name}ValidateTest";
-			var nameSpace = new List<string> { "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Entity" };
+			var nameSpace = new List<string> { "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation" };
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 			nameSpace.Add($"{config.UnitTestNameSpace}.{group.Name}.DataSource");
 
@@ -47,7 +45,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 
 			builder
 				.AppendLine("[Inject]")
-				.AppendLine($"protected ISpecificationEntity<{item.Name}Entity> Specification {{ get; set; }}")
+				.AppendLine($"protected ISpecificationValidation<{item.Name}Entity> Specification {{ get; set; }}")
 				.AppendLine()
 				.AppendLine($"[Theory(DisplayName = \"{item.Name}Validate\")]")
 				.AppendLine($"[MemberData(nameof({item.Name}DataSource.DataSource), MemberType = typeof({item.Name}DataSource))]")

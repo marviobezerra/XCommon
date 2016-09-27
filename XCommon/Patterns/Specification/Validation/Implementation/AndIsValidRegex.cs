@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-    internal class AndIsValidRegex<TEntity> : ISpecificationEntity<TEntity>
+    internal class AndIsValidRegex<TEntity> : ISpecificationValidation<TEntity>
     {
         private string RegexExpression { get; set; }
         private Func<TEntity, string> Selector { get; set; }

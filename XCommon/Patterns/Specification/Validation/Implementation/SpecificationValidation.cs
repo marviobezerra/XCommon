@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
 	internal class SpecificationList<TEntity>
 	{
-		public ISpecificationEntity<TEntity> Specification { get; set; }
+		public ISpecificationValidation<TEntity> Specification { get; set; }
 
 		public bool StopIfInvalid { get; set; }
 	}
 
-	public class SpecificationEntity<TEntity> : ISpecificationEntity<TEntity>
+	public class SpecificationValidation<TEntity> : ISpecificationValidation<TEntity>
 	{
-		public SpecificationEntity()
+		public SpecificationValidation()
 		{
 			SpecificationsList = new List<SpecificationList<TEntity>>();
 			Add(new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, "Entity {0} can't be null", typeof(TEntity).Name), true);
@@ -39,7 +39,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
 			return result;
 		}
 
-		public void Add(ISpecificationEntity<TEntity> specification, bool stopIfInvalid = false)
+		public void Add(ISpecificationValidation<TEntity> specification, bool stopIfInvalid = false)
 		{
 			SpecificationsList.Add(new SpecificationList<TEntity> { Specification = specification, StopIfInvalid = stopIfInvalid });
 		}

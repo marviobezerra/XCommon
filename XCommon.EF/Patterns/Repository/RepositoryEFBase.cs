@@ -8,7 +8,7 @@ using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Repository.Executes;
-using XCommon.Patterns.Specification.Entity;
+using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.Common;
@@ -28,7 +28,7 @@ namespace XCommon.Patterns.Repository
         }
 
         [Inject]
-        protected virtual ISpecificationEntity<TEntity> SpecificationValidate { get; set; }
+        protected virtual ISpecificationValidation<TEntity> SpecificationValidate { get; set; }
 
         [Inject]
         protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery { get; set; }

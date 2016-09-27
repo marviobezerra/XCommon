@@ -1,13 +1,13 @@
 ﻿using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-	internal class OrSpecification<TEntity> : ISpecificationEntity<TEntity>
+	internal class OrSpecification<TEntity> : ISpecificationValidation<TEntity>
 	{
-		private ISpecificationEntity<TEntity> Spec1 { get; set; }
-		private ISpecificationEntity<TEntity> Spec2 { get; set; }
+		private ISpecificationValidation<TEntity> Spec1 { get; set; }
+		private ISpecificationValidation<TEntity> Spec2 { get; set; }
 
-		internal OrSpecification(ISpecificationEntity<TEntity> spec1, ISpecificationEntity<TEntity> spec2)
+		internal OrSpecification(ISpecificationValidation<TEntity> spec1, ISpecificationValidation<TEntity> spec2)
 		{
 			Spec1 = spec1;
 			Spec2 = spec2;

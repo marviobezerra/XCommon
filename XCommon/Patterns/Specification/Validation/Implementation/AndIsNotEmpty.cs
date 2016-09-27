@@ -2,7 +2,7 @@
 using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
     public enum AndIsNotEmptyType
     {
@@ -13,7 +13,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         Object
     }
 
-    internal class AndIsNotEmpty<TEntity, TValue> : ISpecificationEntity<TEntity>
+    internal class AndIsNotEmpty<TEntity, TValue> : ISpecificationValidation<TEntity>
     {
         private AndIsNotEmptyType Type { get; set; }
         private Func<TEntity, TValue> Selector { get; set; }

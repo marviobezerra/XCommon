@@ -4,7 +4,7 @@ using XCommon.Extensions.Converters;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Patterns.Specification.Entity.Implementation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
     public enum AndCheckValueType
     {
@@ -20,7 +20,7 @@ namespace XCommon.Patterns.Specification.Entity.Implementation
         InRange
     }
 
-    internal class AndCheckValue<TEntity, TValue> : ISpecificationEntity<TEntity>
+    internal class AndCheckValue<TEntity, TValue> : ISpecificationValidation<TEntity>
     {
         private AndCheckValueType Type { get; set; }
         private AndCheckCompareType CompareType { get; set; }
