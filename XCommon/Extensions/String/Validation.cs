@@ -8,7 +8,7 @@ namespace XCommon.Extensions.String
 	public static class Validation
     {
         #region Valida Email
-        public static bool EmailValido(this string email)
+        public static bool EmailValid(this string email)
         {
             if (string.IsNullOrEmpty(email))
                 return false;
@@ -20,7 +20,7 @@ namespace XCommon.Extensions.String
         #endregion
 
         #region Valida Telefone
-        public static bool TelefoneValido(this string telefone)
+        public static bool PhoneValid(this string telefone)
         {
             if (string.IsNullOrEmpty(telefone))
                 return false;
@@ -32,7 +32,7 @@ namespace XCommon.Extensions.String
         #endregion
 
         #region Valida URL
-        public static bool UrlValida(this string url)
+        public static bool UrlValid(this string url)
         {
             Regex regex = new Regex(LibraryRegex.URL);
 
@@ -41,7 +41,7 @@ namespace XCommon.Extensions.String
         #endregion
 
         #region Valida CNPJ
-        public static bool CPNJValido(this string cnpj)
+        public static bool CPNJValid(this string cnpj)
         {
             cnpj = cnpj.Remove(".", "-", "/");
             List<string> _cnpj = new List<string>();
@@ -103,7 +103,7 @@ namespace XCommon.Extensions.String
         #endregion
 
         #region Valida CPF
-        public static bool CPFValido(this string cpf)
+        public static bool CPFValid(this string cpf)
         {
             const string _cpf = "000.000.000-00";
             cpf = cpf.Remove(".", "-", "/");
@@ -152,15 +152,15 @@ namespace XCommon.Extensions.String
         #endregion
 
         #region Codigo de barras
-        public static bool CodigoBarraValido(this string codigoBarra)
+        public static bool BarCodeValid(this string barCode)
         {
             const string checkSum = "131313131313";
-            bool valido = (codigoBarra.Length == 13);
+            bool valid = (barCode.Length == 13);
 
-            if (valido)
+            if (valid)
             {
-                int digito = int.Parse(codigoBarra[codigoBarra.Length - 1].ToString());
-                string ean = codigoBarra.Substring(0, codigoBarra.Length - 1);
+                int digito = int.Parse(barCode[barCode.Length - 1].ToString());
+                string ean = barCode.Substring(0, barCode.Length - 1);
 
                 int sum = 0;
                 for (int i = 0; i <= ean.Length - 1; i++)
@@ -170,9 +170,9 @@ namespace XCommon.Extensions.String
 
                 int calculo = 10 - (sum % 10);
 
-                valido = (digito == calculo);
+                valid = (digito == calculo);
             }
-            return valido;
+            return valid;
         }
         #endregion
     }

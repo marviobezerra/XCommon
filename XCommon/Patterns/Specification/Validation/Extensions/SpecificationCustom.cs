@@ -21,7 +21,7 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
 		
 		public static SpecificationValidation<TEntity> AndIsCPF<TEntity>(this SpecificationValidation<TEntity> specification, Func<TEntity, string> selector, string message, params object[] args)
 		{
-			specification.Add(new AndIsValid<TEntity>(c => selector(c).CPFValido(), message, args));
+			specification.Add(new AndIsValid<TEntity>(c => selector(c).CPFValid(), message, args));
 			return specification;
 		}
 
@@ -30,7 +30,7 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
 		
 		public static SpecificationValidation<TEntity> AndIsCNPJ<TEntity>(this SpecificationValidation<TEntity> specification, Func<TEntity, string> selector, string message, params object[] args)
 		{
-			specification.Add(new AndIsValid<TEntity>(c => selector(c).CPNJValido(), message, args));
+			specification.Add(new AndIsValid<TEntity>(c => selector(c).CPNJValid(), message, args));
 			return specification;
 		}
 

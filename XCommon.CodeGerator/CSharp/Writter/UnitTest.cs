@@ -28,12 +28,12 @@ namespace XCommon.CodeGerator.CSharp.Writter
 		private void GenerateValidateTest(CSharpConfig config, ItemGroup group, Item item)
 		{
 			string path = Path.Combine(config.UnitTestPath, group.Name);
-			string file = $"{item.Name}ValidateTest.cs";
+			string file = $"{item.Name}Test.cs";
 
 			if (File.Exists(Path.Combine(path, file)))
 				return;
 
-			var className = $"{item.Name}ValidateTest";
+			var className = $"{item.Name}Test";
 			var nameSpace = new List<string> { "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation" };
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 			nameSpace.Add($"{config.UnitTestNameSpace}.{group.Name}.DataSource");
