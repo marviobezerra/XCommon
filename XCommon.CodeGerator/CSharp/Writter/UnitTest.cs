@@ -48,7 +48,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				.AppendLine($"protected ISpecificationValidation<{item.Name}Entity> Specification {{ get; set; }}")
 				.AppendLine()
 				.AppendLine($"[Theory(DisplayName = \"{item.Name}Validate\")]")
-				.AppendLine($"[MemberData(nameof({item.Name}DataSource.DataSource), MemberType = typeof({item.Name}DataSource))]")
+				.AppendLine($"[MemberData(nameof({item.Name}DataSource.Data), MemberType = typeof({item.Name}DataSource))]")
 				.AppendLine($"public void Validate{item.Name}({item.Name}Entity data, bool valid, string message)")
 				.AppendLine("{")
 				.IncrementIndent()
@@ -75,14 +75,15 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			var className = $"{item.Name}DataSource";
 			var nameSpace = new List<string> { "System", "XCommon.UnitTest", "System.Collections.Generic" };
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
+			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
 
 			StringBuilderIndented builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit(className, $"DataSourceBase<{className}, {item.Name}Entity>", $"{config.UnitTestNameSpace}.{group.Name}.DataSource", ClassVisility.Public, false, nameSpace.ToArray());
+				.ClassInit(className, $"DataSource<{className}, {item.Name}Entity, {item.Name}Filter>", $"{config.UnitTestNameSpace}.{group.Name}.DataSource", ClassVisility.Public, false, nameSpace.ToArray());
 
 			builder
-				.AppendLine($"protected override List<DataItem<{item.Name}Entity>> Load()")
+				.AppendLine($"protected override List<DataItem<{item.Name}Entity>> LoadData()")
 				.AppendLine("{")
 				.IncrementIndent()
 				.AppendLine($"List<DataItem<{item.Name}Entity>> result = new List<DataItem<{item.Name}Entity>>();")
@@ -96,6 +97,15 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				.DecrementIndent()
 				.AppendLine("});")
 				.AppendLine()
+				.AppendLine("return result;")
+				.DecrementIndent()
+				.AppendLine("}")
+				.AppendLine()
+				.AppendLine($"protected override List<DataItem<{item.Name}Filter>> LoadFilter()")
+				.AppendLine("{")
+				.IncrementIndent()
+				.AppendLine($"List<DataItem<{item.Name}Filter>> result = new List<DataItem<{item.Name}Filter>>();")
+				.AppendLine("")
 				.AppendLine("return result;")
 				.DecrementIndent()
 				.AppendLine("}")
