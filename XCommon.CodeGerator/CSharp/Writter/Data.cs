@@ -51,7 +51,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			string path = config.DataBase.Path;
 			string file = $"{config.DataBase.ContextName}.cs";
 
-			List<string> nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "XCommon.Patterns.Ioc", "XCommon.Application" };
+			List<string> nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Infrastructure", "XCommon.Patterns.Ioc", "XCommon.Application" };
 			nameSpaces.AddRange(config.DataBaseItems.Select(c => $"{config.DataBase.NameSpace}.{c.Name}"));
 			nameSpaces.AddRange(config.DataBaseItems.Select(c => $"{config.DataBase.NameSpace}.{c.Name}.Map"));
 
@@ -78,7 +78,12 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				.AppendLine("if (AppSettings.UnitTest)")
 				.AppendLine("{")
 				.IncrementIndent()
-				.AppendLine($"options.UseInMemoryDatabase(\"{config.DataBase.ContextName}\");")
+				.AppendLine($"options")
+				.IncrementIndent()
+				.AppendLine($".UseInMemoryDatabase(\"{config.DataBase.ContextName}\")")
+				.AppendLine(".ConfigureWarnings(config => config.Ignore(InMemoryEventId.TransactionIgnoredWarning));")
+				.DecrementIndent()
+				.AppendLine()
 				.AppendLine("return;")
 				.DecrementIndent()
 				.AppendLine("}")
