@@ -6,6 +6,8 @@ namespace XCommon.UnitTest
 {
 	public abstract class Scenery<TKey, TParm>
 	{
+		private static readonly object Lock = new object();
+
 		public Scenery()
 		{
 			Config = new Dictionary<TKey, Pair<Type, IScenery<TParm>>>();
@@ -20,17 +22,20 @@ namespace XCommon.UnitTest
 
 		public virtual void Load(params TKey[] scenery)
 		{
-			TParm param = GetParam();
-
-			foreach (var item in scenery)
+			lock (Lock)
 			{
-				var config = Config[item];
+				TParm param = GetParam();
 
-				if (config.Item2 == null)
-					config.Item2 = (IScenery<TParm>)Activator.CreateInstance(config.Item1);
+				foreach (var item in scenery)
+				{
+					var config = Config[item];
 
-				config.Item2.Run(param);
-			}			
+					if (config.Item2 == null)
+						config.Item2 = (IScenery<TParm>)Activator.CreateInstance(config.Item1);
+
+					config.Item2.Run(param);
+				}
+			}
 		}
 	}
 }
