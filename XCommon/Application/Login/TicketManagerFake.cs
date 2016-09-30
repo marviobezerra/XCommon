@@ -7,48 +7,42 @@ namespace XCommon.Application.Login
 {
 	public class TicketManagerFake : ITicketManager
 	{
-		public string Culture { get; set; }
+		public string Culture { get; private set; }
 
-		public bool IsAuthenticated { get; set; }
+		public bool IsAuthenticated { get; private set; }
 
-		public ExecuteUser User
-		{
-			get
-			{
-				var userKey = UserKey;
+		public ExecuteUser User { get; set; }
 
-				if (userKey == Guid.Empty)
-					return null;
-
-				return new ExecuteUser
-				{
-					Key = userKey,
-					Name = "Fake"
-				};
-			}
-		}
-
-		public Guid UserKey
-		{
-			get
-			{
-				Guid result = Guid.Empty;
-
-				if (!IsAuthenticated)
-					return result;
-
-				return 1.ToGuid();
-			}
-		}
+		public Guid UserKey { get; set; }
 
 		public async Task SignInAsync(TicketEntity signUpTicket)
 		{
-			await Task.Yield();
+            if (signUpTicket.Status == TicketStatus.Sucess)
+            {
+                IsAuthenticated = true;
+                Culture = signUpTicket.Culture;
+                UserKey = signUpTicket.Key;
+                User = new ExecuteUser
+                {
+                    Key = signUpTicket.Key,
+                    Name = signUpTicket.Name,
+                    Login = "Fake"
+                };
+
+                return;
+            }
+
+            await SignOutAsync();
 		}
 
 		public async Task SignOutAsync()
 		{
-			await Task.Yield();
-		}
+            IsAuthenticated = true;
+            Culture = string.Empty;
+            UserKey = Guid.Empty;
+            User = null;
+
+            await Task.Yield();
+        }
 	}
 }
