@@ -37,7 +37,7 @@ namespace XCommon.Application.Login
 
 		public async Task SignOutAsync()
 		{
-            IsAuthenticated = true;
+            IsAuthenticated = false;
             Culture = string.Empty;
             UserKey = Guid.Empty;
             User = null;

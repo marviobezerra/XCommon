@@ -1,7 +1,7 @@
 ﻿namespace XCommon.UnitTest
 {
-	public interface IScenery<TContext>
+	public interface IScenery
 	{
-		void Run(TContext context);
+		void Run();
 	}
 }

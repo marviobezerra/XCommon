@@ -10,7 +10,7 @@ namespace XCommon.Extensions.String
         #region Valida Email
         public static bool EmailValid(this string email)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrWhiteSpace(email))
                 return false;
 
             Regex regex = new Regex(LibraryRegex.Email);
