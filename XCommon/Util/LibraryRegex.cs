@@ -22,7 +22,7 @@
         {
             get
             {
-                return @"(:?https?://|www\.|^[\w\d]+)(\S+\b)\.(\S+\b)*";
+                return @"(?<Protocol>\w+):\/\/(?<Domain>[\w@][\w.:@]+)\/?[\w\.?=%&=\-@/$,]*";
             }
         }
     }
