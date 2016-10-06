@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using XCommon.Extensions.Util;
 
 namespace XCommon.Patterns.Ioc
@@ -8,7 +9,7 @@ namespace XCommon.Patterns.Ioc
 		public static Map<TContract> Map<TContract>()
 			where TContract : class
 		{
-			if (!typeof(TContract).CheckIsInterface() || !typeof(TContract).CheckIsAbstract())
+			if (!(typeof(TContract).GetTypeInfo().IsInterface || typeof(TContract).GetTypeInfo().IsAbstract))
 				throw new Exception("O mapeamento deve iniciar por uma interface ou classe abstrata");
 
 			return new Map<TContract>(typeof(TContract));

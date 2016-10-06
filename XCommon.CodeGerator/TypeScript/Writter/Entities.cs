@@ -118,10 +118,10 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 			List<Type> types = config.Assemblys
 				.SelectMany(c => c.GetTypes())
-				.Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface() && !c.GetTypeInfo().IsEnum)
+				.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum)
 				.ToList();
 
-			types.AddRange(config.TypesExtra.Where(c => !c.CheckIsAbstract() && !c.CheckIsInterface() && !c.GetTypeInfo().IsEnum));
+			types.AddRange(config.TypesExtra.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum));
 
 			foreach (var type in types.Distinct())
 			{

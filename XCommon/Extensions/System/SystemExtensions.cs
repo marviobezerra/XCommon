@@ -40,15 +40,5 @@ namespace System
         {
             return someType.GetProperties().FirstOrDefault(c => c.Name == propertyName);
         }
-
-        public static bool CheckIsInterface(this Type someType)
-        {
-            return someType.GetTypeInfo().IsInterface;
-        }
-
-        public static bool CheckIsAbstract(this Type someType)
-        {
-            return someType.GetTypeInfo().IsAbstract;
-        }
     }
 }

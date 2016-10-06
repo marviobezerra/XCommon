@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace XCommon.Patterns.Ioc
 {
@@ -23,7 +24,7 @@ namespace XCommon.Patterns.Ioc
 
 		public void To<TConcret>(bool canCache, params object[] args)
 		{
-			if (typeof(TConcret).CheckIsInterface() || typeof(TConcret).CheckIsAbstract())
+			if (typeof(TConcret).GetTypeInfo().IsInterface || typeof(TConcret).GetTypeInfo().IsAbstract)
 				throw new Exception("O mapeamento não pode terminar por uma interface ou classe abstrata");
 
 			RepositoryManager.Add(Contract, typeof(TConcret), true, canCache, args);
