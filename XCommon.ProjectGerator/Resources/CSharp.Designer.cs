@@ -171,7 +171,7 @@ namespace XCommon.ProjectGerator.Resources {
         ///      &quot;version&quot;: &quot;1.0.1&quot;
         ///    },
         ///[{include}]
-        ///    &quot;XCommon&quot;: &quot;1.0.36&quot;,
+        ///    &quot;XCommon&quot;: &quot;1.0.37&quot;,
         ///    &quot;XCommon.CodeGerator&quot;: &quot;1.0.3 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ProjectJsonCodeGenerator {

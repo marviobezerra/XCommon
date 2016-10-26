@@ -15,8 +15,8 @@
     "[{name}].Business.Contract": "1.0.0-*",
     "[{name}].Business.Entity": "1.0.0-*",
     "[{name}].Business.Factory": "1.0.0-*",
-    "XCommon": "1.0.36",
-    "XCommon.Web": "1.0.36",
+    "XCommon": "1.0.37",
+    "XCommon.Web": "1.0.37",
     "xunit": "2.2.0-*"
   },
   "testRunner": "xunit",

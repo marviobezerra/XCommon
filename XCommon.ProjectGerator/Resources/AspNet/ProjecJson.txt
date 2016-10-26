@@ -19,8 +19,8 @@
       "version": "1.0.1"
     },
 [{include}]
-    "XCommon": "1.0.36",
-    "XCommon.Web": "1.0.36"
+    "XCommon": "1.0.37",
+    "XCommon.Web": "1.0.37"
   },
 
 	"tools": {

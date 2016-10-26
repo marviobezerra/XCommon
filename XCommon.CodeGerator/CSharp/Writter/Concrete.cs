@@ -35,13 +35,13 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					if (File.Exists(Path.Combine(path, file)))
 						continue;
 
-					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Entity", "XCommon.Patterns.Specification.Entity.Implementation" };
+					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Implementation" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 
 					StringBuilderIndented builder = new StringBuilderIndented();
 
 					builder
-						.ClassInit($"{item.Name}Validate", $"ISpecificationEntity<{item.Name}Entity>", $"{config.ConcreteNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())
+						.ClassInit($"{item.Name}Validate", $"ISpecificationValidation<{item.Name}Entity>", $"{config.ConcreteNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())
 						.AppendLine($"public bool IsSatisfiedBy({item.Name}Entity entity)")
 						.AppendLine("{")
 						.IncrementIndent()
@@ -52,7 +52,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 						.AppendLine($"public bool IsSatisfiedBy({item.Name}Entity entity, Execute execute)")
 						.AppendLine("{")
 						.IncrementIndent()
-						.AppendLine($"SpecificationEntity<{item.Name}Entity> result = new SpecificationEntity<{item.Name}Entity>();")
+						.AppendLine($"SpecificationValidation<{item.Name}Entity> result = new SpecificationValidation<{item.Name}Entity>();")
 						.AppendLine("return result.IsSatisfiedBy(entity, execute);")
 						.DecrementIndent()
 						.AppendLine("}")
