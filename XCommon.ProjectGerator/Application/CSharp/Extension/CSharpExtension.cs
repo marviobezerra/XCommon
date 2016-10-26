@@ -59,8 +59,8 @@ namespace XCommon.ProjectGerator.Application.CSharp.Extension
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Resource");
                     break;
-                case ProjectJson.BusinessConcrecte:
-                    template = Resources.CSharp.ProjectJsonConcrecte;
+                case ProjectJson.BusinessConcrete:
+                    template = Resources.CSharp.ProjectJsonConcrete;
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Data");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
@@ -79,7 +79,7 @@ namespace XCommon.ProjectGerator.Application.CSharp.Extension
                     break;
                 case ProjectJson.BusinessFactory:
                     template = Resources.CSharp.ProjectJsonFactory;
-                    references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Concrecte");
+                    references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Concrete");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Contract");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Data");
                     references.Add($"{project.Parameter.SolutionParam.SolutionName}.Business.Entity");
@@ -89,6 +89,9 @@ namespace XCommon.ProjectGerator.Application.CSharp.Extension
                     break;
                 case ProjectJson.ViewWebSimple:
                     template = Resources.CSharp.ProjectJsonEntity;
+                    break;
+                case ProjectJson.BusinessTest:
+                    template = Resources.CSharp.ProjectJsonTest;
                     break;
                 default:
                     break;

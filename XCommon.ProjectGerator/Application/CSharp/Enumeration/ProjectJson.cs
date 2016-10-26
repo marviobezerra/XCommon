@@ -3,12 +3,13 @@
     public enum ProjectJson
     {
         BusinessCodeGenerator,
-        BusinessConcrecte,
+        BusinessConcrete,
         BusinessContract,
         BusinessData,
         BusinessEntity,
         BusinessFactory,
         BusinessResource,
+        BusinessTest,
         ViewWebSimple
     }
 }

@@ -2229,7 +2229,7 @@
           "lib/netstandard1.3/_._": {}
         }
       },
-      "XCommon/1.0.35": {
+      "XCommon/1.0.36": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -2246,14 +2246,14 @@
           "netstandard1.6/XCommon.dll": {}
         }
       },
-      "XCommon.CodeGerator/1.0.35": {
+      "XCommon.CodeGerator/1.0.36": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "System.Data.SqlClient": "4.1.0",
-          "XCommon": "1.0.35"
+          "XCommon": "1.0.36"
         },
         "compile": {
           "netstandard1.6/XCommon.CodeGerator.dll": {}
@@ -2698,7 +2698,7 @@
           "lib/net45/_._": {}
         }
       },
-      "XCommon/1.0.35": {
+      "XCommon/1.0.36": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2714,14 +2714,14 @@
           "net451/XCommon.dll": {}
         }
       },
-      "XCommon.CodeGerator/1.0.35": {
+      "XCommon.CodeGerator/1.0.36": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "System.Data.SqlClient": "4.1.0",
-          "XCommon": "1.0.35"
+          "XCommon": "1.0.36"
         },
         "compile": {
           "net451/XCommon.CodeGerator.dll": {}
@@ -7584,12 +7584,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.35": {
+    "XCommon/1.0.36": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
     },
-    "XCommon.CodeGerator/1.0.35": {
+    "XCommon.CodeGerator/1.0.36": {
       "type": "project",
       "path": "../XCommon.CodeGerator/project.json",
       "msbuildProject": "../XCommon.CodeGerator/XCommon.CodeGerator.xproj"
@@ -7597,8 +7597,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "XCommon >= 1.0.35-*",
-      "XCommon.CodeGerator >= 1.0.35-*"
+      "XCommon >= 1.0.36-*",
+      "XCommon.CodeGerator >= 1.0.36-*"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.1"

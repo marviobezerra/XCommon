@@ -5,11 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using XCommon.Application;
-using XCommon.Application.Login;
 using XCommon.Patterns.Ioc;
-using XCommon.Web.Authentication;
-using XCommon.Web.Authentication.Ticket;
-using XCommon.Web.Extensions;
+using XCommon.Web;
 [{factoryUsing}]
 
 namespace [{namespace}]
@@ -28,7 +25,7 @@ namespace [{namespace}]
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -46,9 +43,10 @@ namespace [{namespace}]
             ApplicationSettings appSettings = Configuration.Get<ApplicationSettings>("[{name}]");
             IHttpContextAccessor httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
 
-            Kernel.Map<ITicketManager>().To<TicketManager>(httpContextAccessor);
-            Kernel.Map<ITicketManagerWeb>().To<TicketManager>(httpContextAccessor);
             Kernel.Map<IApplicationSettings>().To(appSettings);
+
+            // Uncomment this line for Map classes
+            //Register.Do(appSettings.UnitTest);
 
             if (env.IsDevelopment())
             {
@@ -61,9 +59,7 @@ namespace [{namespace}]
             }
 
             app
-				// Configure external providers, then uncomment this line
-                //.UseXCommonAuthentication(Configuration)
-                .UseStaticFiles()                
+                .UseStaticFiles()
                 .UseMvc(routes =>
                 {
                     routes.MapRoute(
@@ -71,6 +67,6 @@ namespace [{namespace}]
                         template: "{*url}",
                         defaults: new { controller = "Home", action = "Index" });
                 });
-        }        
+        }
     }
 }

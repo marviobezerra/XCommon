@@ -1,5 +1,7 @@
 var path = require("path"),
 	ExtractTextPlugin = require("extract-text-webpack-plugin"),
+	autoprefixer = require("autoprefixer"),
+	precss = require("precss"),
 	webpack = require("webpack");
 
 module.exports = {
@@ -7,14 +9,15 @@ module.exports = {
 		"./App/polyfills.ts",
 		"./App/vendors.ts",
 		"./App/main.ts",
-        "./App/Styles/app-theme.scss"
+        "./App/styles/app-style.scss"
 	],
 	output: {
-		path: path.join(__dirname, "[{output}]", "asserts"),
+		path: path.join(__dirname, "wwwroot", "asserts"),
 		filename: "bundle.js"
 	},
 	plugins: [
-		new ExtractTextPlugin("bundle.css")
+		new ExtractTextPlugin("bundle.css"),
+		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|pt-BR/)
 	],
 
 	resolve: {
@@ -25,14 +28,14 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+				loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader")
 			},
             {
-                test: /\app-theme.scss$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+            	test: /\app-style.scss$/,
+            	loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!sass-loader")
             },
 			{
-			    exclude: /Styles/,
+			    exclude: /styles/,
 			    test: /\.scss$/,
 			    loaders: ["raw-loader", "sass-loader?sourceMap"]
 			},
@@ -45,5 +48,8 @@ module.exports = {
 				loader: "strip-sourcemap"
 			}
 		]
+	},
+	postcss: function () {
+		return [precss, autoprefixer({ browsers: ["last 2 versions"] })];
 	}
 };

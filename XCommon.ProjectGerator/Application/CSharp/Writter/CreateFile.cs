@@ -17,7 +17,11 @@ namespace XCommon.ProjectGerator.Application.CSharp.Writter
 
             var file = Path.Combine(param.Path, param.FileName);
 
-            File.WriteAllText(file, param.Template);
+            var template = param.Template
+                .Replace("[{name}]", Constants.Name)
+                .Replace("[{nameSafe}]", Constants.NameSafe);
+
+            File.WriteAllText(file, template);
         }
     }
 }

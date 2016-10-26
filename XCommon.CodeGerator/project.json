@@ -1,11 +1,11 @@
 {
-  "version": "1.0.35-*",
+  "version": "1.0.36-*",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Newtonsoft.Json": "9.0.1",
     "System.Data.SqlClient": "4.1.0",
-    "XCommon": "1.0.35-*"
+    "XCommon": "1.0.36-*"
   },
 
   "frameworks": {

@@ -13,6 +13,6 @@
     <layout>Whait</layout>
     <script type="text/javascript">{0}</script>
     <script type="text/javascript" src="/assets/bundle.js"></script>
-    <script type="text/javascript" src="//localhost:35729/livereload.js?snipver =1" async defer></script>
+    <script type="text/javascript" src="//localhost:35729/livereload.js?snipver=1" async defer></script>
 </body>
 </html>

@@ -61,6 +61,37 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;MyPetLife&quot;: {
+        ///    &quot;Name&quot;: &quot;[{name}]&quot;,
+        ///    &quot;Version&quot;: &quot;0.0.1&quot;,
+        ///    &quot;Culture&quot;: {
+        ///      &quot;Name&quot;: &quot;pt-BR&quot;,
+        ///      &quot;Description&quot;: &quot;Portugues&quot;
+        ///    },
+        ///    &quot;Cultures&quot;: [
+        ///      {
+        ///        &quot;Name&quot;: &quot;pt-BR&quot;,
+        ///        &quot;Description&quot;: &quot;Portugues&quot;
+        ///      },
+        ///      {
+        ///        &quot;Name&quot;: &quot;en-US&quot;,
+        ///        &quot;Description&quot;: &quot;English&quot;
+        ///      }
+        ///    ],
+        ///    &quot;UnitTest&quot;: true,
+        ///    &quot;Production&quot;: false
+        ///  }
+        ///}
+        ///.
+        /// </summary>
+        internal static string AppSettingsTest {
+            get {
+                return ResourceManager.GetString("AppSettingsTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to using XCommon.Application.Login;
         ///using XCommon.Patterns.Ioc;
         ///
@@ -82,25 +113,24 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to using System;
+        ///   Looks up a localized string similar to using Microsoft.Extensions.Configuration;
+        ///using System;
         ///using System.Collections.Generic;
         ///using System.IO;
         ///using System.Reflection;
         ///using System.Resources;
-        ///using Microsoft.Extensions.Configuration;
-        ///using XCommon.Application.Login;
-        ///using XCommon.CodeGerator;
-        ///using XCommon.CodeGerator.Configuration;
         ///using XCommon.Application;
+        ///using XCommon.Application.Login;
+        ///using XCommon.Application.Socket;
+        ///using XCommon.CodeGerator;
+        ///using XCommon.CodeGerator.Angular.Configuration;
+        ///using XCommon.CodeGerator.CSharp.Configuration;
+        ///using XCommon.CodeGerator.TypeScript.Configuration;
         ///using XCommon.Web;
         ///
         ///namespace [{name}].CodeGenerator
         ///{
-        ///	public class Program
-        ///	{
-        ///        private static IApplicationSettings ApplicationSettings { get; set;  }
-        ///        
-        ///        public static void Main(string[] a [rest of string was truncated]&quot;;.
+        ///	public class  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GeneratorProgram {
             get {
@@ -138,10 +168,10 @@ namespace XCommon.ProjectGerator.Resources {
         ///    &quot;Microsoft.Extensions.Configuration.Json&quot;: &quot;1.0.0&quot;,
         ///    &quot;Microsoft.NETCore.App&quot;: {
         ///      &quot;type&quot;: &quot;platform&quot;,
-        ///      &quot;version&quot;: &quot;1.0.0&quot;
+        ///      &quot;version&quot;: &quot;1.0.1&quot;
         ///    },
         ///[{include}]
-        ///    &quot;XCommon&quot;: &quot;1.0.32&quot;,
+        ///    &quot;XCommon&quot;: &quot;1.0.36&quot;,
         ///    &quot;XCommon.CodeGerator&quot;: &quot;1.0.3 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ProjectJsonCodeGenerator {
@@ -172,9 +202,9 @@ namespace XCommon.ProjectGerator.Resources {
         ///}
         ///.
         /// </summary>
-        internal static string ProjectJsonConcrecte {
+        internal static string ProjectJsonConcrete {
             get {
-                return ResourceManager.GetString("ProjectJsonConcrecte", resourceCulture);
+                return ResourceManager.GetString("ProjectJsonConcrete", resourceCulture);
             }
         }
         
@@ -306,6 +336,30 @@ namespace XCommon.ProjectGerator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;buildOptions&quot;: {
+        ///  },
+        ///  &quot;dependencies&quot;: {
+        ///    &quot;dotnet-test-xunit&quot;: &quot;2.2.0-*&quot;,
+        ///    &quot;FluentAssertions&quot;: &quot;4.15.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.Abstractions&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.FileExtensions&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.Extensions.Configuration.Json&quot;: &quot;1.0.0&quot;,
+        ///    &quot;Microsoft.NETCore.App&quot;: {
+        ///      &quot;version&quot;: &quot;1.0.1-*&quot;,
+        ///      &quot;type&quot;: &quot;platform&quot;
+        ///    },
+        ///    &quot;[{name}].Business.Contract&quot;: &quot;1.0.0-*&quot;,
+        ///    &quot;[{ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ProjectJsonTest {
+            get {
+                return ResourceManager.GetString("ProjectJsonTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Microsoft Visual Studio Solution File, Format Version 12.00
         ///# Visual Studio 14
@@ -327,6 +381,147 @@ namespace XCommon.ProjectGerator.Resources {
         internal static string Solution {
             get {
                 return ResourceManager.GetString("Solution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to namespace [{name}].Business.Entity
+        ///{
+        ///    public class TempClass
+        ///    {
+        ///    }
+        ///}
+        ///.
+        /// </summary>
+        internal static string TempClass {
+            get {
+                return ResourceManager.GetString("TempClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using [{name}].Business.Test.DataScenery;
+        ///using XCommon.Patterns.Ioc;
+        ///
+        ///namespace [{name}].Business.Test
+        ///{
+        ///	public abstract class BaseTest
+        ///	{
+        ///		public BaseTest()
+        ///		{
+        ///			Constants.InitKernel();
+        ///			Kernel.Resolve(this);
+        ///			Scenery = new SceneryManager();
+        ///		}
+        ///
+        ///		protected SceneryManager Scenery { get; set; }
+        ///	}
+        ///}
+        ///.
+        /// </summary>
+        internal static string TestBase {
+            get {
+                return ResourceManager.GetString("TestBase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using [{name}].Business.Data;
+        ///using XCommon.UnitTest;
+        ///
+        ///namespace [{name}].Business.Test.DataScenery.Sceneries
+        ///{
+        ///    public class CleanDataBaseScenery : IScenery
+        ///    {
+        ///        public void Run()
+        ///        {
+        ///            using ([{safename}]Context db = new [{safename}]Context())
+        ///            {
+        ///                db.Database.EnsureDeleted();
+        ///                db.Database.EnsureCreated();
+        ///            }
+        ///        }
+        ///    }
+        ///}
+        ///.
+        /// </summary>
+        internal static string TestCleanDataBaseScenery {
+            get {
+                return ResourceManager.GetString("TestCleanDataBaseScenery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using Microsoft.Extensions.Configuration;
+        ///using System;
+        ///using System.IO;
+        ///using XCommon.Application;
+        ///using XCommon.Application.Login;
+        ///using XCommon.Patterns.Ioc;
+        ///using XCommon.Web;
+        ///
+        ///namespace [{name}].Business.Test.DataScenery
+        ///{
+        ///	public static class Constants
+        ///    {
+        ///		private static bool KernelInited { get; set; }
+        ///
+        ///		public static void InitKernel()
+        ///		{
+        ///			if (KernelInited)
+        ///				return;
+        ///
+        ///			var builder = new ConfigurationBuilder()
+        ///				   .SetBasePath(Directory.GetCurrentDirectory())
+        ///				    [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TestContants {
+            get {
+                return ResourceManager.GetString("TestContants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using [{name}].Business.Test.DataScenery.Sceneries;
+        ///using XCommon.UnitTest;
+        ///
+        ///namespace [{name}].Business.Test.DataScenery
+        ///{
+        ///    public class SceneryManager : SceneryManager&lt;SceneryType&gt;
+        ///	{
+        ///        public SceneryManager()
+        ///        {
+        ///            Clean = new CleanDataBaseScenery();
+        ///        }
+        ///
+        ///        private CleanDataBaseScenery Clean { get; set; }
+        ///
+        ///        protected override void SetUp()
+        ///		{
+        ///			Config.Add(SceneryType.ClearDataBase, typeof(CleanDataBaseScenery));
+        ///        }
+        ///
+        ///        protected  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TestSceneryManager {
+            get {
+                return ResourceManager.GetString("TestSceneryManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to namespace [{name}].Business.Test.DataScenery
+        ///{
+        ///	public enum SceneryType
+        ///    {
+        ///        ClearDataBase
+        ///    }
+        ///}
+        ///.
+        /// </summary>
+        internal static string TestSceneryType {
+            get {
+                return ResourceManager.GetString("TestSceneryType", resourceCulture);
             }
         }
     }

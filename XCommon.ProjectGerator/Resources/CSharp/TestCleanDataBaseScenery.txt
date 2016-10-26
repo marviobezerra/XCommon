@@ -1,0 +1,17 @@
+﻿using [{name}].Business.Data;
+using XCommon.UnitTest;
+
+namespace [{name}].Business.Test.DataScenery.Sceneries
+{
+    public class CleanDataBaseScenery : IScenery
+    {
+        public void Run()
+        {
+            using ([{nameSafe}]Context db = new [{nameSafe}]Context())
+            {
+                db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+            }
+        }
+    }
+}

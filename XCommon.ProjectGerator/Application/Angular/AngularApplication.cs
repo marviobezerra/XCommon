@@ -68,15 +68,17 @@ namespace XCommon.ProjectGerator.Application.Angular
         {
             string initialAboutComponents = "run -- -a -f About -c " + string.Join(" ", InitialComponents());
             string argumentsNPM = "install " + string.Join(" ", AngularPackages()) + " --save";
+            string argumentsNPMDev = "install " + string.Join(" ", AngularDevPackages()) + " --save-dev";
             string argumentsTyping = "install " + string.Join(" ", TypingsPackages()) + " --global --save";
 
             CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Creating basic Angular 'Home' components", Command = "dotnet", Arguments = "run -- -a -f Home -c Home", Directory = Path.Combine(BasePath, "..", $"{Name}.CodeGenerator") }));
             CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Creating basic Angular 'About' components", Command = "dotnet", Arguments = initialAboutComponents, Directory = Path.Combine(BasePath, "..", $"{Name}.CodeGenerator") }));
             CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Creating basic Angular 'System' components", Command = "dotnet", Arguments = "run -- -a -f System -c NotFound", Directory = Path.Combine(BasePath, "..", $"{Name}.CodeGenerator") }));
 
-			CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing NPM packages", Command = "npm", Arguments = argumentsNPM, Directory = BasePath }));
-			CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing Typings", Command = "typings", Arguments = argumentsTyping, Directory = BasePath }));
-		}
+            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing NPM packages", Command = "npm", Arguments = argumentsNPM, Directory = BasePath }));
+            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing NPM DEV packages", Command = "npm", Arguments = argumentsNPMDev, Directory = BasePath }));
+            CommandsPost.Add(new CommandShell(new CommandShellParam { Name = "Installing Typings", Command = "typings", Arguments = argumentsTyping, Directory = BasePath }));
+        }
 
         public List<string> AngularPackages()
         {
@@ -87,33 +89,23 @@ namespace XCommon.ProjectGerator.Application.Angular
             result.Add("@angular/core");
             result.Add("@angular/forms");
             result.Add("@angular/http");
+            result.Add("@angular/material");
             result.Add("@angular/platform-browser");
             result.Add("@angular/platform-browser-dynamic");
             result.Add("@angular/router");
-            result.Add("@angular2-material/button");
-            result.Add("@angular2-material/button-toggle");
-            result.Add("@angular2-material/card");
-            result.Add("@angular2-material/checkbox");
-            result.Add("@angular2-material/core");
-            result.Add("@angular2-material/grid-list");
-            result.Add("@angular2-material/icon");
-            result.Add("@angular2-material/input");
-            result.Add("@angular2-material/list");
-            result.Add("@angular2-material/menu");
-            result.Add("@angular2-material/progress-bar");
-            result.Add("@angular2-material/progress-circle");
-            result.Add("@angular2-material/radio");
-            result.Add("@angular2-material/sidenav");
-            result.Add("@angular2-material/slide-toggle");
-            result.Add("@angular2-material/slider");
-            result.Add("@angular2-material/tabs");
-            result.Add("@angular2-material/toolbar");
-            result.Add("@angular2-material/tooltip");
-            result.Add("angular2-text-mask");
             result.Add("core-js");
             result.Add("reflect-metadata");
             result.Add("rxjs");
             result.Add("zone.js");
+
+            return result;
+        }
+
+        public List<string> AngularDevPackages()
+        {
+            List<string> result = new List<string>();
+
+            result.Add("autoprefixer");
             result.Add("css-loader");
             result.Add("extract-text-webpack-plugin");
             result.Add("gulp");
@@ -124,7 +116,10 @@ namespace XCommon.ProjectGerator.Application.Angular
             result.Add("gulp-util");
             result.Add("node-sass");
             result.Add("path");
+            result.Add("postcss-loader");
+            result.Add("precss");
             result.Add("raw-loader");
+            result.Add("run-sequence");
             result.Add("sass-loader");
             result.Add("strip-sourcemap-loader");
             result.Add("style-loader");
@@ -132,7 +127,6 @@ namespace XCommon.ProjectGerator.Application.Angular
             result.Add("typescript");
             result.Add("typings");
             result.Add("webpack");
-            result.Add("webpack-merge");
             result.Add("webpack-stream");
 
             return result;
@@ -155,8 +149,8 @@ namespace XCommon.ProjectGerator.Application.Angular
             List<string> result = new List<string>();
 
             result.Add("AboutHome?o");
-			result.Add("About");
-			result.Add("Privacy");
+            result.Add("About");
+            result.Add("Privacy");
             result.Add("Terms");
             result.Add("Contact");
 

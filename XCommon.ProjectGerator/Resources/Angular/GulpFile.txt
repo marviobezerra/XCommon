@@ -1,4 +1,4 @@
-/// <binding ProjectOpened="dev:watch" />
+/// <binding ProjectOpened='watch' />
 var gulp = require("gulp"),
 	gutil = require("gulp-util"),
 	webpack = require("webpack"),
@@ -6,137 +6,150 @@ var gulp = require("gulp"),
 	shell = require("gulp-shell"),
 	livereload = require("gulp-livereload"),
 	rimraf = require("gulp-rimraf"),
-	webpackStream = require("webpack-stream"),
-	merge = require("webpack-merge");
+	runsequence = require("run-sequence"),
+	webpackStream = require("webpack-stream");
 
 var helper = {
-    tasks: {
-        clear: "clear",
-        watch: "dev:watch",
-        html: {
-            page: "dev:html:page"
-        },
-        dnx: {
-            ts: "dnx:typescript:ts"
-        },
-        default: {
-            dev: "default:dev",
-            deploy: "default:deploy"
-        }
-    },
-    path: {
-        source: {
-            defaultFile: "./App/App.Component.ts",
-            html: "./App/**/*.html"
-        },
-        destination: {
-            html: "./wwwroot/html",
-            assets: "./wwwroot/assets"
-        },
-        entity: "../Prospect.MyPetLife.Business.Entity/**/*.cs",
-        resource: "../Prospect.MyPetLife.Business.Resource/**/*.resx"
-    },
-    htmlMimify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeTagWhitespace: false,
-        removeRedundantAttributes: true,
-        caseSensitive: true
-    },
-    webpack: function (dev, watch, deploy) {
-        var result = merge(require("./webpack.config.js"), {
-        });
+	tasks: {
+		clear: "clear",
+		watch: "watch",
+		compile: {
+			html: "compile:html",
+			ts: "compile:ts",
+			deploy: "compile:deploy",
+			dnx: {
+			    ts: "run:dnx:ts",
+			    csharp: "run:dnx:csharp",
+			}
+		}
+	},
+	path: {
+		source: {
+			defaultFile: "./App/App.Component.ts",
+			html: "./App/**/*.html"
+		},
+		destination: {
+			html: "./wwwroot/html",
+			assets: "./wwwroot/assets"
+		},
+		entity: "../Sample.Business.Entity/**/*.cs",
+		resource: "../Sample.Business.Resource/**/*.resx"
+	},
+	htmlMimify: {
+		collapseWhitespace: true,
+		removeComments: true,
+		removeTagWhitespace: false,
+		removeRedundantAttributes: true,
+		caseSensitive: true
+	},
+	webpack: {
+		debug: false,
+		watch: false,
+		parse: function () {
+			var result = require("./webpack.config.js");
 
-        if (dev === true) {
-            result.devtool = "source-map";
-        }
+			if (helper.webpack.debug === true) {
+				result.devtool = "source-map";
+				result.watch = helper.webpack.watch;
+				result.plugins = result.plugins || [];
+				result.plugins.push(helper.webpack.log);
+			}
 
-        if (watch === true) {
-            result.watch = true;
-            result.plugins = result.plugins || [];
-            result.plugins.push(helper.webPackLog);
-        }
+			if (helper.webpack.debug === false) {
+				result.debug = false;
+				result.plugins = result.plugins || [];
+				result.plugins.push(new webpack.NoErrorsPlugin());
+				result.plugins.push(new webpack.optimize.DedupePlugin());
+				result.plugins.push(new webpack.optimize.UglifyJsPlugin({
+					beautify: false,
+					comments: false,
+					minimize: true,
+					mangle: {
+						screw_ie8: true,
+						keep_fnames: true
+					},
+					compress: {
+						warnings: false,
+						screw_ie8: true,
+						drop_console: true,
+						drop_debugger: true
+					}
+				}));
+			}
 
-        if (deploy === true) {
-            result.debug = false;
-            result.plugins = result.plugins || [];
-            result.plugins.push(new webpack.NoErrorsPlugin());
-            result.plugins.push(new webpack.optimize.DedupePlugin());
-            result.plugins.push(new webpack.optimize.UglifyJsPlugin({
-                beautify: false,
-                comments: false,
-                minimize: true,
-                mangle: {
-                    screw_ie8: true,
-                    keep_fnames: true
-                },
-                compress: {
-                    warnings: false,
-                    screw_ie8: true,
-                    drop_console: true,
-                    drop_debugger: true
-                }
-            }));
-        }
-
-        return result;
-    },
-    webPackLog: function () {
-        this.plugin("done", function (stats) {
-            if (stats.compilation.errors && stats.compilation.errors.length) {
-                console.log("");
-                console.log("********************************************************************************");
-                console.log("********************************   ERROR   *************************************");
-                console.log("");
-                console.log(stats.compilation.errors);
-                console.log("********************************************************************************");
-                console.log("");
-                stats.compilation.errors = [];
-            }
-        });
-    }
+			return result;
+		},
+		log: function () {
+			this.plugin("done", function (stats) {
+				if (stats.compilation.errors && stats.compilation.errors.length) {
+					console.log("");
+					console.log("********************************************************************************");
+					console.log("********************************   ERROR   *************************************");
+					console.log("");
+					console.log(stats.compilation.errors);
+					console.log("********************************************************************************");
+					console.log("");
+					stats.compilation.errors = [];
+				}
+			});
+		}
+	}
 };
 
 gulp.task(helper.tasks.clear, function () {
-    return gulp.src([helper.path.destination.assets, helper.path.destination.html], { read: false })
+
+	return gulp.src([helper.path.destination.html, helper.path.destination.assets], { read: false })
 		.pipe(rimraf());
+
 });
 
-gulp.task(helper.tasks.html.page, function (done) {
+gulp.task(helper.tasks.compile.html, function (done) {
 
-	var trigger = false;
-
-    return gulp.src([helper.path.source.html])
+	return gulp.src([helper.path.source.html])
         .pipe(htmlmin(helper.htmlMimify))
         .pipe(gulp.dest(helper.path.destination.html))
 		.on("end", function () {
 			livereload.reload("index.html");
 		});
+
 });
 
-gulp.task(helper.tasks.default.dev, [helper.tasks.html.page], function () {
-    return gulp.src(helper.path.source.defaultFile)
-        .pipe(webpackStream(helper.webpack(true, false, false)))
-        .pipe(gulp.dest(helper.path.destination.assets));
-});
+gulp.task(helper.tasks.compile.ts, function () {
 
-gulp.task(helper.tasks.default.deploy, [helper.tasks.html.page], function () {
-    return gulp.src(helper.path.source.defaultFile)
-        .pipe(webpackStream(helper.webpack(false, false, true)))
-        .pipe(gulp.dest(helper.path.destination.assets));
-});
-
-gulp.task(helper.tasks.watch, [helper.tasks.html.page], function () {
-	livereload.listen();
-
-    gulp.watch([helper.path.source.html], [helper.tasks.html.page]);
-    gulp.watch([helper.path.resource], [helper.tasks.dnx.ts]);
-    gulp.watch([helper.path.entity], [helper.tasks.dnx.ts]);
-
-    return gulp.src(helper.path.source.defaultFile)
-        .pipe(webpackStream(helper.webpack(true, true, false)))
+	return gulp.src(helper.path.source.defaultFile)
+        .pipe(webpackStream(helper.webpack.parse()))
         .pipe(gulp.dest(helper.path.destination.assets))
         .pipe(livereload());
+
 });
 
-gulp.task(helper.tasks.dnx.ts, shell.task(["dotnet run --project ../[{codegenerator}]/project.json -- -t"]));
+gulp.task(helper.tasks.compile.deploy, function () {
+
+	helper.webpack.debug = false;
+	helper.webpack.watch = false;
+
+	return runsequence(helper.tasks.clear,
+		[helper.tasks.compile.html, helper.tasks.compile.ts]);
+
+});
+
+gulp.task(helper.tasks.watch, function () {
+
+	helper.webpack.debug = true;
+	helper.webpack.watch = true;
+
+	livereload.listen();
+
+	var sub = gulp.task(helper.tasks.watch + ":sub", function () {
+		gulp.watch([helper.path.source.html], [helper.tasks.compile.html]);
+		gulp.watch([helper.path.resource], [helper.tasks.compile.dnx]);
+		gulp.watch([helper.path.entity], [helper.tasks.compile.dnx]);
+	});
+
+	return runsequence(helper.tasks.clear, helper.tasks.compile.html,
+		[helper.tasks.watch + ":sub", helper.tasks.compile.ts]);
+
+});
+
+gulp.task(helper.tasks.compile.dnx.ts, shell.task(["dotnet run --project ../[{codegenerator}]/project.json -- -t"]));
+gulp.task(helper.tasks.compile.dnx.csharp, shell.task(["dotnet run --project ../[{codegenerator}]/project.json -- -c"]));

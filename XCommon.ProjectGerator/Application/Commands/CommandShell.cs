@@ -19,12 +19,13 @@ namespace XCommon.ProjectGerator.Application.Commands
             {
                 WorkingDirectory = param.Directory,
                 UseShellExecute = true,
-                WindowStyle = ProcessWindowStyle.Hidden
+                WindowStyle = ProcessWindowStyle.Normal
             };
 
             try
             {
                 var proc = Process.Start(processInfo);
+                proc.OutputDataReceived += (s, e) => Console.WriteLineWhite($"\t\t::{e.Data}");
                 proc.WaitForExit();
 
                 if (proc.ExitCode != 0)

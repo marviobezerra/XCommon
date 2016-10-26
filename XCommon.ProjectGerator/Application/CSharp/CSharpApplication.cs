@@ -28,7 +28,7 @@ namespace XCommon.ProjectGerator.Application.CSharp
             var help = result.HelpOption("--help");
 
             var simple = result.Option("-s|--simple", "Create new C# application, without business layer", CommandOptionType.NoValue);
-            
+
             var path = result.Option("-p|--path", "Set the path to the new application", CommandOptionType.SingleValue);
             var name = result.Option("-n|--name", "Set the name of the new application", CommandOptionType.SingleValue);
 
@@ -36,7 +36,7 @@ namespace XCommon.ProjectGerator.Application.CSharp
             var notest = result.Option("--notest", "Create new C# application, without test project", CommandOptionType.NoValue);
             var nogenerator = result.Option("--nogenerator", "Create new C# application, without code generator project", CommandOptionType.NoValue);
 
-            result.OnExecute(() => 
+            result.OnExecute(() =>
             {
                 bool error = false;
                 List<string> messages = new List<string>();
@@ -44,7 +44,7 @@ namespace XCommon.ProjectGerator.Application.CSharp
                 if (!path.HasValue())
                 {
                     error = true;
-                    messages.Add("Path not specified");                    
+                    messages.Add("Path not specified");
                 }
 
                 if (!name.HasValue())
@@ -83,6 +83,9 @@ namespace XCommon.ProjectGerator.Application.CSharp
 
         private void Create(CSharpApplicationConfig config)
         {
+            Constants.Name = config.Name;
+            Constants.NameSafe = config.Name.Replace(".", string.Empty);
+
             var solution = Commands
                 .AddCSharpSolution(config.Path, config.Name);
 
@@ -108,9 +111,9 @@ namespace XCommon.ProjectGerator.Application.CSharp
 
         private void CreateBusinessProjects(CreateSolution solution)
         {
-            CreateProject businessConcrecte = solution
-                .AddCSharpProject("Business.Concrecte")
-                .AddCSharpProjectJson(ProjectJson.BusinessConcrecte);
+            CreateProject businessConcrete = solution
+                .AddCSharpProject("Business.Concrete")
+                .AddCSharpProjectJson(ProjectJson.BusinessConcrete);
 
             CreateProject businessContract = solution
                 .AddCSharpProject("Business.Contract")
@@ -119,6 +122,9 @@ namespace XCommon.ProjectGerator.Application.CSharp
             CreateProject businessEntity = solution
                 .AddCSharpProject("Business.Entity")
                 .AddCSharpProjectJson(ProjectJson.BusinessEntity);
+
+            businessEntity
+                .AddFile("", "TempClass.cs", Resources.CSharp.TempClass);
 
             CreateProject businessData = solution
                 .AddCSharpProject("Business.Data")
@@ -133,19 +139,24 @@ namespace XCommon.ProjectGerator.Application.CSharp
                 .AddCSharpProject("Business.Resource")
                 .AddCSharpProjectJson(ProjectJson.BusinessResource);
 
+            CreateProject businessTest = solution
+                .AddCSharpProject("Business.Test")
+                .AddCSharpProjectJson(ProjectJson.BusinessTest);
+
+            businessTest
+                .AddFile("", "appsettings.json", Resources.CSharp.AppSettingsTest)
+                .AddFile("", "BaseTest.cs", Resources.CSharp.TestBase)
+                .AddFile(".DataScenery", "SceneryType.cs", Resources.CSharp.TestSceneryType)
+                .AddFile(".DataScenery", "SceneryManager.cs", Resources.CSharp.TestSceneryManager)
+                .AddFile(".DataScenery", "Contants.cs", Resources.CSharp.TestContants)
+                .AddFile(".DataScenery\\Sceneries", "CleanDataBaseScenery.cs", Resources.CSharp.TestCleanDataBaseScenery);
+
             CreateProject businessGenerator = solution
                 .AddCSharpProject("CodeGenerator")
                 .AddCSharpProjectJson(ProjectJson.BusinessCodeGenerator);
-
-            var safeName = businessGenerator.Parameter.SolutionParam.SolutionName
-                .Replace(".", string.Empty);
-
-            var generatorTemplate = Resources.CSharp.GeneratorProgram
-                .Replace("[{name}]", businessGenerator.Parameter.SolutionParam.SolutionName)
-                .Replace("[{nameSafe}]", safeName);
-
+            
             businessGenerator
-                .AddFile(".", "Program.cs", generatorTemplate);
+                .AddFile(".", "Program.cs", Resources.CSharp.GeneratorProgram);
         }
     }
 }

@@ -2,9 +2,19 @@
   "[{name}]": {
     "Name": "[{name}]",
     "Version": "0.0.1",
-    "Culture": "pt-BR",
+    "Culture": {
+      "Name": "pt-BR",
+      "Description": "Portugues"
+    },
     "Cultures": [
-      "pt-BR"
+      {
+        "Name": "pt-BR",
+        "Description": "Portugues"
+      },
+      {
+        "Name": "en-US",
+        "Description": "English"
+      }
     ],
     "UnitTest": false,
     "Production": false,

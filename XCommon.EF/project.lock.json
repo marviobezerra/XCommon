@@ -1773,7 +1773,7 @@
           "lib/net45/_._": {}
         }
       },
-      "XCommon/1.0.35": {
+      "XCommon/1.0.36": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1789,7 +1789,7 @@
           "net451/XCommon.dll": {}
         }
       },
-      "XCommon.Web/1.0.35": {
+      "XCommon.Web/1.0.36": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1808,7 +1808,7 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
-          "XCommon": "1.0.35"
+          "XCommon": "1.0.36"
         },
         "frameworkAssemblies": [
           "System.Configuration.Install"
@@ -5043,7 +5043,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "XCommon/1.0.35": {
+      "XCommon/1.0.36": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -5060,7 +5060,7 @@
           "netstandard1.6/XCommon.dll": {}
         }
       },
-      "XCommon.Web/1.0.35": {
+      "XCommon.Web/1.0.36": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -5078,7 +5078,7 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
-          "XCommon": "1.0.35"
+          "XCommon": "1.0.36"
         },
         "compile": {
           "netstandard1.6/XCommon.Web.dll": {}
@@ -10467,12 +10467,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.35": {
+    "XCommon/1.0.36": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
     },
-    "XCommon.Web/1.0.35": {
+    "XCommon.Web/1.0.36": {
       "type": "project",
       "path": "../XCommon.Web/project.json",
       "msbuildProject": "../XCommon.Web/XCommon.Web.xproj"
@@ -10483,8 +10483,8 @@
       "Microsoft.EntityFrameworkCore >= 1.0.1",
       "Microsoft.EntityFrameworkCore.Relational >= 1.0.1",
       "NETStandard.Library >= 1.6.0",
-      "XCommon >= 1.0.35-*",
-      "XCommon.Web >= 1.0.35-*"
+      "XCommon >= 1.0.36-*",
+      "XCommon.Web >= 1.0.36-*"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETStandard,Version=v1.6": []

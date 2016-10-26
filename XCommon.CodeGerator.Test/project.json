@@ -1,12 +1,12 @@
 {
-	"version": "1.0.35-*",
+	"version": "1.0.36-*",
 	"buildOptions": {
 		"emitEntryPoint": true
 	},
 
 	"dependencies": {
-		"XCommon": "1.0.35-*",
-		"XCommon.CodeGerator": "1.0.35-*"
+		"XCommon": "1.0.36-*",
+		"XCommon.CodeGerator": "1.0.36-*"
 	},
 
 	"frameworks": {
