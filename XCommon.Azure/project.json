@@ -1,5 +1,5 @@
 {
-  "version": "1.0.37-*",
+  "version": "1.0.38-*",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0"

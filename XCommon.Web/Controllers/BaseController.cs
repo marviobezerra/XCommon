@@ -27,16 +27,16 @@ namespace XCommon.Web.Controllers
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(Ticket.Culture);
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(Ticket.Culture);
 #else
-                CultureInfo.CurrentCulture = new CultureInfo(Ticket.Culture);
-                CultureInfo.CurrentUICulture = new CultureInfo(Ticket.Culture);
+            CultureInfo.CurrentCulture = new CultureInfo(Ticket.Culture);
+            CultureInfo.CurrentUICulture = new CultureInfo(Ticket.Culture);
 #endif
             }
         }
 
-        [Inject]
+        [Inject(forceResolve: false)]
         protected ITicketManager Ticket { get; private set; }
 
-        [Inject]
+        [Inject(forceResolve: false)]
         protected IApplicationSettings ApplicationSettings { get; private set; }
     }
 }
