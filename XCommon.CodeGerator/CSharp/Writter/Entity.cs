@@ -51,7 +51,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			string path = Path.Combine(config.EntrityPath, group.Name, "Auto");
 			string file = $"{item.Name}Entity.cs";
 
-			var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Entity", "XCommon.Util" };
+			var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Entity", "System.Runtime.Serialization" };
 			nameSpace.AddRange(item.Properties.Where(c => c.NameGroup != group.Name).Select(c => c.NameGroup));
 
 			StringBuilderIndented builder = new StringBuilderIndented();
@@ -69,7 +69,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 
 			builder
 				.AppendLine()
-				.AppendLine("[Ignore]")
+				.AppendLine("[IgnoreDataMember]")
 				.AppendLine("public override Guid Key")
 				.AppendLine("{")
 				.IncrementIndent()

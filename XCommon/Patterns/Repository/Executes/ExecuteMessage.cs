@@ -14,7 +14,7 @@ namespace XCommon.Patterns.Repository.Executes
 
         public string Message { get; set; }
 
-        [IgnoreDataMember, Ignore]
+        [IgnoreDataMember]
         public ExecuteMessageInternal MessageInternal { get; set; }
     }
 }

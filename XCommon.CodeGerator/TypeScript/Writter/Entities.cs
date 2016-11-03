@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Runtime.Serialization;
 using XCommon.CodeGerator.Angular.Extensions;
 using XCommon.CodeGerator.Angular.Writter;
 using XCommon.CodeGerator.Core.Util;
@@ -12,7 +12,7 @@ using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript.Writter
 {
-	public class Entities : FileWriter
+    public class Entities : FileWriter
     {
 		private IndexExport Index { get; set; } = new IndexExport();
 
@@ -133,7 +133,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 				foreach (var property in type.GetProperties())
 				{
-					if (property.GetCustomAttributes<IgnoreAttribute>().Count() > 0)
+					if (property.GetCustomAttributes<IgnoreDataMemberAttribute>().Count() > 0)
 						continue;
 
 					var isGeneric = property.PropertyType.IsGenericParameter && !property.Name.Contains("List");

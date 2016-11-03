@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using XCommon.Util;
 
 namespace XCommon.Patterns.Repository.Executes
 {
-	public class Execute
+    public class Execute
     {
         public Execute()
         {
-			
             Messages = new List<ExecuteMessage>();
+            Properties = new Dictionary<string, object>();
         }
 
         public Execute(Execute execute)
@@ -21,11 +20,15 @@ namespace XCommon.Patterns.Repository.Executes
             HasErro = execute.HasErro;
 			HasException = execute.HasException;
             Messages = execute.Messages ?? new List<ExecuteMessage>();
+            Properties = new Dictionary<string, object>();
         }
 
         #region Propertys
 		
-		[IgnoreDataMember, Ignore]
+		[IgnoreDataMember]
+        private Dictionary<string, object> Properties { get; set; }
+
+        [IgnoreDataMember]
         public ExecuteUser User { get; set; }
 
         public bool HasErro { get; private set; }
@@ -85,6 +88,23 @@ namespace XCommon.Patterns.Repository.Executes
             string result = string.Empty;
             Messages.ForEach(c => result += string.Format("{0} - {1}{2}", c.Message, c.Type, Environment.NewLine));
             return result;
+        }
+
+        public virtual TValue GetValue<TValue>(string key)
+        {
+            object result;
+            if (Properties.TryGetValue(key, out result))
+                return (TValue)result;
+
+            return default(TValue);
+        }
+
+        public virtual void SetValue<TValue>(string key, TValue value)
+        {
+            if (Properties.ContainsKey(key))
+                Properties.Remove(key);
+
+            Properties[key] = value;
         }
         #endregion
 

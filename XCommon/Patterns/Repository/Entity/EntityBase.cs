@@ -1,5 +1,5 @@
 ﻿using System;
-using XCommon.Util;
+using System.Runtime.Serialization;
 
 namespace XCommon.Patterns.Repository.Entity
 {
@@ -7,7 +7,7 @@ namespace XCommon.Patterns.Repository.Entity
     {
         public EntityAction Action { get; set; }
 
-        [Ignore]
+        [IgnoreDataMember]
         public abstract Guid Key { get; set; }
     }
 }
