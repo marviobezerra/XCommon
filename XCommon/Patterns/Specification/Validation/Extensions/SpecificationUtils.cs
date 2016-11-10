@@ -17,15 +17,20 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
 			return specification;
 		}
 
-		public static SpecificationValidation<TEntity> And<TEntity>(this SpecificationValidation<TEntity> specification, ISpecificationValidation<TEntity> spec)
+        public static SpecificationValidation<TEntity> And<TEntity>(this SpecificationValidation<TEntity> specification, ISpecificationValidation<TEntity> spec, bool stopIfInvalid = false)
+            => specification.And(spec, true, stopIfInvalid);
+
+        public static SpecificationValidation<TEntity> And<TEntity>(this SpecificationValidation<TEntity> specification, ISpecificationValidation<TEntity> spec, bool condition, bool stopIfInvalid = false)
 		{
-			specification.Add(spec);
+            if (condition)
+			    specification.Add(spec, stopIfInvalid);
+
 			return specification;
 		}
-
-		public static SpecificationValidation<TEntity> Or<TEntity>(this SpecificationValidation<TEntity> specification, ISpecificationValidation<TEntity> spec1, ISpecificationValidation<TEntity> spec2)
+        
+        public static SpecificationValidation<TEntity> Or<TEntity>(this SpecificationValidation<TEntity> specification, ISpecificationValidation<TEntity> spec1, ISpecificationValidation<TEntity> spec2, bool stopIfInvalid = false)
 		{
-			specification.Add(new OrSpecification<TEntity>(spec1, spec2));
+			specification.Add(new OrSpecification<TEntity>(spec1, spec2), stopIfInvalid);
 			return specification;
 		}
 	}

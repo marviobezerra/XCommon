@@ -1773,7 +1773,7 @@
           "lib/net45/_._": {}
         }
       },
-      "XCommon/1.0.38": {
+      "XCommon/1.0.39": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1789,7 +1789,7 @@
           "net451/XCommon.dll": {}
         }
       },
-      "XCommon.Web/1.0.38": {
+      "XCommon.Web/1.0.39": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -5043,7 +5043,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "XCommon/1.0.38": {
+      "XCommon/1.0.39": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -5060,7 +5060,7 @@
           "netstandard1.6/XCommon.dll": {}
         }
       },
-      "XCommon.Web/1.0.38": {
+      "XCommon.Web/1.0.39": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -10467,12 +10467,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "XCommon/1.0.38": {
+    "XCommon/1.0.39": {
       "type": "project",
       "path": "../XCommon/project.json",
       "msbuildProject": "../XCommon/XCommon.xproj"
     },
-    "XCommon.Web/1.0.38": {
+    "XCommon.Web/1.0.39": {
       "type": "project",
       "path": "../XCommon.Web/project.json",
       "msbuildProject": "../XCommon.Web/XCommon.Web.xproj"
