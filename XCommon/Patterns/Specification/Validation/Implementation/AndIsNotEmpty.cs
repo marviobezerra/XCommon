@@ -4,7 +4,7 @@ using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-    public enum AndIsNotEmptyType
+    internal enum AndIsNotEmptyType
     {
         String,
         Int,
@@ -16,27 +16,41 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
     internal class AndIsNotEmpty<TEntity, TValue> : ISpecificationValidation<TEntity>
     {
         private AndIsNotEmptyType Type { get; set; }
+
         private Func<TEntity, TValue> Selector { get; set; }
+
         private string Message { get; set; }
+
         private object[] MessageArgs { get; set; }
 
-        internal AndIsNotEmpty(Func<TEntity, TValue> selector, AndIsNotEmptyType type, string message, params object[] args)
+        private Func<TEntity, bool> Condition { get; set; }
+
+        internal AndIsNotEmpty(Func<TEntity, TValue> selector, AndIsNotEmptyType type, bool condition, string message, params object[] args)
+            : this(selector, type, c => condition, message, args)
+        {
+        }
+
+        internal AndIsNotEmpty(Func<TEntity, TValue> selector, AndIsNotEmptyType type, Func<TEntity, bool> condition, string message, params object[] args)
         {
             Type = type;
             Selector = selector;
             Message = message;
             MessageArgs = args;
+            Condition = condition;
         }
 
         public bool IsSatisfiedBy(TEntity entity)
-			=> IsSatisfiedBy(entity, new Execute());
+            => IsSatisfiedBy(entity, new Execute());
 
-		public bool IsSatisfiedBy(TEntity entity, Execute execute)
+        public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var value = Selector(entity);
-
             bool result = true;
-
+            
+            if (!Condition(entity))
+                return result;
+            
+            var value = Selector(entity);
+            
             switch (Type)
             {
                 case AndIsNotEmptyType.String:
@@ -57,8 +71,8 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
                     break;
             }
 
-            if (!result && execute != null && Message.IsNotEmpty())
-                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
+            if (!result && execute != null)
+                execute.AddMessage(ExecuteMessageType.Error, Message ?? "There is a empty property", MessageArgs ?? new object[] { });
 
             return result;
         }
