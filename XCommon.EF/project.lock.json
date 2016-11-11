@@ -1808,7 +1808,7 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
-          "XCommon": "1.0.38"
+          "XCommon": "1.0.39"
         },
         "frameworkAssemblies": [
           "System.Configuration.Install"
@@ -5078,7 +5078,7 @@
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
-          "XCommon": "1.0.38"
+          "XCommon": "1.0.39"
         },
         "compile": {
           "netstandard1.6/XCommon.Web.dll": {}
@@ -10483,8 +10483,8 @@
       "Microsoft.EntityFrameworkCore >= 1.0.1",
       "Microsoft.EntityFrameworkCore.Relational >= 1.0.1",
       "NETStandard.Library >= 1.6.0",
-      "XCommon >= 1.0.38-*",
-      "XCommon.Web >= 1.0.38-*"
+      "XCommon >= 1.0.39-*",
+      "XCommon.Web >= 1.0.39-*"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETStandard,Version=v1.6": []

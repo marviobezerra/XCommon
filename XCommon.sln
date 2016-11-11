@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.ProjectGerator", "X
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "XCommon.Test", "XCommon.Test\XCommon.Test.xproj", "{FF366599-49E0-4F79-907D-870BDE83949A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A70DD4AB-0D96-4E18-9876-A2E944BF8CE6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Test", ".Test", "{A70DD4AB-0D96-4E18-9876-A2E944BF8CE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

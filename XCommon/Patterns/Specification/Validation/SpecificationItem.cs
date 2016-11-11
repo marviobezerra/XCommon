@@ -2,12 +2,12 @@
 
 namespace XCommon.Patterns.Specification.Validation
 {
-    internal class SpecificationItem<TEntity>
+    public class SpecificationItem<TEntity>
     {
-        internal ISpecificationValidation<TEntity> Specification { get; set; }
+        public ISpecificationValidation<TEntity> Specification { get; set; }
 
-        internal bool StopIfInvalid { get; set; }
+        public bool StopIfInvalid { get; set; }
 
-        internal Func<TEntity, bool> Condition { get; set; }
+        public Func<TEntity, bool> Condition { get; set; }
     }
 }

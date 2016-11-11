@@ -35,25 +35,17 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					if (File.Exists(Path.Combine(path, file)))
 						continue;
 
-					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Implementation" };
+					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 
 					StringBuilderIndented builder = new StringBuilderIndented();
 
 					builder
-						.ClassInit($"{item.Name}Validate", $"ISpecificationValidation<{item.Name}Entity>", $"{config.ConcreteNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())
-						.AppendLine($"public bool IsSatisfiedBy({item.Name}Entity entity)")
+						.ClassInit($"{item.Name}Validate", $"SpecificationValidation<{item.Name}Entity>", $"{config.ConcreteNameSpace}.{group.Name}.Validate", ClassVisility.Public, nameSpace.ToArray())						
+						.AppendLine($"public override bool IsSatisfiedBy({item.Name}Entity entity, Execute execute)")
 						.AppendLine("{")
 						.IncrementIndent()
-						.AppendLine("return IsSatisfiedBy(entity, new Execute());")
-						.DecrementIndent()
-						.AppendLine("}")
-						.AppendLine()
-						.AppendLine($"public bool IsSatisfiedBy({item.Name}Entity entity, Execute execute)")
-						.AppendLine("{")
-						.IncrementIndent()
-						.AppendLine($"SpecificationValidation<{item.Name}Entity> result = new SpecificationValidation<{item.Name}Entity>();")
-						.AppendLine("return result.IsSatisfiedBy(entity, execute);")
+						.AppendLine("return CheckSpecifications(entity, execute);")
 						.DecrementIndent()
 						.AppendLine("}")
 						.InterfaceEnd();

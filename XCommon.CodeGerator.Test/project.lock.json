@@ -2253,7 +2253,7 @@
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "System.Data.SqlClient": "4.1.0",
-          "XCommon": "1.0.38"
+          "XCommon": "1.0.39"
         },
         "compile": {
           "netstandard1.6/XCommon.CodeGerator.dll": {}
@@ -2721,7 +2721,7 @@
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "System.Data.SqlClient": "4.1.0",
-          "XCommon": "1.0.38"
+          "XCommon": "1.0.39"
         },
         "compile": {
           "net451/XCommon.CodeGerator.dll": {}
@@ -7597,8 +7597,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "XCommon >= 1.0.38-*",
-      "XCommon.CodeGerator >= 1.0.38-*"
+      "XCommon >= 1.0.39-*",
+      "XCommon.CodeGerator >= 1.0.39-*"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.1"

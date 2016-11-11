@@ -5,8 +5,8 @@
 	},
 
 	"dependencies": {
-		"XCommon": "1.0.38-*",
-		"XCommon.CodeGerator": "1.0.38-*"
+		"XCommon": "1.0.39-*",
+		"XCommon.CodeGerator": "1.0.39-*"
 	},
 
 	"frameworks": {

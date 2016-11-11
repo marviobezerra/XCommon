@@ -5,8 +5,8 @@
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.EntityFrameworkCore.Relational": "1.0.1",
     "NETStandard.Library": "1.6.0",
-    "XCommon": "1.0.38-*",
-    "XCommon.Web": "1.0.38-*"
+    "XCommon": "1.0.39-*",
+    "XCommon.Web": "1.0.39-*"
   },
 
   "frameworks": {

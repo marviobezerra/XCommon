@@ -15,6 +15,11 @@ namespace XCommon.Patterns.Specification.Validation
 
         protected SpecificationList<TEntity> Specifications { get; set; }
 
+        protected SpecificationList<TEntity> GetNewSpecificationList()
+        {
+            return new SpecificationList<TEntity>();
+        }
+
         public bool IsSatisfiedBy(TEntity entity)
         {
             return IsSatisfiedBy(entity, new Execute());

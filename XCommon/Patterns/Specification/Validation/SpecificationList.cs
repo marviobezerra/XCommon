@@ -18,16 +18,26 @@ namespace XCommon.Patterns.Specification.Validation
         public SpecificationList<TEntity> Add(ISpecificationValidation<TEntity> specification, bool contidion, bool stopIfInvalid = false)
             => Add(specification, c => contidion, stopIfInvalid);
 
+        public SpecificationList<TEntity> Add(SpecificationItem<TEntity> specification)
+        {
+            Items.Add(specification);
+            return this;
+        }
+
+        public SpecificationList<TEntity> Add(List<SpecificationItem<TEntity>> specifications)
+        {
+            Items.AddRange(specifications);
+            return this;
+        }
+
         public SpecificationList<TEntity> Add(ISpecificationValidation<TEntity> specification, Func<TEntity, bool> contidion, bool stopIfInvalid = false)
         {
-            Items.Add(new SpecificationItem<TEntity>
+            return Add(new SpecificationItem<TEntity>
             {
                 Specification = specification,
                 StopIfInvalid = stopIfInvalid,
                 Condition = contidion
             });
-
-            return this;
         }
     }
 }
