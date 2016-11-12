@@ -3,7 +3,7 @@ using XCommon.Patterns.Specification.Validation;
 
 namespace XCommon.Test.Patterns.Specification.Validation.Sample
 {
-    public class PersonEmptyValidation : SpecificationValidation<PersonEntity>
+    public class DefaultSpecificationValidation : SpecificationValidation<PersonEntity>
     {
         public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
         {

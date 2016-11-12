@@ -23,13 +23,7 @@ namespace XCommon.Patterns.Specification.Validation
             Items.Add(specification);
             return this;
         }
-
-        public SpecificationList<TEntity> Add(List<SpecificationItem<TEntity>> specifications)
-        {
-            Items.AddRange(specifications);
-            return this;
-        }
-
+        
         public SpecificationList<TEntity> Add(ISpecificationValidation<TEntity> specification, Func<TEntity, bool> contidion, bool stopIfInvalid = false)
         {
             return Add(new SpecificationItem<TEntity>

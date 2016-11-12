@@ -6,7 +6,7 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
     public static class SpecificationIsValid
     {
         public static SpecificationList<TEntity> AndIsValid<TEntity>(this SpecificationList<TEntity> specification, Func<TEntity, bool> selector)
-            => specification.AndIsValid(selector, c => true, false, null, null);
+            => specification.AndIsValid(selector, c => true, false, "Invalid value", null);
 
         public static SpecificationList<TEntity> AndIsValid<TEntity>(this SpecificationList<TEntity> specification, Func<TEntity, bool> selector, string message, params object[] args)
             => specification.AndIsValid(selector, c => true, false, message, args);

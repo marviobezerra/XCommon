@@ -1,5 +1,4 @@
 ﻿using System;
-using XCommon.Extensions.String;
 using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Patterns.Specification.Validation.Implementation

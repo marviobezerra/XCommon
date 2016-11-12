@@ -1,5 +1,5 @@
 {
-  "version": "1.0.39-*",
+  "version": "1.0.40-*",
 
   "dependencies": {
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
@@ -10,7 +10,7 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "NETStandard.Library": "1.6.0",
-    "XCommon": "1.0.39-*",
+    "XCommon": "1.0.40-*",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",

@@ -1,4 +1,5 @@
-﻿using XCommon.Patterns.Repository.Executes;
+﻿using FluentAssertions;
+using XCommon.Patterns.Repository.Executes;
 using XCommon.Test.Patterns.Specification.Validation.Sample;
 using Xunit;
 
@@ -6,103 +7,70 @@ namespace XCommon.Test.Patterns.Specification.Validation
 {
     public class SpecificationValidationTest
     {
-        [Fact(DisplayName = "Default entity validation")]
-        public void DefaultEntityValidation()
+        [Theory(DisplayName = "Default Specification")]
+        [MemberData(nameof(PersonDataSource.DefaultDataSource), MemberType = typeof(PersonDataSource))]
+        public void DefaultSpecification(PersonEntity data, bool valid, string message)
         {
-            PersonEntity person = new PersonEntity();
+            DefaultSpecificationValidation validation = new DefaultSpecificationValidation();
+            bool result = validation.IsSatisfiedBy(data);
 
-            PersonEmptyValidation validation = new PersonEmptyValidation();
-            bool result = validation.IsSatisfiedBy(person);
-
-            Assert.Equal(true, result);
+            valid.Should().Be(result, message);
         }
 
-        [Fact(DisplayName = "Null entity validation")]
-        public void NullEntityValidation()
+        [Theory(DisplayName = "Default Specification (With execute)")]
+        [MemberData(nameof(PersonDataSource.DefaultDataSource), MemberType = typeof(PersonDataSource))]
+        public void DefaultSpecificationWithExecute(PersonEntity data, bool valid, string message)
         {
-            PersonEmptyValidation validation = new PersonEmptyValidation();
-
-            bool result = validation.IsSatisfiedBy(null);
-
-            Assert.Equal(false, result);
-        }
-
-
-        [Fact(DisplayName = "Default entity validation (With execute)")]
-        public void DefaultEntityValidationWithExecute()
-        {
-            PersonEntity person = new PersonEntity();
+            DefaultSpecificationValidation validation = new DefaultSpecificationValidation();
             Execute execute = new Execute();
-            PersonEmptyValidation validation = new PersonEmptyValidation();
+            bool result = validation.IsSatisfiedBy(data, execute);
 
-            bool result = validation.IsSatisfiedBy(person, execute);
-
-            Assert.Equal(false, execute.HasErro);
-            Assert.Equal(0, execute.Messages.Count);
-            Assert.Equal(true, result);
+            valid.Should().Be(result, message);
+            valid.Should().Be(!execute.HasErro, message);
         }
 
-        [Fact(DisplayName = "Null entity validation (With execute)")]
-        public void NullEntityValidationWithExecute()
+        [Theory(DisplayName = "Complete Specification")]
+        [MemberData(nameof(PersonDataSource.CompleteDataSource), MemberType = typeof(PersonDataSource))]
+        public void CompleteSpecification(PersonEntity data, bool valid, string message)
         {
-            PersonEmptyValidation validation = new PersonEmptyValidation();
+            CompleteSpecificationValidation validation = new CompleteSpecificationValidation();
+            bool result = validation.IsSatisfiedBy(data);
+
+            valid.Should().Be(result, message);
+        }
+
+        [Theory(DisplayName = "Complete Specification (With execute)")]
+        [MemberData(nameof(PersonDataSource.CompleteDataSource), MemberType = typeof(PersonDataSource))]
+        public void CompleteSpecificationWithExecute(PersonEntity data, bool valid, string message)
+        {
+            CompleteSpecificationValidation validation = new CompleteSpecificationValidation();
             Execute execute = new Execute();
+            bool result = validation.IsSatisfiedBy(data, execute);
 
-            bool result = validation.IsSatisfiedBy(null, execute);
-
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(1, execute.Messages.Count);
-            Assert.Equal(false, result);
+            valid.Should().Be(result, message);
+            valid.Should().Be(!execute.HasErro, message);
         }
 
-        [Fact(DisplayName = "String Is Not Empty Validation")]
-        public void StringIsNotEmptyValidation()
+        [Theory(DisplayName = "Complex Specification")]
+        [MemberData(nameof(PersonDataSource.ComplexDataSource), MemberType = typeof(PersonDataSource))]
+        public void ComplexSpecification(PersonEntity data, bool valid, string message)
         {
-            PersonEntity person = new PersonEntity();
-            PersonIsNotEmptyValidation validation = new PersonIsNotEmptyValidation();
+            ComplexSpecificationValidation validation = new ComplexSpecificationValidation();
+            bool result = validation.IsSatisfiedBy(data);
 
-            bool result = validation.IsSatisfiedBy(person);
-
-            Assert.Equal(false, result);
+            valid.Should().Be(result, message);
         }
 
-        [Fact(DisplayName = "String Is Not Empty Validation (With execute)")]
-        public void StringIsNotEmptyValidationWithExecute()
+        [Theory(DisplayName = "Complex Specification (With execute)")]
+        [MemberData(nameof(PersonDataSource.ComplexDataSource), MemberType = typeof(PersonDataSource))]
+        public void ComplexSpecificationWithExecute(PersonEntity data, bool valid, string message)
         {
-            PersonEntity person = new PersonEntity();
-            PersonIsNotEmptyValidation validation = new PersonIsNotEmptyValidation();
+            ComplexSpecificationValidation validation = new ComplexSpecificationValidation();
             Execute execute = new Execute();
+            bool result = validation.IsSatisfiedBy(data, execute);
 
-            bool result = validation.IsSatisfiedBy(person, execute);
-
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(2, execute.Messages.Count);
-            Assert.Equal(false, result);
-        }
-
-        [Fact(DisplayName = "Is Valid Validation")]
-        public void IsValidValidation()
-        {
-            PersonEntity person = new PersonEntity();
-            PersonIsValidValidation validation = new PersonIsValidValidation();
-
-            bool result = validation.IsSatisfiedBy(person);
-
-            Assert.Equal(false, result);
-        }
-
-        [Fact(DisplayName = "Is Valid Validation (With execute)")]
-        public void IsValidValidationWithExecute()
-        {
-            PersonEntity person = new PersonEntity();
-            PersonIsValidValidation validation = new PersonIsValidValidation();
-            Execute execute = new Execute();
-
-            bool result = validation.IsSatisfiedBy(person, execute);
-
-            Assert.Equal(true, execute.HasErro);
-            Assert.Equal(2, execute.Messages.Count);
-            Assert.Equal(false, result);
+            valid.Should().Be(result, message);
+            valid.Should().Be(!execute.HasErro, message);
         }
     }
 }

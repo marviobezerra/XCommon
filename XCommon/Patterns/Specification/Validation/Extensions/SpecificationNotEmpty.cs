@@ -6,7 +6,7 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
     public static class SpecificationNotEmpty
     {
         public static SpecificationList<TEntity> AndIsNotEmpty<TEntity>(this SpecificationList<TEntity> specification, Func<TEntity, string> selector)
-            => specification.AndIsNotEmpty(selector, c => true, false, null, null);
+            => specification.AndIsNotEmpty(selector, c => true, false, "Property value is empty", null);
 
         public static SpecificationList<TEntity> AndIsNotEmpty<TEntity>(this SpecificationList<TEntity> specification, Func<TEntity, string> selector, string message, params object[] args)
             => specification.AndIsNotEmpty(selector, c => true, false, message, args);

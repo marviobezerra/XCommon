@@ -23,36 +23,39 @@ namespace XCommon.Extensions.Converters
             return retorno;
         }
 
-        public static Guid ToGuid(this object Valor)
+        public static Guid NewIfEmpty(this Guid? value)
         {
-            if (Valor == null)
-                return Guid.Empty;
-
-            Guid Retorno = Guid.Empty;
-            Guid.TryParse(Valor.ToString(), out Retorno);
-            return Retorno;
+            return !value.HasValue || value == Guid.Empty ? Guid.NewGuid() : value.Value;
         }
 
-        public static Guid NewIfEmpty(this Guid? Valor)
+        public static Guid? ToGuidOrNull(this object value)
         {
-            return !Valor.HasValue || Valor == Guid.Empty ? Guid.NewGuid() : Valor.Value;
-        }
-
-        public static Guid? ToGuidOrNull(this object Valor)
-        {
-            if (Valor == null)
+            if (value == null)
                 return null;
 
-            Guid Retorno;
-            if (Guid.TryParse(Valor.ToString(), out Retorno))
-                return Retorno;
+            Guid result;
+            if (Guid.TryParse(value.ToString(), out result))
+                return result;
             else
                 return null;
         }
 
-        public static Guid ToGuid(this int valor)
+        public static Guid ToGuid(this string value)
         {
-            return new Guid(string.Format("00000000-0000-0000-0000-{0}", valor.ToString().PadLeft(12, '0')));
+            if (value == null)
+                return Guid.Empty;
+
+            if (value.Length <= 12)
+                return new Guid(string.Format("00000000-0000-0000-0000-{0}", value.PadLeft(12, '0')));
+            
+            Guid result = Guid.Empty;
+            Guid.TryParse(value, out result);
+            return result;
+        }
+
+        public static Guid ToGuid(this int value)
+        {
+            return value.ToString().ToGuid();
         }
     }
 }

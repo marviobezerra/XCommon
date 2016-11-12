@@ -10,12 +10,12 @@ namespace XCommon.Patterns.Specification.Validation
             Specifications = new SpecificationList<TEntity>();
 
             ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
-            Specifications.Add(basicSpecification);
+            Specifications.Add(basicSpecification, true);
         }
 
         protected SpecificationList<TEntity> Specifications { get; set; }
 
-        protected SpecificationList<TEntity> GetNewSpecificationList()
+        protected SpecificationList<TEntity> NewSpecificationList()
         {
             return new SpecificationList<TEntity>();
         }
