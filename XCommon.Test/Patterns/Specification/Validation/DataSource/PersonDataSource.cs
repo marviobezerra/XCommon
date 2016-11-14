@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Entity;
+using XCommon.Test.Patterns.Specification.Validation.Sample;
 using XCommon.UnitTest;
 
-namespace XCommon.Test.Patterns.Specification.Validation.Sample
+namespace XCommon.Test.Patterns.Specification.Validation.DataSource
 {
-    public class PersonDataSource
+    public static class PersonDataSource
     {
         public static IEnumerable<object[]> DefaultDataSource
         {
