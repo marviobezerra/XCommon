@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using XCommon.Application;
 using XCommon.Application.Login;
+using XCommon.Application.Login.Entity;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Executes;

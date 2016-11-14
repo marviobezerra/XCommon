@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XCommon.Application.Login
+namespace XCommon.Application.Login.Entity
 {
     public class TicketEntity
     {

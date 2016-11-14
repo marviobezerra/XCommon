@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using XCommon.Application.Login;
+using XCommon.Application.Login.Entity;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 using XCommon.Web.Authentication.Base;

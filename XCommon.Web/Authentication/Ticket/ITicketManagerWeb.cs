@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using XCommon.Application.Login;
+using XCommon.Application.Login.Entity;
 
 namespace XCommon.Web.Authentication.Ticket
 {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using XCommon.Extensions.Converters;
+using XCommon.Application.Login.Entity;
 using XCommon.Patterns.Repository.Executes;
 
-namespace XCommon.Application.Login
+namespace XCommon.Application.Login.Implementations
 {
-	public class TicketManagerFake : ITicketManager
+    public class TicketManagerFake : ITicketManager
 	{
 		public string Culture { get; private set; }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using XCommon.Application.Login;
+using XCommon.Application.Login.Entity;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Executes;
 using XCommon.Web.Authentication.Ticket;
