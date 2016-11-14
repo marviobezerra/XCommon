@@ -69,10 +69,6 @@ namespace XCommon.Test.Extensions.Checks.DataSource
             }
         }
 
-
-
-
-
         public static IEnumerable<object[]> LessThanDateTimeDataSource
         {
             get
@@ -132,13 +128,6 @@ namespace XCommon.Test.Extensions.Checks.DataSource
                 }
             }
         }
-
-
-
-
-
-
-
         public static IEnumerable<object[]> InRangeDateTimeDataSource
         {
             get

@@ -92,27 +92,7 @@ namespace XCommon.Extensions.String
 
             return result;
         }
-
-        public static List<string> MakePrefix(this string value, string format)
-        {
-            List<string> result = new List<string>();
-
-            value = value.StringNormalize();
-
-            foreach (var item in value.Split(' '))
-            {
-                for (int i = 0; i < item.Length; i++)
-                {
-                    result.Add(string.Format(format, item.Substring(0, i + 1)));
-                }
-            }
-
-            return result
-				.Distinct()
-				.OrderBy(c => c)
-				.ToList();
-        }
-
+              
         public static bool ValueContains(this string value, string strB)
         {
             return ValueContains(value, strB, CompareType.Invariant);

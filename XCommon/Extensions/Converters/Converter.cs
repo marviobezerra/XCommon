@@ -10,6 +10,9 @@ namespace XCommon.Extensions.Converters
         public static TEntity Convert<TEntity>(this object source, params string[] ignore)
             where TEntity : class, new()
         {
+            if (source == null)
+                return null;
+
             return source.Convert<TEntity>(true, ignore);
         }
 
