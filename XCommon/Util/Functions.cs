@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using XCommon.Extensions.String;
 
 namespace XCommon.Util
@@ -11,6 +12,16 @@ namespace XCommon.Util
     {
         private static readonly Random getrandom = new Random();
         private static readonly object syncLock = new object();
+
+        public static bool ValidEmail(string email)
+        {
+            return Regex.IsMatch(email, LibraryRegex.Email);
+        }
+
+        public static bool ValidUrl(string url)
+        {
+            return Regex.IsMatch(url, LibraryRegex.URL);
+        }
 
         public static string GetToken(params int[] parts)
         {
