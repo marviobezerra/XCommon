@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using XCommon.CodeGerator.Angular.Extensions;
 using XCommon.CodeGerator.Angular.Writter;
 using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.TypeScript.Configuration;
 using XCommon.Util;
+using XCommon.Extensions.Util;
 
 namespace XCommon.CodeGerator.TypeScript
 {
-	public class Resource : FileWriter
+    public class Resource : FileWriter
 	{
 		private IndexExport Index { get; set; } = new IndexExport();
 		

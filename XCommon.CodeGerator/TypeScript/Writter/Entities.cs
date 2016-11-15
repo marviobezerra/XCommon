@@ -9,6 +9,7 @@ using XCommon.CodeGerator.Angular.Writter;
 using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.TypeScript.Configuration;
 using XCommon.Util;
+using XCommon.Extensions.Util;
 
 namespace XCommon.CodeGerator.TypeScript.Writter
 {

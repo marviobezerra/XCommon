@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -22,40 +21,21 @@ namespace XCommon.Extensions.Util
             return properties;
         }
 
-        public static PropertyInfo GetProperty(this Type type, string name)
-        {
-            var propriedades = type.GetProperties();
-            return propriedades.Where(c => c.Name == name).FirstOrDefault();
-        }
-
-        public static List<AttributeDetail<T>> GetAtributos<T>(this object objeto)
-            where T : Attribute
+        public static List<AttributeDetail<TAttribute>> GetAttributes<TAttribute>(this object objeto)
+            where TAttribute : Attribute
         {
             var propriedades = objeto.GetType().GetProperties();
 
             var query = from p in propriedades
-                        let attr = p.GetCustomAttributes(typeof(T), true)
+                        let attr = p.GetCustomAttributes(typeof(TAttribute), true)
                         where attr.Count() == 1
-                        select new AttributeDetail<T>
+                        select new AttributeDetail<TAttribute>
                         {
                             Property = p,
-                            Attribute = (T)attr.FirstOrDefault()
+                            Attribute = (TAttribute)attr.FirstOrDefault()
                         };
 
             return query.ToList();
-        }
-
-        public static TAttribute GetAttribute<TAttribute>(this Enum value)
-            where TAttribute : Attribute
-        {
-            FieldInfo fi = value.GetType().GetRuntimeField(value.ToString());
-            var attributes = (TAttribute[])fi.GetCustomAttributes(typeof(TAttribute), false);
-            if (attributes.Length > 0)
-            {
-                return attributes[0];
-            }
-
-            return null;
         }
     }
 }
