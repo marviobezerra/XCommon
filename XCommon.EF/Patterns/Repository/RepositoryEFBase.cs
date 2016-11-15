@@ -38,7 +38,7 @@ namespace XCommon.Patterns.Repository
 
         protected virtual string GetEntityName()
         {
-            return typeof(TEntity).Name.Remove("Entity");
+            return typeof(TEntity).Name.Replace("Entity", string.Empty);
         }
 
         protected virtual TFilter GetDefaultFilterForKey(Guid key)

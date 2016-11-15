@@ -2,8 +2,8 @@
 {
     public enum BooleanOption
     {
-        All,
-        True,
-        False
+        All = 0,
+        True = 1,
+        False = 2
     }
 }
