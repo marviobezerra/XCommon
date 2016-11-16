@@ -15,23 +15,25 @@ namespace XCommon.Util
 
         public static bool ValidEmail(string email)
         {
+            if (email.IsEmpty())
+                return false;
+
             return Regex.IsMatch(email, LibraryRegex.Email);
         }
 
         public static bool ValidUrl(string url)
         {
+            if (url.IsEmpty())
+                return false;
+
             return Regex.IsMatch(url, LibraryRegex.URL);
         }
 
         public static string GetToken(params int[] parts)
-        {
-            return GetToken("-", true, parts);
-        }
+            => GetToken("-", true, parts);
 
         public static string GetToken(bool upperCase, params int[] parts)
-        {
-            return GetToken("-", upperCase, parts);
-        }
+            => GetToken("-", upperCase, parts);
 
         public static string GetToken(string separator, bool upperCase, params int[] parts)
         {
@@ -57,9 +59,7 @@ namespace XCommon.Util
         }
 
         public static int GetRandomNumber(int max)
-        {
-            return GetRandomNumber(0, max);
-        }
+            => GetRandomNumber(0, max);
 
         public static int GetRandomNumber(int min, int max)
         {

@@ -1,8 +1,8 @@
-﻿namespace XCommon.Application.Cache
+﻿namespace XCommon.Application.Cache.Implementations
 {
-    public static class CacheUtils
+    internal static class CacheUtils
     {
-        public static string BuildFullKey<T>(this object userKey)
+        internal static string BuildFullKey<T>(this object userKey)
         {
             if (userKey == null)
                 return typeof(T).FullName;

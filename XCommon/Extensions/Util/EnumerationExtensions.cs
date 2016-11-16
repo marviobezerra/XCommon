@@ -15,32 +15,12 @@ namespace XCommon.Extensions.Util
                 return false;
             }
         }
-
-        public static bool Is<T>(this Enum type, T value)
-        {
-            try
-            {
-                return (int)(object)type == (int)(object)value;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
+        
         public static T Add<T>(this Enum type, T value)
         {
-            return Add<T>(type, value, true);
-        }
-
-        public static T Add<T>(this Enum type, T value, bool condition)
-        {
             try
             {
-                if (condition)
-                    return (T)(object)(((int)(object)type | (int)(object)value));
-
-                return (T)(object)type;
+                return (T)(object)(((int)(object)type | (int)(object)value));
             }
             catch (Exception ex)
             {
@@ -50,17 +30,9 @@ namespace XCommon.Extensions.Util
 
         public static T Remove<T>(this Enum type, T value)
         {
-            return Remove<T>(type, value, true);
-        }
-
-        public static T Remove<T>(this Enum type, T value, bool condition)
-        {
             try
             {
-                if (condition)
-                    return (T)(object)(((int)(object)type & ~(int)(object)value));
-
-                return (T)(object)type;
+                return (T)(object)(((int)(object)type & ~(int)(object)value));
             }
             catch (Exception ex)
             {
