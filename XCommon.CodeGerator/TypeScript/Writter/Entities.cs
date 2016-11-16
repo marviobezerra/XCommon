@@ -10,12 +10,17 @@ using XCommon.CodeGerator.Core.Util;
 using XCommon.CodeGerator.TypeScript.Configuration;
 using XCommon.Util;
 using XCommon.Extensions.Util;
+using XCommon.CodeGerator.CSharp.Extensions;
 
 namespace XCommon.CodeGerator.TypeScript.Writter
 {
     public class Entities : FileWriter
     {
-		private IndexExport Index { get; set; } = new IndexExport();
+        private TypeScriptEntity Config { get; set; }
+
+        private IndexExport Index { get; set; } = new IndexExport();
+
+        private List<string> GeneratedEntities { get; set; }
 
 		private List<TypeScriptClass> TSClass { get; set; }
 
@@ -23,6 +28,11 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 		private string GetFileName(string nameSpace)
 		{
+            var overRide = Config.NameOveride.FirstOrDefault(c => c.NameSpace == nameSpace);
+
+            if (overRide != null)
+                return $"{overRide.FileName.ToLower()}.ts";
+
 			var result = nameSpace.Split('.').Last(c => c != "Filter");
 			return $"{result}.ts";
 		}
@@ -84,11 +94,11 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			}
 		}
 
-		private void LoadEnums(TypeScriptEntity config)
+		private void LoadEnums()
 		{
-			var types = config.Assemblys.SelectMany(c => c.GetTypes()).Where(c => c.GetTypeInfo().IsEnum).ToList();
+			var types = Config.Assemblys.SelectMany(c => c.GetTypes()).Where(c => c.GetTypeInfo().IsEnum).ToList();
 
-			types.AddRange(config.TypesExtra.Where(c => c.GetTypeInfo().IsEnum));
+			types.AddRange(Config.TypesExtra.Where(c => c.GetTypeInfo().IsEnum));
 			types.Add(typeof(Patterns.Repository.Executes.ExecuteMessageType));
 			types.Add(typeof(Patterns.Repository.Entity.EntityAction));
 			types = types.Distinct().ToList();
@@ -113,16 +123,16 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			}
 		}
 
-		private void LoadProperties(TypeScriptEntity config)
+		private void LoadProperties()
 		{
 			var nullablePropertys = new string[] { "Keys", "Keys", "PageNumber", "PageSize" };
 
-			List<Type> types = config.Assemblys
+			List<Type> types = Config.Assemblys
 				.SelectMany(c => c.GetTypes())
 				.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum)
 				.ToList();
 
-			types.AddRange(config.TypesExtra.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum));
+			types.AddRange(Config.TypesExtra.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum));
 
 			foreach (var type in types.Distinct())
 			{
@@ -165,11 +175,14 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			}
 		}
 
-		private void ProcessEnum(TypeScriptEntity config)
+		private void ProcessEnum()
 		{
 			StringBuilderIndented builder = new StringBuilderIndented();
 
-			foreach (var enumItem in TSEnums)
+            builder
+                .GenerateFileMessage();
+
+            foreach (var enumItem in TSEnums)
 			{
 				builder
 					.AppendLine($"export enum {enumItem.Name} {{")
@@ -186,13 +199,12 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 					.AppendLine("}")
 					.AppendLine();
 			}
-
-			WriteFile(config.Path.ToLower(), "enum.ts", builder);
+            
+            WriteFile(Config.Path.ToLower(), "enum.ts", builder);
 		}
 
-		private void ProcessTypes(TypeScriptEntity config)
+		private void ProcessTypes()
 		{
-
 			foreach (var file in TSClass.Select(c => c.FileName).Distinct().OrderBy(c => c))
 			{
 				var fileName = file.GetSelector();
@@ -200,7 +212,10 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 
 				StringBuilderIndented builder = new StringBuilderIndented();
 
-				if (importItems.Any())
+                builder
+                    .GenerateFileMessage();
+
+                if (importItems.Any())
 				{
 					bool imported = false;
 
@@ -218,7 +233,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 					if (imported)
 					{
 						builder
-						.AppendLine();
+						    .AppendLine();
 					}
 				}
 
@@ -261,23 +276,33 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 						.AppendLine();
 				}
 
-				WriteFile(config.Path.ToLower(), fileName, builder);
+                if (GeneratedEntities.Contains(fileName))
+                {
+                    throw new Exception($"Two file with same name cannot be generated: {fileName}");
+                }
+
+                GeneratedEntities.Add(fileName);
+                WriteFile(Config.Path.ToLower(), fileName, builder);
 			}
 		}
 
 		internal void Run(TypeScriptEntity config, IndexExport index)
 		{
+            Config = config;
+
 			TSClass = new List<TypeScriptClass>();
 			TSEnums = new List<TypeScriptEnum>();
 
-			LoadEnums(config);
-			LoadProperties(config);
+            GeneratedEntities = new List<string>();
+
+			LoadEnums();
+			LoadProperties();
 
 			if (!Directory.Exists(config.Path))
 				Directory.CreateDirectory(config.Path);
 
-			ProcessEnum(config);
-			ProcessTypes(config);
+			ProcessEnum();
+			ProcessTypes();
 
 			Index.Run(config.Path);
 

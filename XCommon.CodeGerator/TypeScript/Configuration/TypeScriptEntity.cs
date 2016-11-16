@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace XCommon.CodeGerator.TypeScript.Configuration
 {
@@ -12,11 +10,15 @@ namespace XCommon.CodeGerator.TypeScript.Configuration
 		{
 			Assemblys = new List<Assembly>();
 			TypesExtra = new List<Type>();
-		}
+            NameOveride = new List<Configuration.NameOveride>();
+
+        }
 
 		public string Path { get; set; }
 
-		public List<Assembly> Assemblys { get; set; }
+        public List<NameOveride> NameOveride { get; set; }
+
+        public List<Assembly> Assemblys { get; set; }
 
 		public List<Type> TypesExtra { get; set; }
 	}
