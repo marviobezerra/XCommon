@@ -4,33 +4,44 @@
         where TEntity : new()
     {
         public Execute()
+            : this(default(TEntity), null, null)
         {
-            Entity = new TEntity();
         }
 
         public Execute(Execute execute)
-            : base(execute)
+            : this(default(TEntity), null, execute)
         {
 
         }
 
-        public Execute(Execute execute, TEntity entity)
-            : base(execute)
+        public Execute(ExecuteUser user)
+            : this(default(TEntity), user, null)
         {
-            Entity = entity;
+
         }
 
         public Execute(TEntity entity)
+            : this(entity, null, null)
         {
             Entity = entity;
         }
 
-        public Execute(TEntity entity, ExecuteUser user)
+        public Execute(TEntity entity, Execute execute)
+            : this(entity, null, execute)
         {
-            User = user;
+        }
+
+        public Execute(TEntity entity, ExecuteUser user)
+            : this(entity, user, null)
+        {
+        }
+
+        public Execute(TEntity entity, ExecuteUser user, Execute execute)
+            : base(execute, user)
+        {
             Entity = entity;
         }
-		
+
         public TEntity Entity { get; set; }
     }
 }

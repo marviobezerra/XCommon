@@ -5,7 +5,6 @@ namespace XCommon.Patterns.Repository.Executes
     {
         Error = 1,
 		Warning = 2,
-		Exception = 3,
-		Normal = 4
+		Exception = 3
     }
 }

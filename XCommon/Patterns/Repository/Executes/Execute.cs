@@ -8,24 +8,36 @@ namespace XCommon.Patterns.Repository.Executes
     public class Execute
     {
         public Execute()
+            : this(null, null)
         {
-            Messages = new List<ExecuteMessage>();
-            Properties = new Dictionary<string, object>();
+        }
+
+        public Execute(ExecuteUser user)
+            : this(null, user)
+        {
         }
 
         public Execute(Execute execute)
+            : this(execute, null)
         {
-            User = execute.User;
-            HasWarning = execute.HasWarning;
-            HasErro = execute.HasErro;
-			HasException = execute.HasException;
-            Messages = execute.Messages ?? new List<ExecuteMessage>();
+        }
+
+        public Execute(Execute execute, ExecuteUser user)
+        {
+            Messages = new List<ExecuteMessage>();
             Properties = new Dictionary<string, object>();
+
+            User = user ?? execute?.User;
+
+            if (execute != null)
+            {
+                AddMessage(execute);
+            }
         }
 
         #region Propertys
-		
-		[IgnoreDataMember]
+
+        [IgnoreDataMember]
         private Dictionary<string, object> Properties { get; set; }
 
         [IgnoreDataMember]
@@ -33,24 +45,22 @@ namespace XCommon.Patterns.Repository.Executes
 
         public bool HasErro { get; private set; }
 
-		public bool HasException { get; private set; }
+        public bool HasException { get; private set; }
 
         public bool HasWarning { get; private set; }
-        
+
         public List<ExecuteMessage> Messages { get; private set; }
         #endregion
 
         #region public
-        public virtual void AddMessage(ExecuteMessageType type, string message, params object[] args)
-        {
-            AddMessage(type, string.Format(message, args));
-        }
-
         public virtual void AddMessage(ExecuteMessageType type, string message)
         {
             Messages.Add(new ExecuteMessage { Type = type, Message = message });
             CheckMessage();
         }
+
+        public virtual void AddMessage(ExecuteMessageType type, string message, params object[] args)
+            => AddMessage(type, string.Format(message ?? string.Empty, args ?? new object[] { }));
 
         public virtual void AddMessage(Exception ex, string message)
         {
@@ -82,15 +92,8 @@ namespace XCommon.Patterns.Repository.Executes
             Messages.AddRange(execute.Messages.Where(c => !Messages.Contains(c)));
             CheckMessage();
         }
-
-        public virtual string CompileMessages()
-        {
-            string result = string.Empty;
-            Messages.ForEach(c => result += string.Format("{0} - {1}{2}", c.Message, c.Type, Environment.NewLine));
-            return result;
-        }
-
-        public virtual TValue GetValue<TValue>(string key)
+        
+        public virtual TValue GetProperty<TValue>(string key)
         {
             object result;
             if (Properties.TryGetValue(key, out result))
@@ -99,12 +102,17 @@ namespace XCommon.Patterns.Repository.Executes
             return default(TValue);
         }
 
-        public virtual void SetValue<TValue>(string key, TValue value)
+        public virtual bool SetProperty<TValue>(string key, TValue value)
         {
-            if (Properties.ContainsKey(key))
-                Properties.Remove(key);
-
-            Properties[key] = value;
+            try
+            {
+                Properties[key] = value;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         #endregion
 
@@ -117,9 +125,9 @@ namespace XCommon.Patterns.Repository.Executes
             if (!HasErro)
                 HasErro = Messages.Any(c => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
 
-			if (!HasException)
-				HasException = Messages.Any(c => c.Type == ExecuteMessageType.Exception);
-		}
+            if (!HasException)
+                HasException = Messages.Any(c => c.Type == ExecuteMessageType.Exception);
+        }
         #endregion
     }
 }
