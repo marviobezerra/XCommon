@@ -197,5 +197,6 @@ FakesAssemblies/
 *.ncrunchproject
 *.ncrunchsolution
 
-# Project Lock
+# DNX
 project.lock.json
+artifacts/
