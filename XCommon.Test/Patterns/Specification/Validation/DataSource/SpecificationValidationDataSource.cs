@@ -7,7 +7,7 @@ using XCommon.UnitTest;
 
 namespace XCommon.Test.Patterns.Specification.Validation.DataSource
 {
-    public static class PersonDataSource
+    public static class SpecificationValidationDataSource
     {
         public static IEnumerable<object[]> DefaultDataSource
         {
