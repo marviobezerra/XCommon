@@ -2,7 +2,7 @@
 using System;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Executes;
-using XCommon.Test.Patterns.Specification.Validation.Sample;
+using XCommon.Test.Entity;
 using Xunit;
 
 namespace XCommon.Test.Patterns.Repository.Executes

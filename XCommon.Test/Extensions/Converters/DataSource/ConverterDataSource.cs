@@ -13,11 +13,11 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                List<DataItem<EntityA>> result = new List<DataItem<EntityA>>();
+                DataList<EntityA, bool> result = new DataList<EntityA, bool>();
 
-                result.Add(new DataItem<EntityA>(new EntityA { }, true, "Default value"));
+                result.Add(new EntityA { }, true, "Default value");
 
-                result.Add(new DataItem<EntityA>(new EntityA
+                result.Add(new EntityA
                 {
                     IntValue = 17,
                     IntValueNullable = 17,
@@ -30,9 +30,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValue = "5".ToGuid(),
                     GuidValueNullable = "5".ToGuid(),
                     StringValue = "Marvio"
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                result.Add(new DataItem<EntityA>(new EntityA
+                result.Add(new EntityA
                 {
                     IntValue = 100,
                     IntValueNullable = null,
@@ -45,21 +45,18 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValue = "105".ToGuid(),
                     GuidValueNullable = null,
                     StringValue = "Marvio"
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                result.Add(new DataItem<EntityA>(new EntityA
+                result.Add(new EntityA
                 {
                     IntValueNullable = 100,
                     BoolValueNullAble = false,
                     DateTimeValueNullable = DateTime.Now.AddDays(1),
                     EnumValueNullable = BooleanOption.False,
                     GuidValueNullable = "105".ToGuid(),
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -67,9 +64,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                List<DataItem<EntityD>> result = new List<DataItem<EntityD>>();
+                DataList<EntityD, bool> result = new DataList<EntityD, bool>();
 
-                result.Add(new DataItem<EntityD>(new EntityD
+                result.Add(new EntityD
                 {
                     Id = 1,
                     EntityA = new EntityA
@@ -86,9 +83,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         GuidValueNullable = "5".ToGuid(),
                         StringValue = "Marvio"
                     }
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                result.Add(new DataItem<EntityD>(new EntityD
+                result.Add(new EntityD
                 {
                     Id = 2,
                     EntityA = new EntityA
@@ -105,9 +102,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         GuidValueNullable = null,
                         StringValue = "Marvio"
                     }
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                result.Add(new DataItem<EntityD>(new EntityD
+                result.Add(new EntityD
                 {
                     Id = 3,
                     EntityA = new EntityA
@@ -118,12 +115,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         EnumValueNullable = BooleanOption.False,
                         GuidValueNullable = "105".ToGuid(),
                     }
-                }, true, "Default value"));
+                }, true, "Default value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -172,13 +166,10 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValueNullable = "105".ToGuid(),
                 });
 
-                List<DataItem<List<EntityA>>> result = new List<DataItem<List<EntityA>>>();
-                result.Add(new DataItem<List<EntityA>>(dataItem, true, "Valid list"));
+                DataList<List<EntityA>, bool> result = new DataList<List<EntityA>, bool>();
+                result.Add(dataItem, true, "Valid list");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
     }

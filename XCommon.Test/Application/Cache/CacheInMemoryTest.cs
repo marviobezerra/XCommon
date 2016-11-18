@@ -4,7 +4,7 @@ using XCommon.Application.Cache;
 using XCommon.Application.Cache.Implementations;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Entity;
-using XCommon.Test.Patterns.Specification.Validation.Sample;
+using XCommon.Test.Entity;
 using Xunit;
 
 namespace XCommon.Test.Application.Cache

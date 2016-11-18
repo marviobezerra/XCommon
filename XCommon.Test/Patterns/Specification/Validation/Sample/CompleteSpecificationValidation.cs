@@ -2,6 +2,7 @@
 using XCommon.Patterns.Repository.Executes;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Validation.Extensions;
+using XCommon.Test.Entity;
 
 namespace XCommon.Test.Patterns.Specification.Validation.Sample
 {

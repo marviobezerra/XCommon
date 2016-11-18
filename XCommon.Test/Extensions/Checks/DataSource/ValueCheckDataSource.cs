@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using XCommon.UnitTest;
-using XCommon.Util;
 
 namespace XCommon.Test.Extensions.Checks.DataSource
 {
@@ -13,14 +10,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime>>(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();                
             }
         }
 
@@ -28,14 +22,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime>>(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();                
             }
         }
 
@@ -43,14 +34,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<int, int>>> result = new List<DataItem<Pair<int, int>>>();
+                DataList<int, int, bool> result = new DataList<int, int, bool>();
 
-                result.Add(new DataItem<Pair<int, int>>(new Pair<int, int>(0, 0), false, "Equals value"));
+                result.Add(0, 0, false, "Equals value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -58,14 +46,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<decimal, decimal>>> result = new List<DataItem<Pair<decimal, decimal>>>();
+                DataList<decimal, decimal, bool> result = new DataList<decimal, decimal, bool>();
 
-                result.Add(new DataItem<Pair<decimal, decimal>>(new Pair<decimal, decimal>(0, 0), false, "Equals value"));
-
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                result.Add(0, 0, false, "Equals value");
+                
+                return result.Cast();                
             }
         }
 
@@ -73,14 +58,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime>>(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -88,14 +70,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime>>(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -103,14 +82,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<int, int>>> result = new List<DataItem<Pair<int, int>>>();
+                DataList<int, int, bool> result = new DataList<int, int, bool>();
 
-                result.Add(new DataItem<Pair<int, int>>(new Pair<int, int>(0, 0), false, "Equals value"));
+                result.Add(0, 0, false, "Equals value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -118,28 +94,23 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<decimal, decimal>>> result = new List<DataItem<Pair<decimal, decimal>>>();
+                DataList<decimal, decimal, bool> result = new DataList<decimal, decimal, bool>();
 
-                result.Add(new DataItem<Pair<decimal, decimal>>(new Pair<decimal, decimal>(0, 0), false, "Equals value"));
+                result.Add(0, 0, false, "Equals value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
+
         public static IEnumerable<object[]> InRangeDateTimeDataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime, DateTime>>(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, DateTime.Now, true, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -147,14 +118,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<DateTime, DateTime, DateTime>>> result = new List<DataItem<Pair<DateTime, DateTime, DateTime>>>();
+                DataList<DateTime, DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, DateTime, bool>();
 
-                result.Add(new DataItem<Pair<DateTime, DateTime, DateTime>>(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date"));
+                result.Add(DateTime.Now, DateTime.Now, DateTime.Now, true, "Equals date");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -162,14 +130,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<int, int, int>>> result = new List<DataItem<Pair<int, int, int>>>();
+                DataList<int, int, int, bool> result = new DataList<int, int, int, bool>();
 
-                result.Add(new DataItem<Pair<int, int, int>>(new Pair<int, int, int>(0, 0, 0), true, "Equals value"));
+                result.Add(0, 0, 0, true, "Equals value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -177,14 +142,11 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                List<DataItem<Pair<decimal, decimal, decimal>>> result = new List<DataItem<Pair<decimal, decimal, decimal>>>();
+                DataList<decimal, decimal, decimal, bool> result = new DataList<decimal, decimal, decimal, bool>();
 
-                result.Add(new DataItem<Pair<decimal, decimal, decimal>>(new Pair<decimal, decimal, decimal>(0, 0, 0), true, "Equals value"));
+                result.Add(0, 0, 0, true, "Equals value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
     }

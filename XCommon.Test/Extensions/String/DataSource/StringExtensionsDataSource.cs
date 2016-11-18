@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XCommon.UnitTest;
-using XCommon.Util;
 
 namespace XCommon.Test.Extensions.String.DataSource
 {
@@ -10,22 +9,19 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                List<DataItem<string>> result = new List<DataItem<string>>();
+                DataList<string, bool> result = new DataList<string, bool>();
 
-                result.Add(new DataItem<string>(null, true, "Null value"));
-                result.Add(new DataItem<string>(string.Empty, true, "string.Empty value"));
-                result.Add(new DataItem<string>("", true, "Empty value"));
-                result.Add(new DataItem<string>("    ", true, "Space value"));
-                result.Add(new DataItem<string>("A", false, "With value"));
-                result.Add(new DataItem<string>("1", false, "With value"));
-                result.Add(new DataItem<string>("   1  ", false, "With value"));
-                result.Add(new DataItem<string>("   -  ", false, "With value"));
-                result.Add(new DataItem<string>("   .  ", false, "With value"));
+                result.Add(null, true, "Null value");
+                result.Add(string.Empty, true, "string.Empty value");
+                result.Add("", true, "Empty value");
+                result.Add("    ", true, "Space value");
+                result.Add("A", false, "With value");
+                result.Add("1", false, "With value");
+                result.Add("   1  ", false, "With value");
+                result.Add("   -  ", false, "With value");
+                result.Add("   .  ", false, "With value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -33,22 +29,19 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                List<DataItem<string>> result = new List<DataItem<string>>();
+                DataList<string, bool> result = new DataList<string, bool>();
 
-                result.Add(new DataItem<string>(null, false, "Null value"));
-                result.Add(new DataItem<string>(string.Empty, false, "string.Empty value"));
-                result.Add(new DataItem<string>("", false, "Empty value"));
-                result.Add(new DataItem<string>("    ", false, "Space value"));
-                result.Add(new DataItem<string>("A", true, "With value"));
-                result.Add(new DataItem<string>("1", true, "With value"));
-                result.Add(new DataItem<string>("   1  ", true, "With value"));
-                result.Add(new DataItem<string>("   -  ", true, "With value"));
-                result.Add(new DataItem<string>("   .  ", true, "With value"));
+                result.Add(null, false, "Null value");
+                result.Add(string.Empty, false, "string.Empty value");
+                result.Add("", false, "Empty value");
+                result.Add("    ", false, "Space value");
+                result.Add("A", true, "With value");
+                result.Add("1", true, "With value");
+                result.Add("   1  ", true, "With value");
+                result.Add("   -  ", true, "With value");
+                result.Add("   .  ", true, "With value");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
 
@@ -56,19 +49,16 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                List<DataItem<Pair<string, string>>> result = new List<DataItem<Pair<string, string>>>();
+                DataList<string, string> result = new DataList<string, string>();
 
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("Márvio", "Marvio"), true, "Needs to be Marvio"));
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("Márvio André Bezerra Silvério", "Marvio Andre Bezerra Silverio"), true, "Needs to be Marvio"));
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("Mârvio", "Marvio"), true, "Needs to be Marvio"));
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("Mãrvio", "Marvio"), true, "Needs to be Marvio"));
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("Màrvio", "Marvio"), true, "Needs to be Marvio"));
-                result.Add(new DataItem<Pair<string, string>>(new Pair<string, string>("ÁÂÃÄÅÇÈÉàáâãäåèéêëìíîïòóôõ", "AAAAACEEaaaaaaeeeeiiiioooo"), true, "Needs to be Marvio"));
+                result.Add("Márvio", "Marvio",  "Needs to be Marvio");
+                result.Add("Márvio André Bezerra Silvério", "Marvio Andre Bezerra Silverio", "Marvio Andre Bezerra Silverio");
+                result.Add("Mârvio", "Marvio",  "Needs to be Marvio");
+                result.Add("Mãrvio", "Marvio",  "Needs to be Marvio");
+                result.Add("Màrvio", "Marvio",  "Needs to be Marvio");
+                result.Add("ÁÂÃÄÅÇÈÉàáâãäåèéêëìíîïòóôõ", "AAAAACEEaaaaaaeeeeiiiioooo", "Needs to be AAAAACEEaaaaaaeeeeiiiioooo");
 
-                foreach (var item in result)
-                {
-                    yield return item.Cast();
-                }
+                return result.Cast();
             }
         }
     }
