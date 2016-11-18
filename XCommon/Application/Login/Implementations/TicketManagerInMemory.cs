@@ -5,9 +5,18 @@ using XCommon.Patterns.Repository.Executes;
 
 namespace XCommon.Application.Login.Implementations
 {
-    public class TicketManagerFake : ITicketManager
+    public class TicketManagerInMemory : ITicketManager
 	{
-		public string Culture { get; private set; }
+        public TicketManagerInMemory(string cultureDefault)
+        {
+            Culture = cultureDefault;
+            CultureDefault = cultureDefault;
+        }
+
+        private string CultureDefault { get; set; }
+
+
+        public string Culture { get; private set; }
 
 		public bool IsAuthenticated { get; private set; }
 
@@ -17,7 +26,7 @@ namespace XCommon.Application.Login.Implementations
 
 		public async Task SignInAsync(TicketEntity signUpTicket)
 		{
-            if (signUpTicket.Status == TicketStatus.Sucess)
+            if (signUpTicket != null && signUpTicket.Status == TicketStatus.Sucess)
             {
                 IsAuthenticated = true;
                 Culture = signUpTicket.Culture;
@@ -38,7 +47,7 @@ namespace XCommon.Application.Login.Implementations
 		public async Task SignOutAsync()
 		{
             IsAuthenticated = false;
-            Culture = string.Empty;
+            Culture = CultureDefault;
             UserKey = Guid.Empty;
             User = null;
 
