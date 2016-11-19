@@ -2,9 +2,9 @@
 
 namespace XCommon.Util
 {
-    public class DataList<T1, TResult>
+    public class PairList<T1, TResult>
     {
-        public DataList()
+        public PairList()
         {
             Source = new List<Pair<T1, TResult, string>>();
         }

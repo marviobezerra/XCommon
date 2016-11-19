@@ -9,7 +9,7 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                DataList<string, bool> result = new DataList<string, bool>();
+                PairList<string, bool> result = new PairList<string, bool>();
 
                 result.Add(null, true, "Null value");
                 result.Add(string.Empty, true, "string.Empty value");
@@ -29,7 +29,7 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                DataList<string, bool> result = new DataList<string, bool>();
+                PairList<string, bool> result = new PairList<string, bool>();
 
                 result.Add(null, false, "Null value");
                 result.Add(string.Empty, false, "string.Empty value");
@@ -49,7 +49,7 @@ namespace XCommon.Test.Extensions.String.DataSource
         {
             get
             {
-                DataList<string, string> result = new DataList<string, string>();
+                PairList<string, string> result = new PairList<string, string>();
 
                 result.Add("Márvio", "Marvio",  "Needs to be Marvio");
                 result.Add("Márvio André Bezerra Silvério", "Marvio Andre Bezerra Silverio", "Marvio Andre Bezerra Silverio");

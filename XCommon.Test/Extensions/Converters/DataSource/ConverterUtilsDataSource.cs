@@ -11,7 +11,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                DataList<BooleanOption, bool> result = new DataList<BooleanOption, bool>();
+                PairList<BooleanOption, bool> result = new PairList<BooleanOption, bool>();
 
                 result.Add(BooleanOption.True, true, "BooleanOption.True = True");
                 result.Add(BooleanOption.False, false, "BooleanOption.False = False");
@@ -41,7 +41,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                DataList<string, int> result = new DataList<string, int>();
+                PairList<string, int> result = new PairList<string, int>();
 
                 result.Add(null, 0, "Empty Int");
                 result.Add(string.Empty, 0, "Empty Int");
@@ -97,7 +97,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                DataList<string, Guid> result = new DataList<string, Guid>();
+                PairList<string, Guid> result = new PairList<string, Guid>();
 
                 result.Add(null, Guid.Empty, "Empty Guid");
                 result.Add(string.Empty, Guid.Empty, "Empty Guid");
@@ -120,7 +120,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                DataList<string, BooleanOption> result = new DataList<string, BooleanOption>();
+                PairList<string, BooleanOption> result = new PairList<string, BooleanOption>();
 
                 result.Add(null, default(BooleanOption), "Null String");
                 result.Add("All", BooleanOption.All, "All");
