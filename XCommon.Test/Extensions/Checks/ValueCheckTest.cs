@@ -9,114 +9,111 @@ namespace XCommon.Test.Extensions.Checks
 {
     public class ValueCheckTest
     {
-        [Theory(DisplayName = "Bigger Than DateTime")]
+        [Theory(DisplayName = "BiggerThan DateTime")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        public void BiggerThanDateTime(DateTime from, DateTime to, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2);
+            bool result = from.BiggerThan(to);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Bigger Than DateTime (Without time)")]
+        [Theory(DisplayName = "BiggerThan DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        public void BiggerThanDateTimeNoTime(DateTime from, DateTime to, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2, true);
+            bool result = from.BiggerThan(to, true);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Bigger Than Int")]
+        [Theory(DisplayName = "BiggerThan Int")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanIntDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanInt(Pair<int, int> data, bool expected, string message)
+        public void BiggerThanInt(int from, int to, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2);
+            bool result = from.BiggerThan(to);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Bigger Than Decimal")]
+        [Theory(DisplayName = "BiggerThan Decimal")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanDecimalDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDecimal(Pair<decimal, decimal> data, bool expected, string message)
+        public void BiggerThanDecimal(decimal from, decimal to, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2);
-
+            bool result = from.BiggerThan(to);
+            
             expected.Should().Be(result, message);
         }
         
-        [Theory(DisplayName = "Less Than DateTime")]
+        [Theory(DisplayName = "LessThan DateTime")]
         [MemberData(nameof(ValueCheckDataSource.LessThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        public void LessThanDateTime(DateTime from, DateTime to, bool expected, string message)
         {
-            bool result = data.Item1.LessThan(data.Item2);
+            bool result = from.LessThan(to);
+            //Assert.Equal(expected, result);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Less Than DateTime (Without time)")]
+        [Theory(DisplayName = "LessThan DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.LessThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        public void LessThanDateTimeNoTime(DateTime from, DateTime to, bool expected, string message)
         {
-            bool result = data.Item1.LessThan(data.Item2, true);
+            bool result = from.LessThan(to, true);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Less Than Int")]
+        [Theory(DisplayName = "LessThan Int")]
         [MemberData(nameof(ValueCheckDataSource.LessThanIntDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanInt(Pair<int, int> data, bool expected, string message)
+        public void LessThanInt(int from, int to, bool expected, string message)
         {
-            bool result = data.Item1.LessThan(data.Item2);
+            bool result = from.LessThan(to);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "Less Than Decimal")]
+        [Theory(DisplayName = "LessThan Decimal")]
         [MemberData(nameof(ValueCheckDataSource.LessThanDecimalDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanDecimal(Pair<decimal, decimal> data, bool expected, string message)
+        public void LessThanDecimal(decimal from, decimal to, bool expected, string message)
         {
-            bool result = data.Item1.LessThan(data.Item2);
+            bool result = from.LessThan(to);
 
             expected.Should().Be(result, message);
         }
 
-
-
-
-
-        [Theory(DisplayName = "In Range DateTime")]
+        [Theory(DisplayName = "InRange DateTime")]
         [MemberData(nameof(ValueCheckDataSource.InRangeDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeDateTime(Pair<DateTime, DateTime, DateTime> data, bool expected, string message)
+        public void InRangeDateTime(DateTime from, DateTime toBegin, DateTime toEnd, bool expected, string message)
         {
-            bool result = data.Item1.InRange(data.Item2, data.Item3);
+            bool result = from.InRange(toBegin, toEnd);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "In Range DateTime (Without time)")]
+        [Theory(DisplayName = "InRange DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.InRangeDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeDateTimeNoTime(Pair<DateTime, DateTime, DateTime> data, bool expected, string message)
+        public void InRangeDateTimeNoTime(DateTime from, DateTime toBegin, DateTime toEnd, bool expected, string message)
         {
-            bool result = data.Item1.InRange(data.Item2, data.Item3, true);
+            bool result = from.InRange(toBegin, toEnd, true);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "In Range Int")]
+        [Theory(DisplayName = "InRange Int")]
         [MemberData(nameof(ValueCheckDataSource.InRangeIntDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeInt(Pair<int, int, int> data, bool expected, string message)
+        public void InRangeInt(int from, int toBegin, int toEnd, bool expected, string message)
         {
-            bool result = data.Item1.InRange(data.Item2, data.Item3);
+            bool result = from.InRange(toBegin, toEnd);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "In Range Decimal")]
+        [Theory(DisplayName = "InRange Decimal")]
         [MemberData(nameof(ValueCheckDataSource.InRangeDecimalDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeDecimal(Pair<decimal, decimal, decimal> data, bool expected, string message)
+        public void InRangeDecimal(decimal from, decimal toBegin, decimal toEnd, bool expected, string message)
         {
-            bool result = data.Item1.InRange(data.Item2, data.Item3);
+            bool result = from.InRange(toBegin, toEnd);
 
             expected.Should().Be(result, message);
         }

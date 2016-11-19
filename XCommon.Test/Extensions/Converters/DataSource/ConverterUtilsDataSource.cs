@@ -26,12 +26,12 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                DataList<BooleanOption, bool> result = new DataList<BooleanOption, bool>();
+                DataList<BooleanOption, bool, bool> result = new DataList<BooleanOption, bool, bool>();
 
-                result.Add(BooleanOption.True, true, "BooleanOption.True = True");
-                result.Add(BooleanOption.False, false, "BooleanOption.False = False");
-                result.Add(BooleanOption.All, false, "BooleanOption.All = False");
-                result.Add(default(BooleanOption), false, "default(BooleanOption) = True");
+                result.Add(BooleanOption.True, false, true, "BooleanOption.True = True");
+                result.Add(BooleanOption.False, true, false,  "BooleanOption.False = False");
+                result.Add(BooleanOption.All, false, false, "BooleanOption.All = False");
+                result.Add(default(BooleanOption), false, false, "default(BooleanOption) = True");
 
                 return result.Cast();
             }
@@ -78,16 +78,16 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                 result.Add("AbCd", 999, 999, "Invalid Int");
                 result.Add("100.1", 80, 80, "Invalid Int");
 
-                result.Add("1", 1, 100, "Valid Int");
-                result.Add("-1", -1, 100, "Valid Int");
-                result.Add("10", 10, 100, "Valid Int");
+                result.Add("1", 100, 1, "Valid Int");
+                result.Add("-1", 100, -1, "Valid Int");
+                result.Add("10", 100, 10, "Valid Int");
                 result.Add("100", 100, 100, "Valid Int");
-                result.Add("1000", 1000, 100, "Valid Int");
-                result.Add("10000", 10000, 100, "Valid Int");
-                result.Add("100000", 100000, 100, "Valid Int");
-                result.Add("1000000", 1000000, 100, "Valid Int");
-                result.Add("10000000", 10000000, 100, "Valid Int");
-                result.Add("100000000", 100000000, 100, "Valid Int");
+                result.Add("1000", 100, 1000, "Valid Int");
+                result.Add("10000", 100, 10000, "Valid Int");
+                result.Add("100000", 100, 100000, "Valid Int");
+                result.Add("1000000", 100, 1000000, "Valid Int");
+                result.Add("10000000", 100, 10000000, "Valid Int");
+                result.Add("100000000", 100, 100000000, "Valid Int");
 
                 return result.Cast();
             }

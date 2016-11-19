@@ -26,10 +26,10 @@ namespace XCommon.Test.Extensions.String
 
         [Theory(DisplayName = "RemoveAccent")]
         [MemberData(nameof(StringExtensionsDataSource.RemoveAccentDataSource), MemberType = typeof(StringExtensionsDataSource))]
-        public void RemoveAccent(Pair<string, string> data, bool valid, string message)
+        public void RemoveAccent(string source, string expected, string message)
         {
-            var result = data.Item1.RemoveAcent();
-            result.Should().Be(data.Item2, message);
+            var result = source.RemoveAcent();
+            result.Should().Be(expected, message);
         }
     }
 }

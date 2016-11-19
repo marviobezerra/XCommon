@@ -25,6 +25,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
                 DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
 
                 result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
+                result.Add(DateTime.Now.AddDays(-1), DateTime.Now, false, "Equals date");
 
                 return result.Cast();                
             }
