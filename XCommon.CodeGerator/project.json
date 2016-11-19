@@ -2,16 +2,23 @@
   "version": "1.0.40-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Newtonsoft.Json": "9.0.1",
-    "System.Data.SqlClient": "4.1.0",
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "9.0.2-beta1",
     "XCommon": "1.0.40-*"
   },
 
   "frameworks": {
-    "net451": {},
+    "net451": {
+      "dependencies": {
+        "System.Data.SqlClient": "4.3.0"
+      }
+    },
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Data.Common": "4.3.0",
+        "System.Data.SqlClient": "4.3.0"
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ using XCommon.CodeGerator.CSharp.Configuration;
 
 namespace XCommon.CodeGerator.Core.DataBase
 {
-	internal class DataBaseRead
+    internal class DataBaseRead
 	{ 
 		internal List<ItemGroup> ReadDataBase(string connectionString)
 		{
