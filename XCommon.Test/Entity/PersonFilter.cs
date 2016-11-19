@@ -19,5 +19,9 @@ namespace XCommon.Test.Entity
         public string Email { get; set; }
 
         public int? Age { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int PageSize { get; set; }
     }
 }

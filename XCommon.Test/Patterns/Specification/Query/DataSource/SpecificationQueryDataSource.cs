@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Test.Entity;
-using XCommon.UnitTest;
 using XCommon.Util;
 
 namespace XCommon.Test.Patterns.Specification.Query.DataSource
@@ -45,8 +45,15 @@ namespace XCommon.Test.Patterns.Specification.Query.DataSource
         {
             get
             {
-                DataList<PersonFilter, int> result = new DataList<PersonFilter, int>();
+                DataList<List<PersonEntity>, PersonFilter, int> result = new DataList<List<PersonEntity>, PersonFilter, int>();
 
+                result.Add(PeopleList, new PersonFilter { }, 20, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Id = "0".ToGuid() }, 0, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Id = "2".ToGuid() }, 1, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Ids = new List<Guid> { "1".ToGuid(), "2".ToGuid() } }, 2, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Name = "Maria" }, 3, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Name = "Maria", Email = "maria.jane@gmail.com" }, 1, "Empty filter");
+                result.Add(PeopleList, new PersonFilter { PageNumber = 1, PageSize = 2 }, 2, "Empty filter");
 
                 return result.Cast();
             }
