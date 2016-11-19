@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace XCommon.Patterns.Specification.Validation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
     public class SpecificationList<TEntity>
     {

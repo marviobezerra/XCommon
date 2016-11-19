@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XCommon.Patterns.Specification.Validation
+namespace XCommon.Patterns.Specification.Validation.Implementation
 {
     public class SpecificationItem<TEntity>
     {

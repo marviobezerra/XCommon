@@ -31,7 +31,7 @@ namespace XCommon.Patterns.Repository
         protected virtual ISpecificationValidation<TEntity> SpecificationValidate { get; set; }
 
         [Inject]
-        protected virtual IQueryBuilder<TData, TFilter> SpecificationQuery { get; set; }
+        protected virtual ISpecificationQuery<TData, TFilter> SpecificationQuery { get; set; }
 
         [Inject(forceResolve: false)]
         protected virtual ILogger Logger { get; set; }

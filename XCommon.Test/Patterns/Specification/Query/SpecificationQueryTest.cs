@@ -15,7 +15,7 @@ namespace XCommon.Test.Patterns.Specification.Query
         [MemberData(nameof(SpecificationQueryDataSource.DefaultDataSource), MemberType = typeof(SpecificationQueryDataSource))]
         public void QuerySimple(List<PersonEntity> source, PersonFilter filter, int recordCount, string message)
         {
-            IQueryBuilder<PersonEntity, PersonFilter> query = new PersonQuery();
+            ISpecificationQuery<PersonEntity, PersonFilter> query = new PersonQuery();
 
             var result = query.Build(source, filter);
             result.Count().Should().Be(recordCount);
