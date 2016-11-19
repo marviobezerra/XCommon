@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Test.Entity;
-using XCommon.UnitTest;
+using XCommon.Util;
 
 namespace XCommon.Test.Patterns.Specification.Validation.DataSource
 {

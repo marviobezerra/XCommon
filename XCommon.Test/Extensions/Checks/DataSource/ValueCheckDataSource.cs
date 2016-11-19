@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using XCommon.UnitTest;
+using XCommon.Util;
 
 namespace XCommon.Test.Extensions.Checks.DataSource
 {
@@ -10,9 +11,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
+                result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
                 return result.Cast();                
             }
@@ -22,10 +23,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
-                result.Add(DateTime.Now.AddDays(-1), DateTime.Now, false, "Equals date");
+                result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
                 return result.Cast();                
             }
@@ -59,9 +59,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
+                result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
                 return result.Cast();
             }
@@ -71,9 +71,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, false, "Equals date");
+                result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
                 return result.Cast();
             }
@@ -107,9 +107,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, DateTime.Now, true, "Equals date");
+                result.Add(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date");
 
                 return result.Cast();
             }
@@ -119,9 +119,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<DateTime, DateTime, DateTime, bool> result = new DataList<DateTime, DateTime, DateTime, bool>();
+                DataList<Pair<DateTime, DateTime, DateTime>, bool> result = new DataList<Pair<DateTime, DateTime, DateTime>, bool>();
 
-                result.Add(DateTime.Now, DateTime.Now, DateTime.Now, true, "Equals date");
+                result.Add(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date");
 
                 return result.Cast();
             }

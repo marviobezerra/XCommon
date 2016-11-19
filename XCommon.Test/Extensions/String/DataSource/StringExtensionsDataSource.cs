@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using XCommon.UnitTest;
+using XCommon.Util;
 
 namespace XCommon.Test.Extensions.String.DataSource
 {

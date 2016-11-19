@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using XCommon.Util;
 
-namespace XCommon.UnitTest
+namespace XCommon.Util
 {
     public class DataList<T1, TResult>
     {

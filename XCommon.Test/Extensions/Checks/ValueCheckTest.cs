@@ -11,18 +11,18 @@ namespace XCommon.Test.Extensions.Checks
     {
         [Theory(DisplayName = "BiggerThan DateTime")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTime(DateTime from, DateTime to, bool expected, string message)
+        public void BiggerThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.BiggerThan(to);
+            bool result = data.Item1.BiggerThan(data.Item2);
 
             expected.Should().Be(result, message);
         }
 
         [Theory(DisplayName = "BiggerThan DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTimeNoTime(DateTime from, DateTime to, bool expected, string message)
+        public void BiggerThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.BiggerThan(to, true);
+            bool result = data.Item1.BiggerThan(data.Item2, true);
 
             expected.Should().Be(result, message);
         }
@@ -47,19 +47,18 @@ namespace XCommon.Test.Extensions.Checks
         
         [Theory(DisplayName = "LessThan DateTime")]
         [MemberData(nameof(ValueCheckDataSource.LessThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanDateTime(DateTime from, DateTime to, bool expected, string message)
+        public void LessThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.LessThan(to);
-            //Assert.Equal(expected, result);
+            bool result = data.Item1.LessThan(data.Item2);
 
             expected.Should().Be(result, message);
         }
 
         [Theory(DisplayName = "LessThan DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.LessThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void LessThanDateTimeNoTime(DateTime from, DateTime to, bool expected, string message)
+        public void LessThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.LessThan(to, true);
+            bool result = data.Item1.LessThan(data.Item2, true);
 
             expected.Should().Be(result, message);
         }
@@ -84,18 +83,18 @@ namespace XCommon.Test.Extensions.Checks
 
         [Theory(DisplayName = "InRange DateTime")]
         [MemberData(nameof(ValueCheckDataSource.InRangeDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeDateTime(DateTime from, DateTime toBegin, DateTime toEnd, bool expected, string message)
+        public void InRangeDateTime(Pair<DateTime, DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.InRange(toBegin, toEnd);
+            bool result = data.Item1.InRange(data.Item2, data.Item3);
 
             expected.Should().Be(result, message);
         }
 
         [Theory(DisplayName = "InRange DateTime (Without time)")]
         [MemberData(nameof(ValueCheckDataSource.InRangeDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void InRangeDateTimeNoTime(DateTime from, DateTime toBegin, DateTime toEnd, bool expected, string message)
+        public void InRangeDateTimeNoTime(Pair<DateTime, DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = from.InRange(toBegin, toEnd, true);
+            bool result = data.Item1.InRange(data.Item2, data.Item2, true);
 
             expected.Should().Be(result, message);
         }
