@@ -6,30 +6,40 @@ namespace XCommon.Patterns.Specification.Query
 {
     public abstract class SpecificationQuery<TEntity, TFilter> : ISpecificationQuery<TEntity, TFilter>
     {
-        public SpecificationQuery()
+        public int AppliedFilters { get; private set; }
+
+        public int AppliedOrders { get; private set; }
+
+        public SpecificationList<TEntity, TFilter> NewSpecificationList()
         {
-            Specifications = new SpecificationList<TEntity, TFilter>();
+            return new SpecificationList<TEntity, TFilter>();
         }
 
-        protected SpecificationList<TEntity, TFilter> Specifications { get; set; }
-
-
-        protected virtual IQueryable<TEntity> CheckSpecifications(IQueryable<TEntity> source, TFilter filter)
+        protected virtual IQueryable<TEntity> CheckSpecifications(SpecificationList<TEntity, TFilter> specifications, IQueryable<TEntity> source, TFilter filter)
         {
-            foreach (var specification in Specifications.Items)
+            AppliedFilters = 0;
+            AppliedOrders = 0;
+
+            foreach (var specification in specifications.Items)
             {
                 if (specification.Condition(filter))
+                {
+                    AppliedFilters++;
                     source = source.Where(specification.Predicate);
+                }
             }
 
-            foreach (var item in Specifications.Order)
+            foreach (var item in specifications.Order)
             {
                 if (item.Condition(filter))
+                {
+                    AppliedOrders++;
                     source = item.Sort(source);
+                }
             }
 
-            if (Specifications.PageNumber > 0 && Specifications.PageSize > 0)
-                source = source.Skip((Specifications.PageNumber - 1) * Specifications.PageSize).Take(Specifications.PageSize);
+            if (specifications.PageNumber > 0 && specifications.PageSize > 0)
+                source = source.Skip((specifications.PageNumber - 1) * specifications.PageSize).Take(specifications.PageSize);
 
             return source;
         }

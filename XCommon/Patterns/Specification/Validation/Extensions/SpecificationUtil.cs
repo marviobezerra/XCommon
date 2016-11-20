@@ -35,9 +35,9 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
         }
 
         public static SpecificationList<TEntity> AndMerge<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, bool condition)
-            => specification.AndMerge(specificationList, c => condition);
+            => specification.AndIsValid(specificationList, c => condition);
 
-        public static SpecificationList<TEntity> AndMerge<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition)
+        public static SpecificationList<TEntity> AndIsValid<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition)
         {
             specification.Add(new AndConcat<TEntity>(specificationList, condition));
             return specification;

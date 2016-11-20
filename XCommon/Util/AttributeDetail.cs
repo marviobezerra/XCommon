@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace XCommon.Extensions.Util
+namespace XCommon.Util
 {
     public class AttributeDetail<T>
         where T : Attribute

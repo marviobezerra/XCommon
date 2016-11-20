@@ -112,7 +112,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 			foreach (var table in config.DataBaseItems.SelectMany(c => c.Items))
 			{
 				builder
-					.AppendLine($"Kernel.Map<IQueryBuilder<{table.Name}, {table.Name}Filter>>().To<{table.Name}Query>();");
+					.AppendLine($"Kernel.Map<ISpecificationQuery<{table.Name}, {table.Name}Filter>>().To<{table.Name}Query>();");
 			}
 
 			builder

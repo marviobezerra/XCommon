@@ -154,6 +154,7 @@ namespace XCommon.Patterns.Repository
             using (var db = new TContext())
             {
                 var query = SpecificationQuery.Build(db.Set<TData>(), filter);
+
                 await query.ForEachAsync(data =>
                 {
                     result.Add(data.Convert<TEntity>());

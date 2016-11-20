@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using XCommon.Extensions.Util;
+using XCommon.Util;
 
 namespace XCommon.Patterns.Ioc
 {

@@ -10,7 +10,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
     {
         public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
         {
-            Specifications
+            var specification = NewSpecificationList()
                 .AndIsValid(c => c.Id != Guid.Empty, "Invalid ID")
                 .AndIsNotEmpty(c => c.Name, "Name is empty")
                 .AndIsNotEmpty(c => c.Email, "Email is required")
@@ -18,7 +18,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
                 .AndIsValid(c => c.Age > 0, "Age need's to be more than zero");
 
 
-            return CheckSpecifications(entity, execute);
+            return CheckSpecifications(specification, entity, execute);
         }
     }
 }

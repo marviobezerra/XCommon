@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using XCommon.Extensions.Converters;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Test.Entity;
@@ -41,11 +42,11 @@ namespace XCommon.Test.Patterns.Specification.Query.DataSource
             }
         }
 
-        public static IEnumerable<object[]> DefaultDataSource
+        public static IEnumerable<object[]> DataSourceDefault
         {
             get
             {
-                DataList<List<PersonEntity>, PersonFilter, int> result = new DataList<List<PersonEntity>, PersonFilter, int>();
+                PairList<List<PersonEntity>, PersonFilter, int> result = new PairList<List<PersonEntity>, PersonFilter, int>();
 
                 result.Add(PeopleList, new PersonFilter { }, 20, "Empty filter");
                 result.Add(PeopleList, new PersonFilter { Id = "0".ToGuid() }, 0, "Empty filter");
@@ -54,6 +55,19 @@ namespace XCommon.Test.Patterns.Specification.Query.DataSource
                 result.Add(PeopleList, new PersonFilter { Name = "Maria" }, 3, "Empty filter");
                 result.Add(PeopleList, new PersonFilter { Name = "Maria", Email = "maria.jane@gmail.com" }, 1, "Empty filter");
                 result.Add(PeopleList, new PersonFilter { PageNumber = 1, PageSize = 2 }, 2, "Empty filter");
+
+                return result.Cast();
+            }
+        }
+
+        public static IEnumerable<object[]> DataSourceOrder
+        {
+            get
+            {
+                PairList<List<PersonEntity>, PersonFilter, PersonEntity> result = new PairList<List<PersonEntity>, PersonFilter, PersonEntity>();
+
+                result.Add(PeopleList, new PersonFilter { PageNumber = 1, PageSize = 1 }, PeopleList.FirstOrDefault(c => c.Id == "10".ToGuid()), "Empty filter");
+                result.Add(PeopleList, new PersonFilter { Name = "Maria", PageNumber = 1, PageSize = 1 }, PeopleList.FirstOrDefault(c => c.Id == "8".ToGuid()), "Empty filter");
 
                 return result.Cast();
             }

@@ -5,19 +5,17 @@ namespace XCommon.Patterns.Specification.Validation
 {
     public abstract class SpecificationValidation<TEntity> : ISpecificationValidation<TEntity>
     {
-        public SpecificationValidation()
+        protected SpecificationList<TEntity> NewSpecificationList(bool addCheckBaseObject = true)
         {
-            Specifications = new SpecificationList<TEntity>();
+            SpecificationList<TEntity> result = new SpecificationList<TEntity>();
 
-            ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
-            Specifications.Add(basicSpecification, true);
-        }
-
-        protected SpecificationList<TEntity> Specifications { get; set; }
-
-        protected SpecificationList<TEntity> NewSpecificationList()
-        {
-            return new SpecificationList<TEntity>();
+            if (addCheckBaseObject)
+            {
+                ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
+                result.Add(basicSpecification, true);
+            }
+            
+            return result;
         }
 
         public bool IsSatisfiedBy(TEntity entity)
@@ -27,11 +25,11 @@ namespace XCommon.Patterns.Specification.Validation
 
         public abstract bool IsSatisfiedBy(TEntity entity, Execute execute);
 
-        protected virtual bool CheckSpecifications(TEntity entity, Execute execute)
+        protected virtual bool CheckSpecifications(SpecificationList<TEntity> specifications, TEntity entity, Execute execute)
         {
             bool result = true;
 
-            foreach (var item in Specifications.Items)
+            foreach (var item in specifications.Items)
             {
                 if (!item.Condition(entity))
                     continue;

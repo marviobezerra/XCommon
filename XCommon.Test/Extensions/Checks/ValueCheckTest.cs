@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using XCommon.Extensions.Checks;
 using XCommon.Test.Extensions.Checks.DataSource;
 using XCommon.Util;
@@ -113,6 +114,24 @@ namespace XCommon.Test.Extensions.Checks
         public void InRangeDecimal(decimal from, decimal toBegin, decimal toEnd, bool expected, string message)
         {
             bool result = from.InRange(toBegin, toEnd);
+
+            expected.Should().Be(result, message);
+        }
+
+        [Theory(DisplayName = "Valid List")]
+        [MemberData(nameof(ValueCheckDataSource.GuidValidList), MemberType = typeof(ValueCheckDataSource))]
+        public void ValidList(List<Guid> source, bool expected, string message)
+        {
+            bool result = source.IsValidList();
+
+            expected.Should().Be(result, message);
+        }
+
+        [Theory(DisplayName = "Valid List (Ignore Empty)")]
+        [MemberData(nameof(ValueCheckDataSource.GuidValidListIgnoreEmpty), MemberType = typeof(ValueCheckDataSource))]
+        public void ValidListIgnoreEmpty(List<Guid> source, bool expected, string message)
+        {
+            bool result = source.IsValidList(true);
 
             expected.Should().Be(result, message);
         }

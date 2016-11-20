@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XCommon.Extensions.Checks
 {
@@ -69,5 +71,12 @@ namespace XCommon.Extensions.Checks
             return (start <= value) && (value <= end);
         }
         #endregion
+
+        public static bool IsValidList(this List<Guid> list, bool ignoreEmpty = false)
+        {
+            return list != null 
+                && list.Any() 
+                && (ignoreEmpty ? list.Any(c => c != Guid.Empty) : true);
+        }
     }
 }

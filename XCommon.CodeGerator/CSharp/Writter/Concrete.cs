@@ -35,7 +35,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					if (File.Exists(Path.Combine(path, file)))
 						continue;
 
-					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation" };
+					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 
 					StringBuilderIndented builder = new StringBuilderIndented();
@@ -45,7 +45,12 @@ namespace XCommon.CodeGerator.CSharp.Writter
 						.AppendLine($"public override bool IsSatisfiedBy({item.Name}Entity entity, Execute execute)")
 						.AppendLine("{")
 						.IncrementIndent()
-						.AppendLine("return CheckSpecifications(entity, execute);")
+                        .AppendLine("var spefications = NewSpecificationList()")
+                        .IncrementIndent()
+                        .AppendLine(".AndIsValid(e => e.Key != Guid.Empty, \"Default key isn't valid\");")
+                        .DecrementIndent()
+                        .AppendLine()
+						.AppendLine("return CheckSpecifications(spefications, entity, execute);")
 						.DecrementIndent()
 						.AppendLine("}")
 						.InterfaceEnd();
@@ -69,7 +74,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					if (File.Exists(file))
 						continue;
 
-					var nameSpace = new List<string> { "System", "System.Linq", "System.Collections.Generic", "XCommon.Patterns.Specification.Query", "XCommon.Extensions.String" };
+					var nameSpace = new List<string> { "System", "System.Linq", "System.Collections.Generic", "XCommon.Patterns.Specification.Query", "XCommon.Patterns.Specification.Query.Extensions", "XCommon.Extensions.String", "XCommon.Extensions.Checks" };
 					nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
 
@@ -80,29 +85,22 @@ namespace XCommon.CodeGerator.CSharp.Writter
 						: table.NameKey;
 
 					builder
-						.ClassInit($"{table.Name}Query", $"IQueryBuilder<{table.Name}, {table.Name}Filter>", $"{config.ConcreteNameSpace}.{group.Name}.Query", ClassVisility.Public, nameSpace.ToArray())
-						.AppendLine($"public IQueryable<{table.Name}> Build(IQueryable<{table.Name}> query, {table.Name}Filter filter)")
+						.ClassInit($"{table.Name}Query", $"SpecificationQuery<{table.Name}, {table.Name}Filter>", $"{config.ConcreteNameSpace}.{group.Name}.Query", ClassVisility.Public, nameSpace.ToArray())
+						.AppendLine($"public override IQueryable<{table.Name}> Build(IQueryable<{table.Name}> source, {table.Name}Filter filter)")
 						.AppendLine("{")
 						.IncrementIndent()
-						.AppendLine($"QueryBuilder<{table.Name}, {table.Name}Filter> result = new QueryBuilder<{table.Name}, {table.Name}Filter>()")
+						.AppendLine($"var spefications = NewSpecificationList()")
 						.IncrementIndent()
-						.AppendLine($".And(e => e.{table.NameKey} == filter.Key, filter.Key.HasValue)")
-						.AppendLine($".And(e => filter.Keys.Contains(e.{table.NameKey}), filter.Keys.Count > 0)")
+						.AppendLine($".And(e => e.{table.NameKey} == filter.Key, f => f.Key.HasValue)")
+						.AppendLine($".And(e => filter.Keys.Contains(e.{table.NameKey}), f => f.Keys.IsValidList())")
 						.AppendLine($".OrderBy(e => e.{columnOrder})")
 						.AppendLine(".Take(filter.PageNumber, filter.PageSize);")
 						.DecrementIndent()
 						.AppendLine()
-						.AppendLine("return result.Build(query, filter);")
+						.AppendLine("return CheckSpecifications(spefications, source, filter);")
 						.DecrementIndent()
 						.AppendLine("}")
-						.AppendLine()
-						.AppendLine($"public IQueryable<{table.Name}> Build(IEnumerable<{table.Name}> query, {table.Name}Filter filter)")
-						.AppendLine("{")
-						.IncrementIndent()
-						.AppendLine("return Build(query.AsQueryable(), filter);")
-						.DecrementIndent()
-						.AppendLine("}")
-						.InterfaceEnd();
+						.ClassEnd();
 
 					if (!Directory.Exists(path))
 						Directory.CreateDirectory(path);

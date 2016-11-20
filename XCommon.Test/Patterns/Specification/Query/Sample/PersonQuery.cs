@@ -10,7 +10,7 @@ namespace XCommon.Test.Patterns.Specification.Query.Sample
     {
         public override IQueryable<PersonEntity> Build(IQueryable<PersonEntity> source, PersonFilter filter)
         {
-            Specifications
+            var specifications = NewSpecificationList()
                 .And(e => e.Id == filter.Id, filter.Id.HasValue)
                 .And(e => filter.Ids.Contains(e.Id), filter.Ids.Count > 0)
                 .And(e => e.Name.Contains(filter.Name), filter.Name.IsNotEmpty())
@@ -19,7 +19,7 @@ namespace XCommon.Test.Patterns.Specification.Query.Sample
                 .OrderBy(e => e.Name)
                 .Take(filter.PageNumber, filter.PageSize);
 
-            return CheckSpecifications(source, filter);
+            return CheckSpecifications(specifications, source, filter);
         }
     }
 }

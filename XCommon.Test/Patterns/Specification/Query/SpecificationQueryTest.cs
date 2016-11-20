@@ -11,14 +11,28 @@ namespace XCommon.Test.Patterns.Specification.Query
 {
     public class SpecificationQueryTest
     {
+        public SpecificationQueryTest()
+        {
+            Specification = new PersonQuery();
+        }
+
+        public ISpecificationQuery<PersonEntity, PersonFilter> Specification { get; set; }
+
         [Theory(DisplayName = "Query (Simple)")]
-        [MemberData(nameof(SpecificationQueryDataSource.DefaultDataSource), MemberType = typeof(SpecificationQueryDataSource))]
+        [MemberData(nameof(SpecificationQueryDataSource.DataSourceDefault), MemberType = typeof(SpecificationQueryDataSource))]
         public void QuerySimple(List<PersonEntity> source, PersonFilter filter, int recordCount, string message)
         {
-            ISpecificationQuery<PersonEntity, PersonFilter> query = new PersonQuery();
-
-            var result = query.Build(source, filter);
+            var result = Specification.Build(source, filter);
             result.Count().Should().Be(recordCount);
+        }
+
+        [Theory(DisplayName = "Query (Order)")]
+        [MemberData(nameof(SpecificationQueryDataSource.DataSourceOrder), MemberType = typeof(SpecificationQueryDataSource))]
+        public void QueryOrder(List<PersonEntity> source, PersonFilter filter, PersonEntity expected, string message)
+        {
+            var result = Specification.Build(source, filter);
+            result.Count().Should().Be(1);
+            result.First().ShouldBeEquivalentTo(expected);
         }
     }
 }

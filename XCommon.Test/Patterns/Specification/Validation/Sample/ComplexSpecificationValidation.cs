@@ -12,31 +12,31 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
     {
         public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
         {
-            Specifications
-                .AndMerge(ValidateNew(), c => c.Action == EntityAction.New)
-                .AndMerge(ValidateUpdate(), c => c.Action == EntityAction.Update)                
-                .AndMerge(ValidateDelete(), c => c.Action == EntityAction.Delete)                
+            var specifications = NewSpecificationList()
+                .AndIsValid(ValidateNew(), c => c.Action == EntityAction.New)
+                .AndIsValid(ValidateUpdate(), c => c.Action == EntityAction.Update)                
+                .AndIsValid(ValidateDelete(), c => c.Action == EntityAction.Delete)                
                 .AndIsNotEmpty(c => c.Name, "Person needs a Name")                
                 .AndIsEmail(c => c.Email, "Person needs a valida email");
 
-            return CheckSpecifications(entity, execute);
+            return CheckSpecifications(specifications, entity, execute);
         }
 
         private SpecificationList<PersonEntity> ValidateDelete()
         {
-            return NewSpecificationList()
+            return NewSpecificationList(false)
                 .AndIsValid(c => c.Id != Guid.Empty, "Delete person needs to have a valid ID");
         }
 
         private SpecificationList<PersonEntity> ValidateUpdate()
         {
-            return NewSpecificationList()
+            return NewSpecificationList(false)
                 .AndIsValid(c => c.Age >= 21, "Update person needs to be older than 21");
         }
 
         private SpecificationList<PersonEntity> ValidateNew()
         {
-            return NewSpecificationList()
+            return NewSpecificationList(false)
                 .AndIsValid(c => c.Age >= 18, "New person needs to be older than 18");
         }
     }

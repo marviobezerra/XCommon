@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using XCommon.Extensions.Converters;
 using XCommon.UnitTest;
 using XCommon.Util;
 
@@ -35,7 +36,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<int, int, bool> result = new DataList<int, int, bool>();
+                PairList<int, int, bool> result = new PairList<int, int, bool>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -47,7 +48,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<decimal, decimal, bool> result = new DataList<decimal, decimal, bool>();
+                PairList<decimal, decimal, bool> result = new PairList<decimal, decimal, bool>();
 
                 result.Add(0, 0, false, "Equals value");
                 
@@ -83,7 +84,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<int, int, bool> result = new DataList<int, int, bool>();
+                PairList<int, int, bool> result = new PairList<int, int, bool>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -95,7 +96,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<decimal, decimal, bool> result = new DataList<decimal, decimal, bool>();
+                PairList<decimal, decimal, bool> result = new PairList<decimal, decimal, bool>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -131,7 +132,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<int, int, int, bool> result = new DataList<int, int, int, bool>();
+                PairList<int, int, int, bool> result = new PairList<int, int, int, bool>();
 
                 result.Add(0, 0, 0, true, "Equals value");
 
@@ -143,9 +144,41 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                DataList<decimal, decimal, decimal, bool> result = new DataList<decimal, decimal, decimal, bool>();
+                PairList<decimal, decimal, decimal, bool> result = new PairList<decimal, decimal, decimal, bool>();
 
                 result.Add(0, 0, 0, true, "Equals value");
+
+                return result.Cast();
+            }
+        }
+
+        public static IEnumerable<object[]> GuidValidList
+        {
+            get
+            {
+                PairList<List<Guid>, bool> result = new PairList<List<Guid>, bool>();
+
+                result.Add(null, false, "Null list");
+                result.Add(new List<Guid>(), false, "Empty list");
+                result.Add(new List<Guid> { "0".ToGuid() }, true, "Just GuidEmpty");
+                result.Add(new List<Guid> { "1".ToGuid() }, true, "One valid Guid");
+                result.Add(new List<Guid> { "1".ToGuid(), "2".ToGuid() }, true, "Two valid Guid");
+
+                return result.Cast();
+            }
+        }
+
+        public static IEnumerable<object[]> GuidValidListIgnoreEmpty
+        {
+            get
+            {
+                PairList<List<Guid>, bool> result = new PairList<List<Guid>, bool>();
+
+                result.Add(null, false, "Null list");
+                result.Add(new List<Guid>(), false, "Empty list");
+                result.Add(new List<Guid> { "0".ToGuid() }, false, "Just GuidEmpty");
+                result.Add(new List<Guid> { "1".ToGuid() }, true, "One valid Guid");
+                result.Add(new List<Guid> { "0".ToGuid(), "1".ToGuid() }, true, "Two valid Guid");
 
                 return result.Cast();
             }

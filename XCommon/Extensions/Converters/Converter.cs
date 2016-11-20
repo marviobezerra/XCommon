@@ -7,7 +7,6 @@ namespace XCommon.Extensions.Converters
 {
     public static class Converter
     {
-
         public static TEntity Convert<TEntity>(this object source, params string[] ignore)
             where TEntity : class, new()
         {
