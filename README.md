@@ -19,8 +19,8 @@ This is the core base for all other projects. Each topic represent a name space 
 
 > Classes and features for help the development process.
 
-| Feature          | Description                                   
- ----------------- | ---------------------------------------------------------------------
+| Feature          | Description
+ ----------------- | -----------------
 | Cache | Data cache with Get, Put and Remove methods.
 | CommandLine | Command line application. There are features to parse parameters.
 | ConsoleX | Helper for console such loading, colors, etc.
@@ -35,8 +35,8 @@ This is the core base for all other projects. Each topic represent a name space 
 
 > All features are extensions methods.
 
-| Feature          | Description                                   
- ----------------- | ---------------------------------------------------------------------
+| Feature          | Description
+ ----------------- | -----------------
 |Checks| Checkers for Int, Decimal and DateTime. It applies checkers like BigerThan, LessThan and InRange.
 |Converters| It can converter a complex object in other. It is done by copying properties. There are more converters like Byte to Stream and others. 
 |String| Utils functions for String, like IsEmpty and IsNotEmpty.
@@ -46,8 +46,8 @@ This is the core base for all other projects. Each topic represent a name space 
 
 > Some design patterns implemented.
 
-| Feature          | Description                                   
- ----------------- | ---------------------------------------------------------------------
+| Feature          | Description
+ ----------------- | -----------------
 |Ioc| Simple IOC. Not so fancy or complete (complex) like Ninject or Castle Windsor, but it's complete functional and fast.
 |Repository| Yes, another repository pattern! The implementation is in XCommon.EF project.
 |Specification| Two implementations of Specification Pattern. One for Validation and another for Query.
@@ -56,22 +56,22 @@ This is the core base for all other projects. Each topic represent a name space 
 
 > The proposal is help to write Unit Test.
 
-| Feature          | Description                                   
- ----------------- | ---------------------------------------------------------------------
+| Feature          | Description
+ ----------------- | -----------------
 |SceneryManager| It helps you for create and run a scenery when you are writing unit tests.
 
 **Util**
 
 > Many functions to make our life easier.
 
-| Feature          | Description                                   
- ----------------- | ---------------------------------------------------------------------
- |Pair| Like tuple of .Net
- |PairList| It's a Pair, but in list.
- |RadomString| Generate a random string.
- |RadomNumber| Generate a random number.
- |Token| Generates a token (without cryptography).
- |And other| Check the wiki page for a complete list.
+| Feature          | Description
+ ----------------- | -----------------
+|Pair| Like tuple of .Net.
+|PairList| It's a Pair, but in list.
+|RadomString| Generate a random string.
+|RadomNumber| Generate a random number.
+|Token| Generates a token (without cryptography).
+|And others| Check the wiki page for a complete list.
 
 > **Note:** In this project some features are just interfaces, some of then has an InMemory implementations for unit test. 
 
