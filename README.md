@@ -10,14 +10,15 @@ XCommon is a light library, which implement's some design patterns and some util
 
 Each project is available on Nuget with the same name.
 
-### XCommon
+## XCommon
+----------
 
 This is the core base for all other projects. Each topic represent a name space on XCommon.
 
 > **Nuget install**
 > [PM> Install-Package XCommon](https://www.nuget.org/packages/XCommon/)
 
-**Application**
+###**Application**
 
 > Classes and features for help the development process.
 
@@ -33,7 +34,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[Socket](https://github.com/marviobezerra/XCommon/wiki/XCommon---Socket)| Wrapper for WebSockets protocol. Implemented in XCommon.Web
 |[ApplicationSettings](https://github.com/marviobezerra/XCommon/wiki/XCommon---ApplicationSettings)| Interface which has information for applications. *It isn't a name space.
 
-**Extensions**
+###**Extensions**
 
 > All features are extensions methods.
 
@@ -44,7 +45,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[String](https://github.com/marviobezerra/XCommon/wiki/XCommon---String)| Utils functions for String, like IsEmpty and IsNotEmpty.
 |[Util](https://github.com/marviobezerra/XCommon/wiki/XCommon---Util)| Utils functions for Enum, specially for bitwize enumerators.
 
-**Patterns**
+###**Patterns**
 
 > Some design patterns implemented.
 
@@ -54,7 +55,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[Repository](https://github.com/marviobezerra/XCommon/wiki/XCommon---Repository)| Yes, another repository pattern! The implementation is in XCommon.EF project.
 |[Specification](https://github.com/marviobezerra/XCommon/wiki/XComonn---Specification)| Two implementations of Specification Pattern. One for [Validation](https://github.com/marviobezerra/XCommon/wiki/XComonn---Specification-Validation) and another for [Query](https://github.com/marviobezerra/XCommon/wiki/XComon---Specification-Query).
 
-**UnitTest**
+###**UnitTest**
 
 > The proposal is help to write Unit Test.
 
@@ -62,7 +63,7 @@ This is the core base for all other projects. Each topic represent a name space 
  ----------------- | -----------------
 |SceneryManager| It helps you for create and run a scenery when you are writing unit tests.
 
-**Util**
+###**Util**
 
 > Many functions to make our life easier.
 
