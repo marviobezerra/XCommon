@@ -1,6 +1,6 @@
 ﻿using System;
 using XCommon.Patterns.Repository.Entity;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Validation.Extensions;
 using XCommon.Patterns.Specification.Validation.Implementation;

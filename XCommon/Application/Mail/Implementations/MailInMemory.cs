@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 
 namespace XCommon.Application.Mail.Implementations
 {

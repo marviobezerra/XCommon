@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using XCommon.Util;
 
-namespace XCommon.Patterns.Repository.Executes
+namespace XCommon.Application.Executes
 {
 	public class ExecuteMessage
     {

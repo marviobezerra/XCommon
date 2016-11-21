@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace XCommon.Patterns.Repository.Executes
+namespace XCommon.Application.Executes
 {
 	public class ExecuteMessageInternal
     {

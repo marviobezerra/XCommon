@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 using XCommon.Test.Entity;
 using XCommon.Test.Patterns.Specification.Validation.DataSource;
 using XCommon.Test.Patterns.Specification.Validation.Sample;

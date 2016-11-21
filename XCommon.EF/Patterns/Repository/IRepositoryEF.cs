@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using XCommon.Patterns.Repository.Entity;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 
 namespace XCommon.Patterns.Repository
 {

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using System;
 using XCommon.Extensions.Converters;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 using XCommon.Test.Entity;
 using Xunit;
 

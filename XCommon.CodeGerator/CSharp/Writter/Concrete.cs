@@ -35,7 +35,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 					if (File.Exists(Path.Combine(path, file)))
 						continue;
 
-					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
+					var nameSpace = new List<string> { "System", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 
 					StringBuilderIndented builder = new StringBuilderIndented();

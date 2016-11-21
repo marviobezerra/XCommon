@@ -7,7 +7,7 @@ using XCommon.Extensions.Converters;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Query;
 using Microsoft.EntityFrameworkCore.Storage;

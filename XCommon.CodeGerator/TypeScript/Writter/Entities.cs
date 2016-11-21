@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using XCommon.Application.Executes;
 using XCommon.CodeGerator.Angular.Extensions;
 using XCommon.CodeGerator.Angular.Writter;
 using XCommon.CodeGerator.Core.Util;
-using XCommon.CodeGerator.TypeScript.Configuration;
-using XCommon.Util;
-using XCommon.Extensions.Util;
 using XCommon.CodeGerator.CSharp.Extensions;
+using XCommon.CodeGerator.TypeScript.Configuration;
+using XCommon.Extensions.Util;
+using XCommon.Util;
 
 namespace XCommon.CodeGerator.TypeScript.Writter
 {
@@ -99,7 +100,7 @@ namespace XCommon.CodeGerator.TypeScript.Writter
 			var types = Config.Assemblys.SelectMany(c => c.GetTypes()).Where(c => c.GetTypeInfo().IsEnum).ToList();
 
 			types.AddRange(Config.TypesExtra.Where(c => c.GetTypeInfo().IsEnum));
-			types.Add(typeof(Patterns.Repository.Executes.ExecuteMessageType));
+			types.Add(typeof(ExecuteMessageType));
 			types.Add(typeof(Patterns.Repository.Entity.EntityAction));
 			types = types.Distinct().ToList();
 

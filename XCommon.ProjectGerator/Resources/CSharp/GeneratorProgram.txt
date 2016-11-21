@@ -88,9 +88,9 @@ namespace [{name}].CodeGenerator
 						},
 						TypesExtra = new List<Type>
 					{
-						typeof(XCommon.Patterns.Repository.Executes.ExecuteMessageType),
-						typeof(XCommon.Patterns.Repository.Executes.ExecuteMessage),
-						typeof(XCommon.Patterns.Repository.Executes.Execute<>),
+						typeof(XCommon.Application.Executes.ExecuteMessageType),
+						typeof(XCommon.Application.Executes.ExecuteMessage),
+						typeof(XCommon.Application.Executes.Execute<>),
 						typeof(XCommon.Patterns.Repository.Entity.EntityBase),
 						typeof(PasswordChangeEntity),
 						typeof(PasswordRecoveryEntity),

@@ -1,4 +1,4 @@
-﻿using XCommon.Patterns.Repository.Executes;
+﻿using XCommon.Application.Executes;
 
 namespace XCommon.Patterns.Specification.Validation
 {

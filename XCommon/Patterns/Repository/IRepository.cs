@@ -1,5 +1,5 @@
 ﻿using XCommon.Patterns.Repository.Entity;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

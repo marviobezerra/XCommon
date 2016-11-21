@@ -34,7 +34,7 @@ namespace XCommon.CodeGerator.CSharp.Writter
 				return;
 
 			var className = $"{item.Name}Test";
-			var nameSpace = new List<string> { "System.Linq", "System.Collections.Generic", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Patterns.Repository.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
+			var nameSpace = new List<string> { "System.Linq", "System.Collections.Generic", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
             nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");

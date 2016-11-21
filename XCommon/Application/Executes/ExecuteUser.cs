@@ -1,4 +1,4 @@
-﻿namespace XCommon.Patterns.Repository.Executes
+﻿namespace XCommon.Application.Executes
 {
     public class ExecuteUser
     {

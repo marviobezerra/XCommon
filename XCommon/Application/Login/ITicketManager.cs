@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using XCommon.Application.Login.Entity;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 
 namespace XCommon.Application.Login
 {

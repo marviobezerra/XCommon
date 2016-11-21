@@ -12,7 +12,7 @@ using XCommon.Application.Login;
 using XCommon.Application.Login.Entity;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
-using XCommon.Patterns.Repository.Executes;
+using XCommon.Application.Executes;
 
 namespace XCommon.Web.Authentication.Ticket
 {
