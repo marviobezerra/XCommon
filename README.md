@@ -23,15 +23,16 @@ This is the core base for all other projects. Each topic represent a name space 
 
 | Feature          | Description
  ----------------- | -----------------
+|[ApplicationSettings](https://github.com/marviobezerra/XCommon/wiki/XCommon---ApplicationSettings)| Interface which has information for applications. *It isn't a name space.
 | [Cache](https://github.com/marviobezerra/XCommon/wiki/XCommon---Cache)| Data cache with Get, Put and Remove methods.
 | [CommandLine](https://github.com/marviobezerra/XCommon/wiki/Command-Line)| Command line application. There are features to parse parameters.
 | [ConsoleX](https://github.com/marviobezerra/XCommon/wiki/XCommon---ConsoleX)| Helper for console such loading, colors, etc.
+| [Execute](https://github.com/marviobezerra/XCommon/wiki/XComon---Execute) | Control and store messages from executions.
 |[FileStorage](https://github.com/marviobezerra/XCommon/wiki/XCommon---FileStorage)| File access with Save, Exists, Load and Delete methods.
 |[Logger](https://github.com/marviobezerra/XCommon/wiki/XCommon---Logger)| Application logging, or tracing if you preer.
 |[Login](https://github.com/marviobezerra/XCommon/wiki/XCommon---Login)| Login control, doesn't controle permissions.
 |[Mail](https://github.com/marviobezerra/XCommon/wiki/XCommon---Mail)| Send email.
 |[Socket](https://github.com/marviobezerra/XCommon/wiki/XCommon---Socket)| Wrapper for WebSockets protocol. Implemented in XCommon.Web
-|[ApplicationSettings](https://github.com/marviobezerra/XCommon/wiki/XCommon---ApplicationSettings)| Interface which has information for applications. *It isn't a name space.
 
 ###**Extensions**
 
