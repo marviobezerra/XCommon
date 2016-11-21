@@ -68,17 +68,17 @@ namespace XCommon.Extensions.Converters
             return result;
         }
 
-        public static int ToInt32(this object value, int valueDefault = 0)
+        public static int ToInt32(this object value, int defaultValue = 0)
         {
             if (value == null)
-                return valueDefault;
+                return defaultValue;
 
             int result = 0;
 
             if (int.TryParse(value.ToString(), out result))
                 return result;
 
-            return valueDefault;
+            return defaultValue;
         }
 
         public static bool ToBool(this BooleanOption value, bool defaultValue = true)
