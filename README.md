@@ -14,7 +14,7 @@ Each project is available on Nuget with the same name.
 
 This is the core base for all other projects. Each topic represent a name space on XCommon.
 
-> Nuget install
+> **Nuget install**
 > [PM> Install-Package XCommon](https://www.nuget.org/packages/XCommon/)
 
 **Application**
