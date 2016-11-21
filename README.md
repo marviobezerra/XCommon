@@ -40,10 +40,10 @@ This is the core base for all other projects. Each topic represent a name space 
 
 | Feature          | Description
  ----------------- | -----------------
-|[Checks](https://github.com/marviobezerra/XCommon/wiki/XCommon---Checks)| Checkers for Int, Decimal and DateTime. It applies checkers like BigerThan, LessThan and InRange.
-|[Converters](https://github.com/marviobezerra/XCommon/wiki/XCommon---Converters)| It can converter a complex object in other. It is done by copying properties. There are more converters like Byte to Stream and others. 
-|[String](https://github.com/marviobezerra/XCommon/wiki/XCommon---String)| Utils functions for String, like IsEmpty and IsNotEmpty.
-|[Util](https://github.com/marviobezerra/XCommon/wiki/XCommon---Util)| Utils functions for Enum, specially for bitwize enumerators.
+|[Checks](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#checks)| Checkers for Int, Decimal and DateTime. It applies checkers like BigerThan, LessThan and InRange.
+|[Converters](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#converters)| It can converter a complex object in other. It is done by copying properties. There are more converters like Byte to Stream and others. 
+|[String](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#string)| Utils functions for String, like IsEmpty and IsNotEmpty.
+|[Util](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#util)| Utils functions for Enum, specially for bitwize enumerators.
 
 ###**Patterns**
 
