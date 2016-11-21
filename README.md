@@ -1,3 +1,5 @@
+# XCommon
+
 XCommon is a light library, which implement's some design patterns and some util functions in pure C#. It is divide in five projects;
 
 - XCommon
@@ -11,6 +13,9 @@ Each project is available on Nuget with the same name.
 ### XCommon
 
 This is the core base for all other projects. Each topic represent a name space on XCommon.
+
+> Nuget install
+> [PM> Install-Package XCommon](https://www.nuget.org/packages/XCommon/)
 
 **Application**
 
