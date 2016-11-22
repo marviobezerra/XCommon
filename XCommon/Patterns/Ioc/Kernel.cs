@@ -1,72 +1,194 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using XCommon.Extensions.Util;
 using XCommon.Util;
+using System.Linq;
 
 namespace XCommon.Patterns.Ioc
 {
-	public static class Kernel
-	{
-		public static Map<TContract> Map<TContract>()
-			where TContract : class
-		{
-			if (!(typeof(TContract).GetTypeInfo().IsInterface || typeof(TContract).GetTypeInfo().IsAbstract))
-				throw new Exception("O mapeamento deve iniciar por uma interface ou classe abstrata");
+    public static class Kernel
+    {
+        static Kernel()
+        {
+            Reset();
+            KernelMap = new Map();
+        }
 
-			return new Map<TContract>(typeof(TContract));
-		}
+        private static Map KernelMap { get; set; }
 
-		public static void Register(Type type)
-		{
-			RepositoryManager.Add(type, type, true, true, null);
-		}
+        private static Dictionary<Type, RepositoryType> Repository { get; set; }
 
-		public static void Register<TContract>(bool canChace)
-		{
-			RepositoryManager.Add(typeof(TContract), typeof(TContract), false, canChace, null);
-		}
+        public static int Count
+        {
+            get
+            {
+                return Repository.Count;
+            }
+        }
 
-		public static void Register<TContract>(TContract instance)
-		{
-			RepositoryManager.Add(typeof(TContract), typeof(TContract), instance, true, true, null);
-		}
+        #region Resolve
+        public static TContract Resolve<TContract>(bool canCache = true, bool forceResolve = true)
+            => (TContract)Resolve(typeof(TContract), canCache, forceResolve);
 
-		public static void Resolve(object target)
-		{
-			foreach (AttributeDetail<InjectAttribute> item in target.GetAttributes<InjectAttribute>())
-			{
-				item.Property.SetValue(target, RepositoryManager.Resolve(item.Property.PropertyType, item.Attribute.CanCache, item.Attribute.ForceResolve), null);
-			}
-		}
+        public static void Resolve(object target)
+        {
+            foreach (AttributeDetail<InjectAttribute> item in target.GetAttributes<InjectAttribute>())
+            {
+                item.Property.SetValue(target, Resolve(item.Property.PropertyType, item.Attribute.CanCache, item.Attribute.ForceResolve), null);
+            }
+        }
 
-		public static TContract Resolve<TContract>(Type type)
-		{
-			return (TContract)RepositoryManager.Resolve(type, true, true);
-		}
+        public static object Resolve(Type contract, bool canCache, bool forceResolve)
+        {
+            lock (Repository)
+            {
+                RepositoryType repositoryItem = null;
+                Repository.TryGetValue(contract, out repositoryItem);
 
-		public static TContract Resolve<TContract>(bool canCache = true)
-		{
-			return RepositoryManager.Resolve<TContract>(canCache);
-		}
+                if (repositoryItem == null)
+                {
+                    return forceResolve
+                        ? ResolveByException(contract)
+                        : null;
+                }
 
-		public static bool CanResolve(Type type)
-		{
-			return RepositoryManager.Exists(type);
-		}
+                return repositoryItem.UseResolver
+                    ? ResolveByFunction(repositoryItem, canCache)
+                    : ResolveByActivator(repositoryItem, canCache);
+            }
+        }
 
-		public static bool CanResolve<TContract>()
-		{
-			return RepositoryManager.Exists(typeof(TContract));
-		}
+        private static object ResolveByException(Type contract)
+        {
+            throw new Exception(string.Format("Não é possivel resolver o tipo: {0}", contract.FullName));
+        }
 
-		public static void Reset()
-		{
-			RepositoryManager.Init();
-		}
+        private static object ResolveByFunction(RepositoryType repositoryItem, bool canCache)
+        {
+            if (!canCache || !repositoryItem.CanCache)
+                return repositoryItem.Resolver();
 
-		public static int GetMappedCount()
-		{
-			return RepositoryManager.GetMappedCount();
-		}
-	}
+            if (repositoryItem.Instance == null && repositoryItem.CanCache)
+                repositoryItem.Instance = repositoryItem.Resolver();
+
+            return repositoryItem.Instance;
+        }
+
+        private static object ResolveByActivator(RepositoryType repositoryItem, bool canCache)
+        {
+            if (!canCache || !repositoryItem.CanCache)
+                return Activator.CreateInstance(repositoryItem.ConcretType);
+
+            if (repositoryItem.Instance == null)
+                repositoryItem.Instance = Activator.CreateInstance(repositoryItem.ConcretType, repositoryItem.ConstructorParams);
+
+            return repositoryItem.Instance;
+        }
+
+        #endregion
+
+        #region Map
+        public static Map Map<TContract>()
+            where TContract : class
+        {
+            KernelMap.Contract = typeof(TContract);
+            return KernelMap;
+        }
+
+        internal static void MapValidate(Type contract, Type concret, object[] args)
+        {
+            args = args ?? new object[] { };
+
+            MapValidateTypes(contract, concret, args);
+            MapValidateConstructors(contract, concret, args);
+        }
+
+        internal static void MapValidateConstructors(Type contract, Type concret, object[] args)
+        {
+            var constructors = concret.GetTypeInfo().GetConstructors();
+
+            foreach (var constructor in constructors)
+            {
+                var count = 0;
+                var parameters = constructor.GetParameters();
+
+                if (parameters.Length != args.Length)
+                    continue;
+
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    count += parameters[i].ParameterType == args[i].GetType()
+                        ? 1
+                        : 0;
+                }
+
+                if (count == args.Length)
+                    return;
+            }
+
+            throw new Exception($"There is no constructor for class {concret.Name} with the informed params");
+        }
+
+        private static void MapValidateTypes(Type contract, Type concret, object[] args)
+        {
+            if (concret.GetTypeInfo().IsInterface || concret.GetTypeInfo().IsAbstract)
+                throw new Exception($"The final class {concret.Name} needs cannot be an interface or abstract class");
+
+            if (contract.GetTypeInfo().IsInterface && !concret.GetTypeInfo().GetInterfaces().Contains(contract))
+                throw new Exception($"The class {concret.Name} doesn't implement the interface {contract.Name}");
+
+            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !concret.GetTypeInfo().GetNestedTypes().Contains(contract))
+                throw new Exception($"The class {concret.Name} doesn't implement the abstract {contract.Name}");
+        }
+
+        internal static void Map(Type contract, Type concret, object instance, bool overrideExistence, bool canCache, object[] constructorParams, Func<object> resolver)
+        {
+            lock (Repository)
+            {
+                if (Repository.ContainsKey(contract) && !overrideExistence)
+                    return;
+
+                Repository[contract] = new RepositoryType
+                {
+                    CanCache = canCache,
+                    Instance = instance,
+                    ConstructorParams = constructorParams,
+                    Resolver = resolver,
+                    ConcretType = concret,
+                    UseResolver = resolver != null
+                };
+            }
+        }
+        #endregion
+
+        #region Remove
+        internal static bool Remove<TConctract>()
+            => Remove(typeof(TConctract));
+
+        internal static bool Remove(Type contract)
+        {
+            if (contract == null)
+                return false;
+
+            lock (Repository)
+            {
+                if (Repository.ContainsKey(contract))
+                {
+                    Repository.Remove(contract);
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        #endregion
+
+        public static void Reset()
+        {
+            Repository = new Dictionary<Type, RepositoryType>();
+        }
+
+
+    }
 }

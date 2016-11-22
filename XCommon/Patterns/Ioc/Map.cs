@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Reflection;
 
 namespace XCommon.Patterns.Ioc
 {
-	public class Map<TContract>
+    public class Map
 	{
+        internal Map()
+        {
+
+        }
+
 		internal Type Contract { get; set; }
+        
+        public void To<TConcret>()
+            => To<TConcret>(true, new object[] { });
 
-		internal Map(Type type)
-		{
-			Contract = type;
-		}
-
-		public void To<TConcret>()
-		{
-			To<TConcret>(true);
-		}
-
-		public void To<TConcret>(params object[] args)
-		{
-			To<TConcret>(true, args);
-		}
+        public void To<TConcret>(params object[] args)
+            => To<TConcret>(true, args);
 
 		public void To<TConcret>(bool canCache, params object[] args)
 		{
-			if (typeof(TConcret).GetTypeInfo().IsInterface || typeof(TConcret).GetTypeInfo().IsAbstract)
-				throw new Exception("O mapeamento não pode terminar por uma interface ou classe abstrata");
+            Type concretType = typeof(TConcret);
 
-			RepositoryManager.Add(Contract, typeof(TConcret), true, canCache, args);
+            Kernel.MapValidate(Contract, concretType, args);
+			Kernel.Map(Contract, concretType, null, true, canCache, args, null);
 		}
 
-		public void To<TConcret>(TConcret instance, params object[] args)
+		public void To<TConcret>(TConcret instance)
 		{
-			RepositoryManager.Add(Contract, typeof(TConcret), instance, true, true, args);
+            Kernel.Map(Contract, typeof(TConcret), instance, true, true, null, null);
 		}
 
 		public void ToFunc(Func<object> resolver)
 		{
-			RepositoryManager.Add<TContract>(Contract, resolver);
-		}
-	}
+            Kernel.Map(Contract, null, null, true, true, null, resolver);
+
+        }
+    }
 }
