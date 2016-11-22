@@ -49,73 +49,7 @@ namespace XCommon.Test.Patterns.Ioc
             act.ShouldNotThrow("It is a valid map");
             Kernel.Count.Should().Be(1, "There is one class mapped");
         }
-
-        [Fact(DisplayName = "Map (Simple, valid - no cache interface)")]
-        public void MapSimpleValidNoCacheInterface()
-        {
-            Action act = () => Kernel.Map<IAnimal>().To<AnimalCat>();
-
-            act.ShouldNotThrow("It is a valid map");
-
-            IAnimal animal01 = Kernel.Resolve<IAnimal>();
-            IAnimal animal02 = Kernel.Resolve<IAnimal>(false);
-
-            animal01.Should().NotBe(animal02, "It isn't the same instance");
-        }
-
-        [Fact(DisplayName = "Map (Simple, valid - no cache abstract)")]
-        public void MapSimpleValidNoCacheAbstract()
-        {
-            Action act = () => Kernel.Map<Vehicle>().To<VehicleCar>();
-
-            act.ShouldNotThrow("It is a valid map");
-
-            Vehicle vehicle01 = Kernel.Resolve<Vehicle>();
-            Vehicle vehicle02 = Kernel.Resolve<Vehicle>(false);
-
-            vehicle01.Should().NotBe(vehicle02, "It isn't the same instance");
-        }
-
-        [Fact(DisplayName = "Map (Simple, valid - no cache class to class)")]
-        public void MapSimpleValidNoCacheClassToClass()
-        {
-            Action act = () => Kernel.Map<VehicleCar>().To<VehicleCar>();
-
-            act.ShouldNotThrow("It is a valid map");
-
-            VehicleCar vehicle01 = Kernel.Resolve<VehicleCar>();
-            VehicleCar vehicle02 = Kernel.Resolve<VehicleCar>(false);
-
-            vehicle01.Should().NotBe(vehicle02, "It isn't the same instance");
-        }
-
-        [Fact(DisplayName = "Map (Simple, valid - no cache function)")]
-        public void MapSimpleValidNoCacheFunction()
-        {
-            int count = 0;
-
-            Func<VehicleCar> resolver = () =>
-            {
-                count++;
-                return new VehicleCar();
-            };
-
-            Action act = () => Kernel.Map<Vehicle>().To(resolver);
-
-            act.ShouldNotThrow("It is a valid map");
-
-            Vehicle vehicle01 = Kernel.Resolve<Vehicle>();
-            count.Should().Be(1, "Was create one instance");
-
-            Vehicle vehicle02 = Kernel.Resolve<Vehicle>(false);
-            count.Should().Be(2, "Was create two instance");
-
-            vehicle01.Should().NotBe(vehicle02, "It isn't the same instance");
-
-            Vehicle vehicle03 = Kernel.Resolve<Vehicle>();
-            count.Should().Be(2, "Was create just two instance");
-        }
-
+        
         [Fact(DisplayName = "Map (Constructor params, valid - 01 param)")]
         public void MapConstructorParamsValid01Param()
         {
