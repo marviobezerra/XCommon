@@ -1,11 +1,11 @@
 {
-  "version": "1.0.40-*",
+  "version": "1.0.0-beta-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
   "dependencies": {
-    "XCommon": "1.0.40-*",
-    "XCommon.CodeGerator": "1.0.40-*"
+    "XCommon": "1.0.0-*",
+    "XCommon.CodeGerator": "1.0.0-*"
   },
   "runtimes": {
     "win10-x64": {}

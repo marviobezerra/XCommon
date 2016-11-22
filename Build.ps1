@@ -44,10 +44,10 @@ $revision = "{0:D4}" -f [convert]::ToInt32($revision, 10)
 
 exec { & dotnet test .\XCommon.Test -c Release }
 
-#exec { & dotnet pack .\XCommon -c Release -o .\artifacts --version-suffix=$revision }
-#exec { & dotnet pack .\XCommon.Azure -c Release -o .\artifacts --version-suffix=$revision }
-#exec { & dotnet pack .\XCommon.CodeGerator -c Release -o .\artifacts --version-suffix=$revision }
-#exec { & dotnet pack .\XCommon.EF -c Release -o .\artifacts --version-suffix=$revision }
-#exec { & dotnet pack .\XCommon.Web -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\XCommon -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\XCommon.Azure -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\XCommon.CodeGerator -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\XCommon.EF -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\XCommon.Web -c Release -o .\artifacts --version-suffix=$revision }
 
 pause
