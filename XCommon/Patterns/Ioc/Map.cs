@@ -2,37 +2,29 @@
 
 namespace XCommon.Patterns.Ioc
 {
-    public class Map
+    public class Map<TContract>
 	{
         internal Map()
         {
-
         }
-
-		internal Type Contract { get; set; }
         
-        public void To<TConcret>()
-            => To<TConcret>(true, new object[] { });
-
         public void To<TConcret>(params object[] args)
-            => To<TConcret>(true, args);
-
-		public void To<TConcret>(bool canCache, params object[] args)
 		{
             Type concretType = typeof(TConcret);
+            Type contracttType = typeof(TContract);
 
-            Kernel.MapValidate(Contract, concretType, args);
-			Kernel.Map(Contract, concretType, null, true, canCache, args, null);
+            Kernel.MapValidate(contracttType, concretType, args);
+			Kernel.Map(contracttType, concretType, null, args, null);
 		}
 
-		public void To<TConcret>(TConcret instance)
+		public void To(TContract instance)
 		{
-            Kernel.Map(Contract, typeof(TConcret), instance, true, true, null, null);
+            Kernel.Map(typeof(TContract), instance.GetType(), instance, null, null);
 		}
 
-		public void ToFunc(Func<object> resolver)
+		public void To(Func<TContract> resolver)
 		{
-            Kernel.Map(Contract, null, null, true, true, null, resolver);
+            Kernel.Map(typeof(TContract), null, null, null, () => resolver());
 
         }
     }

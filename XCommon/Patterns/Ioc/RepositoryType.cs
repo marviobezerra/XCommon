@@ -6,9 +6,9 @@ namespace XCommon.Patterns.Ioc
 	{
 		internal Func<object> Resolver { get; set; }
 
-		internal bool UseResolver { get; set; }
+        internal bool UseActicator { get; set; }
 
-		internal bool CanCache { get; set; }
+		internal bool UseResolver { get; set; }
 
 		internal Type ConcretType { get; set; }
 

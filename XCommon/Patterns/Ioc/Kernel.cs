@@ -12,10 +12,7 @@ namespace XCommon.Patterns.Ioc
         static Kernel()
         {
             Reset();
-            KernelMap = new Map();
         }
-
-        private static Map KernelMap { get; set; }
 
         private static Dictionary<Type, RepositoryType> Repository { get; set; }
 
@@ -28,7 +25,10 @@ namespace XCommon.Patterns.Ioc
         }
 
         #region Resolve
-        public static TContract Resolve<TContract>(bool canCache = true, bool forceResolve = true)
+        public static TContract Resolve<TContract>()
+            => (TContract)Resolve(typeof(TContract), true, true);
+
+        public static TContract Resolve<TContract>(bool canCache, bool forceResolve = true)
             => (TContract)Resolve(typeof(TContract), canCache, forceResolve);
 
         public static void Resolve(object target)
@@ -39,7 +39,7 @@ namespace XCommon.Patterns.Ioc
             }
         }
 
-        public static object Resolve(Type contract, bool canCache, bool forceResolve)
+        internal static object Resolve(Type contract, bool canCache, bool forceResolve)
         {
             lock (Repository)
             {
@@ -66,10 +66,10 @@ namespace XCommon.Patterns.Ioc
 
         private static object ResolveByFunction(RepositoryType repositoryItem, bool canCache)
         {
-            if (!canCache || !repositoryItem.CanCache)
+            if (!canCache)
                 return repositoryItem.Resolver();
 
-            if (repositoryItem.Instance == null && repositoryItem.CanCache)
+            if (repositoryItem.Instance == null)
                 repositoryItem.Instance = repositoryItem.Resolver();
 
             return repositoryItem.Instance;
@@ -77,7 +77,10 @@ namespace XCommon.Patterns.Ioc
 
         private static object ResolveByActivator(RepositoryType repositoryItem, bool canCache)
         {
-            if (!canCache || !repositoryItem.CanCache)
+            if (!repositoryItem.UseActicator)
+                return repositoryItem.Instance;
+
+            if (!canCache)
                 return Activator.CreateInstance(repositoryItem.ConcretType);
 
             if (repositoryItem.Instance == null)
@@ -89,11 +92,10 @@ namespace XCommon.Patterns.Ioc
         #endregion
 
         #region Map
-        public static Map Map<TContract>()
+        public static Map<TContract> Map<TContract>()
             where TContract : class
         {
-            KernelMap.Contract = typeof(TContract);
-            return KernelMap;
+            return new Map<TContract>();
         }
 
         internal static void MapValidate(Type contract, Type concret, object[] args)
@@ -138,25 +140,33 @@ namespace XCommon.Patterns.Ioc
             if (contract.GetTypeInfo().IsInterface && !concret.GetTypeInfo().GetInterfaces().Contains(contract))
                 throw new Exception($"The class {concret.Name} doesn't implement the interface {contract.Name}");
 
-            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !concret.GetTypeInfo().GetNestedTypes().Contains(contract))
+            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !MapCheckBaseType(contract, concret))
                 throw new Exception($"The class {concret.Name} doesn't implement the abstract {contract.Name}");
         }
 
-        internal static void Map(Type contract, Type concret, object instance, bool overrideExistence, bool canCache, object[] constructorParams, Func<object> resolver)
+        private static bool MapCheckBaseType(Type contract, Type concret)
+        {
+            if (concret.GetTypeInfo().BaseType == contract)
+                return true;
+
+            if (concret.GetTypeInfo().BaseType != typeof(object))
+                return MapCheckBaseType(contract, concret.GetTypeInfo().BaseType);
+
+            return false;
+        }
+
+        internal static void Map(Type contract, Type concret, object instance, object[] constructorParams, Func<object> resolver)
         {
             lock (Repository)
             {
-                if (Repository.ContainsKey(contract) && !overrideExistence)
-                    return;
-
                 Repository[contract] = new RepositoryType
                 {
-                    CanCache = canCache,
                     Instance = instance,
                     ConstructorParams = constructorParams,
                     Resolver = resolver,
                     ConcretType = concret,
-                    UseResolver = resolver != null
+                    UseResolver = resolver != null,
+                    UseActicator = instance == null
                 };
             }
         }
@@ -188,7 +198,5 @@ namespace XCommon.Patterns.Ioc
         {
             Repository = new Dictionary<Type, RepositoryType>();
         }
-
-
     }
 }
