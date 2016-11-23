@@ -49,7 +49,7 @@ namespace XCommon.Util
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[GetRandomNumber(0, s.Length)]).ToArray());
         }
-        
+
         public static int GetRandomNumber(int min, int max)
         {
             lock (syncLock)
@@ -73,6 +73,6 @@ namespace XCommon.Util
             }
 
             return hash.ToString();
-        }
+        }        
     }
 }

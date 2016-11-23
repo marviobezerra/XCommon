@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using XCommon.Util;
 
 namespace XCommon.Extensions.Util
@@ -37,6 +38,29 @@ namespace XCommon.Extensions.Util
                         };
 
             return query.ToList();
+        }
+
+        public static string GetClassName(this Type type)
+        {
+            string result = type.Name;
+
+            if (!type.GetTypeInfo().IsGenericType)
+                return result;
+
+            result = result.Substring(0, result.IndexOf('`'));
+            result += "<";
+            result += string.Join(", ", type.GetTypeInfo().GetGenericArguments().Select(t => t.GetClassName()));
+            result += ">";
+
+            return result;
+        }
+
+        public static bool IsTypeBased(this Type concret, Type contract)
+        {
+            return concret.GetTypeInfo().IsSubclassOf(contract)
+                || concret.GetTypeInfo().IsAssignableFrom(contract)
+                || concret.GetTypeInfo().GetInterfaces().Contains(contract)
+                || concret == contract;
         }
     }
 }

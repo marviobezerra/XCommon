@@ -15,5 +15,9 @@ namespace XCommon.Patterns.Ioc
 		internal object Instance { get; set; }
 
 		internal object[] ConstructorParams { get; set; }
-	}
+
+        internal int CountNewInstance { get; set; }
+
+        internal int CountCacheInstance { get; set; }
+    }
 }

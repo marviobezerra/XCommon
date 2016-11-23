@@ -251,5 +251,69 @@ namespace XCommon.Test.Patterns.Ioc
 
             animal01.Should().NotBe(animal02, "Each classe is a new instance");
         }
+
+        [Fact(DisplayName = "Resolve (Attribute)")]
+        public void ResolveAttribute()
+        {
+            Kernel.Map<IAnimal>().To<AnimalCat>();
+            Kernel.Map<Vehicle>().To<VehicleCar>();
+
+            SampleBusiness business = new SampleBusiness();
+
+            business.Animal.Should().NotBeNull("There is a class mapped");
+            business.Vehicle.Should().NotBeNull("There is a class mapped");
+
+        }
+
+        [Fact(DisplayName = "Resolve (Attribute, Thown Unmaped type)")]
+        public void ResolveAttributeUnmapedType()
+        {
+            Kernel.Map<IAnimal>().To<AnimalCat>();
+
+            Action act = () => new SampleBusiness();
+
+            act.ShouldThrow<Exception>("There is no classe mapped for vehicle");
+        }
+
+        [Fact(DisplayName = "Resolve (Attribute, no cache)")]
+        public void ResolveAttributeNoCache()
+        {
+            Kernel.Map<IAnimal>().To<AnimalCat>();
+            Kernel.Map<Vehicle>().To<VehicleCar>();
+
+            SampleNoCacheBusiness business = new SampleNoCacheBusiness();
+            IAnimal animal = Kernel.Resolve<IAnimal>();
+
+            business.Animal.Should().NotBe(animal, "These classes aren't the same instance");
+        }
+
+        [Fact(DisplayName = "Resolve (Attribute, no force)")]
+        public void ResolveAttributeNoForce()
+        {
+            Kernel.Map<Vehicle>().To<VehicleCar>();
+            
+            SampleNoForceBusiness business = new SampleNoForceBusiness();
+
+            business.Animal.Should().BeNull("There is no class mapped for animal, but it isn't forced to be resolved");
+            business.Vehicle.Should().NotBeNull("There is a class mapped for animal, even if it isn't force to be resolved needs to get an instace");
+
+        }
+
+        [Fact(DisplayName = "CheckReport")]
+        public void CheckReport()
+        {
+            Kernel.Map<Vehicle>().To<VehicleCar>();
+            Kernel.Map<IAnimal>().To<AnimalDog>(2);
+
+            var animal01 = Kernel.Resolve<IAnimal>();
+            var animal02 = Kernel.Resolve<IAnimal>();
+            var animal03 = Kernel.Resolve<IAnimal>();
+
+            var animal04 = Kernel.Resolve<IAnimal>();
+            var animal05 = Kernel.Resolve<IAnimal>();
+
+            var x = Kernel.Report();
+            x.Count.Should().Be(2);
+        }
     }
 }

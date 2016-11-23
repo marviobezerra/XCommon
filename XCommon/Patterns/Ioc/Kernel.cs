@@ -67,24 +67,46 @@ namespace XCommon.Patterns.Ioc
         private static object ResolveByFunction(RepositoryType repositoryItem, bool canCache)
         {
             if (!canCache)
+            {
+                repositoryItem.CountNewInstance++;
                 return repositoryItem.Resolver();
+            }
 
             if (repositoryItem.Instance == null)
+            {
+                repositoryItem.CountNewInstance++;
                 repositoryItem.Instance = repositoryItem.Resolver();
 
+                return repositoryItem.Instance;
+            }
+
+            repositoryItem.CountCacheInstance++;
             return repositoryItem.Instance;
         }
 
         private static object ResolveByActivator(RepositoryType repositoryItem, bool canCache)
         {
             if (!repositoryItem.UseActicator)
+            {
+                repositoryItem.CountCacheInstance++;
                 return repositoryItem.Instance;
+            }
 
             if (!canCache)
+            {
+                repositoryItem.CountNewInstance++;
                 return Activator.CreateInstance(repositoryItem.ConcretType);
+            }
 
             if (repositoryItem.Instance == null)
+            {
+                repositoryItem.CountNewInstance++;
+
                 repositoryItem.Instance = Activator.CreateInstance(repositoryItem.ConcretType, repositoryItem.ConstructorParams);
+                return repositoryItem.Instance;
+            }
+
+            repositoryItem.CountCacheInstance++;
 
             return repositoryItem.Instance;
         }
@@ -113,14 +135,17 @@ namespace XCommon.Patterns.Ioc
             foreach (var constructor in constructors)
             {
                 var count = 0;
-                var parameters = constructor.GetParameters();
+                var contrusctorParameters = constructor.GetParameters();
 
-                if (parameters.Length != args.Length)
+                if (contrusctorParameters.Length != args.Length)
                     continue;
 
-                for (int i = 0; i < parameters.Length; i++)
+                for (int i = 0; i < contrusctorParameters.Length; i++)
                 {
-                    count += parameters[i].ParameterType == args[i].GetType()
+                    Type paramContract = contrusctorParameters[i].ParameterType;
+                    Type paramConcrect = args[i].GetType();
+
+                    count += paramConcrect.IsTypeBased(paramContract)
                         ? 1
                         : 0;
                 }
@@ -140,19 +165,8 @@ namespace XCommon.Patterns.Ioc
             if (contract.GetTypeInfo().IsInterface && !concret.GetTypeInfo().GetInterfaces().Contains(contract))
                 throw new Exception($"The class {concret.Name} doesn't implement the interface {contract.Name}");
 
-            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !MapCheckBaseType(contract, concret))
+            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !concret.IsTypeBased(contract))
                 throw new Exception($"The class {concret.Name} doesn't implement the abstract {contract.Name}");
-        }
-
-        private static bool MapCheckBaseType(Type contract, Type concret)
-        {
-            if (concret.GetTypeInfo().BaseType == contract)
-                return true;
-
-            if (concret.GetTypeInfo().BaseType != typeof(object))
-                return MapCheckBaseType(contract, concret.GetTypeInfo().BaseType);
-
-            return false;
         }
 
         internal static void Map(Type contract, Type concret, object instance, object[] constructorParams, Func<object> resolver)
@@ -193,6 +207,26 @@ namespace XCommon.Patterns.Ioc
             }
         }
         #endregion
+
+        public static List<KernelReportEntity> Report()
+        {
+            List<KernelReportEntity> result = new List<KernelReportEntity>();
+
+            foreach (var item in Repository)
+            {
+                KernelReportEntity report = new KernelReportEntity
+                {
+                    MapFrom = item.Key.GetClassName(),
+                    MapTo = item.Value.ConcretType?.GetClassName(),
+                    CountCacheInstance = item.Value.CountCacheInstance,
+                    CountNewInstance = item.Value.CountNewInstance
+                };
+
+                result.Add(report);
+            }
+
+            return result;
+        }
 
         public static void Reset()
         {
