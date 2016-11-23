@@ -134,64 +134,122 @@ namespace XCommon.Test.Patterns.Ioc
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, valid)")]
+        [Fact(DisplayName = "Resolve (Generic, valid)")]
         public void ResolveGenericValid()
         {
-            Assert.False(true);
+            Kernel.Map<IAnimal>().To<AnimalCat>();
+
+            IAnimal animal01 = Kernel.Resolve<IAnimal>();
+            IAnimal animal02 = Kernel.Resolve<IAnimal>();
+
+            animal01.Should().NotBeNull("There is a mapped class");
+            animal01.Should().Be(animal02, "Both are the same instance");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, valid no cache)")]
+        [Fact(DisplayName = "Resolve (Generic, valid no cache)")]
         public void ResolveGenericValidNoCache()
         {
-            Assert.False(true);
+            Kernel.Map<IAnimal>().To<AnimalCat>();
+
+            IAnimal animal01 = Kernel.Resolve<IAnimal>(false);
+            IAnimal animal02 = Kernel.Resolve<IAnimal>(false);
+
+            animal01.Should().NotBe(animal02, "Each class is a new instance");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, valid no force)")]
+        [Fact(DisplayName = "Resolve (Generic, not mapped valid no force)")]
         public void ResolveGenericValidNoForce()
         {
-            Assert.False(true);
+            IAnimal animal01 = Kernel.Resolve<IAnimal>(true, false);
+
+            animal01.Should().BeNull("There isn't a mapped class, but the Kernel doesn't force to resolve");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, valid no cache and no force)")]
+        [Fact(DisplayName = "Resolve (Generic, not mapped valid no cache and no force)")]
         public void ResolveGenericValidNoForceAndNoForce()
         {
-            Assert.False(true);
+            IAnimal animal01 = Kernel.Resolve<IAnimal>(false, false);
+
+            animal01.Should().BeNull("There isn't a mapped class, but the Kernel doesn't use cache and doesn't force to resolve");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, invalid - Unmaped type)")]
+        [Fact(DisplayName = "Resolve (Generic, invalid - Unmaped type)")]
         public void ResolveGenericInvalidUnmapedType()
         {
-            Assert.False(true);
+            Action act = () => Kernel.Resolve<IAnimal>();
+            act.ShouldThrow<Exception>("There isn't a class mapped for that interface");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Generic, valid - Unmaped type - no force)")]
-        public void ResolveGenericInvalidUnmapedTypeNoForce()
-        {
-            Assert.False(true);
-        }
-
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Object, valid)")]
+        [Fact(DisplayName = "Resolve (Object, valid)")]
         public void ResolveObjectValid()
         {
-            Assert.False(true);
+            Kernel.Map<AnimalCat>().To<AnimalCat>();
+            AnimalCat animal = Kernel.Resolve<AnimalCat>();
+
+            animal.Should().NotBeNull("There is one class mapped for that class");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Object, valid - no cache)")]
+        [Fact(DisplayName = "Resolve (Object, valid - no cache)")]
         public void ResolveObjectValidNoCache()
         {
-            Assert.False(true);
+            Kernel.Map<AnimalCat>().To<AnimalCat>();
+
+            AnimalCat animal01 = Kernel.Resolve<AnimalCat>(false);
+            AnimalCat animal02 = Kernel.Resolve<AnimalCat>(false);
+
+            animal01.Should().NotBe(animal02, "Each class is a new instance");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Object, valid - Unmaped type no force)")]
+        [Fact(DisplayName = "Resolve (Object, valid - Unmaped type no force)")]
         public void ResolveObjectValidUnmapedTypeNoForce()
         {
-            Assert.False(true);
+            AnimalCat animal = Kernel.Resolve<AnimalCat>(true, false);
+
+            animal.Should().BeNull("There isn't a mapped class, but the kernel wasn't force to resolve");
         }
 
-        [Fact(Skip = "Not implemented", DisplayName = "Resolve (Object, invalid - Unmaped type force)")]
+        [Fact(DisplayName = "Resolve (Object, invalid - Unmaped type force)")]
         public void ResolveObjectInvalidUnmapedTypeForce()
         {
-            Assert.False(true);
+            Action act = () => Kernel.Resolve<AnimalCat>();
+
+            act.ShouldThrow<Exception>("There isn't a mapped class");
+        }
+
+        [Fact(DisplayName = "Resolve (Function, valid - cache)")]
+        public void ResolveFunctionValidCache()
+        {
+            Func<IAnimal> resolver = () => new AnimalCat();
+            Kernel.Map<IAnimal>().To(resolver);
+
+            IAnimal animal01 = Kernel.Resolve<IAnimal>();
+            IAnimal animal02 = Kernel.Resolve<IAnimal>();
+
+            animal01.Should().Be(animal02, "Both classes are the same instance");
+        }
+
+        [Fact(DisplayName = "Resolve (Function, valid - no cache)")]
+        public void ResolveFunctionValidNoCache()
+        {
+            int count = 0;
+            Func<IAnimal> resolver = () => 
+            {
+                count++;
+                return new AnimalCat();
+            };
+
+            Kernel.Map<IAnimal>().To(resolver);
+
+            count.Should().Be(0, "The function wasn't executed yet");
+
+            IAnimal animal01 = Kernel.Resolve<IAnimal>(false);
+            count.Should().Be(1, "The function was executed one time");
+
+            IAnimal animal02 = Kernel.Resolve<IAnimal>(false);
+            count.Should().Be(2, "The function was executed two times");
+
+
+            animal01.Should().NotBe(animal02, "Each classe is a new instance");
         }
     }
 }

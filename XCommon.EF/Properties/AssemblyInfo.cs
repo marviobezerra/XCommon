@@ -6,9 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("XCommon.EF")]
+[assembly: AssemblyCompany("XCommon")]
+[assembly: AssemblyDescription("XCommon for Entity FrameWork")]
+[assembly: AssemblyProduct("XCommon for Entity FrameWork")]
 [assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Márvio André Bezerra Silverio")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from

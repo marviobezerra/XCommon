@@ -26,16 +26,13 @@ namespace XCommon.Util
             if (url.IsEmpty())
                 return false;
 
-            return Regex.IsMatch(url, LibraryRegex.URL);
+            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
         }
 
         public static string GetToken(params int[] parts)
-            => GetToken("-", true, parts);
+            => GetToken('-', parts);
 
-        public static string GetToken(bool upperCase, params int[] parts)
-            => GetToken("-", upperCase, parts);
-
-        public static string GetToken(string separator, bool upperCase, params int[] parts)
+        public static string GetToken(char separator, params int[] parts)
         {
             List<string> list = new List<string>();
 
@@ -44,12 +41,7 @@ namespace XCommon.Util
                 list.Add(GetRandomString(parts[i]));
             }
 
-            var result = string.Join(separator, list.ToArray());
-
-            if (upperCase)
-                return result.ToUpper();
-
-            return result;
+            return string.Join(separator.ToString(), list.ToArray());
         }
 
         public static string GetRandomString(int length)
@@ -57,10 +49,7 @@ namespace XCommon.Util
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[GetRandomNumber(0, s.Length)]).ToArray());
         }
-
-        public static int GetRandomNumber(int max)
-            => GetRandomNumber(0, max);
-
+        
         public static int GetRandomNumber(int min, int max)
         {
             lock (syncLock)
