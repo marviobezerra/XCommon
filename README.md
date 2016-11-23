@@ -25,11 +25,9 @@ This is the core base for all other projects. Each topic represent a name space 
  ----------------- | -----------------
 |[ApplicationSettings](https://github.com/marviobezerra/XCommon/wiki/XCommon---ApplicationSettings)| Interface which has information for applications. *It isn't a name space.
 | [Cache](https://github.com/marviobezerra/XCommon/wiki/XCommon---Cache)| Data cache with Get, Put and Remove methods.
-| [CommandLine](https://github.com/marviobezerra/XCommon/wiki/Command-Line)| Command line application. There are features to parse parameters.
-| [ConsoleX](https://github.com/marviobezerra/XCommon/wiki/XCommon---ConsoleX)| Helper for console such loading, colors, etc.
 | [Execute](https://github.com/marviobezerra/XCommon/wiki/XComon---Execute) | Control and store messages from executions.
 |[FileStorage](https://github.com/marviobezerra/XCommon/wiki/XCommon---FileStorage)| File access with Save, Exists, Load and Delete methods.
-|[Logger](https://github.com/marviobezerra/XCommon/wiki/XCommon---Logger)| Application logging, or tracing if you preer.
+|[Logger](https://github.com/marviobezerra/XCommon/wiki/XCommon---Logger)| Application logging, or tracing if you prefer.
 |[Login](https://github.com/marviobezerra/XCommon/wiki/XCommon---Login)| Login control, doesn't controle permissions.
 |[Mail](https://github.com/marviobezerra/XCommon/wiki/XCommon---Mail)| Send email.
 |[Socket](https://github.com/marviobezerra/XCommon/wiki/XCommon---Socket)| Wrapper for WebSockets protocol. Implemented in XCommon.Web
@@ -76,6 +74,6 @@ This is the core base for all other projects. Each topic represent a name space 
 |[Token](https://github.com/marviobezerra/XCommon/wiki/XCommon---Utils)| Generates a token (without cryptography).
 |[And others](https://github.com/marviobezerra/XCommon/wiki/XCommon---Utils)| Check the wiki page for a complete list.
 
-> **Note:** In this project some features are just interfaces, some of then has an InMemory implementations for unit test. 
+> **Note:** There are features in this project that are just interfaces, some of then has an InMemory implementations for unit test. 
 
 > For instance, the interface *IFileStorage* has two implementations. One in *XCommon*, just for unit tests, and another in *XCommon.Azure*, for real Azure blob storage access.
