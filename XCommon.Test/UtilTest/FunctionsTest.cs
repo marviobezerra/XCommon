@@ -53,25 +53,31 @@ namespace XCommon.Test.UtilTest
             }
         }
 
-        [Theory(Skip = "Not implemented", DisplayName = "GetRandomString")]
+        [Theory(DisplayName = "GetRandomString")]
         [MemberData(nameof(FunctionDataSource.RandomString), MemberType = typeof(FunctionDataSource))]
-        public void GetRandomString()
+        public void GetRandomString(int length, bool valid, string message)
         {
+            var result = Functions.GetRandomString(length);
+            result.Length.Should().Be(length, "Length doesn't match with the requirement");
 
         }
 
-        [Theory(Skip = "Not implemented", DisplayName = "GetRandomNumber")]
+        [Theory(DisplayName = "GetRandomNumber")]
         [MemberData(nameof(FunctionDataSource.RandomNumber), MemberType = typeof(FunctionDataSource))]
-        public void GetRandomNumber()
+        public void GetRandomNumber(int min, int max, string message)
         {
+            var result = Functions.GetRandomNumber(min, max);
 
+            result.Should().BeGreaterOrEqualTo(min, "Invalid min: " + min.ToString())
+                .And.BeLessOrEqualTo(max, "Invalid max: " + max.ToString());
         }
 
-        [Theory(Skip = "Not implemented", DisplayName = "GetMD5")]
+        [Theory(DisplayName = "GetMD5")]
         [MemberData(nameof(FunctionDataSource.MD5), MemberType = typeof(FunctionDataSource))]
-        public void GetMD5()
+        public void GetMD5(string value, string expected, string message)
         {
-
+            var result = Functions.GetMD5(value);
+            result.Should().Be(expected, "Value doesn't match: " + value);
         }
     }
 }

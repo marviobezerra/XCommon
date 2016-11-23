@@ -58,7 +58,7 @@ namespace XCommon.Util
             }
         }
 
-        public static string GetMD5(string value, bool upperCase = true)
+        public static string GetMD5(string value)
         {
             if (value.IsEmpty())
                 return string.Empty;
@@ -69,7 +69,7 @@ namespace XCommon.Util
 
             for (int i = 0; i < bytes.Length; i++)
             {
-                hash.Append(bytes[i].ToString(upperCase ? "X2" : "x2"));
+                hash.Append(bytes[i].ToString("x2"));
             }
 
             return hash.ToString();
