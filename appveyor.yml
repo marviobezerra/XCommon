@@ -1,35 +1,36 @@
 version: '{build}'
-pull_requests:
-    do_not_increment_build_number: true
-branches:
-    only:
+pull_requests:  
+  do_not_increment_build_number: true
+branches:  
+  only:
+  - master
+  - dev
+nuget:  
+  disable_publish_on_pr: true
+build_script:  
+- ps: .\Build.ps1
+test: off  
+artifacts:  
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+deploy:  
+- provider: NuGet
+  server: https://www.myget.org/F/xcommon/api/v2
+  api_key:
+    secure: dFawKPfL3HmoHICZTwO9BfXOsNp0vkqTpOfgHLMtY7sddv9racVZWpo9Ikr8qwMO
+  skip_symbols: true
+  on:
+    branch: 
+      only:
         - master
         - dev
-nuget:
-    disable_publish_on_pr: true
-build_script:
-    - ps: .\Build.ps1
-test: off
-artifacts:
-    - path: .\artifacts\**\*.nupkg
-    name: NuGet
-deploy:
-    - provider: NuGet
-        server: https://www.myget.org/F/xcommon/api/v2
-        api_key:
-        secure: dFawKPfL3HmoHICZTwO9BfXOsNp0vkqTpOfgHLMtY7sddv9racVZWpo9Ikr8qwMO
-        on:
-            branch:
-                only:
-                    - master
-                    - dev
-    - provider: NuGet
-        name: production
-        api_key:
-        secure: fsRetSaFXw+0cu0f35ys7iiQi81/0CSLzJ620cOIChLwF7akoYLuWk+T7B+FHrKo
-        on:
-            branch:
-                only:
-                    - master
-                    - dev
-            appveyor_repo_tag: true
+- provider: NuGet
+  name: production
+  api_key:
+    secure: fsRetSaFXw+0cu0f35ys7iiQi81/0CSLzJ620cOIChLwF7akoYLuWk+T7B+FHrKo
+  on:
+    branch: 
+      only:
+        - master
+        - dev
+    appveyor_repo_tag: true
