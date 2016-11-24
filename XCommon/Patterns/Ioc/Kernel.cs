@@ -145,7 +145,7 @@ namespace XCommon.Patterns.Ioc
                     Type paramContract = contrusctorParameters[i].ParameterType;
                     Type paramConcrect = args[i].GetType();
 
-                    count += paramConcrect.IsTypeBased(paramContract)
+                    count += paramConcrect.IsBasedIn(paramContract)
                         ? 1
                         : 0;
                 }
@@ -165,7 +165,7 @@ namespace XCommon.Patterns.Ioc
             if (contract.GetTypeInfo().IsInterface && !concret.GetTypeInfo().GetInterfaces().Contains(contract))
                 throw new Exception($"The class {concret.Name} doesn't implement the interface {contract.Name}");
 
-            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !concret.IsTypeBased(contract))
+            if (!contract.GetTypeInfo().IsInterface && contract.GetTypeInfo().IsAbstract && !concret.IsBasedIn(contract))
                 throw new Exception($"The class {concret.Name} doesn't implement the abstract {contract.Name}");
         }
 

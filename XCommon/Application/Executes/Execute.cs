@@ -96,6 +96,7 @@ namespace XCommon.Application.Executes
         public virtual TValue GetProperty<TValue>(string key)
         {
             object result;
+
             if (Properties.TryGetValue(key, out result))
                 return (TValue)result;
 

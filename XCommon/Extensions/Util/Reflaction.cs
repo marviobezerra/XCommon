@@ -55,7 +55,7 @@ namespace XCommon.Extensions.Util
             return result;
         }
 
-        public static bool IsTypeBased(this Type concret, Type contract)
+        public static bool IsBasedIn(this Type concret, Type contract)
         {
             return concret.GetTypeInfo().IsSubclassOf(contract)
                 || concret.GetTypeInfo().IsAssignableFrom(contract)
