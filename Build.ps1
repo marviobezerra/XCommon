@@ -41,7 +41,7 @@ Invoke-MSBuild
 
 $revision = @{ $true = $env:APPVEYOR_BUILD_NUMBER; $false = 1 }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL];
 $revision = "--version-suffix=beta-{0:D4}" -f [convert]::ToInt32($revision, 10)
-$revision = @{ $true = ""; $false = $revision }[$env:APPVEYOR_REPO_BRANCH -eq "master" -and $env:APPVEYOR_REPO_TAG -eq true];
+$revision = @{ $true = ""; $false = $revision }[$env:APPVEYOR_REPO_TAG -eq true];
 
 exec { & dotnet test .\XCommon.Test -c Release }
 
