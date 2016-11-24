@@ -1,11 +1,11 @@
 {
-  "version": "1.0.40-*",
+  "version": "1.0.41-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
   "dependencies": {
-    "XCommon": "1.0.40-*",
-    "XCommon.CodeGerator": "1.0.40-*"
+    "XCommon": "1.0.41-*",
+    "XCommon.CodeGerator": "1.0.41-*"
   },
   "frameworks": {
     "net451": {},

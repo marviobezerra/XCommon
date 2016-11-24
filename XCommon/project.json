@@ -1,5 +1,5 @@
 {
-  "version": "1.0.40-*",
+  "version": "1.0.41-*",
   "packOptions": {
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
     "summary": "This is the XCommon core project. XCommon is a light library, which implement's some design patterns like as Ioc, Specification, Repositiry and others. It also has some util functions in pure C#. Check the GitHub Wiki page for a complete documentation.",

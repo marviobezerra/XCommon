@@ -1,5 +1,5 @@
 {
-  "version": "1.0.40-*",
+  "version": "1.0.41-*",
   "packOptions": {
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
     "summary": "XCommon.EF has as implementation of our repository specific for Entity Frame Core. Check the GitHub Wiki page for a complete documentation.",
@@ -20,7 +20,7 @@
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
     "NETStandard.Library": "1.6.1",
-    "XCommon": "1.0.40-*"
+    "XCommon": "1.0.41-*"
   },
 
   "frameworks": {
