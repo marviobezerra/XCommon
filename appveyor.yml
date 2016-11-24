@@ -22,8 +22,8 @@ deploy:
   on:
     branch: 
       only:
-        - master
-        - dev
+      - master
+      - dev
 - provider: NuGet
   name: production
   api_key:
@@ -31,6 +31,6 @@ deploy:
   on:
     branch: 
       only:
-        - master
-        - dev
+      - master
+      - dev
     appveyor_repo_tag: true
