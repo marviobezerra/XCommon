@@ -1,6 +1,11 @@
 {
   "version": "1.0.41-*",
+  "description": "This is the XCommon core project. XCommon is a light library, which implement's some design patterns like as Ioc, Specification, Repositiry and others.",
+  "authors": [
+    "Marvio Andre Bezerra Silverio"
+  ],
   "packOptions": {
+    "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
     "summary": "This is the XCommon core project. XCommon is a light library, which implement's some design patterns like as Ioc, Specification, Repositiry and others. It also has some util functions in pure C#. Check the GitHub Wiki page for a complete documentation.",
     "tags": [
@@ -12,7 +17,7 @@
       "Query builder"
     ],
     "owners": [
-      "Márvio André Bezerra Silverio"
+      "Marvio Andre Bezerra Silverio"
     ],
     "repository": {
       "type": "git",

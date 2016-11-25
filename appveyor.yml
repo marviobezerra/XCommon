@@ -14,13 +14,6 @@ artifacts:
   name: NuGet
 deploy:  
 - provider: NuGet
-  server: https://www.myget.org/F/xcommon/api/v2
-  api_key:
-    secure: dFawKPfL3HmoHICZTwO9BfXOsNp0vkqTpOfgHLMtY7sddv9racVZWpo9Ikr8qwMO
-  skip_symbols: true
-  on:
-    branch: dev
-- provider: NuGet
   name: production
   api_key:
     secure: fsRetSaFXw+0cu0f35ys7iiQi81/0CSLzJ620cOIChLwF7akoYLuWk+T7B+FHrKo

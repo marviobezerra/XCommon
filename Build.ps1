@@ -39,16 +39,10 @@ exec { & dotnet restore }
 
 Invoke-MSBuild
 
-Write-Host "APPVEYOR_REPO_BRANCH:"$env:APPVEYOR_REPO_BRANCH
-
-$revision = @{ $true = $env:APPVEYOR_BUILD_NUMBER; $false = 1 }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL];
-$revision = "--version-suffix=beta-{0:D4}" -f [convert]::ToInt32($revision, 10)
-$revision = @{ $true = ""; $false = $revision }[$env:APPVEYOR_REPO_BRANCH -eq "master"];
-
 exec { & dotnet test .\XCommon.Test -c Release }
 
-exec { & dotnet pack .\XCommon -c Release -o .\artifacts $revision }
-exec { & dotnet pack .\XCommon.Azure -c Release -o .\artifacts $revision }
-exec { & dotnet pack .\XCommon.CodeGerator -c Release -o .\artifacts $revision }
-exec { & dotnet pack .\XCommon.EF -c Release -o .\artifacts $revision }
-exec { & dotnet pack .\XCommon.Web -c Release -o .\artifacts $revision }
+exec { & dotnet pack .\XCommon -c Release -o .\artifacts }
+exec { & dotnet pack .\XCommon.Azure -c Release -o .\artifacts }
+exec { & dotnet pack .\XCommon.CodeGerator -c Release -o .\artifacts }
+exec { & dotnet pack .\XCommon.EF -c Release -o .\artifacts }
+exec { & dotnet pack .\XCommon.Web -c Release -o .\artifacts }

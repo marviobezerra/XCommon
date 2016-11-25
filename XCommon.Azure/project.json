@@ -1,8 +1,13 @@
 {
   "version": "1.0.41-*",
-  "packOptions": {
+  "description": "XCommon for Azure. There are features like access blob file storage, send mail and tohers.",
+  "authors": [
+    "Marvio Andre Bezerra Silverio"
+  ],
+  "packOptions": {    
+    "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
-    "summary": "All features in this package has as aim Azure or another cloud service, like access blob file storage, send mail and tohers. Check the GitHub Wiki page for a complete documentation.",
+    "summary": "XCommon for Azure. All features in this package has as aim Azure or another cloud service, like access blob file storage, send mail and tohers. Check the GitHub Wiki page for a complete documentation.",
     "tags": [
       "XCommon",
       "Azure",
