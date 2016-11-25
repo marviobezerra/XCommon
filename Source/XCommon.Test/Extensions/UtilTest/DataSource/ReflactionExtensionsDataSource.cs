@@ -11,7 +11,7 @@ namespace XCommon.Test.Extensions.UtilTest.DataSource
         {
             get
             {
-                PairList<Type, Type, bool> result = new PairList<Type, Type, bool>();
+                PairList<Type, Type, bool, string> result = new PairList<Type, Type, bool, string>();
 
                 result.Add(typeof(IEnumerable<string>), typeof(List<string>), true, "IsValid IEnumerable<string> > List<string>");
                 result.Add(typeof(IEnumerable<string>), typeof(List<string>), true, "IsValid IEnumerable<string> > List<string>");

@@ -46,7 +46,7 @@ namespace XCommon.Test.Patterns.Specification.Query.DataSource
         {
             get
             {
-                PairList<List<PersonEntity>, PersonFilter, int> result = new PairList<List<PersonEntity>, PersonFilter, int>();
+                PairList<List<PersonEntity>, PersonFilter, int, string> result = new PairList<List<PersonEntity>, PersonFilter, int, string>();
 
                 result.Add(PeopleList, new PersonFilter { }, 20, "Empty filter");
                 result.Add(PeopleList, new PersonFilter { Id = "0".ToGuid() }, 0, "Empty filter");
@@ -64,7 +64,7 @@ namespace XCommon.Test.Patterns.Specification.Query.DataSource
         {
             get
             {
-                PairList<List<PersonEntity>, PersonFilter, PersonEntity> result = new PairList<List<PersonEntity>, PersonFilter, PersonEntity>();
+                PairList<List<PersonEntity>, PersonFilter, PersonEntity, string> result = new PairList<List<PersonEntity>, PersonFilter, PersonEntity, string>();
 
                 result.Add(PeopleList, new PersonFilter { PageNumber = 1, PageSize = 1 }, PeopleList.FirstOrDefault(c => c.Id == "10".ToGuid()), "Empty filter");
                 result.Add(PeopleList, new PersonFilter { Name = "Maria", PageNumber = 1, PageSize = 1 }, PeopleList.FirstOrDefault(c => c.Id == "8".ToGuid()), "Empty filter");

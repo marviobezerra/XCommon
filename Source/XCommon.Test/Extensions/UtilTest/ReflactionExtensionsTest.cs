@@ -17,16 +17,16 @@ namespace XCommon.Test.Extensions.UtilTest
 
         [Theory(DisplayName = "GetClassName")]
         [MemberData(nameof(ReflactionExtensionsDataSource.GetClassNameDataSource), MemberType = typeof(ReflactionExtensionsDataSource))]
-        public void GetClassName(Type contract, string expected, string message)
+        public void GetClassName(Type contract, string expected)
         {
-            contract.GetClassName().Should().Be(expected, message);
+            contract.GetClassName().Should().Be(expected);
         }
 
         [Theory(DisplayName = "GetClassName")]
         [MemberData(nameof(ReflactionExtensionsDataSource.GetClassNameDataSourceNoPrimitives), MemberType = typeof(ReflactionExtensionsDataSource))]
-        public void GetClassNameNoPrimitive(Type contract, string expected, string message)
+        public void GetClassNameNoPrimitive(Type contract, string expected)
         {
-            contract.GetClassName(false).Should().Be(expected, message);
+            contract.GetClassName(false).Should().Be(expected);
         }
     }
 }

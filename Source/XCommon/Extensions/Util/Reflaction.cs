@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using XCommon.Util;
 
 namespace XCommon.Extensions.Util
@@ -31,7 +30,6 @@ namespace XCommon.Extensions.Util
             PrimitiveTypes.Add(typeof(uint), "uint");
             PrimitiveTypes.Add(typeof(ulong), "ulong");
         }
-
 
         public static IEnumerable<PropertyInfo> GetProperties(this Type type)
         {

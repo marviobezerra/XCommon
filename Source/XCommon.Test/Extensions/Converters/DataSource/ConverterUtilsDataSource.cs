@@ -11,7 +11,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<BooleanOption, bool> result = new PairList<BooleanOption, bool>();
+                PairList<BooleanOption, bool, string> result = new PairList<BooleanOption, bool, string>();
 
                 result.Add(BooleanOption.True, true, "BooleanOption.True = True");
                 result.Add(BooleanOption.False, false, "BooleanOption.False = False");
@@ -26,7 +26,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<BooleanOption, bool, bool> result = new PairList<BooleanOption, bool, bool>();
+                PairList<BooleanOption, bool, bool, string> result = new PairList<BooleanOption, bool, bool, string>();
 
                 result.Add(BooleanOption.True, false, true, "BooleanOption.True = True");
                 result.Add(BooleanOption.False, true, false,  "BooleanOption.False = False");
@@ -41,7 +41,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<string, int> result = new PairList<string, int>();
+                PairList<string, int, string> result = new PairList<string, int, string>();
 
                 result.Add(null, 0, "Empty Int");
                 result.Add(string.Empty, 0, "Empty Int");
@@ -69,7 +69,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<string, int, int> result = new PairList<string, int, int>();
+                PairList<string, int, int, string> result = new PairList<string, int, int, string>();
 
                 result.Add(null, 9, 9, "Empty Int");
                 result.Add(string.Empty, 90, 90, "Empty Int");
@@ -97,7 +97,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<string, Guid> result = new PairList<string, Guid>();
+                PairList<string, Guid, string> result = new PairList<string, Guid, string>();
 
                 result.Add(null, Guid.Empty, "Empty Guid");
                 result.Add(string.Empty, Guid.Empty, "Empty Guid");
@@ -120,7 +120,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<string, BooleanOption> result = new PairList<string, BooleanOption>();
+                PairList<string, BooleanOption, string> result = new PairList<string, BooleanOption, string>();
 
                 result.Add(null, default(BooleanOption), "Null String");
                 result.Add("All", BooleanOption.All, "All");

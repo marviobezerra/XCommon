@@ -13,7 +13,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<EntityA, bool> result = new PairList<EntityA, bool>();
+                PairList<EntityA, bool, string> result = new PairList<EntityA, bool, string>();
 
                 result.Add(new EntityA { }, true, "Default value");
 
@@ -64,7 +64,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<EntityD, bool> result = new PairList<EntityD, bool>();
+                PairList<EntityD, bool, string> result = new PairList<EntityD, bool, string>();
 
                 result.Add(new EntityD
                 {
@@ -166,7 +166,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValueNullable = "105".ToGuid(),
                 });
 
-                PairList<List<EntityA>, bool> result = new PairList<List<EntityA>, bool>();
+                PairList<List<EntityA>, bool, string> result = new PairList<List<EntityA>, bool, string>();
                 result.Add(dataItem, true, "Valid list");
 
                 return result.Cast();

@@ -13,7 +13,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.DataSource
         {
             get
             {
-                PairList<PersonEntity, bool> result = new PairList<PersonEntity, bool>();
+                PairList<PersonEntity, bool, string> result = new PairList<PersonEntity, bool, string>();
 
                 result.Add(null, false, "Null entity always is invalid");
                 result.Add(new PersonEntity(), true, "Default entity in this case is valid");
@@ -26,7 +26,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.DataSource
         {
             get
             {
-                PairList<PersonEntity, bool> result = new PairList<PersonEntity, bool>();
+                PairList<PersonEntity, bool, string> result = new PairList<PersonEntity, bool, string>();
 
                 result.Add(null, false, "Null entity");
                 result.Add(new PersonEntity(), false, "Default entity");
@@ -49,7 +49,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.DataSource
         {
             get
             {
-                PairList<PersonEntity, bool> result = new PairList<PersonEntity, bool>();
+                PairList<PersonEntity, bool, string> result = new PairList<PersonEntity, bool, string>();
 
                 // New
                 result.Add(new PersonEntity { Action = EntityAction.New, Id = "1".ToGuid(), Age = 15, Name = "Marvio", Email = "marvio@gmail.com.br" }, false, "Invalid, young person");
