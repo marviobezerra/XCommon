@@ -1,5 +1,5 @@
 {
-  "version": "1.0.41-*",
+  "version": "1.0.42-*",
   "description": "XCommon.EF is an implementation for XCommon repository for Entity Frame Core.",
   "authors": [
     "Marvio Andre Bezerra Silverio"
@@ -7,6 +7,7 @@
   "packOptions": {
     "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/Files/XCommon.EF.png",
     "summary": "XCommon.EF is an implementation for XCommon repository for Entity FrameWork Core.",
     "tags": [
       "XCommon",
@@ -25,7 +26,7 @@
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
     "NETStandard.Library": "1.6.1",
-    "XCommon": "1.0.41-*"
+    "XCommon": "1.0.42-*"
   },
 
   "frameworks": {
