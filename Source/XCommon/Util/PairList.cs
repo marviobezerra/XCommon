@@ -11,7 +11,7 @@ namespace XCommon.Util
 
         private List<Pair<T1, TResult, string>> Source { get; set; }
 
-        public void Add(T1 param01, TResult result, string message)
+        public void Add(T1 param01, TResult result, string message = "")
         {
             Source.Add(new Pair<T1, TResult, string>(param01, result, message));
         }
@@ -37,7 +37,7 @@ namespace XCommon.Util
 
         private List<Pair<T1, T2, TResult, string>> Source { get; set; }
 
-        public void Add(T1 param01, T2 param02, TResult result, string message)
+        public void Add(T1 param01, T2 param02, TResult result, string message = "")
         {
             Source.Add(new Pair<T1, T2, TResult, string>(param01, param02, result, message));
         }
@@ -63,7 +63,7 @@ namespace XCommon.Util
 
         private List<Pair<T1, T2, T3, TResult, string>> Source { get; set; }
 
-        public void Add(T1 param01, T2 param02, T3 param03, TResult result, string message)
+        public void Add(T1 param01, T2 param02, T3 param03, TResult result, string message = "")
         {
             Source.Add(new Pair<T1, T2, T3, TResult, string>(param01, param02, param03, result, message));
         }

@@ -299,21 +299,15 @@ namespace XCommon.Test.Patterns.Ioc
 
         }
 
-        [Fact(DisplayName = "CheckReport")]
-        public void CheckReport()
+        [Fact(DisplayName = "Reset")]
+        public void Reset()
         {
             Kernel.Map<Vehicle>().To<VehicleCar>();
             Kernel.Map<IAnimal>().To<AnimalDog>(2);
 
-            var animal01 = Kernel.Resolve<IAnimal>();
-            var animal02 = Kernel.Resolve<IAnimal>();
-            var animal03 = Kernel.Resolve<IAnimal>();
+            Kernel.Reset();
 
-            var animal04 = Kernel.Resolve<IAnimal>();
-            var animal05 = Kernel.Resolve<IAnimal>();
-
-            var x = Kernel.Report();
-            x.Count.Should().Be(2);
+            Kernel.Count.Should().Be(0);
         }
     }
 }
