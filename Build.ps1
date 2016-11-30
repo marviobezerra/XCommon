@@ -41,6 +41,6 @@ exec { & dotnet test .\Source\XCommon.Test -c Release }
 
 exec { & dotnet pack .\Source\XCommon -c Release -o .\artifacts }
 exec { & dotnet pack .\Source\XCommon.Azure -c Release -o .\artifacts }
-exec { & dotnet pack .\Source\XCommon.CodeGerator -c Release -o .\artifacts }
+exec { & dotnet pack .\Source\XCommon.CodeGenerator -c Release -o .\artifacts }
 exec { & dotnet pack .\Source\XCommon.EF -c Release -o .\artifacts }
 exec { & dotnet pack .\Source\XCommon.Web -c Release -o .\artifacts }

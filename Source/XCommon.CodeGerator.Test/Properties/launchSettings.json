@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "XCommon.CodeGerator.Test": {
-      "commandName": "Project",
-      "commandLineArgs": "-c"
-    }
-  }
-}

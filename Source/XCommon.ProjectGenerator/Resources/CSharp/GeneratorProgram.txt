@@ -1,0 +1,161 @@
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Resources;
+using XCommon.Application;
+using XCommon.Application.Login;
+using XCommon.Application.Socket;
+using XCommon.CodeGenerator;
+using XCommon.CodeGenerator.Angular.Configuration;
+using XCommon.CodeGenerator.CSharp.Configuration;
+using XCommon.CodeGenerator.TypeScript.Configuration;
+using XCommon.Web;
+
+namespace [{name}].CodeGenerator
+{
+	public class Program
+	{
+        private static IApplicationSettings ApplicationSettings { get; set;  }
+        
+        public static void Main(string[] args)
+		{
+
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "[{name}].View.Web"))
+				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+			var config = builder.Build();
+			ApplicationSettings = config.Get<ApplicationSettings>("[{nameSafe}]");
+
+			Generator gen = new Generator(GetConfig());
+			gen.Run(args);
+		}
+
+		private static Configuration GetConfig()
+		{
+			string basePath = Path.Combine(Directory.GetCurrentDirectory(), "..");
+
+			var web = "[{name}].View.Web";
+			var entity = "[{name}].Business.Entity";
+			var contract = "[{name}].Business.Contract";
+			var concrete = "[{name}].Business.Concrete";
+			var factory = "[{name}].Business.Factory";
+			var data = "[{name}].Business.Data";
+			var unitTest = "[{name}].Business.Test";
+
+			return new Configuration
+			{
+				Angular = new AngularConfig
+				{
+					ComponentPath = Path.Combine(basePath, web, "App", "components"),
+					ServicePath = Path.Combine(basePath, web, "App", "services"),
+					StyleInclude = new List<string>(),
+					HtmlRoot = "/html/components"
+				},
+				CSharp = new CSharpConfig
+				{
+					EntrityPath = Path.Combine(basePath, entity),
+					EntrityNameSpace = entity,
+					FactoryPath = Path.Combine(basePath, factory),
+					FacotryNameSpace = factory,
+					ContractPath = Path.Combine(basePath, contract),
+					ContractNameSpace = contract,
+					ConcretePath = Path.Combine(basePath, concrete),
+					ConcreteNameSpace = concrete,
+					UnitTestNameSpace = unitTest,
+					UnitTestPath = Path.Combine(basePath, unitTest),
+					DataBase = new DataBaseConfig
+					{
+						ConnectionString = ApplicationSettings.ConnectionString,
+						ContextName = "[{nameSafe}]Context",
+						NameSpace = data,
+						Path = Path.Combine(basePath, data),
+						Rewrite = GetRewrite(),
+						Remap = GetRemap()
+					}
+				},
+				TypeScript = new TypeScriptConfig
+				{
+					Entity = new TypeScriptEntity
+					{
+						Path = Path.Combine(basePath, web, "App", "Entity"),
+						Assemblys = new List<Assembly>
+						{
+							// It is necessary the reference for one class in entity project, you can change this reference above.
+							typeof(Business.Entity.TempClass).GetTypeInfo().Assembly
+						},
+						TypesExtra = new List<Type>
+					{
+						typeof(XCommon.Application.Executes.ExecuteMessageType),
+						typeof(XCommon.Application.Executes.ExecuteMessage),
+						typeof(XCommon.Application.Executes.Execute<>),
+						typeof(XCommon.Patterns.Repository.Entity.EntityBase),
+						typeof(PasswordChangeEntity),
+						typeof(PasswordRecoveryEntity),
+						typeof(SignInEntity),
+						typeof(SignUpInternalEntity),
+						typeof(TicketEntity),
+						typeof(TicketStatus),
+						typeof(UserProvider)
+                    }
+					},
+					Resource = new TypeScriptResource
+					{
+						LazyLoad = false,
+						CultureDefault = ApplicationSettings.Culture,
+						Cultures = ApplicationSettings.Cultures,
+						File = "Resource",
+						Path = Path.Combine(basePath, web, "App", "services"),
+						Resources = GetResources()
+					}
+				}
+			};
+		}
+
+		private static Dictionary<Type, ResourceManager> GetResources()
+		{
+			Dictionary<Type, ResourceManager> result = new Dictionary<Type, ResourceManager>();
+
+			// When you create your resource project change this reference for generate TypeScript resources
+			//result.Add(typeof(Business.Resource.Message), Business.Resource.Message.ResourceManager);
+
+			return result;
+		}
+
+		private static List<DataBaseRewrite> GetRewrite()
+		{
+			List<DataBaseRewrite> result = new List<DataBaseRewrite>();
+
+			//result.Add(new DataBaseRewrite
+			//{
+			//	SchemaPK = "Register",
+			//	TablePK = "People",
+			//	ColumnPK = "IdPerson",
+			//	SchemaFK = "Register",
+			//	TableFK = "PeopleBlocked",
+			//	ColumnFK = "IdPersonFrom",
+			//	CustonName = "PeopleBlockedFrom"
+			//});
+
+			return result;
+		}
+
+		private static List<DataBaseRemap> GetRemap()
+		{
+			List<DataBaseRemap> result = new List<DataBaseRemap>();
+
+			//result.Add(new DataBaseRemap
+			//{
+			//	Schema = "Register",
+			//	Table = "People",
+			//	Column = "Gender",
+			//	NameSpace = "[{name}].Business.Entity.Enum",
+			//	Type = "GenderType"
+			//});
+
+			return result;
+		}
+	}
+}

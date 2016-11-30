@@ -1,5 +1,5 @@
 {
-  "version": "1.0.42-*",
+  "version": "1.0.43-*",
   "description": "XCommon.Web has implementation for Asp .Net Core such Controler, Ticket Authentication and some others which makes your like easier.",
   "authors": [
     "Marvio Andre Bezerra Silverio"
@@ -36,7 +36,7 @@
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.2-beta1",
-    "XCommon": "1.0.42-*"
+    "XCommon": "1.0.43-*"
   },
 
   "frameworks": {
