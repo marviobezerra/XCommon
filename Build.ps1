@@ -37,8 +37,6 @@ EnsurePsbuildInstalled
 
 exec { & dotnet restore }
 
-Invoke-MSBuild
-
 exec { & dotnet test .\Source\XCommon.Test -c Release }
 
 exec { & dotnet pack .\Source\XCommon -c Release -o .\artifacts }

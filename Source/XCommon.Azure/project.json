@@ -7,7 +7,7 @@
   "packOptions": {
     "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
-    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/Files/NugetIcon/XCommon.Azure.png",
+    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/Files/NugetIcon/XCommon.Azure.png",
     "summary": "XCommon for Azure. All features in this package has as aim Azure or another cloud service, like access blob file storage, send mail and tohers. Check the GitHub Wiki page for a complete documentation.",
     "tags": [
       "XCommon",
