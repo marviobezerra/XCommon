@@ -1,21 +1,19 @@
-# XCommon
+#XCommon
 
 XCommon is a light library, which implement's some design patterns and some util functions in pure C#. It is divide in five projects;
 
-- XCommon
-- XCommon.Web
-- XCommon.EF
-- XCommon.Azure
-- XCommon.CodeGenerator
 
-Each project is available on Nuget with the same name.
+|Project | Build   | Version
+|:-------| ------- | -------
+| XCommon | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) |  [![NuGet version](https://badge.fury.io/nu/xcommon.svg)](https://badge.fury.io/nu/xcommon)
+| XCommon.Azure | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) |  [![NuGet version](https://badge.fury.io/nu/xcommon.azure.svg)](https://badge.fury.io/nu/xcommon.azure)
+| XCommon.Web | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) | [![NuGet version](https://badge.fury.io/nu/xcommon.web.svg)](https://badge.fury.io/nu/xcommon.web)
+| XCommon.EF | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) | [![NuGet version](https://badge.fury.io/nu/xcommon.ef.svg)](https://badge.fury.io/nu/xcommon.ef)
+| XCommon.CodeGenerator | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) | [![NuGet version](https://badge.fury.io/nu/xcommon.codegenerator.svg)](https://badge.fury.io/nu/xcommon.codegenerator)
 
-## XCommon
+##XCommon
 
 This is the core base for all other projects. Each topic represent a name space on XCommon.
-
-> **Nuget install**
-> [PM> Install-Package XCommon](https://www.nuget.org/packages/XCommon/)
 
 ###**Application**
 
