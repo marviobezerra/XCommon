@@ -7,7 +7,7 @@
   "packOptions": {
     "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
-    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/Files/NugetIcon/XCommon.Web.png",
+    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.Web.png",
     "summary": "XCommon.Web has implementation for Asp .Net Core like Controler, Ticket Authentication and some others which makes your like easier.",
     "tags": [
       "XCommon",

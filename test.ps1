@@ -42,9 +42,3 @@ exec { & dotnet test .\test\XCommon.Test.Azure -c Release }
 exec { & dotnet test .\test\XCommon.Test.CodeGenerator -c Release }
 exec { & dotnet test .\test\XCommon.Test.EF -c Release }
 exec { & dotnet test .\test\XCommon.Test.Web -c Release }
-
-exec { & dotnet pack .\src\XCommon -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.Azure -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.CodeGenerator -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.EF -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.Web -c Release -o .\artifacts }

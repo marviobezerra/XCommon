@@ -7,7 +7,7 @@
   "packOptions": {
     "projectUrl": "https://github.com/marviobezerra/XCommon",
     "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
-    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/Files/NugetIcon/XCommon.EF.png",
+    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.EF.png",
     "summary": "XCommon.EF is an implementation for XCommon repository for Entity FrameWork Core.",
     "tags": [
       "XCommon",
