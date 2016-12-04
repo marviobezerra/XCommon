@@ -5,11 +5,11 @@ namespace XCommon.Patterns.Specification.Validation
 {
     public abstract class SpecificationValidation<TEntity> : ISpecificationValidation<TEntity>
     {
-        protected SpecificationList<TEntity> NewSpecificationList(bool addCheckBaseObject = true)
+        protected SpecificationList<TEntity> NewSpecificationList(bool addCheckNullObject = true)
         {
             SpecificationList<TEntity> result = new SpecificationList<TEntity>();
 
-            if (addCheckBaseObject)
+            if (addCheckNullObject)
             {
                 ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
                 result.Add(basicSpecification, true);

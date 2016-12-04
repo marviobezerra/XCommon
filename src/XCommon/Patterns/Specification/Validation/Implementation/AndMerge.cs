@@ -3,14 +3,14 @@ using XCommon.Application.Executes;
 
 namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-    public class AndConcat<TEntity> : ISpecificationValidation<TEntity>
+    public class AndMerge<TEntity> : ISpecificationValidation<TEntity>
     {
-        public AndConcat(SpecificationList<TEntity> specificationList, bool condition)
+        public AndMerge(SpecificationList<TEntity> specificationList, bool condition)
             : this(specificationList, c => condition)
         {
         }
 
-        public AndConcat(SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition)
+        public AndMerge(SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition)
         {
             Condition = condition;
             SpecificationList = specificationList;

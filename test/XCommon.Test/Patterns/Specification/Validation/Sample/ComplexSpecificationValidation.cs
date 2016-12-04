@@ -13,9 +13,9 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
         public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
         {
             var specifications = NewSpecificationList()
-                .AndIsValid(ValidateNew(), c => c.Action == EntityAction.New)
-                .AndIsValid(ValidateUpdate(), c => c.Action == EntityAction.Update)                
-                .AndIsValid(ValidateDelete(), c => c.Action == EntityAction.Delete)                
+                .AndMerge(ValidateNew(), c => c.Action == EntityAction.New)
+                .AndMerge(ValidateUpdate(), c => c.Action == EntityAction.Update)                
+                .AndMerge(ValidateDelete(), c => c.Action == EntityAction.Delete)                
                 .AndIsNotEmpty(c => c.Name, "Person needs a Name")                
                 .AndIsEmail(c => c.Email, "Person needs a valida email");
 

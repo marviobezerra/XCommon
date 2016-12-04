@@ -34,12 +34,12 @@ namespace XCommon.Patterns.Specification.Validation.Extensions
             return specification.AndRegexValid(selector, LibraryRegex.URL, condition, stopIfInvalid, message, args);
         }
 
-        public static SpecificationList<TEntity> AndMerge<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, bool condition)
-            => specification.AndIsValid(specificationList, c => condition);
+        public static SpecificationList<TEntity> AndMerge<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, bool condition, bool stopIfInvalid = false)
+            => specification.AndMerge(specificationList, c => condition, stopIfInvalid);
 
-        public static SpecificationList<TEntity> AndIsValid<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition)
+        public static SpecificationList<TEntity> AndMerge<TEntity>(this SpecificationList<TEntity> specification, SpecificationList<TEntity> specificationList, Func<TEntity, bool> condition, bool stopIfInvalid = false)
         {
-            specification.Add(new AndConcat<TEntity>(specificationList, condition));
+            specification.Add(new AndMerge<TEntity>(specificationList, condition), stopIfInvalid);
             return specification;
         }
     }
