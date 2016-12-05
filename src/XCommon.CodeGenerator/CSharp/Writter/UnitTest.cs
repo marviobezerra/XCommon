@@ -66,7 +66,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 				.AppendLine("}")
                 .AppendLine()
 
-                .AppendLine($"[Theory(DisplayName = \"{item.Name} (Load) \")]")
+                .AppendLine($"[Theory(DisplayName = \"{item.Name} (Load)\")]")
                 .AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityFilter), MemberType = typeof({item.Name}DataSource))]")
                 .AppendLine($"public async Task GetByFilterAsync({item.Name}Filter filter, int expected, string message)")
                 .AppendLine("{")
