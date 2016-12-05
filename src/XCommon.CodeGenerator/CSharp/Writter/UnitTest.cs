@@ -34,10 +34,10 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 				return;
 
 			var className = $"{item.Name}Test";
-			var nameSpace = new List<string> { "System.Linq", "System.Collections.Generic", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
+			var nameSpace = new List<string> { "System.Threading.Tasks", "System.Linq", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation" };
+			nameSpace.Add($"{config.ContractNameSpace}.{group.Name}");
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
-			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
-            nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
+            nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
             nameSpace.Add($"{config.UnitTestNameSpace}.{group.Name}.DataSource");
 
 			StringBuilderIndented builder = new StringBuilderIndented();
@@ -50,7 +50,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 				.AppendLine($"protected ISpecificationValidation<{item.Name}Entity> SpecificationValidation {{ get; set; }}")
                 .AppendLine()
                 .AppendLine("[Inject]")
-                .AppendLine($"protected ISpecificationQuery<{item.Name}, {item.Name}Filter> SpecificationQuery {{ get; set; }}")
+                .AppendLine($"protected I{item.Name}Business {item.Name}Business {{ get; set; }}")
                 .AppendLine()
 				.AppendLine($"[Theory(DisplayName = \"{item.Name} (Validate)\")]")
 				.AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityValidation), MemberType = typeof({item.Name}DataSource))]")
@@ -68,10 +68,11 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 
                 .AppendLine($"[Theory(DisplayName = \"{item.Name} (Load) \")]")
                 .AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityFilter), MemberType = typeof({item.Name}DataSource))]")
-                .AppendLine($"public void ValidateLoad(List<{item.Name}> source, {item.Name}Filter filter, int expected, string message)")
+                .AppendLine($"public async Task GetByFilterAsync({item.Name}Filter filter, int expected, string message)")
                 .AppendLine("{")
                 .IncrementIndent()
-                .AppendLine("var result = SpecificationQuery.Build(source, filter);")
+                .AppendLine($"//Scenery.Load(SceneryType.{item.Name});")
+                .AppendLine($"var result = await {item.Name}Business.GetByFilterAsync(filter);")
                 .AppendLine()
                 .AppendLine("result.Count().Should().Be(expected, message);")
                 .DecrementIndent()
@@ -93,7 +94,6 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 			var className = $"{item.Name}DataSource";
 			var nameSpace = new List<string> { "System", "XCommon.Util", "System.Collections.Generic" };
 			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
-			nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
             nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
 
 			StringBuilderIndented builder = new StringBuilderIndented();
@@ -102,20 +102,6 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 				.ClassInit(className, string.Empty, $"{config.UnitTestNameSpace}.{group.Name}.DataSource", ClassVisility.Public, false, nameSpace.ToArray());
 
 			builder
-				.AppendLine($"public static List<{item.Name}> Source")
-				.AppendLine("{")
-				.IncrementIndent()
-                .AppendLine("get")
-                .AppendLine("{")
-                .IncrementIndent()            
-                .AppendLine($"List<{item.Name}> result = new List<{item.Name}>();")
-                .AppendLine()
-                .AppendLine("return result;")
-                .DecrementIndent()
-                .AppendLine("}")
-                .DecrementIndent()
-                .AppendLine("}")
-
                 .AppendLine($"public static IEnumerable<object[]> EntityValidation")
                 .AppendLine("{")
                 .IncrementIndent()
@@ -123,7 +109,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
                 .AppendLine("{")
                 .IncrementIndent()
 
-                .AppendLine($"PairList<{item.Name}Entity, bool> result = new PairList<{item.Name}Entity, bool>();")
+                .AppendLine($"PairList<{item.Name}Entity, bool, string> result = new PairList<{item.Name}Entity, bool, string>();")
                 .AppendLine()
                 .AppendLine("result.Add(null, false, \"Null value\");")
                 .AppendLine($"result.Add(new {item.Name}Entity(), false, \"Default value\");")
@@ -133,6 +119,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
                 .AppendLine("}")
                 .DecrementIndent()
                 .AppendLine("}")
+                .AppendLine()
                 
                 .AppendLine($"public static IEnumerable<object[]> EntityFilter")
                 .AppendLine("{")
@@ -140,9 +127,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
                 .AppendLine("get")
                 .AppendLine("{")
                 .IncrementIndent()
-                .AppendLine($"PairList<List<{item.Name}>, {item.Name}Filter, int> result = new PairList<List<{item.Name}>, {item.Name}Filter, int>();")
+                .AppendLine($"PairList<{item.Name}Filter, int, string> result = new PairList<{item.Name}Filter, int, string>();")
                 .AppendLine()
-                .AppendLine($"result.Add(Source, new {item.Name}Filter(), 0, \"Default filter\");")
+                .AppendLine($"result.Add(new {item.Name}Filter(), 0, \"Default filter\");")
                 .AppendLine()
                 .AppendLine("return result.Cast();")
                 .DecrementIndent()
