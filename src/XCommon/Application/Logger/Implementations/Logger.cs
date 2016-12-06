@@ -11,7 +11,6 @@ namespace XCommon.Application.Logger.Implementations
         public Logger()
         {
             Kernel.Resolve(this);
-            LoggerData = Writter.LoadData();
         }
 
         [Inject]
@@ -20,59 +19,117 @@ namespace XCommon.Application.Logger.Implementations
         [Inject]
         public ILoggerWritter Writter { get; set; }
 
-        public List<LoggerEntity> LoggerData { get; set; }
+        public List<LoggerEntity> LoggerData
+        {
+            get
+            {
+                return Writter.LoadDataAsync().Result;
+            }
+        }
         
-        public async Task<ILogger> DebugAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Debug, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, 0, LogType.Trace, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> DebugAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync(LogType.Debug, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Trace, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> ErrorAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Error, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Trace, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> ErrorAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync(LogType.Error, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync<TCaller>(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), 0, LogType.Trace, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> ExceptionAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Exception, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync<TCaller>(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Trace, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> ExceptionAsync(Exception exception, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Exception, null, exception, message, memberName, sourceFilePath, sourceLineNumber);
-
-        public async Task<ILogger> ExceptionAsync<TResource>(Exception exception, TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync(LogType.Exception, resource, exception, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> TraceAsync<TCaller>(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Trace, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
 
         public async Task<ILogger> InfoAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Info, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+            => await WriteAsync(null, 0, LogType.Info, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> InfoAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync(LogType.Info, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> InfoAsync(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Info, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> TraceAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync<object>(LogType.Trace, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> InfoAsync(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Info, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        public async Task<ILogger> TraceAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
-            => await WriteAsync(LogType.Trace, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+        public async Task<ILogger> InfoAsync<TCaller>(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), 0, LogType.Info, null, null, message, memberName, sourceFilePath, sourceLineNumber);
 
-        private async Task<ILogger> WriteAsync<TResource>(LogType type, TResource resource, Exception exception, string message, string memberName, string sourceFilePath, int sourceLineNumber)
+        public async Task<ILogger> InfoAsync<TCaller>(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Info, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> InfoAsync<TCaller>(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Info, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, 0, LogType.Debug, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Debug, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Debug, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync<TCaller>(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), 0, LogType.Debug, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync<TCaller>(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Debug, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> DebugAsync<TCaller>(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Debug, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, 0, LogType.Error, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Error, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Error, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync<TCaller>(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), 0, LogType.Error, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync<TCaller>(string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Error, null, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ErrorAsync<TCaller>(string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Error, resource, null, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync(Exception exception, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+           => await WriteAsync(null, 0, LogType.Exception, null, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync(Exception exception, string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Exception, null, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync(Exception exception, string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(null, eventId, LogType.Exception, resource, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync<TCaller>(Exception exception, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), 0, LogType.Exception, null, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync<TCaller>(Exception exception, string message, int eventId, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Exception, null, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        public async Task<ILogger> ExceptionAsync<TCaller>(Exception exception, string message, int eventId, object resource, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
+            => await WriteAsync(typeof(TCaller), eventId, LogType.Exception, resource, exception, message, memberName, sourceFilePath, sourceLineNumber);
+
+        private async Task<ILogger> WriteAsync(Type callerType, int eventId, LogType type, object resource, Exception exception, string message, string memberName, string sourceFilePath, int sourceLineNumber)
         {
-            if (ApplicationSettings.Logger < type)
+            if (ApplicationSettings.Logger == LogType.None || ApplicationSettings.Logger > type)
                 return this;
 
-            await Task.Factory.StartNew(() =>
+            await Writter.SaveDataAsync(new LoggerEntity(exception, callerType)
             {
-                LoggerData.Add(new LoggerEntity(exception)
-                {
-                    Type = type,
-                    Resource = resource,
-                    Message = message,
-                    MemberName = memberName,
-                    SourceFilePath = sourceFilePath,
-                    SourceLineNumber = sourceLineNumber
-                });
-
-                Writter.SaveData(LoggerData);
+                LogLevel = type,
+                Resource = resource,
+                Message = message,
+                SourceMethod = memberName,
+                SourceFilePath = sourceFilePath,
+                SourceLineNumber = sourceLineNumber
             });
 
             return this;

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace XCommon.Application.Logger.Implementations
 {
@@ -9,29 +10,36 @@ namespace XCommon.Application.Logger.Implementations
         public LoggerWritterJson(string filePath)
         {
             FilePath = filePath;
+            LoadData();
         }
 
         private string FilePath { get; set; }
 
-        private static object LockObject = new object();
+        private List<LoggerEntity> LoggerData { get; set; }
 
-        public List<LoggerEntity> LoadData()
+        private void LoadData()
         {
-            lock (LockObject)
-            {
-                return File.Exists(FilePath)
-                    ? JsonConvert.DeserializeObject<List<LoggerEntity>>(File.ReadAllText(FilePath))
-                    : new List<LoggerEntity>();
-            }
+            LoggerData = File.Exists(FilePath)
+                  ? JsonConvert.DeserializeObject<List<LoggerEntity>>(File.ReadAllText(FilePath))
+                  : new List<LoggerEntity>();
         }
 
-        public void SaveData(List<LoggerEntity> data)
+        public async Task<List<LoggerEntity>> LoadDataAsync()
         {
-            lock (LockObject)
+            return await Task.Factory.StartNew(() => 
             {
-                string content = JsonConvert.SerializeObject(data, Formatting.None);
-                File.WriteAllText(FilePath, content);
-            }
+                return LoggerData;
+            });           
+        }
+
+        public async Task SaveDataAsync(LoggerEntity item)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                LoggerData.Add(item);
+                string content = JsonConvert.SerializeObject(LoggerData, Formatting.None);
+                File.WriteAllText (FilePath, content);
+            });
         }
     }
 }
