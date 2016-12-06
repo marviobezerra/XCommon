@@ -26,7 +26,8 @@
     }
   },
   "dependencies": {
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "9.0.1"
   },
 
   "frameworks": {
@@ -44,7 +45,8 @@
         "System.Globalization.Extensions": "4.3.0",
         "System.Linq.Expressions": "4.3.0",
         "System.Linq.Queryable": "4.3.0",
-        "System.Runtime.Serialization.Primitives": "4.3.0"
+        "System.Runtime.Serialization.Primitives": "4.3.0",
+        "System.Diagnostics.StackTrace": "4.3.0"
       }
     }
   }

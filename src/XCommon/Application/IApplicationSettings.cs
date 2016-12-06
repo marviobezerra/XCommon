@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XCommon.Application.Logger;
 
 namespace XCommon.Application
 {
@@ -14,7 +15,9 @@ namespace XCommon.Application
 
 		bool Production { get; }
 
-		ApplicationCulture Culture { get; }
+        LogType Logger { get; }
+
+        ApplicationCulture Culture { get; }
 
 		List<ApplicationCulture> Cultures { get; }
 	}
@@ -32,7 +35,9 @@ namespace XCommon.Application
 
 		public bool Production { get; set; }
 
-		public ApplicationCulture Culture { get; set; }
+        public LogType Logger { get; set; }
+
+        public ApplicationCulture Culture { get; set; }
 
 		public List<ApplicationCulture> Cultures { get; set; }
 

@@ -1,38 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace XCommon.Application.Logger
 {
     public interface ILogger
     {
-        LoggerConfiguration Config { get; }
+        List<LoggerEntity> LoggerData { get; }
 
-        LoggerInfo GetInfo([CallerMemberName] string memberName = "", [CallerFilePath] string fileName = "", [CallerLineNumber] int lineNumber = 0);
+        Task<ILogger> TraceAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Debug(string message, params object[] args);
+        Task<ILogger> TraceAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Debug(LoggerInfo info, string message, params object[] args);
+        Task<ILogger> InfoAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Error(string message, params object[] args);
+        Task<ILogger> InfoAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Error(LoggerInfo info, string message, params object[] args);
+        Task<ILogger> DebugAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Exception(string message, params object[] args);
+        Task<ILogger> DebugAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Exception(LoggerInfo info, string message, params object[] args);
+        Task<ILogger> ErrorAsync(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Info(string message, params object[] args);
+        Task<ILogger> ErrorAsync<TResource>(TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Info(LoggerInfo info, string message, params object[] args);
+        Task<ILogger> ExceptionAsync(Exception exception, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
-        ILogger Log(string message, params object[] args);
-
-        ILogger Log(LoggerInfo info, string message, params object[] args);
-
-        ILogger Log(LogType type, string message, params object[] args);
-
-        ILogger Log(LoggerInfo info, LogType type, string message, params object[] args);
-
-        ILogger Exception(Exception exception);
+        Task<ILogger> ExceptionAsync<TResource>(Exception exception, TResource resource, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
     }
 }
