@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XCommon.CodeGenerator.Test.Entity.Common
+namespace XCommon.Test.CodeGenerator.Entity.Common
 {
     public class StatesEntity
     {

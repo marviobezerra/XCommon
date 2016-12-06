@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XCommon.CodeGenerator.Test.Entity.Enum
+namespace XCommon.Test.CodeGenerator.Entity.Enum
 {
     public enum CityStatus
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XCommon.CodeGenerator.Test.Resource {
+namespace XCommon.Test.CodeGenerator.Resource {
     using System;
     using System.Reflection;
     
@@ -38,7 +38,7 @@ namespace XCommon.CodeGenerator.Test.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XCommon.CodeGenerator.Test.Resource.Form", typeof(Form).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XCommon.Test.CodeGenerator.Resource.Form", typeof(Form).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

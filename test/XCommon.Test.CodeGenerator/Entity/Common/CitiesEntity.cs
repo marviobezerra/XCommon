@@ -1,7 +1,7 @@
 ﻿using System;
-using XCommon.CodeGenerator.Test.Entity.Enum;
+using XCommon.Test.CodeGenerator.Entity.Enum;
 
-namespace XCommon.CodeGenerator.Test.Entity.Common
+namespace XCommon.Test.CodeGenerator.Entity.Common
 {
     public class CitiesEntity
     {

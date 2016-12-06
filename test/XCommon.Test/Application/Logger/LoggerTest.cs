@@ -19,7 +19,6 @@ namespace XCommon.Test.Application.Logger
             AppSettings = new ApplicationSettings();
 
             Kernel.Map<IApplicationSettings>().To(AppSettings);
-
             Kernel.Map<ILoggerWritter>().To<LoggerWritterInMemory>();
             Kernel.Map<ILogger>().To<AppLogger.Logger>();
         }

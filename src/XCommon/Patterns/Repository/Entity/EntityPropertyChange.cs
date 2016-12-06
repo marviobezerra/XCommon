@@ -13,7 +13,7 @@ namespace XCommon.Patterns.Repository.Entity
                 PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
 
-        protected void RaisePropertyChanged<T>(Expression<Func<T>> memberExpression)
+        protected void RaisePropertyChanged<TEntity>(Expression<Func<TEntity>> memberExpression)
         {
             if (memberExpression == null)
             {

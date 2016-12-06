@@ -1,7 +1,7 @@
 ﻿using System;
-using XCommon.CodeGenerator.Test.Entity.Common;
+using XCommon.Test.CodeGenerator.Entity.Common;
 
-namespace XCommon.CodeGenerator.Test.Entity.Register
+namespace XCommon.Test.CodeGenerator.Entity.Register
 {
     public class PeopleEntity
     {

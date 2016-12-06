@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Resources;
 using XCommon.Application;
+using XCommon.CodeGenerator;
 using XCommon.CodeGenerator.Angular.Configuration;
 using XCommon.CodeGenerator.CSharp.Configuration;
 using XCommon.CodeGenerator.TypeScript.Configuration;
 
-namespace XCommon.CodeGenerator.Test
+namespace XCommon.Test.CodeGenerator
 {
-	public class Program
+    public class Program
     {
         public static void Main(string[] args)
         {

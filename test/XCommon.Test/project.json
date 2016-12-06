@@ -16,5 +16,10 @@
         }
       }
     }
+  },
+  "buildOptions": {
+    "copyToOutput": [
+      "xunit.runner.json"
+    ]
   }
 }
