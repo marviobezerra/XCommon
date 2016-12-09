@@ -8,7 +8,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
 {
     public static class ValueCheckDataSource
     {
-        public static IEnumerable<object[]> BiggerThanDateTimeDataSource
+        public static IEnumerable<object[]> GreaterThanDateTimeDataSource
         {
             get
             {
@@ -20,7 +20,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
             }
         }
 
-        public static IEnumerable<object[]> BiggerThanDateTimeNoTimeDataSource
+        public static IEnumerable<object[]> GreaterThanDateTimeNoTimeDataSource
         {
             get
             {
@@ -32,7 +32,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
             }
         }
 
-        public static IEnumerable<object[]> BiggerThanIntDataSource
+        public static IEnumerable<object[]> GreaterThanIntDataSource
         {
             get
             {
@@ -44,7 +44,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
             }
         }
 
-        public static IEnumerable<object[]> BiggerThanDecimalDataSource
+        public static IEnumerable<object[]> GreaterThanDecimalDataSource
         {
             get
             {

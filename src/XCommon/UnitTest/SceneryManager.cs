@@ -17,6 +17,8 @@ namespace XCommon.UnitTest
 
 		protected abstract void SetUp();
 
+		public abstract void Reset();
+
         protected abstract TParam BeforeRun();
 
         protected abstract void AfterRun(TParam param);

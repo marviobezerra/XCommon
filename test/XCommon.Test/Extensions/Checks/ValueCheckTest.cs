@@ -10,38 +10,38 @@ namespace XCommon.Test.Extensions.Checks
 {
     public class ValueCheckTest
     {
-        [Theory(DisplayName = "BiggerThan DateTime")]
-        [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        [Theory(DisplayName = "GreaterThan DateTime")]
+        [MemberData(nameof(ValueCheckDataSource.GreaterThanDateTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
+        public void GreaterThanDateTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2);
+            bool result = data.Item1.GreaterThan(data.Item2);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "BiggerThan DateTime (Without time)")]
-        [MemberData(nameof(ValueCheckDataSource.BiggerThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
+        [Theory(DisplayName = "GreaterThan DateTime (Without time)")]
+        [MemberData(nameof(ValueCheckDataSource.GreaterThanDateTimeNoTimeDataSource), MemberType = typeof(ValueCheckDataSource))]
+        public void GreaterThanDateTimeNoTime(Pair<DateTime, DateTime> data, bool expected, string message)
         {
-            bool result = data.Item1.BiggerThan(data.Item2, true);
+            bool result = data.Item1.GreaterThan(data.Item2, true);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "BiggerThan Int")]
-        [MemberData(nameof(ValueCheckDataSource.BiggerThanIntDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanInt(int from, int to, bool expected, string message)
+        [Theory(DisplayName = "GreaterThan Int")]
+        [MemberData(nameof(ValueCheckDataSource.GreaterThanIntDataSource), MemberType = typeof(ValueCheckDataSource))]
+        public void GreaterThanInt(int from, int to, bool expected, string message)
         {
-            bool result = from.BiggerThan(to);
+            bool result = from.GreaterThan(to);
 
             expected.Should().Be(result, message);
         }
 
-        [Theory(DisplayName = "BiggerThan Decimal")]
-        [MemberData(nameof(ValueCheckDataSource.BiggerThanDecimalDataSource), MemberType = typeof(ValueCheckDataSource))]
-        public void BiggerThanDecimal(decimal from, decimal to, bool expected, string message)
+        [Theory(DisplayName = "GreaterThan Decimal")]
+        [MemberData(nameof(ValueCheckDataSource.GreaterThanDecimalDataSource), MemberType = typeof(ValueCheckDataSource))]
+        public void GreaterThanDecimal(decimal from, decimal to, bool expected, string message)
         {
-            bool result = from.BiggerThan(to);
+            bool result = from.GreaterThan(to);
             
             expected.Should().Be(result, message);
         }

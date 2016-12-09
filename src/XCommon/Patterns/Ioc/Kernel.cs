@@ -61,7 +61,7 @@ namespace XCommon.Patterns.Ioc
 
         private static object ResolveByException(Type contract)
         {
-            throw new Exception(string.Format("Não é possivel resolver o tipo: {0}", contract.FullName));
+            throw new Exception(string.Format("It is impossible to resolve the type: {0}", contract.FullName));
         }
 
         private static object ResolveByFunction(RepositoryType repositoryItem, bool canCache)
@@ -154,7 +154,7 @@ namespace XCommon.Patterns.Ioc
                     return;
             }
 
-            throw new Exception($"There is no constructor for class {concret.Name} with the informed params");
+            throw new Exception($"There isn't constructor for class {concret.Name} with the informed params");
         }
 
         private static void MapValidateTypes(Type contract, Type concret, object[] args)

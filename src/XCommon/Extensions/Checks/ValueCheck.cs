@@ -6,8 +6,8 @@ namespace XCommon.Extensions.Checks
 {
     public static class ValueCheck
     {
-        #region BiggerThan
-        public static bool BiggerThan(this DateTime value, DateTime reference, bool removeTime = false)
+        #region GreaterThan
+        public static bool GreaterThan(this DateTime value, DateTime reference, bool removeTime = false)
         {
             if (removeTime)
             {
@@ -17,12 +17,12 @@ namespace XCommon.Extensions.Checks
             return value > reference;
         }
 
-        public static bool BiggerThan(this int value, int reference)
+        public static bool GreaterThan(this int value, int reference)
         {
             return value > reference;
         }
 
-        public static bool BiggerThan(this decimal value, decimal reference)
+        public static bool GreaterThan(this decimal value, decimal reference)
         {
             return value > reference;
         }

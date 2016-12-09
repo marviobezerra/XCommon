@@ -9,99 +9,107 @@ using XCommon.Util;
 
 namespace XCommon.CodeGenerator.CSharp.Writter
 {
-	internal class UnitTest : FileWriter
-	{
-		public void Run(CSharpConfig config)
-		{
-			foreach (var group in config.DataBaseItems)
-			{
-				foreach (var item in group.Items)
-				{
-					GenerateValidateDataSource(config, group, item);
-					GenerateValidateTest(config, group, item);
-				}
-			}
+    internal class UnitTest : FileWriter
+    {
+        public void Run(CSharpConfig config)
+        {
+            foreach (var group in config.DataBaseItems)
+            {
+                foreach (var item in group.Items)
+                {
+                    GenerateValidateDataSource(config, group, item);
+                    GenerateValidateTest(config, group, item);
+                }
+            }
 
-			Console.WriteLine("Generate unit test code - OK");
-		}
+            Console.WriteLine("Generate unit test code - OK");
+        }
 
-		private void GenerateValidateTest(CSharpConfig config, ItemGroup group, Item item)
-		{
-			string path = Path.Combine(config.UnitTestPath, group.Name);
-			string file = $"{item.Name}Test.cs";
+        private void GenerateValidateTest(CSharpConfig config, ItemGroup group, Item item)
+        {
+            string path = Path.Combine(config.UnitTestPath, group.Name);
+            string file = $"{item.Name}Test.cs";
 
-			if (File.Exists(Path.Combine(path, file)))
-				return;
+            if (File.Exists(Path.Combine(path, file)))
+                return;
 
-			var className = $"{item.Name}Test";
-			var nameSpace = new List<string> { "System.Threading.Tasks", "System.Linq", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation" };
-			nameSpace.Add($"{config.ContractNameSpace}.{group.Name}");
-			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
+            var className = $"{item.Name}Test";
+            var nameSpace = new List<string> { "System.Linq", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
+            nameSpace.Add($"{config.DataBase.NameSpace}");
+            nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
+            nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
             nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
             nameSpace.Add($"{config.UnitTestNameSpace}.{group.Name}.DataSource");
 
-			StringBuilderIndented builder = new StringBuilderIndented();
+            StringBuilderIndented builder = new StringBuilderIndented();
 
-			builder
-				.ClassInit(className, "BaseTest", $"{config.UnitTestNameSpace}.{group.Name}", ClassVisility.Public, false, nameSpace.ToArray());
+            builder
+                .ClassInit(className, "BaseTest", $"{config.UnitTestNameSpace}.{group.Name}", ClassVisility.Public, false, nameSpace.ToArray());
 
-			builder
-				.AppendLine("[Inject]")
-				.AppendLine($"protected ISpecificationValidation<{item.Name}Entity> SpecificationValidation {{ get; set; }}")
+            builder
+                .AppendLine("[Inject]")
+                .AppendLine($"protected ISpecificationValidation<{item.Name}Entity> SpecificationValidation {{ get; set; }}")
                 .AppendLine()
                 .AppendLine("[Inject]")
-                .AppendLine($"protected I{item.Name}Business {item.Name}Business {{ get; set; }}")
+                .AppendLine($"protected ISpecificationQuery<{item.Name}, {item.Name}Filter> SpecificationQuery {{ get; set; }}")
                 .AppendLine()
-				.AppendLine($"[Theory(DisplayName = \"{item.Name} (Validate)\")]")
-				.AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityValidation), MemberType = typeof({item.Name}DataSource))]")
-				.AppendLine($"public void Validate{item.Name}({item.Name}Entity data, bool expected, string message)")
-				.AppendLine("{")
-				.IncrementIndent()
-				.AppendLine("Execute execute = new Execute();")
-				.AppendLine("bool result = SpecificationValidation.IsSatisfiedBy(data, execute);")
-				.AppendLine()
-				.AppendLine("result.Should().Be(expected, message);")
-				.AppendLine("expected.Should().Be(!execute.HasErro, message);")
-				.DecrementIndent()
-				.AppendLine("}")
+                .AppendLine($"[Theory(DisplayName = \"{item.Name} (Validate)\")]")
+                .AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityValidation), MemberType = typeof({item.Name}DataSource))]")
+                .AppendLine($"public void Validate{item.Name}({item.Name}Entity data, bool expected, string message)")
+                .AppendLine("{")
+                .IncrementIndent()
+                .AppendLine("Execute execute = new Execute();")
+                .AppendLine("bool result = SpecificationValidation.IsSatisfiedBy(data, execute);")
+                .AppendLine()
+                .AppendLine("result.Should().Be(expected, message);")
+                .AppendLine("expected.Should().Be(!execute.HasErro, message);")
+                .DecrementIndent()
+                .AppendLine("}")
                 .AppendLine()
 
                 .AppendLine($"[Theory(DisplayName = \"{item.Name} (Load)\")]")
                 .AppendLine($"[MemberData(nameof({item.Name}DataSource.EntityFilter), MemberType = typeof({item.Name}DataSource))]")
-                .AppendLine($"public async Task GetByFilterAsync({item.Name}Filter filter, int expected, string message)")
+                .AppendLine($"public void Load{item.Name}({item.Name}Filter filter, int expected, string message)")
                 .AppendLine("{")
                 .IncrementIndent()
                 .AppendLine($"//Scenery.Load(SceneryType.{item.Name});")
-                .AppendLine($"var result = await {item.Name}Business.GetByFilterAsync(filter);")
-                .AppendLine()
+                .AppendLine("")
+                .AppendLine($"using ({config.DataBase.ContextName} db = new {config.DataBase.ContextName}())")
+                .AppendLine("{")
+                .IncrementIndent()
+                .AppendLine($"var result = SpecificationQuery.Build(db.{item.Name}, filter);")
                 .AppendLine("result.Count().Should().Be(expected, message);")
                 .DecrementIndent()
                 .AppendLine("}")
+                .AppendLine()
 
-				.ClassEnd();
+                .DecrementIndent()
+                .AppendLine("}")
 
-			WriteFile(path, file, builder);
-		}
+                .ClassEnd();
 
-		private void GenerateValidateDataSource(CSharpConfig config, ItemGroup group, Item item)
-		{
-			string path = Path.Combine(config.UnitTestPath, group.Name, "DataSource");
-			string file = $"{item.Name}DataSource.cs";
+            WriteFile(path, file, builder);
+        }
 
-			if (File.Exists(Path.Combine(path, file)))
-				return;
+        private void GenerateValidateDataSource(CSharpConfig config, ItemGroup group, Item item)
+        {
+            string path = Path.Combine(config.UnitTestPath, group.Name, "DataSource");
+            string file = $"{item.Name}DataSource.cs";
 
-			var className = $"{item.Name}DataSource";
-			var nameSpace = new List<string> { "System", "XCommon.Util", "System.Collections.Generic" };
-			nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
+            if (File.Exists(Path.Combine(path, file)))
+                return;
+
+            var className = $"{item.Name}DataSource";
+            var nameSpace = new List<string> { "System", "XCommon.Util", "System.Collections.Generic" };
+            nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
             nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
 
-			StringBuilderIndented builder = new StringBuilderIndented();
+            StringBuilderIndented builder = new StringBuilderIndented();
 
-			builder
-				.ClassInit(className, string.Empty, $"{config.UnitTestNameSpace}.{group.Name}.DataSource", ClassVisility.Public, false, nameSpace.ToArray());
+            builder
+                .ClassInit(className, string.Empty, $"{config.UnitTestNameSpace}.{group.Name}.DataSource", ClassVisility.Public, false, nameSpace.ToArray());
 
-			builder
+            builder
                 .AppendLine($"public static IEnumerable<object[]> EntityValidation")
                 .AppendLine("{")
                 .IncrementIndent()
@@ -120,7 +128,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
                 .DecrementIndent()
                 .AppendLine("}")
                 .AppendLine()
-                
+
                 .AppendLine($"public static IEnumerable<object[]> EntityFilter")
                 .AppendLine("{")
                 .IncrementIndent()
@@ -139,7 +147,7 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 
                 .ClassEnd();
 
-			WriteFile(path, file, builder);
-		}
-	}
+            WriteFile(path, file, builder);
+        }
+    }
 }
