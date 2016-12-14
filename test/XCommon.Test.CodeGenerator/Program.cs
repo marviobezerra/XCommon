@@ -23,11 +23,8 @@ namespace XCommon.Test.CodeGenerator
 			{
 				Angular = new AngularConfig
 				{
-					ComponentPath = @"D:\A\App\Component",
-					DirectivePath = @"D:\A\App\Directive",
-					ServicePath = @"D:\A\App\Service",
-					PipePath = @"D:\A\App\Pipe",
-					HtmlRoot = "html"
+                    AppPath = @"D:\A\App\",
+                    ComponentHtmlRoot = ""
 				},
 				CSharp = new CSharpConfig
 				{

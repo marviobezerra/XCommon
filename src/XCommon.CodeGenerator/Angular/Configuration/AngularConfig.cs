@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace XCommon.CodeGenerator.Angular.Configuration
 {
@@ -9,20 +6,14 @@ namespace XCommon.CodeGenerator.Angular.Configuration
     {
 		public AngularConfig()
 		{
-			HtmlRoot = ".";
+            ComponentHtmlRoot = ".";
 			StyleInclude = new List<string>();
 		}
 
 		public List<string> StyleInclude { get; set; }
 
-		public string ComponentPath { get; set; }
+		public string AppPath { get; set; }
 
-		public string DirectivePath { get; set; }
-
-		public string PipePath { get; set; }
-
-		public string ServicePath { get; set; }
-
-		public string HtmlRoot { get; set; }
+        public string ComponentHtmlRoot { get; set; }
 	}
 }

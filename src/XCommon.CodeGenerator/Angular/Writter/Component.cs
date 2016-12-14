@@ -11,7 +11,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 {
 	internal class Component : FileWriter
 	{
-		internal void Run(string path, string feature, string htmlRoot, List<string> styleInclude, List<string> components)
+		internal void Run(string path, string module, string feature, string htmlRoot, List<string> styleInclude, List<string> components)
 		{
 			path = path.ToLower();
 
@@ -27,7 +27,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 					continue;
 				}
 
-				TypeScript(path, componentName, selector, htmlRoot, feature);
+				TypeScript(path, componentName, selector, htmlRoot, module, feature);
 				Sass(path, selector, styleInclude);
 				Html(path, selector, outlet);
 
@@ -35,7 +35,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 			}
 		}
 
-		private void TypeScript(string path, string name, string selector, string htmlRoot, string feture)
+		private void TypeScript(string path, string name, string selector, string htmlRoot, string module, string feture)
 		{
 			var file = $"{selector}.component.ts";
 
@@ -47,7 +47,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 
 
 			StringBuilderIndented builder = new StringBuilderIndented();
-			string templateUrl = $"\"{htmlRoot}/{feture}/{selector}.html\",";
+			string templateUrl = $"\"{htmlRoot}/{module}/components/{feture}/{selector}.html\",";
 
 			builder
 				.AppendLine("import { Component, OnInit } from \"@angular/core\";")

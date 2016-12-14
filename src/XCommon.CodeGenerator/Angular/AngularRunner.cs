@@ -22,6 +22,7 @@ namespace XCommon.CodeGenerator.Angular
 			var help = appCommand.HelpOption("-h|--help");
 			var name = appCommand.Argument("[terms]", "Name of items to be generate");
 
+			var module = appCommand.Option("-m|--module", "Module", CommandOptionType.SingleValue);
 			var feature = appCommand.Option("-f|--feature", "Feature", CommandOptionType.SingleValue);
 			var component = appCommand.Option("-c|--component", "Generate a new Component with HTML, TS and SCSS", CommandOptionType.NoValue);
 			var service = appCommand.Option("-s|--service", "Generate a new Angular service", CommandOptionType.NoValue);
@@ -35,6 +36,8 @@ namespace XCommon.CodeGenerator.Angular
 				}
 
 				IndexExport index = new IndexExport();
+                string moduleName = module.HasValue() ? module.Value() : "";
+                string featureName = feature.HasValue() ? feature.Value() : "";
 
 				if (component.HasValue())
 				{
@@ -59,9 +62,9 @@ namespace XCommon.CodeGenerator.Angular
 
 					Component componentWritter = new Component();
 
-					string path = ParsePath(config, feature.Value(), ItemType.Component);
+					string path = ParsePath(config, ItemType.Component, moduleName, featureName);
 
-					componentWritter.Run(path, feature.Value(), config.HtmlRoot, config.StyleInclude, GetItems(appCommand, name));
+					componentWritter.Run(path, moduleName, featureName, config.ComponentHtmlRoot, config.StyleInclude, GetItems(appCommand, name));
 					index.Run(path);
 
 					return 0;
@@ -76,7 +79,7 @@ namespace XCommon.CodeGenerator.Angular
 					}
 
 					Service serviceWritter = new Service();
-					string path = ParsePath(config, string.Empty, ItemType.Service);
+					string path = ParsePath(config, ItemType.Service, moduleName, featureName);
 
 					serviceWritter.Run(path, GetItems(appCommand, name));
 					index.Run(path);
@@ -94,7 +97,7 @@ namespace XCommon.CodeGenerator.Angular
 			return appCommand.Execute(arguments.ToArray());
 		}
 
-		private string ParsePath(AngularConfig config, string extra, ItemType type)
+		private string ParsePath(AngularConfig config, ItemType type, string module, string feature)
 		{
 			string currentPath = Directory.GetCurrentDirectory();
 
@@ -102,23 +105,15 @@ namespace XCommon.CodeGenerator.Angular
 			{
 
 				case ItemType.Directive:
-					return string.IsNullOrEmpty(config.DirectivePath)
-						? Path.Combine(currentPath, "app", "directives")
-						: config.DirectivePath;
+                    return Path.Combine(config.AppPath, module, "directives");
 				case ItemType.Service:
-					return string.IsNullOrEmpty(config.ServicePath)
-						? Path.Combine(currentPath, "app", "services")
-						: config.ServicePath;
-				case ItemType.Pipe:
-					return string.IsNullOrEmpty(config.PipePath)
-						? Path.Combine(currentPath, "app", "pipes")
-						: config.PipePath;
-				case ItemType.Component:
+                    return Path.Combine(config.AppPath, module, "services");
+                case ItemType.Pipe:
+                    return Path.Combine(config.AppPath, module, "pipes");
+                case ItemType.Component:
 				default:
-					return string.IsNullOrEmpty(config.ComponentPath)
-						? Path.Combine(currentPath, "app", "components", extra)
-						: Path.Combine(config.ComponentPath, extra);
-			}			
+                    return Path.Combine(config.AppPath, module, "components", feature);
+            }			
 		}
 
 		private List<string> GetItems(CommandLineApplication AppCommand, CommandArgument name)
