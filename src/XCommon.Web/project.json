@@ -1,0 +1,56 @@
+{
+  "version": "1.0.44-*",
+  "description": "XCommon.Web has implementation for Asp .Net Core such Controler, Ticket Authentication and some others which makes your like easier.",
+  "authors": [
+    "Marvio Andre Bezerra Silverio"
+  ],
+  "packOptions": {
+    "projectUrl": "https://github.com/marviobezerra/XCommon",
+    "licenseUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.Web.png",
+    "summary": "XCommon.Web has implementation for Asp .Net Core like Controler, Ticket Authentication and some others which makes your like easier.",
+    "tags": [
+      "XCommon",
+      "Web"
+    ],
+    "owners": [
+      "Márvio André Bezerra Silverio"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/marviobezerra/XCommon"
+    }
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
+    "Microsoft.AspNetCore.Authentication.Facebook": "1.1.0",
+    "Microsoft.AspNetCore.Authentication.Google": "1.1.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.WebSockets.Server": "0.1.0",
+    "Microsoft.Extensions.Configuration.Binder": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "9.0.2-beta1",
+    "XCommon": "1.0.44-*"
+  },
+
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+      },
+      "frameworkAssemblies": {
+        "System.Configuration.Install": "4.0.0.0"
+      }
+    },
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "dependencies": {
+      }
+    }
+  }
+}
