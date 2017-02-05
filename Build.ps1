@@ -39,7 +39,6 @@ exec { & dotnet restore }
 
 exec { & dotnet test .\test\XCommon.Test -c Release }
 exec { & dotnet test .\test\XCommon.Test.Azure -c Release }
-exec { & dotnet test .\test\XCommon.Test.CodeGenerator -c Release }
 exec { & dotnet test .\test\XCommon.Test.EF -c Release }
 exec { & dotnet test .\test\XCommon.Test.Web -c Release }
 
