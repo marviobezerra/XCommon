@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.43-*",
+  "version": "1.0.44-*",
   "buildOptions": {
     "emitEntryPoint": true,
     "copyToOutput": [
@@ -7,8 +7,8 @@
     ]
   },
   "dependencies": {
-    "XCommon": "1.0.43-*",
-    "XCommon.CodeGenerator": "1.0.43-*"
+    "XCommon": "1.0.44-*",
+    "XCommon.CodeGenerator": "1.0.44-*"
   },
   "frameworks": {
     "net451": {},

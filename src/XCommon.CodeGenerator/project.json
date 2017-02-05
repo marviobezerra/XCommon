@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.43-*",
+  "version": "1.0.44-*",
   "description": "XCommon Code Generator generates code in a fast and simple way.",
   "authors": [
     "Marvio Andre Bezerra Silverio"
@@ -25,7 +25,7 @@
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.2-beta1",
-    "XCommon": "1.0.43-*"
+    "XCommon": "1.0.44-*"
   },
 
   "frameworks": {

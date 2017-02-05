@@ -1,5 +1,5 @@
 {
-  "version": "1.0.43-*",
+  "version": "1.0.44-*",
   "description": "XCommon for Azure. There are features like access blob file storage, send mail and tohers.",
   "authors": [
     "Marvio Andre Bezerra Silverio"
