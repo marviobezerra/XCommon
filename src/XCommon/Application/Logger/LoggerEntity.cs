@@ -43,22 +43,28 @@ namespace XCommon.Application.Logger
         private void AddException(Exception exception)
         {
             if (exception == null)
-                return;
+			{
+				return;
+			}
 
-            ExceptionsMessages.Add(exception.Message);
+			ExceptionsMessages.Add(exception.Message);
 
             StackTracers.Add(exception.StackTrace);
 
             if (exception.InnerException != null)
-                AddException(exception.InnerException);
-        }
+			{
+				AddException(exception.InnerException);
+			}
+		}
 
         private void AddCaller(Type callerType)
         {
             if (callerType == null)
-                return;
+			{
+				return;
+			}
 
-            SourceType = callerType.Name;
+			SourceType = callerType.Name;
             SourceAssemblie = callerType.AssemblyQualifiedName;
             SourceNameSpace = callerType.Namespace;
         }

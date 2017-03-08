@@ -18,8 +18,7 @@ namespace XCommon.Application.Mail.Implementations
 
         public Execute Send(string to, string replyTo, string subject, string body)
         {
-            Execute result = new Execute();
-
+            var result = new Execute();
             Mails.Add(new MailInMemoryEntity(to, replyTo, subject, body));
 
             return result;

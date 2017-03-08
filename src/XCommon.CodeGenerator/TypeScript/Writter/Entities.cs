@@ -10,7 +10,7 @@ using XCommon.CodeGenerator.Angular.Writter;
 using XCommon.CodeGenerator.Core.Util;
 using XCommon.CodeGenerator.CSharp.Extensions;
 using XCommon.CodeGenerator.TypeScript.Configuration;
-using XCommon.Extensions.Util;
+//using XCommon.Extensions.Util;
 using XCommon.Util;
 
 namespace XCommon.CodeGenerator.TypeScript.Writter
@@ -32,7 +32,9 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
             var overRide = Config.NameOveride.FirstOrDefault(c => c.NameSpace == nameSpace);
 
             if (overRide != null)
-                return $"{overRide.FileName.ToLower()}.ts";
+			{
+				return $"{overRide.FileName.ToLower()}.ts";
+			}
 
 			var result = nameSpace.Split('.').Last(c => c != "Filter");
 			return $"{result}.ts";
@@ -41,10 +43,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 		private string GetPropertyType(Type type, TypeScriptClass tsClass, bool generic)
 		{
 			var underlyingType = Nullable.GetUnderlyingType(type);
-
-			var currentType = underlyingType == null
-				? type
-				: underlyingType;
+			var currentType = underlyingType ?? type;
 
 			if (currentType.GetTypeInfo().IsGenericType && currentType.Name.Contains("List"))
 			{
@@ -60,10 +59,14 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 			}
 
 			if (generic)
+			{
 				return type.Name;
+			}
 
 			if (currentType.GetTypeInfo().IsEnum)
+			{
 				return currentType.Name;
+			}
 
 			if (currentType.Name.Contains("Entity") || currentType.Name == "ExecuteMessage")
 			{
@@ -146,7 +149,9 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 				foreach (var property in type.GetProperties())
 				{
 					if (property.GetCustomAttributes<IgnoreDataMemberAttribute>().Count() > 0)
+					{
 						continue;
+					}
 
 					var isGeneric = property.PropertyType.IsGenericParameter && !property.Name.Contains("List");
 					var enumProperty = TSEnums.FirstOrDefault(c => c.Type == (Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType));
@@ -300,7 +305,9 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 			LoadProperties();
 
 			if (!Directory.Exists(config.Path))
+			{
 				Directory.CreateDirectory(config.Path);
+			}
 
 			ProcessEnum();
 			ProcessTypes();

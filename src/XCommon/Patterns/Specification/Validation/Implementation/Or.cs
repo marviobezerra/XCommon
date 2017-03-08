@@ -28,16 +28,18 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            bool result = true;
+            var result = true;
 
             if (!Condition(entity))
-                return result;
+			{
+				return result;
+			}
 
-            Execute executeInternal1 = new Execute();
-            Execute executeInternal2 = new Execute();
+			var executeInternal1 = new Execute();
+            var executeInternal2 = new Execute();
 
-            bool result1 = Spec1.IsSatisfiedBy(entity, executeInternal1);
-            bool result2 = Spec2.IsSatisfiedBy(entity, executeInternal2);
+            var result1 = Spec1.IsSatisfiedBy(entity, executeInternal1);
+            var result2 = Spec2.IsSatisfiedBy(entity, executeInternal2);
             result = result1 || result2;
 
             if (!result && execute != null)

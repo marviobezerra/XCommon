@@ -10,8 +10,8 @@ namespace XCommon.Patterns.Ioc
         
         public void To<TConcret>(params object[] args)
 		{
-            Type concretType = typeof(TConcret);
-            Type contracttType = typeof(TContract);
+            var concretType = typeof(TConcret);
+            var contracttType = typeof(TContract);
 
             Kernel.MapValidate(contracttType, concretType, args);
 			Kernel.Map(contracttType, concretType, null, args, null);

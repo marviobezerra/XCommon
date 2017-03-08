@@ -8,7 +8,9 @@ namespace XCommon.CodeGenerator.CSharp
 		internal int Run(CSharpConfig config)
 		{
 			if (config == null)
+			{
 				return -1;
+			}
 
 			Concrete concrete = new Concrete();
 			Contract contract = new Contract();

@@ -24,8 +24,10 @@ namespace XCommon.Util
         public IEnumerable<object[]> Cast()
         {
             foreach (var item in Source)
-                yield return new object[] { item };
-        }
+			{
+				yield return new object[] { item };
+			}
+		}
     }
 
     public class PairList<T1, T2>
@@ -50,8 +52,10 @@ namespace XCommon.Util
         public IEnumerable<object[]> Cast()
         {
             foreach (var item in Source)
-                yield return new object[] { item.Item1, item.Item2 };
-        }
+			{
+				yield return new object[] { item.Item1, item.Item2 };
+			}
+		}
     }
 
     public class PairList<T1, T2, T3>
@@ -76,8 +80,10 @@ namespace XCommon.Util
         public IEnumerable<object[]> Cast()
         {
             foreach (var item in Source)
-                yield return new object[] { item.Item1, item.Item2, item.Item3 };
-        }
+			{
+				yield return new object[] { item.Item1, item.Item2, item.Item3 };
+			}
+		}
     }
 
     public class PairList<T1, T2, T3, T4>
@@ -102,8 +108,10 @@ namespace XCommon.Util
         public IEnumerable<object[]> Cast()
         {
             foreach (var item in Source)
-                yield return new object[] { item.Item1, item.Item2, item.Item3, item.Item4 };
-        }
+			{
+				yield return new object[] { item.Item1, item.Item2, item.Item3, item.Item4 };
+			}
+		}
     }
 
     public class PairList<T1, T2, T3, T4, T5>
@@ -128,7 +136,9 @@ namespace XCommon.Util
         public IEnumerable<object[]> Cast()
         {
             foreach (var item in Source)
-                yield return new object[] { item.Item1, item.Item2, item.Item3, item.Item4, item.Item5 };
-        }
+			{
+				yield return new object[] { item.Item1, item.Item2, item.Item3, item.Item4, item.Item5 };
+			}
+		}
     }
 }

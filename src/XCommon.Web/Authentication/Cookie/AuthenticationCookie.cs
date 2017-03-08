@@ -14,9 +14,11 @@ namespace XCommon.Web.Authentication.Cookie
         internal override void Register(IApplicationBuilder app)
         {
             if (Config == null)
-                return;
+			{
+				return;
+			}
 
-            CookieAuthenticationOptions result = new CookieAuthenticationOptions
+			CookieAuthenticationOptions result = new CookieAuthenticationOptions
             {
                 AuthenticationScheme = CookieAuthenticationDefaults.AuthenticationScheme,
                 AutomaticAuthenticate = true,

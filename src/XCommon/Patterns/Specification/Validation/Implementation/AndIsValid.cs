@@ -31,17 +31,21 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            bool result = true;
+            var result = true;
 
             if (!Condition(entity))
-                return result;
+			{
+				return result;
+			}
 
-            result = Selector(entity);
+			result = Selector(entity);
 
             if (!result && execute != null)
-                execute.AddMessage(ExecuteMessageType.Error, Message ?? "There is a invalid property", MessageArgs ?? new object[] { });
+			{
+				execute.AddMessage(ExecuteMessageType.Error, Message ?? "There is a invalid property", MessageArgs ?? new object[] { });
+			}
 
-            return result;
+			return result;
         }
     }
 }

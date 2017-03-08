@@ -33,7 +33,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 			string file = $"{item.Name}Filter.cs";
 
 			if (File.Exists(Path.Combine(path, file)))
+			{
 				return;
+			}
 
 			var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Entity" };
 

@@ -17,9 +17,11 @@ namespace XCommon.Web.Authentication.Facebook
         internal override void Register(IApplicationBuilder app)
         {
             if (Config == null)
-                return;
+			{
+				return;
+			}
 
-            FacebookOptions result = new FacebookOptions
+			FacebookOptions result = new FacebookOptions
             {
                 AppId = Config.AppId,
                 AppSecret = Config.AppSecret,

@@ -120,9 +120,11 @@ namespace XCommon.Application.Logger.Implementations
         private async Task<ILogger> WriteAsync(Type callerType, int eventId, LogType type, object resource, Exception exception, string message, string memberName, string sourceFilePath, int sourceLineNumber)
         {
             if (ApplicationSettings.Logger == LogType.None || ApplicationSettings.Logger > type)
-                return this;
+			{
+				return this;
+			}
 
-            await Writter.SaveDataAsync(new LoggerEntity(exception, callerType)
+			await Writter.SaveDataAsync(new LoggerEntity(exception, callerType)
             {
                 LogLevel = type,
                 Resource = resource,

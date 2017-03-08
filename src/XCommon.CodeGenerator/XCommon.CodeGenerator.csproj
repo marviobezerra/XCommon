@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Version>1.0.44</Version>
+    <Authors>Marvio Andre Bezerra Silverio</Authors>
+    <Company>Marvio Andre Bezerra Silverio</Company>
+    <Copyright>Marvio Andre Bezerra Silverio</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/marviobezerra/XCommon</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>XCommon Code Generator generates code in a fast and simple way.</Description>
+    <PackageIconUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.CodeGenerator.png</PackageIconUrl>
+    <PackageTags>XCommon, CodeGenerator, Typescript Generator</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCommon\XCommon.csproj" />
+  </ItemGroup>
+
+</Project>

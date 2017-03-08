@@ -1,38 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using XCommon.Extensions.Util;
 
 namespace XCommon.Extensions.Converters
 {
-    public static class Converter
+	public static class Converter
     {
         public static TEntity Convert<TEntity>(this object source, params string[] ignore)
             where TEntity : class, new()
         {
             if (source == null)
-                return null;
+			{
+				return null;
+			}
 
-            var result = new TEntity();
-            
-            var propertySource = source.GetType().GetProperties();
-            var propertyResult = result.GetType().GetProperties();
+			var result = new TEntity();
+
+			var propertySource = source.GetType().GetProperties(true);
+			var propertyResult = result.GetType().GetProperties(true);
 
             foreach (var item in propertyResult)
             {
                 if (ignore.Length > 0 && ignore.Contains(item.Name))
-                    continue;
+				{
+					continue;
+				}
 
-                var find = propertySource.Where(c => c.Name == item.Name && c.PropertyType == item.PropertyType);
+				var find = propertySource.Where(c => c.Name == item.Name && c.PropertyType == item.PropertyType);
 
                 if (!find.Any())
-                    continue;
+				{
+					continue;
+				}
 
-                var sourceItem = find.First();
+				var sourceItem = find.First();
 
                 if (item.CanWrite && sourceItem.CanRead)
-                    item.SetValue(result, sourceItem.GetValue(source, null), null);
-            }
+				{
+					item.SetValue(result, sourceItem.GetValue(source, null), null);
+				}
+			}
 
             return result;
         }
@@ -41,9 +49,9 @@ namespace XCommon.Extensions.Converters
             where TEntity : class, new()
             where TSource : class
         {
-            var retorno = new List<TEntity>();
+			var retorno = new List<TEntity>();
 
-            foreach (TSource item in source)
+            foreach (var item in source)
             {
                 retorno.Add(item.Convert<TEntity>(ignore));
             }

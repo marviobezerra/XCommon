@@ -37,9 +37,11 @@ namespace XCommon.Application.FileStorage.Implementations
             var folder = GetFolder(container, false);
 
             if (folder == null)
-                return false;
+			{
+				return false;
+			}
 
-            if (folder.ContainsKey(fileName))
+			if (folder.ContainsKey(fileName))
             {
                 folder.Remove(fileName);
                 return true;
@@ -56,9 +58,11 @@ namespace XCommon.Application.FileStorage.Implementations
             var folder = GetFolder(container, false);
 
             if (folder == null)
-                return false;
+			{
+				return false;
+			}
 
-            return folder.ContainsKey(fileName);
+			return folder.ContainsKey(fileName);
         }
 
         public byte[] Load(string fileName)
@@ -69,12 +73,12 @@ namespace XCommon.Application.FileStorage.Implementations
             var folder = GetFolder(container, false);
 
             if (folder == null)
-                return null;
+			{
+				return null;
+			}
 
-            byte[] result;
-
-            folder.TryGetValue(fileName, out result);
-            return result;
+			folder.TryGetValue(fileName, out byte[] result);
+			return result;
         }
 
         public bool Save(string fileName, byte[] content, bool overRide = true)

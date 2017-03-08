@@ -13,9 +13,13 @@ namespace XCommon.Patterns.Specification.Query.Extensions
         public static SpecificationList<TEntity, TFilter> OrderBy<TEntity, TFilter, TProperty>(this SpecificationList<TEntity, TFilter> specification, Expression<Func<TEntity, TProperty>> property, Func<TFilter, bool> condition, bool descending = false)
         {
             if (descending)
+            {
                 specification.Order.Add(new SpecificationOrder<TEntity, TFilter>(items => items.OrderByDescending(property), condition));
+            }
             else
+            {
                 specification.Order.Add(new SpecificationOrder<TEntity, TFilter>(items => items.OrderBy(property), condition));
+            }
 
             return specification;
         }

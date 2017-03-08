@@ -20,7 +20,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					string file = $"I{item.Name}Business.cs";
 
 					if (File.Exists(Path.Combine(path, file)))
+					{
 						continue;
+					}
 
 					var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");

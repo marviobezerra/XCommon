@@ -28,7 +28,7 @@ namespace XCommon.UnitTest
 			lock (Lock)
 			{
                 
-                TParam param = BeforeRun();
+                var param = BeforeRun();
 
 				foreach (var item in sceneries)
 				{

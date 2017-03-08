@@ -5,9 +5,11 @@
         internal static string BuildFullKey<T>(this object userKey)
         {
             if (userKey == null)
-                return typeof(T).FullName;
+			{
+				return typeof(T).FullName;
+			}
 
-            return typeof(T).FullName + userKey;
+			return typeof(T).FullName + userKey;
         }
     }
 }

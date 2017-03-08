@@ -118,9 +118,12 @@ namespace XCommon.CodeGenerator.Angular
 
 		private List<string> GetItems(CommandLineApplication AppCommand, CommandArgument name)
 		{
-			List<string> items = new List<string>();
-			items.Add(name.Value);
-			items.AddRange(AppCommand.RemainingArguments);
+            List<string> items = new List<string>
+            {
+                name.Value
+            };
+
+            items.AddRange(AppCommand.RemainingArguments);
 			return items;
 		}
 	}

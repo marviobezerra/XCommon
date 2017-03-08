@@ -1,5 +1,4 @@
-﻿
-namespace XCommon.Patterns.Repository.Entity
+﻿namespace XCommon.Patterns.Repository.Entity
 {
     public enum EntityAction
     {

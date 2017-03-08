@@ -37,8 +37,8 @@ EnsurePsbuildInstalled
 
 exec { & dotnet restore }
 
-exec { & dotnet test .\test\XCommon.Test -c Release }
-exec { & dotnet test .\test\XCommon.Test.Azure -c Release }
-exec { & dotnet test .\test\XCommon.Test.CodeGenerator -c Release }
-exec { & dotnet test .\test\XCommon.Test.EF -c Release }
-exec { & dotnet test .\test\XCommon.Test.Web -c Release }
+exec { & dotnet test .\test\XCommon.Test\XCommon.Test.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.Azure\XCommon.Test.Azure.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.CodeGenerator\XCommon.Test.CodeGenerator.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.EF\XCommon.Test.EF.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.Web\XCommon.Test.Web.csproj -c Release }
