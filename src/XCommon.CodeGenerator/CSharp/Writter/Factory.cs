@@ -25,7 +25,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 			string file = $"Register.cs";
 
 			if (File.Exists(Path.Combine(path, file)))
+			{
 				return;
+			}
 
 			var nameSpace = new List<string> { "XCommon.Patterns.Ioc" };
 

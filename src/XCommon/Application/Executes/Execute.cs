@@ -64,7 +64,7 @@ namespace XCommon.Application.Executes
 
         public virtual void AddMessage(Exception ex, string message)
         {
-            ExecuteMessage executeMessage = new ExecuteMessage();
+            var executeMessage = new ExecuteMessage();
             executeMessage.MessageInternal.AddException(ex);
             executeMessage.Message = message;
             executeMessage.Type = ExecuteMessageType.Exception;
@@ -81,7 +81,7 @@ namespace XCommon.Application.Executes
 
         public virtual void AddMessage(params Execute[] execute)
         {
-            foreach (Execute item in execute)
+            foreach (var item in execute)
             {
                 AddMessage(item);
             }
@@ -95,12 +95,13 @@ namespace XCommon.Application.Executes
         
         public virtual TValue GetProperty<TValue>(string key)
         {
-            object result;
 
-            if (Properties.TryGetValue(key, out result))
-                return (TValue)result;
+			if (Properties.TryGetValue(key, out object result))
+			{
+				return (TValue)result;
+			}
 
-            return default(TValue);
+			return default(TValue);
         }
 
         public virtual bool SetProperty<TValue>(string key, TValue value)
@@ -121,14 +122,20 @@ namespace XCommon.Application.Executes
         private void CheckMessage()
         {
             if (!HasWarning)
-                HasWarning = Messages.Any(c => c.Type == ExecuteMessageType.Warning);
+			{
+				HasWarning = Messages.Any(c => c.Type == ExecuteMessageType.Warning);
+			}
 
-            if (!HasErro)
-                HasErro = Messages.Any(c => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
+			if (!HasErro)
+			{
+				HasErro = Messages.Any(c => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
+			}
 
-            if (!HasException)
-                HasException = Messages.Any(c => c.Type == ExecuteMessageType.Exception);
-        }
+			if (!HasException)
+			{
+				HasException = Messages.Any(c => c.Type == ExecuteMessageType.Exception);
+			}
+		}
         #endregion
     }
 }

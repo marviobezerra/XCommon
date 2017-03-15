@@ -44,12 +44,14 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            bool result = true;
+            var result = true;
             
             if (!Condition(entity))
-                return result;
-            
-            var value = Selector(entity);
+			{
+				return result;
+			}
+
+			var value = Selector(entity);
             
             switch (Type)
             {
@@ -72,9 +74,11 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
             }
 
             if (!result && execute != null)
-                execute.AddMessage(ExecuteMessageType.Error, Message ?? "There is a empty property", MessageArgs ?? new object[] { });
+			{
+				execute.AddMessage(ExecuteMessageType.Error, Message ?? "There is a empty property", MessageArgs ?? new object[] { });
+			}
 
-            return result;
+			return result;
         }
     }
 }

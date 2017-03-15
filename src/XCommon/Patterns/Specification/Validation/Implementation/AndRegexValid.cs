@@ -37,7 +37,7 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            var value = Selector(entity);
+			var value = Selector(entity);
             Regex regex = null;
 
             try
@@ -47,17 +47,21 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
             catch (Exception ex)
             {
                 if (execute != null)
-                    execute.AddMessage(ex, "Invalid regex", RegexExpression);
+				{
+					execute.AddMessage(ex, "Invalid regex", RegexExpression);
+				}
 
-                return false;
+				return false;
             }
 
-            var result = value.IsNotEmpty() && regex.IsMatch(value);
+			var result = value.IsNotEmpty() && regex.IsMatch(value);
 
             if (!result && execute != null && !string.IsNullOrEmpty(Message))
-                execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
+			{
+				execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
+			}
 
-            return result;
+			return result;
         }
     }
 }

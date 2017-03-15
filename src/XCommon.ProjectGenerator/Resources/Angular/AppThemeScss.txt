@@ -1,8 +1,0 @@
-/// <reference path="app-variables.scss" />
-@import "app-variables.scss";
-
-html, body {
-	margin: 0;
-	padding: 0;
-    font-family: $font;
-}

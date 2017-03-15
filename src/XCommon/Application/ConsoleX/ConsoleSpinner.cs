@@ -55,15 +55,19 @@ namespace XCommon.Application.ConsoleX
             SetSequence(sequence);
 
             if (autoStart)
-                Start();
-        }
+			{
+				Start();
+			}
+		}
 
         public void Start()
         {
             Active = true;
             if (!SpinnerThread.IsAlive)
-                SpinnerThread.Start();
-        }
+			{
+				SpinnerThread.Start();
+			}
+		}
 
         private void SetSequence(SpinnerSequence sequence)
         {
@@ -91,7 +95,7 @@ namespace XCommon.Application.ConsoleX
 
         public List<string> GetSequenceDots(int size)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
 
             var char1 = '.';
             var char2 = ' ';
@@ -106,20 +110,23 @@ namespace XCommon.Application.ConsoleX
 
         private List<string> SequenceDotsBuild(int size, char s1, char s2, bool reverse)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
+            var line = string.Empty;
 
-            string line = string.Empty;
-
-            for (int i = 1; i < size + 1; i++)
+            for (var i = 1; i < size + 1; i++)
             {
                 line = string.Empty.PadRight(i, s1);
 
                 if (reverse)
-                    line = line.PadLeft(size, s2);
-                else
-                    line = line.PadRight(size, s2);
+				{
+					line = line.PadLeft(size, s2);
+				}
+				else
+				{
+					line = line.PadRight(size, s2);
+				}
 
-                result.Add(line);
+				result.Add(line);
             }
 
             return result;
@@ -143,9 +150,11 @@ namespace XCommon.Application.ConsoleX
         private void Draw(string c)
         {
             if (System.Console.CursorTop != Top)
-                Top = System.Console.CursorTop;
+			{
+				Top = System.Console.CursorTop;
+			}
 
-            System.Console.SetCursorPosition(Left, Top);
+			System.Console.SetCursorPosition(Left, Top);
             Console.Write(c.ToString());
         }
 

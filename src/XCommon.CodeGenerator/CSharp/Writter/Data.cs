@@ -27,12 +27,16 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 		private void ClearFolder(CSharpConfig config)
 		{
 			if (!Directory.Exists(config.DataBase.Path))
+			{
 				Directory.CreateDirectory(config.DataBase.Path);
-			
+			}
+
 			foreach (var directory in Directory.GetDirectories(config.DataBase.Path, "*", SearchOption.TopDirectoryOnly))
 			{
 				if (directory.Contains("Properties"))
+				{
 					continue;
+				}
 
 				Directory.Delete(directory, true);
 			}
@@ -40,7 +44,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 			foreach (var file in Directory.GetFiles(config.DataBase.Path, "*.cs", SearchOption.AllDirectories))
 			{
 				if (file.Contains("AssemblyInfo.cs"))
+				{
 					continue;
+				}
 
 				File.Delete(file);
 			}
@@ -224,19 +230,25 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 				using (builder.Indent())
 				{
 					if (!property.Nullable)
+					{
 						builder
 							.AppendLine()
 							.Append(".IsRequired()");
+					}
 
 					if (property.Type == "string" && !string.IsNullOrEmpty(property.Size) && property.Size != "MAX")
+					{
 						builder
 							.AppendLine()
 							.Append($".HasMaxLength({property.Size})");
+					}
 
 					if (property.Key)
+					{
 						builder
 							.AppendLine()
 							.Append(".ValueGeneratedNever()");
+					}
 				}
 
 				builder
@@ -268,7 +280,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 		private string ProcessRelationShipName(CSharpConfig config, ItemRelationship relationShip, string defaultName)
 		{
 			if (config.DataBase.Rewrite == null)
+			{
 				return defaultName;
+			}
 
 			var rewrite = config.DataBase.Rewrite.FirstOrDefault(c =>
 					c.SchemaPK == relationShip.ItemGroupPK
@@ -279,7 +293,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					&& c.ColumnFK == relationShip.PropertyFK);
 
 			if (rewrite != null)
+			{
 				return rewrite.CustonName;
+			}
 
 			return defaultName;
 		}

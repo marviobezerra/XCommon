@@ -85,7 +85,9 @@ namespace XCommon.CodeGenerator.Angular.Writter
 			styleInclude.ForEach(c => builder.AppendLine(c));
 
 			if (styleInclude.Count > 0)
+			{
 				builder.AppendLine();
+			}
 
 			builder
 				.AppendLine($".{selector} {{")

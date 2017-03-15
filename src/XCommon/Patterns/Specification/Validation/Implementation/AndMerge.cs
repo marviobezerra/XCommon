@@ -25,12 +25,14 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
         public bool IsSatisfiedBy(TEntity entity, Execute execute)
         {
-            bool result = true;
+            var result = true;
 
             if (!Condition(entity))
-                return result;
+			{
+				return result;
+			}
 
-            SpecificationList.Items.ForEach(specification => 
+			SpecificationList.Items.ForEach(specification => 
             {
                 result = result && specification.Specification.IsSatisfiedBy(entity, execute);
             });

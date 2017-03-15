@@ -19,9 +19,11 @@ namespace XCommon.Application.FileStorage.Implementations
         private bool CheckFolder(string folder, bool createIfEmpty = true)
         {
             if (Directory.Exists(folder))
-                return true;
+			{
+				return true;
+			}
 
-            if (createIfEmpty)
+			if (createIfEmpty)
             {
                 Directory.CreateDirectory(folder);
                 return true;
@@ -35,7 +37,7 @@ namespace XCommon.Application.FileStorage.Implementations
 
         public bool Delete(string container, string fileName)
         {
-            string file = GetFullPath(container, fileName);
+            var file = GetFullPath(container, fileName);
 
             try
             {
@@ -58,7 +60,7 @@ namespace XCommon.Application.FileStorage.Implementations
 
         public bool Exists(string container, string fileName)
         {
-            string file = GetFullPath(container, fileName);
+            var file = GetFullPath(container, fileName);
             return File.Exists(file);
         }
 
@@ -67,12 +69,14 @@ namespace XCommon.Application.FileStorage.Implementations
 
         public byte[] Load(string container, string fileName)
         {
-            string file = GetFullPath(container, fileName);
+            var file = GetFullPath(container, fileName);
 
             if (File.Exists(file))
-                return File.ReadAllBytes(file);
+			{
+				return File.ReadAllBytes(file);
+			}
 
-            return null;
+			return null;
         }
 
         public bool Save(string fileName, byte[] content, bool overRide = true)
@@ -80,7 +84,7 @@ namespace XCommon.Application.FileStorage.Implementations
 
         public bool Save(string container, string fileName, byte[] content, bool overRide = true)
         {
-            string file = GetFullPath(container, fileName);
+            var file = GetFullPath(container, fileName);
             CheckFolder(container, true);
 
             if (overRide || !File.Exists(file))

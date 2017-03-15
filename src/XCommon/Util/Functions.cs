@@ -16,17 +16,21 @@ namespace XCommon.Util
         public static bool ValidEmail(string email)
         {
             if (email.IsEmpty())
-                return false;
+			{
+				return false;
+			}
 
-            return Regex.IsMatch(email, LibraryRegex.Email);
+			return Regex.IsMatch(email, LibraryRegex.Email);
         }
 
         public static bool ValidUrl(string url)
         {
             if (url.IsEmpty())
-                return false;
+			{
+				return false;
+			}
 
-            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
+			return Uri.IsWellFormedUriString(url, UriKind.Absolute);
         }
 
         public static string GetToken(params int[] parts)
@@ -34,9 +38,9 @@ namespace XCommon.Util
 
         public static string GetToken(char separator, params int[] parts)
         {
-            List<string> list = new List<string>();
+            var list = new List<string>();
 
-            for (int i = 0; i < parts.Length; i++)
+            for (var i = 0; i < parts.Length; i++)
             {
                 list.Add(GetRandomString(parts[i]));
             }
@@ -61,13 +65,15 @@ namespace XCommon.Util
         public static string GetMD5(string value)
         {
             if (value.IsEmpty())
-                return string.Empty;
+			{
+				return string.Empty;
+			}
 
-            StringBuilder hash = new StringBuilder();
+			var hash = new StringBuilder();
             var md5 = MD5.Create();
-            byte[] bytes = md5.ComputeHash(new UTF8Encoding().GetBytes(value));
+            var bytes = md5.ComputeHash(new UTF8Encoding().GetBytes(value));
 
-            for (int i = 0; i < bytes.Length; i++)
+            for (var i = 0; i < bytes.Length; i++)
             {
                 hash.Append(bytes[i].ToString("x2"));
             }

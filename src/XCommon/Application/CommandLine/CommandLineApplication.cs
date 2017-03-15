@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -109,7 +109,7 @@ namespace XCommon.Application.CommandLine
 
         public int Execute(params string[] args)
         {
-            CommandLineApplication command = this;
+            var command = this;
             CommandOption option = null;
             IEnumerator<CommandArgument> arguments = null;
 

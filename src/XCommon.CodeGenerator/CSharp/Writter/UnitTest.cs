@@ -31,9 +31,11 @@ namespace XCommon.CodeGenerator.CSharp.Writter
             string file = $"{item.Name}Test.cs";
 
             if (File.Exists(Path.Combine(path, file)))
-                return;
+			{
+				return;
+			}
 
-            var className = $"{item.Name}Test";
+			var className = $"{item.Name}Test";
             var nameSpace = new List<string> { "System.Linq", "FluentAssertions", "Xunit", "XCommon.Patterns.Ioc", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Query" };
             nameSpace.Add($"{config.DataBase.NameSpace}");
             nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
@@ -97,9 +99,11 @@ namespace XCommon.CodeGenerator.CSharp.Writter
             string file = $"{item.Name}DataSource.cs";
 
             if (File.Exists(Path.Combine(path, file)))
-                return;
+			{
+				return;
+			}
 
-            var className = $"{item.Name}DataSource";
+			var className = $"{item.Name}DataSource";
             var nameSpace = new List<string> { "System", "XCommon.Util", "System.Collections.Generic" };
             nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
             nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");

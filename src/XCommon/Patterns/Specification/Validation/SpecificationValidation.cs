@@ -7,7 +7,7 @@ namespace XCommon.Patterns.Specification.Validation
     {
         protected SpecificationList<TEntity> NewSpecificationList(bool addCheckNullObject = true)
         {
-            SpecificationList<TEntity> result = new SpecificationList<TEntity>();
+            var result = new SpecificationList<TEntity>();
 
             if (addCheckNullObject)
             {
@@ -27,19 +27,23 @@ namespace XCommon.Patterns.Specification.Validation
 
         protected virtual bool CheckSpecifications(SpecificationList<TEntity> specifications, TEntity entity, Execute execute)
         {
-            bool result = true;
+            var result = true;
 
             foreach (var item in specifications.Items)
             {
                 if (!item.Condition(entity))
-                    continue;
+				{
+					continue;
+				}
 
-                var satisfied = item.Specification.IsSatisfiedBy(entity, execute);
+				var satisfied = item.Specification.IsSatisfiedBy(entity, execute);
                 result = result && satisfied;
 
                 if (!result && item.StopIfInvalid)
-                    break;
-            }
+				{
+					break;
+				}
+			}
 
             return result;
         }

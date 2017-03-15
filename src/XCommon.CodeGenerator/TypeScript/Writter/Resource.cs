@@ -9,6 +9,9 @@ using XCommon.CodeGenerator.Core.Util;
 using XCommon.CodeGenerator.TypeScript.Configuration;
 using XCommon.Util;
 using XCommon.Extensions.Util;
+using System.Reflection;
+using XCommon.Application;
+using System.Resources;
 
 namespace XCommon.CodeGenerator.TypeScript
 {
@@ -21,7 +24,9 @@ namespace XCommon.CodeGenerator.TypeScript
 		internal void Run(TypeScriptResource config, IndexExport index)
 		{
 			if (config.Resources == null || config.Resources.Count <= 0)
+			{
 				return;
+			}
 
 			StringBuilderIndented builder = new StringBuilderIndented();
 
@@ -46,17 +51,20 @@ namespace XCommon.CodeGenerator.TypeScript
 			BuildInterface(builder);
 
 			if (!config.LazyLoad)
+			{
 				BuildClass(config, builder);
+			}
 
 			BuidService(config, builder);
 
 			if (!Directory.Exists(config.Path))
+			{
 				Directory.CreateDirectory(config.Path);
+			}
 
-			var file = config.File.GetSelector() + ".service.ts";
+			string file = config.File.GetSelector() + ".service.ts";
 
 			WriteFile(config.Path.ToLower(), file, builder);
-
 			Index.Run(config.Path);
 
 			index.Run(config.Path);
@@ -72,18 +80,18 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void GetResouces(TypeScriptResource config)
 		{
-			foreach (var manager in config.Resources)
+			foreach (KeyValuePair<Type, ResourceManager> manager in config.Resources)
 			{
 				GeneratorResourceEntity resource = new GeneratorResourceEntity
 				{
 					ResourceName = manager.Key.Name
 				};
 
-				foreach (var culture in config.Cultures)
+				foreach (ApplicationCulture culture in config.Cultures)
 				{
 					Dictionary<string, string> retorno = new Dictionary<string, string>();
 
-					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
+					foreach (PropertyInfo item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
 					{
 						retorno.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Name)));
 					}
@@ -97,13 +105,13 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void BuildInterface(StringBuilderIndented builder)
 		{
-			foreach (var resource in Resources)
+			foreach (GeneratorResourceEntity resource in Resources)
 			{
 				builder
 					.AppendLine($"export interface I{resource.ResourceName} {{")
 					.IncrementIndent();
 
-				foreach (var value in resource.Values.FirstOrDefault().Properties)
+				foreach (KeyValuePair<string, string> value in resource.Values.FirstOrDefault().Properties)
 				{
 					builder
 						.AppendLine($"{value.Key}: string;");
@@ -120,7 +128,7 @@ namespace XCommon.CodeGenerator.TypeScript
 				.IncrementIndent()
 				.AppendLine("Culture: string;");
 
-			foreach (var resource in Resources)
+			foreach (GeneratorResourceEntity resource in Resources)
 			{
 				builder
 					.AppendLine($"{resource.ResourceName}: I{resource.ResourceName};");
@@ -134,15 +142,15 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void BuildClass(TypeScriptResource config, StringBuilderIndented builder)
 		{
-			foreach (var culture in config.Cultures)
+			foreach (ApplicationCulture culture in config.Cultures)
 			{
-				foreach (var resource in Resources)
+				foreach (GeneratorResourceEntity resource in Resources)
 				{
 					builder
 						.AppendLine($"class {resource.ResourceName}{GetCultureName(culture.Name)} implements I{resource.ResourceName} {{")
 						.IncrementIndent();
 
-					foreach (var property in resource.Values.Where(c => c.Culture == culture.Name).SelectMany(c => c.Properties))
+					foreach (KeyValuePair<string, string> property in resource.Values.Where(c => c.Culture == culture.Name).SelectMany(c => c.Properties))
 					{
 						builder
 							.AppendLine($"{property.Key}: string = \"{property.Value}\";");

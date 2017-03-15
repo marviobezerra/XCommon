@@ -15,8 +15,8 @@ namespace XCommon.Extensions.Converters
 
         public static byte[] ToByte(this Stream input)
         {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
+            var buffer = new byte[16 * 1024];
+            using (var ms = new MemoryStream())
             {
                 int read;
                 while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
@@ -36,11 +36,10 @@ namespace XCommon.Extensions.Converters
                 return default(TEnum);
             }
 
-            TEnum enumresult;
-            int intResult = -1;
-            var values = Enum.GetValues(typeof(TEnum)).Cast<int>();
+			var intResult = -1;
+			var values = Enum.GetValues(typeof(TEnum)).Cast<int>();
 
-            if (!Enum.TryParse(value, true, out enumresult))
+            if (!Enum.TryParse(value, true, out TEnum enumresult))
                 return default(TEnum);
 
             intResult = enumresult.ToInt32();
@@ -56,7 +55,7 @@ namespace XCommon.Extensions.Converters
             if (value.IsEmpty())
                 return Guid.Empty;
 
-            Guid result = Guid.Empty;
+            var result = Guid.Empty;
 
             if (value.Length <= 12)
             {
@@ -73,12 +72,11 @@ namespace XCommon.Extensions.Converters
             if (value == null)
                 return defaultValue;
 
-            int result = 0;
 
-            if (int.TryParse(value.ToString(), out result))
-                return result;
+			if (int.TryParse(value.ToString(), out int result))
+				return result;
 
-            return defaultValue;
+			return defaultValue;
         }
 
         public static bool ToBool(this BooleanOption value, bool defaultValue = true)

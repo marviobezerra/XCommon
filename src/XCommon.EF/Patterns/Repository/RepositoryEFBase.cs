@@ -3,16 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using XCommon.Application.Executes;
+using XCommon.Application.Logger;
 using XCommon.Extensions.Converters;
-using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
-using XCommon.Application.Executes;
-using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Query;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data.Common;
-using XCommon.Application.Logger;
+using XCommon.Patterns.Specification.Validation;
 
 namespace XCommon.Patterns.Repository
 {
@@ -173,9 +170,11 @@ namespace XCommon.Patterns.Repository
                     var result = await SaveAsync(execute, db);
 
                     if (!result.HasErro)
-                        transaction.Commit();
+					{
+						transaction.Commit();
+					}
 
-                    return result;
+					return result;
                 }
             }
         }
@@ -204,9 +203,11 @@ namespace XCommon.Patterns.Repository
                     var result = await SaveManyAsync(execute, db);
 
                     if (!result.HasErro)
-                        transaction.Commit();
+					{
+						transaction.Commit();
+					}
 
-                    return result;
+					return result;
                 }
             }
         }
@@ -218,13 +219,17 @@ namespace XCommon.Patterns.Repository
                 execute.AddMessage(await ValidateManyAsync(execute.Entity));
 
                 if (execute.HasErro)
-                    return execute;
+				{
+					return execute;
+				}
 
-                execute.AddMessage(await SaveAsync(execute.Entity, context));
+				execute.AddMessage(await SaveAsync(execute.Entity, context));
 
                 if (!execute.HasErro)
-                    await AfterExecuteAsync(execute.Entity);
-            }
+				{
+					await AfterExecuteAsync(execute.Entity);
+				}
+			}
             catch (Exception ex)
             {
                 execute.AddMessage(ex, string.Format("Erro on save: {0}", GetEntityName()));

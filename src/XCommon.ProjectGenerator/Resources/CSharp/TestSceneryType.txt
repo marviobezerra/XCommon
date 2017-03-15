@@ -1,7 +1,0 @@
-﻿namespace [{name}].Business.Test.DataScenery
-{
-	public enum SceneryType
-    {
-        ClearDataBase
-    }
-}

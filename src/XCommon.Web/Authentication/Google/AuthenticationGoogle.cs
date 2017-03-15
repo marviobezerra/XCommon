@@ -23,9 +23,11 @@ namespace XCommon.Web.Authentication.Google
         internal override void Register(IApplicationBuilder app)
         {
             if (Config == null)
-                return;
+			{
+				return;
+			}
 
-            GoogleOptions result = new GoogleOptions
+			GoogleOptions result = new GoogleOptions
             {
                 ClientId = Config.ClientId,
                 ClientSecret = Config.ClientSecret,

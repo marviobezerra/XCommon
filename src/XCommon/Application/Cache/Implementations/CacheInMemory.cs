@@ -26,12 +26,11 @@ namespace XCommon.Application.Cache.Implementations
 
         public T Get<T>(string key)
         {
-            string fullKey = key.BuildFullKey<T>();
-            Pair<DateTime, object> value;
+            var fullKey = key.BuildFullKey<T>();
 
             lock (LockObject)
             {
-                if (Cache.TryGetValue(fullKey, out value))
+                if (Cache.TryGetValue(fullKey, out Pair<DateTime, object> value))
                 {
                     if (DateTime.Now > value.Item1)
                     {
@@ -64,8 +63,10 @@ namespace XCommon.Application.Cache.Implementations
         public void Put<T>(string key, T value, DateTime absoluteExpiration)
         {
             lock (LockObject)
-                Cache[key.BuildFullKey<T>()] = new Pair<DateTime, object>(absoluteExpiration, value);
-        }
+			{
+				Cache[key.BuildFullKey<T>()] = new Pair<DateTime, object>(absoluteExpiration, value);
+			}
+		}
 
         public void Remove<T>()
             => Remove<T>(null);
@@ -73,7 +74,9 @@ namespace XCommon.Application.Cache.Implementations
         public void Remove<T>(string key)
         {
             lock (LockObject)
-                Cache.Remove(key.BuildFullKey<T>());
-        }
+			{
+				Cache.Remove(key.BuildFullKey<T>());
+			}
+		}
     }
 }

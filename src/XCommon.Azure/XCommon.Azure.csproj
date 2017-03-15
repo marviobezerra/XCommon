@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Description>XCommon for Azure. There are features like access blob file storage, send mail and tohers.</Description>
+    <Authors>Marvio Andre Bezerra Silverio</Authors>
+    <Version>1.0.45</Version>
+    <Company>Marvio Andre Bezerra Silverio</Company>
+    <PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.Azure.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/marviobezerra/XCommon</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>XCommon, Azure, FileStorage</PackageTags>
+    <Copyright>Marvio Andre Bezerra Silverio</Copyright>
+  </PropertyGroup>
+
+</Project>

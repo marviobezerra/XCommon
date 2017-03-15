@@ -39,9 +39,11 @@ namespace XCommon.Patterns.Specification.Query
             }
 
             if (specifications.PageNumber > 0 && specifications.PageSize > 0)
-                source = source.Skip((specifications.PageNumber - 1) * specifications.PageSize).Take(specifications.PageSize);
+			{
+				source = source.Skip((specifications.PageNumber - 1) * specifications.PageSize).Take(specifications.PageSize);
+			}
 
-            return source;
+			return source;
         }
 
         public abstract IQueryable<TEntity> Build(IQueryable<TEntity> source, TFilter filter);

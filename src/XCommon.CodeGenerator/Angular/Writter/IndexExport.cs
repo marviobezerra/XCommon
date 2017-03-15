@@ -19,17 +19,21 @@ namespace XCommon.CodeGenerator.Angular.Writter
         private void Process(string dir)
         {
             if (!Directory.Exists(dir))
-                return;
+			{
+				return;
+			}
 
-            string file = $"{dir}\\index.ts";
+			string file = $"{dir}\\index.ts";
             StringBuilder builder = new StringBuilder();
 
             foreach (var fileName in Directory.GetFiles(dir, "*.ts", SearchOption.TopDirectoryOnly).OrderBy(c => c))
             {
                 if (Path.GetFileName(fileName) == "index.ts")
-                    continue;
+				{
+					continue;
+				}
 
-                builder.AppendLine($"export * from \"./{CheckFileName(fileName)}\";");
+				builder.AppendLine($"export * from \"./{CheckFileName(fileName)}\";");
             }
 
             File.WriteAllText(file, builder.ToString(), Encoding.UTF8);

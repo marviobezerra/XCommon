@@ -18,14 +18,18 @@ namespace XCommon.Application.Executes
         public void AddException(Exception e)
         {
             if (e == null)
-                return;
+			{
+				return;
+			}
 
-            MessageException.Add(e.Message);
+			MessageException.Add(e.Message);
 
             StackTracers.Add(e.StackTrace);
 
             if (e.InnerException != null)
-                AddException(e.InnerException);
-        }
+			{
+				AddException(e.InnerException);
+			}
+		}
     }
 }

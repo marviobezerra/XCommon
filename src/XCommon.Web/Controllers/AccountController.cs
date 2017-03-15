@@ -2,19 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using XCommon.Application.Executes;
 using XCommon.Application.Login;
 using XCommon.Application.Login.Entity;
 using XCommon.Patterns.Ioc;
-using XCommon.Application.Executes;
 using XCommon.Web.Authentication.Ticket;
 
 namespace XCommon.Web.Controllers
 {
     public abstract class AccountController : BaseController
     {
-        protected ILoginBusiness LoginBusiness => Kernel.Resolve<ILoginBusiness>();
+        [Inject]
+        protected ILoginBusiness LoginBusiness { get; set; }
 
-        private ITicketManagerWeb TicketManagerWeb => Kernel.Resolve<ITicketManagerWeb>();
+        [Inject]
+        private ITicketManagerWeb TicketManagerWeb { get; set; }
 
         [HttpPost("signin")]
         public virtual async Task<Execute<TicketStatus>> SignIn([FromBody] SignInEntity login)

@@ -37,7 +37,7 @@ namespace XCommon.Application.Logger.Implementations
             await Task.Factory.StartNew(() =>
             {
                 LoggerData.Add(item);
-                string content = JsonConvert.SerializeObject(LoggerData, Formatting.None);
+                var content = JsonConvert.SerializeObject(LoggerData, Formatting.None);
                 File.WriteAllText (FilePath, content);
             });
         }

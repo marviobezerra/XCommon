@@ -9,7 +9,9 @@ namespace XCommon.CodeGenerator.Core.Util
 		protected void WriteFile(string path, string file, StringBuilderIndented builder)
 		{
 			if (!Directory.Exists(path))
+			{
 				Directory.CreateDirectory(path);
+			}
 
 			string fullPath = Path.Combine(path, file);
 

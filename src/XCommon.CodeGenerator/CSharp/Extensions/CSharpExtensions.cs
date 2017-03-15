@@ -35,7 +35,9 @@ namespace XCommon.CodeGenerator.CSharp.Extensions
 			foreach (var nameSpace in args.Distinct().OrderBy(c => c))
 			{
 				if (nameSpace.IsEmpty())
+				{
 					continue;
+				}
 
 				builder.AppendLine($"using {nameSpace};");
 			}

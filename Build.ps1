@@ -37,13 +37,14 @@ EnsurePsbuildInstalled
 
 exec { & dotnet restore }
 
-exec { & dotnet test .\test\XCommon.Test -c Release }
-exec { & dotnet test .\test\XCommon.Test.Azure -c Release }
-exec { & dotnet test .\test\XCommon.Test.EF -c Release }
-exec { & dotnet test .\test\XCommon.Test.Web -c Release }
+exec { & dotnet test .\test\XCommon.Test\XCommon.Test.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.Azure\XCommon.Test.Azure.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.CodeGenerator\XCommon.Test.CodeGenerator.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.EF\XCommon.Test.EF.csproj -c Release }
+exec { & dotnet test .\test\XCommon.Test.Web\XCommon.Test.Web.csproj -c Release }
 
-exec { & dotnet pack .\src\XCommon -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.Azure -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.CodeGenerator -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.EF -c Release -o .\artifacts }
-exec { & dotnet pack .\src\XCommon.Web -c Release -o .\artifacts }
+exec { & dotnet pack .\src\XCommon\XCommon.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.Azure\XCommon.Azure.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.EF\XCommon.EF.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.Web\XCommon.Web.csproj -c Release -o ..\..\artifacts }

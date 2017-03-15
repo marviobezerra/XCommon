@@ -33,7 +33,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					string file = $"{item.Name}Validate.cs";
 
 					if (File.Exists(Path.Combine(path, file)))
+					{
 						continue;
+					}
 
 					var nameSpace = new List<string> { "System", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
@@ -72,7 +74,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					string file = Path.Combine(path, $"{table.Name}Query.cs");
 
 					if (File.Exists(file))
+					{
 						continue;
+					}
 
 					var nameSpace = new List<string> { "System", "System.Linq", "System.Collections.Generic", "XCommon.Patterns.Specification.Query", "XCommon.Patterns.Specification.Query.Extensions", "XCommon.Extensions.String", "XCommon.Extensions.Checks" };
 					nameSpace.Add($"{config.DataBase.NameSpace}.{group.Name}");
@@ -103,7 +107,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 						.ClassEnd();
 
 					if (!Directory.Exists(path))
+					{
 						Directory.CreateDirectory(path);
+					}
 
 					File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 				}
@@ -120,7 +126,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					string file = Path.Combine(path, $"{item.Name}Business.cs");
 
 					if (File.Exists(file))
+					{
 						continue;
+					}
 
 					var nameSpace = new List<string> { "System", " XCommon.Patterns.Repository" };
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
@@ -136,7 +144,9 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 						.ClassEnd();
 
 					if (!Directory.Exists(path))
+					{
 						Directory.CreateDirectory(path);
+					}
 
 					File.WriteAllText(file, builder.ToString(), Encoding.UTF8);
 				}

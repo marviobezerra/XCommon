@@ -72,14 +72,18 @@ namespace XCommon.Web.Authentication.Ticket
                 Guid result = Guid.Empty;
 
                 if (!IsAuthenticated)
-                    return result;
+				{
+					return result;
+				}
 
-                var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 if (identifier.IsEmpty())
-                    return result;
+				{
+					return result;
+				}
 
-                Guid.TryParse(identifier, out result);
+				Guid.TryParse(identifier, out result);
 
                 return result;
             }
@@ -92,9 +96,11 @@ namespace XCommon.Web.Authentication.Ticket
                 var userKey = UserKey;
 
                 if (userKey == Guid.Empty)
-                    return null;
+				{
+					return null;
+				}
 
-                return new ExecuteUser
+				return new ExecuteUser
                 {
                     Key = userKey,
                     Name = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
@@ -141,9 +147,11 @@ namespace XCommon.Web.Authentication.Ticket
         public bool SetCookieCulture(string culture)
         {
             if (!ApplicationSettings.Cultures.Any(c => c.Name == culture))
-                return false;
+			{
+				return false;
+			}
 
-            try
+			try
             {
                 HttpContextAccessor.HttpContext.Response.Cookies.Append(CookieCulture, culture);
                 return true;

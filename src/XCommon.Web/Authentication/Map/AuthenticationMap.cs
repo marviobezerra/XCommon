@@ -15,9 +15,11 @@ namespace XCommon.Web.Authentication.Map
         internal override void Register(IApplicationBuilder app)
         {
             if (Config == null)
-                return;
+			{
+				return;
+			}
 
-            app
+			app
                .Map(Config.UriLogin, signoutApp =>
                {
                    signoutApp.Run(async context =>
