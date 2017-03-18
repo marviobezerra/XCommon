@@ -7,6 +7,7 @@ using XCommon.Web.Authentication.Cookie;
 using XCommon.Web.Authentication.Facebook;
 using XCommon.Web.Authentication.Google;
 using XCommon.Web.Authentication.Map;
+using XCommon.Extensions.Util;
 
 namespace XCommon.Web.Authentication
 {
