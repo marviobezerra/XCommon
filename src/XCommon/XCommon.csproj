@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <Version>1.0.45</Version>
+    <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+    <Version>1.0.46</Version>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
     <Description>This is the XCommon core project. XCommon is a light library, which implement's some design patterns like as Ioc, Specification, Repositiry and others.</Description>
     <PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
