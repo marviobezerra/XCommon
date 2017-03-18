@@ -37,8 +37,6 @@ EnsurePsbuildInstalled
 
 exec { & dotnet restore }
 
-
-
 exec { & dotnet pack .\src\XCommon\XCommon.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.Azure\XCommon.Azure.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj -c Release -o ..\..\artifacts }

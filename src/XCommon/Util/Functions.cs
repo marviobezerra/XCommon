@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using XCommon.Application;
 using XCommon.Extensions.String;
+using XCommon.Extensions.Util;
 
 namespace XCommon.Util
 {
-    public static class Functions
+	public static class Functions
     {
         private static readonly Random getrandom = new Random();
         private static readonly object syncLock = new object();
@@ -79,6 +82,16 @@ namespace XCommon.Util
             }
 
             return hash.ToString();
-        }        
+        }
+
+		public static IApplicationSettings GetApplicationSettings(string path, string section, string file = "appsettings.json")
+		{
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(path)
+				.AddJsonFile(file, optional: true, reloadOnChange: true);
+
+			var config = builder.Build();
+			return config.Get<ApplicationSettings>(section);
+		}
     }
 }
