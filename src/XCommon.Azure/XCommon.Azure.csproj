@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
     <Description>XCommon for Azure. There are features like access blob file storage, send mail and tohers.</Description>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
-    <Version>1.0.48</Version>
+    <Version>1.0.49</Version>
     <Company>Marvio Andre Bezerra Silverio</Company>
     <PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
