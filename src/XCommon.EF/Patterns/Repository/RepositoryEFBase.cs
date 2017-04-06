@@ -238,21 +238,33 @@ namespace XCommon.Patterns.Repository
             return execute;
         }
 
-        public virtual async Task<Execute> ValidateAsync(TEntity entity)
-        {
-            return await ValidateManyAsync(new List<TEntity> { entity });
-        }
+		public async Task<Execute<TEntity>> SaveAsync(TEntity entity, DbContext context)
+			=> await SaveAsync(new Execute<TEntity>(entity), context);
 
-        public virtual async Task<Execute> ValidateManyAsync(List<TEntity> entity)
-        {
-            return await Task.Run(() =>
-            {
-                Execute result = new Execute();
+		public async Task<Execute<List<TEntity>>> SaveManyAsync(List<TEntity> entities, DbContext context)
+			=> await SaveManyAsync(new Execute<List<TEntity>>(entities), context);
 
-                entity.ForEach(c => SpecificationValidate.IsSatisfiedBy(c, result));
+		public async Task<Execute<TEntity>> SaveAsync(TEntity entity)
+			=> await SaveAsync(new Execute<TEntity>(entity));
 
-                return result;
-            });
-        }
-    }
+		public async Task<Execute<List<TEntity>>> SaveManyAsync(List<TEntity> entities)
+			=> await SaveManyAsync(new Execute<List<TEntity>>(entities));
+
+		public virtual async Task<Execute> ValidateAsync(TEntity entity)
+		{
+			return await ValidateManyAsync(new List<TEntity> { entity });
+		}
+
+		public virtual async Task<Execute> ValidateManyAsync(List<TEntity> entity)
+		{
+			return await Task.Run(() =>
+			{
+				Execute result = new Execute();
+
+				entity.ForEach(c => SpecificationValidate.IsSatisfiedBy(c, result));
+
+				return result;
+			});
+		}
+	}
 }
