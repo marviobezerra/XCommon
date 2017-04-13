@@ -323,7 +323,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 			TSEnums = new List<TypeScriptEnum>();
 
             GeneratedEntities = new List<string>();
-
+			
 			LoadEnums();
 			LoadProperties();
 
@@ -332,6 +332,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 				Directory.CreateDirectory(config.Path);
 			}
 
+			ProcessExtras();
 			ProcessEnum();
 			ProcessTypes();
 
