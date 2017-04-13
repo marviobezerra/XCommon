@@ -16,8 +16,8 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 			{
 				foreach (var item in group.Items)
 				{
-					string path = Path.Combine(config.ContractPath, group.Name);
-					string file = $"I{item.Name}Business.cs";
+					var path = Path.Combine(config.ContractPath, group.Name);
+					var file = $"I{item.Name}Business.cs";
 
 					if (File.Exists(Path.Combine(path, file)))
 					{
@@ -28,10 +28,10 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}");
 					nameSpace.Add($"{config.EntrityNameSpace}.{group.Name}.Filter");
 
-					StringBuilderIndented builder = new StringBuilderIndented();
+					var builder = new StringBuilderIndented();
 
 					builder
-						.InterfaceInit($"I{item.Name}Business", $"IRepository<{item.Name}Entity, {item.Name}Filter>", $"{config.ContractNameSpace}.{group.Name}", ClassVisility.Public, nameSpace.ToArray())
+						.InterfaceInit($"I{item.Name}Business", $"IRepositoryEF<{item.Name}Entity, {item.Name}Filter>", $"{config.ContractNameSpace}.{group.Name}", ClassVisility.Public, nameSpace.ToArray())
 						.InterfaceEnd();
 
 					WriteFile(path, file, builder);
