@@ -31,7 +31,7 @@ namespace XCommon.CodeGenerator
 
 		public int Run(string[] args)
 		{
-			CommandLineApplication app = new CommandLineApplication(false)
+			var app = new CommandLineApplication(false)
 			{
 				Name = "Prospect code generator",
 				Description = "Runs different methods as dnx commands to help you to create some of picies of code",
@@ -46,19 +46,19 @@ namespace XCommon.CodeGenerator
 
 				if (csharp.HasValue())
 				{
-					CSharpRunner runner = new CSharpRunner();
+					var runner = new CSharpRunner();
 					return runner.Run(Config.CSharp);
 				}
 
 				if (angular.HasValue())
 				{
-					AngularRunner runner = new AngularRunner();
+					var runner = new AngularRunner();
 					return runner.Run(Config.Angular, args);
 				}
 
 				if (typeScript.HasValue())
 				{
-					TypeScriptRunner runner = new TypeScriptRunner();
+					var runner = new TypeScriptRunner();
 					return runner.Run(Config.TypeScript);
 				}
 

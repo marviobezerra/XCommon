@@ -16,7 +16,9 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public string Path { get; set; }
 
-        public List<NameOveride> NameOveride { get; set; }
+		public bool IncludeUtils { get; set; }
+
+		public List<NameOveride> NameOveride { get; set; }
 
         public List<Assembly> Assemblys { get; set; }
 

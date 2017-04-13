@@ -10,7 +10,6 @@ using XCommon.CodeGenerator.Angular.Writter;
 using XCommon.CodeGenerator.Core.Util;
 using XCommon.CodeGenerator.CSharp.Extensions;
 using XCommon.CodeGenerator.TypeScript.Configuration;
-//using XCommon.Extensions.Util;
 using XCommon.Util;
 
 namespace XCommon.CodeGenerator.TypeScript.Writter
@@ -49,7 +48,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 			{
 				try
 				{
-					Type genericType = currentType.GenericTypeArguments.FirstOrDefault();
+					var genericType = currentType.GenericTypeArguments.FirstOrDefault();
 					return string.Format("Array<{0}>", GetPropertyType(genericType, tsClass, generic));
 				}
 				catch (Exception ex)
@@ -116,9 +115,9 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 					Values = new Dictionary<string, int>()
 				};
 
-				System.Array enumValues = System.Enum.GetValues(type);
+				var enumValues = System.Enum.GetValues(type);
 
-				for (int i = 0; i < enumValues.Length; i++)
+				for (var i = 0; i < enumValues.Length; i++)
 				{
 					enumProperty.Values.Add(enumValues.GetValue(i).ToString(), (int)enumValues.GetValue(i));
 				}
@@ -131,7 +130,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 		{
 			var nullablePropertys = new string[] { "Keys", "Keys", "PageNumber", "PageSize" };
 
-			List<Type> types = Config.Assemblys
+			var types = Config.Assemblys
 				.SelectMany(c => c.GetTypes())
 				.Where(c => !c.GetTypeInfo().IsAbstract && !c.GetTypeInfo().IsInterface && !c.GetTypeInfo().IsEnum)
 				.ToList();
@@ -140,7 +139,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 
 			foreach (var type in types.Distinct())
 			{
-				TypeScriptClass tsClass = new TypeScriptClass
+				var tsClass = new TypeScriptClass
 				{
 					Class = type.Name,
 					FileName = GetFileName(type.Namespace),
@@ -183,7 +182,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 
 		private void ProcessEnum()
 		{
-			StringBuilderIndented builder = new StringBuilderIndented();
+			var builder = new StringBuilderIndented();
 
             builder
                 .GenerateFileMessage();
@@ -216,14 +215,14 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 				var fileName = file.GetSelector();
 				var importItems = TSClass.Where(c => c.FileName == file).SelectMany(c => c.Imports).ToList();
 
-				StringBuilderIndented builder = new StringBuilderIndented();
+				var builder = new StringBuilderIndented();
 
                 builder
                     .GenerateFileMessage();
 
                 if (importItems.Any())
 				{
-					bool imported = false;
+					var imported = false;
 
 					foreach (var importFile in importItems.Where(c => c.File != file).Select(c => c.File).Distinct())
 					{
@@ -254,7 +253,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 						.Select(c => c.Type)
 						.ToList();
 
-					string classNamePrint = tsClass.Class;
+					var classNamePrint = tsClass.Class;
 
 					if (generics.Count > 0)
 					{
@@ -270,7 +269,7 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 
 					foreach (var property in tsClass.Properties)
 					{
-						string nullable = property.Nullable ? "?" : "";
+						var nullable = property.Nullable ? "?" : "";
 
 						builder
 							.AppendLine($"{property.Name}{nullable}: {property.Type}; ");
@@ -292,10 +291,34 @@ namespace XCommon.CodeGenerator.TypeScript.Writter
 			}
 		}
 
+		private void ProcessExtras()
+		{
+			if (!Config.IncludeUtils)
+				return;
+
+			var builder = new StringBuilderIndented();
+
+			builder
+				.AppendLine("export interface Map<TValue> {")
+				.IncrementIndent()
+				.AppendLine("[K: string]: TValue;")
+				.DecrementIndent()
+				.AppendLine("}")
+				.AppendLine()
+				.AppendLine("export interface KeyValue<TKey, TValue> {")
+				.IncrementIndent()
+				.AppendLine("Key: TKey;")
+				.AppendLine("Value: TValue;")
+				.DecrementIndent()
+				.AppendLine("}");
+
+			WriteFile(Config.Path.ToLower(), "entity-util.ts", builder);
+		}
+
 		internal void Run(TypeScriptEntity config, IndexExport index)
 		{
             Config = config;
-
+			
 			TSClass = new List<TypeScriptClass>();
 			TSEnums = new List<TypeScriptEnum>();
 

@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using XCommon.CodeGenerator.Angular.Extensions;
 using XCommon.CodeGenerator.Angular.Writter;
 using XCommon.CodeGenerator.Core.Util;
 using XCommon.CodeGenerator.TypeScript.Configuration;
-using XCommon.Util;
 using XCommon.Extensions.Util;
-using System.Reflection;
-using XCommon.Application;
-using System.Resources;
+using XCommon.Util;
 
 namespace XCommon.CodeGenerator.TypeScript
 {
-    public class Resource : FileWriter
+	public class Resource : FileWriter
 	{
 		private IndexExport Index { get; set; } = new IndexExport();
 		
@@ -28,20 +26,20 @@ namespace XCommon.CodeGenerator.TypeScript
 				return;
 			}
 
-			StringBuilderIndented builder = new StringBuilderIndented();
+			var builder = new StringBuilderIndented();
 
 			builder
-				.AppendLine("import { Injectable } from \"@angular/core\";");
+				.AppendLine("import { Injectable } from '@angular/core';");
 
 			if (config.LazyLoad)
 			{
 				builder
-					.AppendLine("import { Http, Response } from \"@angular/http\";")
-					.AppendLine("import { Observable } from \"rxjs/Observable\";");
+					.AppendLine("import { Http, Response } from '@angular/http';")
+					.AppendLine("import { Observable } from 'rxjs/Observable';");
 			}
 
 			builder
-				.AppendLine("import { Map } from \"../entity\";")
+				.AppendLine($"import {{ Map }} from '{config.EntityPath}';")
 				.AppendLine();
 
 			Resources = new List<GeneratorResourceEntity>();
@@ -62,7 +60,7 @@ namespace XCommon.CodeGenerator.TypeScript
 				Directory.CreateDirectory(config.Path);
 			}
 
-			string file = config.File.GetSelector() + ".service.ts";
+			var file = config.File.GetSelector() + ".service.ts";
 
 			WriteFile(config.Path.ToLower(), file, builder);
 			Index.Run(config.Path);
@@ -80,18 +78,18 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void GetResouces(TypeScriptResource config)
 		{
-			foreach (KeyValuePair<Type, ResourceManager> manager in config.Resources)
+			foreach (var manager in config.Resources)
 			{
-				GeneratorResourceEntity resource = new GeneratorResourceEntity
+				var resource = new GeneratorResourceEntity
 				{
 					ResourceName = manager.Key.Name
 				};
 
-				foreach (ApplicationCulture culture in config.Cultures)
+				foreach (var culture in config.Cultures)
 				{
-					Dictionary<string, string> retorno = new Dictionary<string, string>();
+					var retorno = new Dictionary<string, string>();
 
-					foreach (PropertyInfo item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
+					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
 					{
 						retorno.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Name)));
 					}
@@ -105,13 +103,13 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void BuildInterface(StringBuilderIndented builder)
 		{
-			foreach (GeneratorResourceEntity resource in Resources)
+			foreach (var resource in Resources)
 			{
 				builder
 					.AppendLine($"export interface I{resource.ResourceName} {{")
 					.IncrementIndent();
 
-				foreach (KeyValuePair<string, string> value in resource.Values.FirstOrDefault().Properties)
+				foreach (var value in resource.Values.FirstOrDefault().Properties)
 				{
 					builder
 						.AppendLine($"{value.Key}: string;");
@@ -128,7 +126,7 @@ namespace XCommon.CodeGenerator.TypeScript
 				.IncrementIndent()
 				.AppendLine("Culture: string;");
 
-			foreach (GeneratorResourceEntity resource in Resources)
+			foreach (var resource in Resources)
 			{
 				builder
 					.AppendLine($"{resource.ResourceName}: I{resource.ResourceName};");
@@ -142,18 +140,18 @@ namespace XCommon.CodeGenerator.TypeScript
 
 		private void BuildClass(TypeScriptResource config, StringBuilderIndented builder)
 		{
-			foreach (ApplicationCulture culture in config.Cultures)
+			foreach (var culture in config.Cultures)
 			{
-				foreach (GeneratorResourceEntity resource in Resources)
+				foreach (var resource in Resources)
 				{
 					builder
 						.AppendLine($"class {resource.ResourceName}{GetCultureName(culture.Name)} implements I{resource.ResourceName} {{")
 						.IncrementIndent();
 
-					foreach (KeyValuePair<string, string> property in resource.Values.Where(c => c.Culture == culture.Name).SelectMany(c => c.Properties))
+					foreach (var property in resource.Values.Where(c => c.Culture == culture.Name).SelectMany(c => c.Properties))
 					{
 						builder
-							.AppendLine($"{property.Key}: string = \"{property.Value}\";");
+							.AppendLine($"{property.Key}: string = '{property.Value}';");
 					}
 
 					builder
@@ -176,7 +174,7 @@ namespace XCommon.CodeGenerator.TypeScript
 			BuildLanguageSuportedContructor(config, builder);
 
 			builder
-				.AppendLine($"this.SetLanguage(\"{config.CultureDefault.Name}\")")
+				.AppendLine($"this.SetLanguage('{config.CultureDefault.Name}')")
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine();
@@ -221,7 +219,7 @@ namespace XCommon.CodeGenerator.TypeScript
 				.AppendLine("if (!value) {")
 				.IncrementIndent()
 				.AppendLine($"console.warn(`Unknown language: ${{language}}! Set up current culture as the default language: {config.CultureDefault.Name}`);")
-				.AppendLine($"this.SetLanguage(\"{config.CultureDefault.Name}\");")
+				.AppendLine($"this.SetLanguage('{config.CultureDefault.Name}');")
 				.AppendLine("return;")
 				.DecrementIndent()
 				.AppendLine("}")
@@ -297,7 +295,7 @@ namespace XCommon.CodeGenerator.TypeScript
 			foreach (var culture in config.Cultures)
 			{
 				builder
-					.AppendLine($"case \"{culture.Name}\":")
+					.AppendLine($"case '{culture.Name}':")
 					.IncrementIndent();
 
 				foreach (var resource in Resources)
@@ -320,7 +318,7 @@ namespace XCommon.CodeGenerator.TypeScript
 		{
 			foreach (var culture in config.Cultures)
 			{
-				builder.AppendLine($"this.Languages.push({{ Name: \"{culture.Name}\", Description: \"{culture.Description}\" }});");
+				builder.AppendLine($"this.Languages.push({{ Name: '{culture.Name}', Description: '{culture.Description}' }});");
 			}
 		}
 

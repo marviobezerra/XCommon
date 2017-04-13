@@ -13,7 +13,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 		{
 			path = path.ToLower();
 
-			foreach (string service in services)
+			foreach (var service in services)
 			{
 				var file = Path.Combine(path, $"{service.GetSelector()}.service.ts").ToLower();
 
@@ -23,11 +23,11 @@ namespace XCommon.CodeGenerator.Angular.Writter
 					return;
 				}
 
-				StringBuilderIndented builder = new StringBuilderIndented();
+				var builder = new StringBuilderIndented();
 
 				builder
-					.AppendLine("import { Injectable } from \"@angular/core\"; ")
-					.AppendLine("import { Http, Response } from \"@angular/http\"; ")
+					.AppendLine("import { Injectable } from '@angular/core'; ")
+					.AppendLine("import { Http, Response } from '@angular/http'; ")
 					.AppendLine()
 					.AppendLine("@Injectable()")
 					.AppendLine($"export class {service.GetName()}Service {{")
