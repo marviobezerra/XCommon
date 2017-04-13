@@ -33,7 +33,7 @@ namespace XCommon.CodeGenerator.Angular.Writter
 					continue;
 				}
 
-				builder.AppendLine($"export * from \"./{CheckFileName(fileName)}\";");
+				builder.AppendLine($"export * from './{CheckFileName(fileName)}';");
             }
 
             File.WriteAllText(file, builder.ToString(), Encoding.UTF8);

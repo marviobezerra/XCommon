@@ -15,9 +15,9 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		internal List<ItemGroup> ReadDataBase(DataBaseConfig config)
 		{
-			List<ItemGroup> result = new List<ItemGroup>();
+			var result = new List<ItemGroup>();
 
-			using (SqlConnection cnx = new SqlConnection(config.ConnectionString))
+			using (var cnx = new SqlConnection(config.ConnectionString))
 			{
 				cnx.Open();
 
@@ -25,7 +25,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 				foreach (var schemaItem in dataBaseObjects.Select(c => c.Schema).OrderBy(c => c).Distinct())
 				{
-					ItemGroup schema = new ItemGroup
+					var schema = new ItemGroup
 					{
 						Name = schemaItem,
 						Items = GetItems(config, cnx, dataBaseObjects, schemaItem)
@@ -40,7 +40,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private List<Item> GetItems(DataBaseConfig config, SqlConnection cnx, List<DataBaseObject> dataBaseObjects, string schema)
 		{
-			List<Item> result = new List<Item>();
+			var result = new List<Item>();
 
 			foreach (var tableItem in dataBaseObjects.Where(c => c.Schema == schema).Select(c => c.TableName).OrderBy(c => c).Distinct())
 			{
@@ -57,7 +57,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private List<ItemProperty> GetProperties(DataBaseConfig config, List<DataBaseObject> dataBaseObjects, string schema, string table)
 		{
-			List<ItemProperty> result = new List<ItemProperty>();
+			var result = new List<ItemProperty>();
 
 			foreach (var column in dataBaseObjects.Where(c => c.Schema == schema && c.TableName == table).OrderBy(c => c.ColumnOrder))
 			{
@@ -80,9 +80,9 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private List<ItemRelationship> GetRelationships(SqlConnection cnx, string tabela, string schema)
 		{
-			List<ItemRelationship> result = new List<ItemRelationship>();
+			var result = new List<ItemRelationship>();
 
-			SqlCommand cmd = new SqlCommand(SqlRelationship(tabela, schema), cnx);
+			var cmd = new SqlCommand(SqlRelationship(tabela, schema), cnx);
 			var reader = cmd.ExecuteReader();
 
 			while (reader.Read())
@@ -109,9 +109,9 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private List<DataBaseObject> GetDataBaseObjects(DataBaseConfig config, SqlConnection cnx)
 		{
-			List<DataBaseObject> result = new List<DataBaseObject>();
+			var result = new List<DataBaseObject>();
 
-			SqlCommand cmd = new SqlCommand(SqlDataObjects(config), cnx);
+			var cmd = new SqlCommand(SqlDataObjects(config), cnx);
 			var data = cmd.ExecuteReader();
 
 			while (data.Read())
@@ -139,7 +139,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private string SqlDataObjects(DataBaseConfig config)
 		{
-			string sql =
+			var sql =
 				"SELECT\n" +
 				"    X.IsTable,\n" +
 				"    X.[Schema],\n" +
@@ -233,13 +233,13 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 			if (config.SchemaExclude.Count > 0)
 			{
-				string schemas = string.Join(", ", config.SchemaExclude);
+				var schemas = string.Join(", ", config.SchemaExclude);
 				sql += $"			AND X.[Schema] NOT IN ('{schemas}')\n";
 			}
 
 			if (config.TableExclude.Count > 0)
 			{
-				string tables = string.Join(", ", config.TableExclude);
+				var tables = string.Join(", ", config.TableExclude);
 				sql += $"			AND X.TableName NOT IN ('{tables}')\n";
 			}
 
@@ -252,7 +252,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private string SqlRelationship(string table, string schema)
 		{
-			string sql = "DECLARE \n"
+			var sql = "DECLARE \n"
 				+ " @Table VARCHAR(100) = '" + schema + "." + table + "' \n"
 				+ " \n"
 				+ " SELECT \n"
@@ -301,7 +301,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private string GetCSharpType(string sqlType, bool nullable)
 		{
-			string result = "string";
+			var result = "string";
 
 			switch (sqlType)
 			{
@@ -355,7 +355,7 @@ namespace XCommon.CodeGenerator.Core.DataBase
 
 		private string GetCSharpTypeNullable(bool nullable, string sqlType)
 		{
-			string Retorno = nullable ? "?" : "";
+			var Retorno = nullable ? "?" : "";
 
 			switch (sqlType)
 			{

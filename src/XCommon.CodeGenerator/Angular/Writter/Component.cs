@@ -47,16 +47,16 @@ namespace XCommon.CodeGenerator.Angular.Writter
 
 
 			StringBuilderIndented builder = new StringBuilderIndented();
-			string templateUrl = $"\"{htmlRoot}/{module}/components/{feture}/{selector}.html\",";
+			string templateUrl = $"'./{selector}.html',";
 
 			builder
-				.AppendLine("import { Component, OnInit } from \"@angular/core\";")
+				.AppendLine("import { Component, OnInit } from '@angular/core';")
 				.AppendLine()
 				.AppendLine("@Component({")
 				.IncrementIndent()
-				.AppendLine($"selector: \"{selector}\",")
+				.AppendLine($"selector: '{selector}',")
 				.AppendLine("templateUrl: " + templateUrl.ToLower())
-				.AppendLine($"styles: [require(\"./{selector}.scss\")]")
+				.AppendLine($"styles: [require('./{selector}.scss')]")
 				.DecrementIndent()
 				.AppendLine("})")
 				.AppendLine($"export class {name.GetName()}Component implements OnInit {{")

@@ -19,6 +19,8 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public string Path { get; set; }
 
+		public string EntityPath { get; set; }
+
 		public string File { get; set; }
 
 		public ApplicationCulture CultureDefault { get; set; }
