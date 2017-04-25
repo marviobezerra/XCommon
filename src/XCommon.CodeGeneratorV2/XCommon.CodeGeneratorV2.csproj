@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Angular\Implementation\" />
+    <Folder Include="Project\Implementation\" />
+    <Folder Include="TypeScript\Implementation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCommon\XCommon.csproj" />
+  </ItemGroup>
+
+</Project>
