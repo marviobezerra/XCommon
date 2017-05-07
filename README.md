@@ -1,4 +1,4 @@
-#XCommon
+# XCommon
 
 XCommon is a light library, which implement's some design patterns and some util functions in pure C#. It is divide in five projects;
 
@@ -11,11 +11,11 @@ XCommon is a light library, which implement's some design patterns and some util
 | XCommon.EF | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) | [![NuGet version](https://badge.fury.io/nu/xcommon.ef.svg)](https://badge.fury.io/nu/xcommon.ef)
 | XCommon.CodeGenerator | [![Build status](https://ci.appveyor.com/api/projects/status/vu4oi81o5oqcltjh?svg=true)](https://ci.appveyor.com/project/marviobezerra/xcommon) | [![NuGet version](https://badge.fury.io/nu/xcommon.codegenerator.svg)](https://badge.fury.io/nu/xcommon.codegenerator)
 
-##XCommon
+## XCommon
 
 This is the core base for all other projects. Each topic represent a name space on XCommon.
 
-###**Application**
+### **Application**
 
 > Classes and features for help the development process.
 
@@ -30,7 +30,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[Mail](https://github.com/marviobezerra/XCommon/wiki/XCommon---Mail)| Send email.
 |[Socket](https://github.com/marviobezerra/XCommon/wiki/XCommon---Socket)| Wrapper for WebSockets protocol. Implemented in XCommon.Web
 
-###**Extensions**
+### **Extensions**
 
 > All features are extensions methods.
 
@@ -41,7 +41,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[String](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#string)| Utils functions for String, like IsEmpty and IsNotEmpty.
 |[Util](https://github.com/marviobezerra/XCommon/wiki/XCommon---Extensions#util)| Utils functions for Enum, specially for bitwize enumerators.
 
-###**Patterns**
+### **Patterns**
 
 > Some design patterns implemented.
 
@@ -51,7 +51,7 @@ This is the core base for all other projects. Each topic represent a name space 
 |[Repository](https://github.com/marviobezerra/XCommon/wiki/XCommon---Repository)| Yes, another repository pattern! The implementation is in XCommon.EF project.
 |[Specification](https://github.com/marviobezerra/XCommon/wiki/XComonn---Specification)| Two implementations of Specification Pattern. One for [Validation](https://github.com/marviobezerra/XCommon/wiki/XComonn---Specification-Validation) and another for [Query](https://github.com/marviobezerra/XCommon/wiki/XComon---Specification-Query).
 
-###**UnitTest**
+### **UnitTest**
 
 > The proposal is help to write Unit Test.
 
@@ -59,7 +59,7 @@ This is the core base for all other projects. Each topic represent a name space 
  ----------------- | -----------------
 |SceneryManager| It helps you for create and run a scenery when you are writing unit tests.
 
-###**Util**
+### **Util**
 
 > Many functions to make our life easier.
 
@@ -71,7 +71,3 @@ This is the core base for all other projects. Each topic represent a name space 
 |[RadomNumber](https://github.com/marviobezerra/XCommon/wiki/XCommon---Utils)| Generate a random number.
 |[Token](https://github.com/marviobezerra/XCommon/wiki/XCommon---Utils)| Generates a token (without cryptography).
 |[And others](https://github.com/marviobezerra/XCommon/wiki/XCommon---Utils)| Check the wiki page for a complete list.
-
-> **Note:** There are features in this project that are just interfaces, some of then has an InMemory implementations for unit test. 
-
-> For instance, the interface *IFileStorage* has two implementations. One in *XCommon*, just for unit tests, and another in *XCommon.Azure*, for real Azure blob storage access.
