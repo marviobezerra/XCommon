@@ -1,5 +1,4 @@
-﻿using System;
-using XCommon.Application.CommandLine;
+﻿using XCommon.Application.CommandLine;
 using XCommon.CodeGeneratorV2.Angular;
 using XCommon.CodeGeneratorV2.CSharp;
 using XCommon.CodeGeneratorV2.CSharp.Implementation;
@@ -8,17 +7,11 @@ using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGeneratorV2
 {
-    public class Generator
+	public class Generator
     {
-		private GeneratorConfig Config { get; set; }
-		
-		private void Map()
+		public Generator(GeneratorConfig config)
 		{
-			Kernel.Map<ICSharpRepositoryWritter>().To<CSharpRepositoryWritter>();
-			Kernel.Map<ICSharpDataWritter>().To<CSharpDataWritter>();
-			Kernel.Map<ICSharpEntityWritter>().To<CSharpEntityWritter>();
-			Kernel.Map<ICSharpFactoryWritter>().To<CSharpFactoryWritter>();
-			Kernel.Map<ICSharpUnitTestWritter>().To<CSharpUnitTestWritter>();
+			Factory.Do(config);
 		}
 
 		public int Run(string[] args)
@@ -39,19 +32,19 @@ namespace XCommon.CodeGeneratorV2
 				if (csharp.HasValue())
 				{
 					var runner = new CSharpRunner();
-					return runner.Run(Config);
+					return runner.Run();
 				}
 
 				if (angular.HasValue())
 				{
 					var runner = new AngularRunner();
-					return runner.Run(Config, args);
+					return runner.Run(args);
 				}
 
 				if (typeScript.HasValue())
 				{
 					var runner = new TypeScriptRunner();
-					return runner.Run(Config);
+					return runner.Run();
 				}
 
 				app.ShowHelp();

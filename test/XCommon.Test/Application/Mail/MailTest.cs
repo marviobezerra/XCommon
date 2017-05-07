@@ -12,12 +12,13 @@ namespace XCommon.Test.Application.Mail
     public class MailTest
     {
         [Fact(DisplayName = "Send")]
-        public void Send()
+		[Trait("Application", "Mail")]
+		public void Send()
         {
-            IMail mail = new MailInMemory();
-            string to = "marvio.bezerra@gmail.com";
-            string subject = "Simple mail";
-            string body = "Just testing code";
+            var mail = new MailInMemory();
+            var to = "marvio.bezerra@gmail.com";
+            var subject = "Simple mail";
+            var body = "Just testing code";
 
             mail.Send(to, subject, body);
 
@@ -34,7 +35,8 @@ namespace XCommon.Test.Application.Mail
         }
 
         [Fact(DisplayName = "Send (ReplyTo)")]
-        public void SendReplyTo()
+		[Trait("Application", "Mail")]
+		public void SendReplyTo()
         {
             IMail mail = new MailInMemory();
             string to = "marvio.bezerra@gmail.com";
@@ -57,18 +59,19 @@ namespace XCommon.Test.Application.Mail
         }
 
         [Fact(DisplayName = "Send (Many)")]
-        public void SendMany()
+		[Trait("Application", "Mail")]
+		public void SendMany()
         {
             IMail mail = new MailInMemory();
-            string toMarvio = "marvio.bezerra@gmail.com";
-            string toMaria = "maria@gmail.com";
+            var toMarvio = "marvio.bezerra@gmail.com";
+            var toMaria = "maria@gmail.com";
 
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
                 mail.Send(toMarvio, $"Mail {i}", $"Interact {i}");
             }
 
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 mail.Send(toMaria, $"Mail {i}", $"Interact {i}");
             }

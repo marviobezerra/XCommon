@@ -15,5 +15,7 @@
 		public string ColumnFK { get; set; }
 
 		public DataBaseRelationShipType Type { get; set; }
+
+		public bool Nullable { get; internal set; }
 	}
 }

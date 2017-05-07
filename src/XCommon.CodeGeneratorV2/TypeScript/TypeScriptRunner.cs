@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using XCommon.CodeGeneratorV2.Core;
 
 namespace XCommon.CodeGeneratorV2.TypeScript
 {
-	internal class TypeScriptRunner
+	internal class TypeScriptRunner : BaseRunner
 	{
-		internal int Run(GeneratorConfig typeScript)
+		internal int Run()
 		{
 			throw new NotImplementedException();
 		}

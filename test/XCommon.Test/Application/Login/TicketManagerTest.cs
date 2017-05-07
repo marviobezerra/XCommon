@@ -14,9 +14,10 @@ namespace XCommon.Test.Application.Login
         public string DefaultCulture => "pt-BR";
 
         [Fact(DisplayName = "Default ticket")]
-        public void DefaultTicket()
+		[Trait("Application", "Login")]
+		public void DefaultTicket()
         {
-            ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
+			ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 
             ticket.User.Should().BeNull();
             ticket.Culture.Should().Be(DefaultCulture);
@@ -25,9 +26,10 @@ namespace XCommon.Test.Application.Login
         }
 
         [Fact(DisplayName = "SignIn")]
-        public async Task SignIn()
+		[Trait("Application", "Login")]
+		public async Task SignIn()
         {
-            ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
+			ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 
             await ticket.SignInAsync(new TicketEntity { Culture = "en-CA", Key = "1".ToGuid(), Name = "Marvio André", Status = TicketStatus.Sucess });
 
@@ -38,9 +40,10 @@ namespace XCommon.Test.Application.Login
         }
 
         [Fact(DisplayName = "SignIn (Null)")]
-        public async Task SignInNull()
+		[Trait("Application", "Login")]
+		public async Task SignInNull()
         {
-            ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
+			ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 
             await ticket.SignInAsync(null);
 
@@ -51,9 +54,10 @@ namespace XCommon.Test.Application.Login
         }
 
         [Fact(DisplayName = "SignIn (Status Fail)")]
-        public async Task SignStatusFail()
+		[Trait("Application", "Login")]
+		public async Task SignStatusFail()
         {
-            ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
+			ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 
             await ticket.SignInAsync(new TicketEntity { Culture = "en-CA", Key = "1".ToGuid(), Name = "Marvio André", Status = TicketStatus.Fail });
 
@@ -64,9 +68,10 @@ namespace XCommon.Test.Application.Login
         }
 
         [Fact(DisplayName = "SignIn (Status FailExternal)")]
-        public async Task SignStatusFailExternal()
+		[Trait("Application", "Login")]
+		public async Task SignStatusFailExternal()
         {
-            ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
+			ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 
             await ticket.SignInAsync(new TicketEntity { Culture = "en-CA", Key = "1".ToGuid(), Name = "Marvio André", Status = TicketStatus.FailExternal });
 
@@ -77,7 +82,8 @@ namespace XCommon.Test.Application.Login
         }
 
         [Fact(DisplayName = "SignOutAsync")]
-        public async Task SignOutAsync()
+		[Trait("Application", "Login")]
+		public async Task SignOutAsync()
         {
             ITicketManager ticket = new TicketManagerInMemory(DefaultCulture);
 

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using XCommon.CodeGeneratorV2.Core;
+using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGeneratorV2.Angular
 {
-	internal class AngularRunner
+	internal class AngularRunner : BaseRunner
 	{
-		internal int Run(GeneratorConfig angular, string[] args)
+		internal int Run(string[] args)
 		{
 			throw new NotImplementedException();
 		}

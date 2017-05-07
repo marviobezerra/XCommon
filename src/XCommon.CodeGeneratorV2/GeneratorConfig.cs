@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using XCommon.CodeGeneratorV2.Angular;
 using XCommon.CodeGeneratorV2.Core.DataBase;
 using XCommon.CodeGeneratorV2.CSharp.Configuration;
@@ -8,7 +6,7 @@ using XCommon.CodeGeneratorV2.TypeScript;
 
 namespace XCommon.CodeGeneratorV2
 {
-    public class GeneratorConfig
+	public class GeneratorConfig
     {
 		public AngularConfig Angular { get; set; }
 

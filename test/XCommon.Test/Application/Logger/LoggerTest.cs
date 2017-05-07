@@ -24,11 +24,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level None)")]
-        public async Task LogNone()
+		[Trait("Application", "Logger")]
+		public async Task LogNone()
         {
             AppSettings.Logger = LogType.None;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");
@@ -40,11 +41,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level Trace)")]
-        public async Task LogTrace()
+		[Trait("Application", "Logger")]
+		public async Task LogTrace()
         {
             AppSettings.Logger = LogType.Trace;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");
@@ -56,11 +58,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level Info)")]
-        public async Task LogInfo()
+		[Trait("Application", "Logger")]
+		public async Task LogInfo()
         {
             AppSettings.Logger = LogType.Info;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");
@@ -72,11 +75,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level Debugger)")]
-        public async Task LogDebugger()
+		[Trait("Application", "Logger")]
+		public async Task LogDebugger()
         {
             AppSettings.Logger = LogType.Debug;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");
@@ -88,11 +92,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level Error)")]
-        public async Task LogError()
+		[Trait("Application", "Logger")]
+		public async Task LogError()
         {
             AppSettings.Logger = LogType.Error;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");
@@ -104,11 +109,12 @@ namespace XCommon.Test.Application.Logger
         }
 
         [Fact(DisplayName = "Logger (Level Exception)")]
-        public async Task LogException()
+		[Trait("Application", "Logger")]
+		public async Task LogException()
         {
             AppSettings.Logger = LogType.Exception;
 
-            ILogger logger = Kernel.Resolve<ILogger>();
+            var logger = Kernel.Resolve<ILogger>();
 
             await logger.TraceAsync("Trace level");
             await logger.InfoAsync("Info level");

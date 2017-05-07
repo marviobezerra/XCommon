@@ -10,19 +10,21 @@ namespace XCommon.Test.Extensions.Converters
     public class ConverterTest
     {
         [Fact(DisplayName = "Type converter (Null Value)")]
-        public void TypeConverterNullValue()
+		[Trait("Extensions", "Converters")]
+		public void TypeConverterNullValue()
         {
             EntityA personA = null;
-            EntityB personB = personA.Convert<EntityB>();
+            var personB = personA.Convert<EntityB>();
 
             personB.Should().BeNull();
         }
 
         [Theory(DisplayName = "Type converter (Simple entity)")]
-        [MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterSimpleEntity(EntityA data, bool valid, string message)
         {
-            EntityB result = data.Convert<EntityB>();
+            var result = data.Convert<EntityB>();
 
             result.GuidValue.Should().Be(data.GuidValue, message);
             result.GuidValueNullable.Should().Be(data.GuidValueNullable, message);
@@ -44,10 +46,11 @@ namespace XCommon.Test.Extensions.Converters
 
 
         [Theory(DisplayName = "Type converter (Simple entity with ignore)")]
-        [MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterSimpleEntityWithIgnore(EntityA data, bool valid, string message)
         {
-            EntityB result = data.Convert<EntityB>(nameof(data.BoolValueNullAble), nameof(data.DateTimeValueNullable), nameof(data.IntValue));
+            var result = data.Convert<EntityB>(nameof(data.BoolValueNullAble), nameof(data.DateTimeValueNullable), nameof(data.IntValue));
 
             result.GuidValue.Should().Be(data.GuidValue, message);
             result.GuidValueNullable.Should().Be(data.GuidValueNullable, message);
@@ -66,15 +69,13 @@ namespace XCommon.Test.Extensions.Converters
             result.DateTimeValue.Should().Be(data.DateTimeValue, message);
             result.DateTimeValueNullable.Should().Be(null, message);
         }
-
-
-
-
+		
         [Theory(DisplayName = "Type converter (Simple heritage entity)")]
-        [MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterHeritageEntity(EntityA data, bool valid, string message)
         {
-            EntityC result = data.Convert<EntityC>();
+            var result = data.Convert<EntityC>();
 
             result.GuidValue.Should().Be(data.GuidValue, message);
             result.GuidValueNullable.Should().Be(data.GuidValueNullable, message);
@@ -95,10 +96,11 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Type converter (Complex entity)")]
-        [MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterComplexEntity(EntityD data, bool valid, string message)
         {
-            EntityE result = data.Convert<EntityE>();
+            var result = data.Convert<EntityE>();
 
             result.Id.Should().Be(data.Id, message);
 
@@ -121,24 +123,26 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Type converter (Complex entity With Ignore)")]
-        [MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterComplexEntityWithIgnore(EntityD data, bool valid, string message)
         {
-            EntityE result = data.Convert<EntityE>(nameof(data.EntityA));
+            var result = data.Convert<EntityE>(nameof(data.EntityA));
 
             result.Id.Should().Be(data.Id, message);
             result.EntityA.Should().Be(null, message);
         }
 
         [Theory(DisplayName = "Type converter (List)")]
-        [MemberData(nameof(ConverterDataSource.ListConverterDataSource), MemberType = typeof(ConverterDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterDataSource.ListConverterDataSource), MemberType = typeof(ConverterDataSource))]
         public void TypeConverterList(List<EntityA> data, bool valid, string message)
         {
-            List<EntityB> result = data.Convert<EntityB, EntityA>();
+            var result = data.Convert<EntityB, EntityA>();
 
             result.Count.Should().Be(data.Count);
 
-            for (int i = 0; i < result.Count; i++)
+            for (var i = 0; i < result.Count; i++)
             {
                 result[i].GuidValue.Should().Be(data[i].GuidValue, message);
                 result[i].GuidValueNullable.Should().Be(data[i].GuidValueNullable, message);
