@@ -22,9 +22,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         private ExecuteUser SampleUser { get; set; }
 
         [Fact(DisplayName = "Constructor (Null parameters)")]
-        public void ConstructorNullParameters()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorNullParameters()
         {
-            Execute execute = new Execute(null, null);
+            var execute = new Execute(null, null);
 
             execute.HasErro.Should().Be(false, "There isn't messages to have error");
             execute.HasWarning.Should().Be(false, "There isn't messages to have warning");
@@ -37,9 +38,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Empty)")]
-        public void Constructor()
+		[Trait("Patterns", "Repository - Execute")]
+		public void Constructor()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.HasErro.Should().Be(false, "There isn't messages to have error");
             execute.HasWarning.Should().Be(false, "There isn't messages to have warning");
@@ -52,9 +54,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (User)")]
-        public void ConstructorUser()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorUser()
         {
-            Execute execute = new Execute(SampleUser);
+            var execute = new Execute(SampleUser);
 
             execute.HasErro.Should().Be(false, "There isn't messages to have error");
             execute.HasWarning.Should().Be(false, "There isn't messages to have warning");
@@ -67,11 +70,12 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Execute)")]
-        public void ConstructorExecute()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorExecute()
         {
-            Execute prioExecute = new Execute();
+            var prioExecute = new Execute();
 
-            Execute execute = new Execute(prioExecute);
+            var execute = new Execute(prioExecute);
 
             execute.HasErro.Should().Be(false, "There isn't messages to have error");
             execute.HasWarning.Should().Be(false, "There isn't messages to have warning");
@@ -84,11 +88,12 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Execute & User)")]
-        public void ConstructorExecuteThatWasUser()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorExecuteThatWasUser()
         {
-            Execute prioExecute = new Execute(SampleUser);
+            var prioExecute = new Execute(SampleUser);
 
-            Execute execute = new Execute(prioExecute);
+            var execute = new Execute(prioExecute);
 
             execute.HasErro.Should().Be(false, "There isn't messages to have error");
             execute.HasWarning.Should().Be(false, "There isn't messages to have warning");
@@ -101,14 +106,15 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Execute, User & Messages)")]
-        public void ConstructorExecuteUserMessages()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorExecuteUserMessages()
         {
-            Execute prioExecute = new Execute(SampleUser);
+            var prioExecute = new Execute(SampleUser);
             prioExecute.AddMessage(ExecuteMessageType.Error, "Error message");
             prioExecute.AddMessage(ExecuteMessageType.Warning, "Warning message");
             prioExecute.AddMessage(ExecuteMessageType.Exception, "Exception message");
 
-            Execute execute = new Execute(prioExecute);
+            var execute = new Execute(prioExecute);
 
             execute.HasErro.Should().Be(true, "There is error message");
             execute.HasWarning.Should().Be(true, "There is warning message");
@@ -121,22 +127,23 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Execute + User, Messages & User)")]
-        public void ConstructorExecuteUserMessagesPlusUser()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorExecuteUserMessagesPlusUser()
         {
-            Execute prioExecute = new Execute(SampleUser);
+            var prioExecute = new Execute(SampleUser);
 
             prioExecute.AddMessage(ExecuteMessageType.Error, "Error message");
             prioExecute.AddMessage(ExecuteMessageType.Warning, "Warning message");
             prioExecute.AddMessage(ExecuteMessageType.Exception, "Exception message");
 
-            ExecuteUser user = new ExecuteUser
+            var user = new ExecuteUser
             {
                 Key = "2".ToGuid(),
                 Login = "jonhy",
                 Name = "Jonhy"
             };
 
-            Execute execute = new Execute(prioExecute, user);
+            var execute = new Execute(prioExecute, user);
 
             execute.HasErro.Should().Be(true, "There is error message");
             execute.HasWarning.Should().Be(true, "There is warning message");
@@ -150,15 +157,16 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "Constructor (Execute + User (null), Messages & User)")]
-        public void ConstructorExecuteUserNullMessagesPlusUser()
+		[Trait("Patterns", "Repository - Execute")]
+		public void ConstructorExecuteUserNullMessagesPlusUser()
         {
-            Execute prioExecute = new Execute(SampleUser);
+            var prioExecute = new Execute(SampleUser);
 
             prioExecute.AddMessage(ExecuteMessageType.Error, "Error message");
             prioExecute.AddMessage(ExecuteMessageType.Warning, "Warning message");
             prioExecute.AddMessage(ExecuteMessageType.Exception, "Exception message");
             
-            Execute execute = new Execute(prioExecute);
+            var execute = new Execute(prioExecute);
 
             execute.HasErro.Should().Be(true, "There is error message");
             execute.HasWarning.Should().Be(true, "There is warning message");
@@ -172,9 +180,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Message null)")]
-        public void AddMessageMessageNull()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageMessageNull()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(ExecuteMessageType.Error, null);
 
@@ -186,9 +195,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Message null & Args Null)")]
-        public void AddMessageMessageNullArgsNull()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageMessageNullArgsNull()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(ExecuteMessageType.Error, null, null);
 
@@ -200,9 +210,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Type, Message & Args)")]
-        public void AddMessageTypeMessageArgs()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageTypeMessageArgs()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(ExecuteMessageType.Error, "Errors: {0} - {1}", "One", "Two");
 
@@ -215,9 +226,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Type & Message)")]
-        public void AddMessageTypeMessage()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageTypeMessage()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(ExecuteMessageType.Warning, "Errors: {0} - {1}");
 
@@ -230,9 +242,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Exception & Message)")]
-        public void AddMessageExceptionMessage()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageExceptionMessage()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(new Exception("Check this message"), "Errors: {0} - {1}");
 
@@ -250,9 +263,10 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Exception, Message & Args)")]
-        public void AddMessageExceptionMessageArgs()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageExceptionMessageArgs()
         {
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(new Exception("Check this message"), "Errors: {0} - {1}", "Three", "Four");
 
@@ -270,16 +284,17 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Execute array)")]
-        public void AddMessageExecuteArray()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageExecuteArray()
         {
-            Execute execute01 = new Execute();
+            var execute01 = new Execute();
             execute01.AddMessage(ExecuteMessageType.Error, "Execute 01 error message");
             execute01.AddMessage(ExecuteMessageType.Warning, "Execute 01 warning message");
 
-            Execute execute02 = new Execute();
+            var execute02 = new Execute();
             execute02.AddMessage(ExecuteMessageType.Error, "Execute 02 error message");
 
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(execute01, execute02);
 
@@ -291,13 +306,14 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
 
         [Fact(DisplayName = "AddMessage (Execute)")]
-        public void AddMessageExecute()
+		[Trait("Patterns", "Repository - Execute")]
+		public void AddMessageExecute()
         {
-            Execute execute01 = new Execute();
+            var execute01 = new Execute();
             execute01.AddMessage(ExecuteMessageType.Error, "Execute 01 error message");
             execute01.AddMessage(ExecuteMessageType.Warning, "Execute 01 warning message");
 
-            Execute execute = new Execute();
+            var execute = new Execute();
 
             execute.AddMessage(execute01);
 
@@ -309,32 +325,35 @@ namespace XCommon.Test.Patterns.Repository.Executes
         }
         
         [Fact(DisplayName = "GetProperty (Simple)")]
-        public void GetPropertySimple()
+		[Trait("Patterns", "Repository - Execute")]
+		public void GetPropertySimple()
         {
-            string propertyName = "IgnorePermissions";
-            Execute execute = new Execute();
+            var propertyName = "IgnorePermissions";
+            var execute = new Execute();
 
             execute.SetProperty(propertyName, "Yes");
-            string result = execute.GetProperty<string>(propertyName);
+            var result = execute.GetProperty<string>(propertyName);
             result.Should().Be("Yes", "It is a valid property");
         }
 
         [Fact(DisplayName = "GetProperty (Complex)")]
-        public void GetProperty()
+		[Trait("Patterns", "Repository - Execute")]
+		public void GetProperty()
         {
-            string propertyName = "AdminUser";
-            Execute execute = new Execute();
+            var propertyName = "AdminUser";
+            var execute = new Execute();
 
             execute.SetProperty(propertyName, new PersonEntity { Name = "Marvio" });
-            PersonEntity result = execute.GetProperty<PersonEntity>(propertyName);
+            var result = execute.GetProperty<PersonEntity>(propertyName);
             result.Name.Should().Be("Marvio", "The person name is Marvio");
         }
 
         [Fact(DisplayName = "SetProperty (string)")]
-        public void SetProperty()
+		[Trait("Patterns", "Repository - Execute")]
+		public void SetProperty()
         {
-            string propertyName = "IgnorePermissions";
-            Execute execute = new Execute();
+            var propertyName = "IgnorePermissions";
+            var execute = new Execute();
 
             var result = execute.SetProperty(propertyName, "Yes");
             result.Should().Be(true, "It is a valid property");

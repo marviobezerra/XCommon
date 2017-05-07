@@ -21,8 +21,9 @@ namespace XCommon.Test.Application.FileStorage
 
         private IFileStorage FileStorage { get; set; }
 
-        [Fact(DisplayName = "Save (Container root)")]  
-        public void SaveContainerRoot()
+        [Fact(DisplayName = "Save (Container root)")]
+		[Trait("Application", "FileStorage")]
+		public void SaveContainerRoot()
         {
             var result = FileStorage.Save("Sample.tmp", SampleContent);
 
@@ -30,7 +31,8 @@ namespace XCommon.Test.Application.FileStorage
         }
 
         [Fact(DisplayName = "Save (Container root, with override)")]
-        public void SaveContainerRootWithOveride()
+		[Trait("Application", "FileStorage")]
+		public void SaveContainerRootWithOveride()
         {
             var result01 = FileStorage.Save("Sample.tmp", SampleContent);
             var result02 = FileStorage.Save("Sample.tmp", SampleContent);
@@ -40,7 +42,8 @@ namespace XCommon.Test.Application.FileStorage
         }
 
         [Fact(DisplayName = "Save (Container root, without override)")]
-        public void SaveContainerRootWithoutOveride()
+		[Trait("Application", "FileStorage")]
+		public void SaveContainerRootWithoutOveride()
         {
             var result01 = FileStorage.Save("Sample.tmp", SampleContent, false);
             var result02 = FileStorage.Save("Sample.tmp", SampleContent, false);

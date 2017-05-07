@@ -10,7 +10,8 @@ namespace XCommon.Test.Extensions.Converters
     public class ConverterUtilsTest
     {
         [Theory(DisplayName = "Converter ToGuid")]
-        [MemberData(nameof(ConverterUtilsDataSource.GuidDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.GuidDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToGuid(string source, Guid expected, string message)
         {
             Guid result = source.ToGuid();
@@ -18,7 +19,8 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Converter ToEnum")]
-        [MemberData(nameof(ConverterUtilsDataSource.EnumDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.EnumDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToEnum(string source, BooleanOption expected, string message)
         {
             BooleanOption result = source.ToEnum<BooleanOption>();
@@ -26,7 +28,8 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Converter ToInt")]
-        [MemberData(nameof(ConverterUtilsDataSource.IntDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.IntDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToInt(string source, int expected, string message)
         {
             int result = source.ToInt32();
@@ -34,7 +37,8 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Converter ToInt (With Default)")]
-        [MemberData(nameof(ConverterUtilsDataSource.IntWithDefaultDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.IntWithDefaultDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToIntWithDefault(string source, int defaultValue, int expected, string message)
         {
             int result = source.ToInt32(defaultValue);
@@ -42,7 +46,8 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Converter ToBool")]
-        [MemberData(nameof(ConverterUtilsDataSource.BooleanOptionDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.BooleanOptionDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToBool(BooleanOption source, bool expected, string message)
         {
             bool result = source.ToBool();
@@ -50,7 +55,8 @@ namespace XCommon.Test.Extensions.Converters
         }
 
         [Theory(DisplayName = "Converter ToBool (With Default)")]
-        [MemberData(nameof(ConverterUtilsDataSource.BooleanOptionWithDefaultDataSource), MemberType = typeof(ConverterUtilsDataSource))]
+		[Trait("Extensions", "Converters")]
+		[MemberData(nameof(ConverterUtilsDataSource.BooleanOptionWithDefaultDataSource), MemberType = typeof(ConverterUtilsDataSource))]
         public void ConverterToBoolWithDefault(BooleanOption source, bool defaultValue, bool expected, string message)
         {
             bool result = source.ToBool(defaultValue);

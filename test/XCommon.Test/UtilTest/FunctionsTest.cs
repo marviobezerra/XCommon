@@ -8,7 +8,8 @@ namespace XCommon.Test.UtilTest
     public class FunctionsTest
     {
         [Theory(DisplayName = "Valid email")]
-        [MemberData(nameof(FunctionDataSource.Email), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.Email), MemberType = typeof(FunctionDataSource))]
         public void ValidEmail(string email, bool expected, string message)
         {
             var result = Functions.ValidEmail(email);
@@ -16,7 +17,8 @@ namespace XCommon.Test.UtilTest
         }
 
         [Theory(DisplayName = "Valid url")]
-        [MemberData(nameof(FunctionDataSource.Url), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.Url), MemberType = typeof(FunctionDataSource))]
         public void ValidUrl(string url, bool expected, string message)
         {
             var result = Functions.ValidUrl(url);
@@ -24,21 +26,23 @@ namespace XCommon.Test.UtilTest
         }
 
         [Theory(DisplayName = "GetToken (Default)")]
-        [MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
         public void GetTokenDefault(int[] parts, char separator)
         {
             var token = Functions.GetToken(parts);
             var tokenSplit = token.Split('-');
             tokenSplit.Length.Should().Be(parts.Length, "The number of parts need to match");
 
-            for (int i = 0; i < tokenSplit.Length; i++)
+            for (var i = 0; i < tokenSplit.Length; i++)
             {
                 tokenSplit[i].Length.Should().Be(parts[i], "It needs to respect the toke part size: " + parts[i].ToString());
             }
         }
         
         [Theory(DisplayName = "GetToken (Separator)")]
-        [MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
         public void GetTokenSeparator(int[] parts, char separator)
         {
             var token = Functions.GetToken(separator, parts);
@@ -46,14 +50,15 @@ namespace XCommon.Test.UtilTest
             var tokenSplit = token.Split(separator);
             tokenSplit.Length.Should().Be(parts.Length);
 
-            for (int i = 0; i < tokenSplit.Length; i++)
+            for (var i = 0; i < tokenSplit.Length; i++)
             {
                 tokenSplit[i].Length.Should().Be(parts[i], "It needs to respect the toke part size: " + parts[i].ToString());
             }
         }
 
         [Theory(DisplayName = "GetRandomString")]
-        [MemberData(nameof(FunctionDataSource.RandomString), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.RandomString), MemberType = typeof(FunctionDataSource))]
         public void GetRandomString(int length)
         {
             var result = Functions.GetRandomString(length);
@@ -62,7 +67,8 @@ namespace XCommon.Test.UtilTest
         }
 
         [Theory(DisplayName = "GetRandomNumber")]
-        [MemberData(nameof(FunctionDataSource.RandomNumber), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.RandomNumber), MemberType = typeof(FunctionDataSource))]
         public void GetRandomNumber(int min, int max)
         {
             var result = Functions.GetRandomNumber(min, max);
@@ -72,7 +78,8 @@ namespace XCommon.Test.UtilTest
         }
 
         [Theory(DisplayName = "GetMD5")]
-        [MemberData(nameof(FunctionDataSource.MD5), MemberType = typeof(FunctionDataSource))]
+		[Trait("Common", "Functions")]
+		[MemberData(nameof(FunctionDataSource.MD5), MemberType = typeof(FunctionDataSource))]
         public void GetMD5(string value, string expected)
         {
             var result = Functions.GetMD5(value);

@@ -6,17 +6,18 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase
 {
     public class DataBaseColumn
     {
-		public DataBaseColumn(string schema, string table)
+		public DataBaseColumn(DataBaseSchema schema, DataBaseTable table, string name)
 		{
-			Table = table;
-			Schema = schema;
+			Name = name;
+			Table = table.Name;
+			Schema = schema.Name;
 		}
 
 		public string Schema { get; private set; }
 
 		public string Table { get; private set; }
 
-		public string Name { get; internal set; }
+		public string Name { get; private set; }
 
 		public bool PK { get; set; }
 

@@ -14,7 +14,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Map (Simple, valid - interface)")]
-        public void MapSimpleValidInterface()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleValidInterface()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalCat>();
 
@@ -23,7 +24,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Map (Simple, valid - abstract)")]
-        public void MapSimpleValidAbstract()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleValidAbstract()
         {
             Action act = () => Kernel.Map<Vehicle>().To<VehicleCar>();
 
@@ -32,7 +34,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Map (Simple, valid - class to class)")]
-        public void MapSimpleValidClassToClass()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleValidClassToClass()
         {
             Action act = () => Kernel.Map<VehicleCar>().To<VehicleCar>();
 
@@ -41,7 +44,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Map (Simple, valid - function)")]
-        public void MapSimpleValidFunction()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleValidFunction()
         {
             Func<VehicleCar> resolver = () => new VehicleCar();
             Action act = () => Kernel.Map<Vehicle>().To(resolver);
@@ -51,165 +55,186 @@ namespace XCommon.Test.Patterns.Ioc
         }
         
         [Fact(DisplayName = "Map (Constructor params, valid - 01 param)")]
-        public void MapConstructorParamsValid01Param()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsValid01Param()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDog>(150);
             act.ShouldNotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, valid - 02 params)")]
-        public void MapConstructorParamsValid02Params()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsValid02Params()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true);
             act.ShouldNotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, valid - 03 params)")]
-        public void MapConstructorParamsValid03Params()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsValid03Params()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true, DateTime.Now);
             act.ShouldNotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - with no params)")]
-        public void MapConstructorParamsInvalidWithNoParams()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsInvalidWithNoParams()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - invalid param type)")]
-        public void MapConstructorParamsInvalidInvalidParamType()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsInvalidInvalidParamType()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, "Fail", DateTime.Now);
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - invalid param count)")]
-        public void MapConstructorParamsInvalidInvalidParamCount()
+		[Trait("Patterns", "Ioc")]
+		public void MapConstructorParamsInvalidInvalidParamCount()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true, DateTime.Now, "Fail");
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to interface)")]
-        public void MapSimpleInvalidInterfaceToInterface()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidInterfaceToInterface()
         {
             Action act = () => Kernel.Map<IAnimal>().To<IAnimal>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to abstract)")]
-        public void MapSimpleInvalidInterfaceToAbstract()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidInterfaceToAbstract()
         {
             Action act = () => Kernel.Map<Vehicle>().To<Vehicle>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to a class that doesn't implement it)")]
-        public void MapSimpleInvalidInterfaceToClassThatDoesImplement()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidInterfaceToClassThatDoesImplement()
         {
             Action act = () => Kernel.Map<IAnimal>().To<VehicleCar>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to abstrac)")]
-        public void MapSimpleInvalidAbstractToAbstrac()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidAbstractToAbstrac()
         {
             Action act = () => Kernel.Map<Vehicle>().To<Vehicle>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to interface)")]
-        public void MapSimpleInvalidAbstractToInterface()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidAbstractToInterface()
         {
             Action act = () => Kernel.Map<IAnimal>().To<Vehicle>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to a class that doesn't implement)")]
-        public void MapSimpleInvalidAbstractToClassThatDoesImplement()
+		[Trait("Patterns", "Ioc")]
+		public void MapSimpleInvalidAbstractToClassThatDoesImplement()
         {
             Action act = () => Kernel.Map<Vehicle>().To<AnimalDog>();
             act.ShouldThrow<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Resolve (Generic, valid)")]
-        public void ResolveGenericValid()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveGenericValid()
         {
             Kernel.Map<IAnimal>().To<AnimalCat>();
 
-            IAnimal animal01 = Kernel.Resolve<IAnimal>();
-            IAnimal animal02 = Kernel.Resolve<IAnimal>();
+            var animal01 = Kernel.Resolve<IAnimal>();
+            var animal02 = Kernel.Resolve<IAnimal>();
 
             animal01.Should().NotBeNull("There is a mapped class");
             animal01.Should().Be(animal02, "Both are the same instance");
         }
 
         [Fact(DisplayName = "Resolve (Generic, valid no cache)")]
-        public void ResolveGenericValidNoCache()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveGenericValidNoCache()
         {
             Kernel.Map<IAnimal>().To<AnimalCat>();
 
-            IAnimal animal01 = Kernel.Resolve<IAnimal>(false);
-            IAnimal animal02 = Kernel.Resolve<IAnimal>(false);
+            var animal01 = Kernel.Resolve<IAnimal>(false);
+            var animal02 = Kernel.Resolve<IAnimal>(false);
 
             animal01.Should().NotBe(animal02, "Each class is a new instance");
         }
 
         [Fact(DisplayName = "Resolve (Generic, not mapped valid no force)")]
-        public void ResolveGenericValidNoForce()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveGenericValidNoForce()
         {
-            IAnimal animal01 = Kernel.Resolve<IAnimal>(true, false);
+            var animal01 = Kernel.Resolve<IAnimal>(true, false);
 
             animal01.Should().BeNull("There isn't a mapped class, but the Kernel doesn't force to resolve");
         }
 
         [Fact(DisplayName = "Resolve (Generic, not mapped valid no cache and no force)")]
-        public void ResolveGenericValidNoForceAndNoForce()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveGenericValidNoForceAndNoForce()
         {
-            IAnimal animal01 = Kernel.Resolve<IAnimal>(false, false);
+            var animal01 = Kernel.Resolve<IAnimal>(false, false);
 
             animal01.Should().BeNull("There isn't a mapped class, but the Kernel doesn't use cache and doesn't force to resolve");
         }
 
         [Fact(DisplayName = "Resolve (Generic, invalid - Unmaped type)")]
-        public void ResolveGenericInvalidUnmapedType()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveGenericInvalidUnmapedType()
         {
             Action act = () => Kernel.Resolve<IAnimal>();
             act.ShouldThrow<Exception>("There isn't a class mapped for that interface");
         }
 
         [Fact(DisplayName = "Resolve (Object, valid)")]
-        public void ResolveObjectValid()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveObjectValid()
         {
             Kernel.Map<AnimalCat>().To<AnimalCat>();
-            AnimalCat animal = Kernel.Resolve<AnimalCat>();
+            var animal = Kernel.Resolve<AnimalCat>();
 
             animal.Should().NotBeNull("There is one class mapped for that class");
         }
 
         [Fact(DisplayName = "Resolve (Object, valid - no cache)")]
-        public void ResolveObjectValidNoCache()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveObjectValidNoCache()
         {
             Kernel.Map<AnimalCat>().To<AnimalCat>();
 
-            AnimalCat animal01 = Kernel.Resolve<AnimalCat>(false);
-            AnimalCat animal02 = Kernel.Resolve<AnimalCat>(false);
+            var animal01 = Kernel.Resolve<AnimalCat>(false);
+            var animal02 = Kernel.Resolve<AnimalCat>(false);
 
             animal01.Should().NotBe(animal02, "Each class is a new instance");
         }
 
         [Fact(DisplayName = "Resolve (Object, valid - Unmaped type no force)")]
-        public void ResolveObjectValidUnmapedTypeNoForce()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveObjectValidUnmapedTypeNoForce()
         {
-            AnimalCat animal = Kernel.Resolve<AnimalCat>(true, false);
+            var animal = Kernel.Resolve<AnimalCat>(true, false);
 
             animal.Should().BeNull("There isn't a mapped class, but the kernel wasn't force to resolve");
         }
 
         [Fact(DisplayName = "Resolve (Object, invalid - Unmaped type force)")]
-        public void ResolveObjectInvalidUnmapedTypeForce()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveObjectInvalidUnmapedTypeForce()
         {
             Action act = () => Kernel.Resolve<AnimalCat>();
 
@@ -217,21 +242,23 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Resolve (Function, valid - cache)")]
-        public void ResolveFunctionValidCache()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveFunctionValidCache()
         {
             Func<IAnimal> resolver = () => new AnimalCat();
             Kernel.Map<IAnimal>().To(resolver);
 
-            IAnimal animal01 = Kernel.Resolve<IAnimal>();
-            IAnimal animal02 = Kernel.Resolve<IAnimal>();
+            var animal01 = Kernel.Resolve<IAnimal>();
+            var animal02 = Kernel.Resolve<IAnimal>();
 
             animal01.Should().Be(animal02, "Both classes are the same instance");
         }
 
         [Fact(DisplayName = "Resolve (Function, valid - no cache)")]
-        public void ResolveFunctionValidNoCache()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveFunctionValidNoCache()
         {
-            int count = 0;
+            var count = 0;
             Func<IAnimal> resolver = () => 
             {
                 count++;
@@ -242,10 +269,10 @@ namespace XCommon.Test.Patterns.Ioc
 
             count.Should().Be(0, "The function wasn't executed yet");
 
-            IAnimal animal01 = Kernel.Resolve<IAnimal>(false);
+            var animal01 = Kernel.Resolve<IAnimal>(false);
             count.Should().Be(1, "The function was executed one time");
 
-            IAnimal animal02 = Kernel.Resolve<IAnimal>(false);
+            var animal02 = Kernel.Resolve<IAnimal>(false);
             count.Should().Be(2, "The function was executed two times");
 
 
@@ -253,12 +280,13 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Resolve (Attribute)")]
-        public void ResolveAttribute()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveAttribute()
         {
             Kernel.Map<IAnimal>().To<AnimalCat>();
             Kernel.Map<Vehicle>().To<VehicleCar>();
 
-            SampleBusiness business = new SampleBusiness();
+            var business = new SampleBusiness();
 
             business.Animal.Should().NotBeNull("There is a class mapped");
             business.Vehicle.Should().NotBeNull("There is a class mapped");
@@ -266,7 +294,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Resolve (Attribute, Thown Unmaped type)")]
-        public void ResolveAttributeUnmapedType()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveAttributeUnmapedType()
         {
             Kernel.Map<IAnimal>().To<AnimalCat>();
 
@@ -276,23 +305,25 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Resolve (Attribute, no cache)")]
-        public void ResolveAttributeNoCache()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveAttributeNoCache()
         {
             Kernel.Map<IAnimal>().To<AnimalCat>();
             Kernel.Map<Vehicle>().To<VehicleCar>();
 
-            SampleNoCacheBusiness business = new SampleNoCacheBusiness();
-            IAnimal animal = Kernel.Resolve<IAnimal>();
+            var business = new SampleNoCacheBusiness();
+            var animal = Kernel.Resolve<IAnimal>();
 
             business.Animal.Should().NotBe(animal, "These classes aren't the same instance");
         }
 
         [Fact(DisplayName = "Resolve (Attribute, no force)")]
-        public void ResolveAttributeNoForce()
+		[Trait("Patterns", "Ioc")]
+		public void ResolveAttributeNoForce()
         {
             Kernel.Map<Vehicle>().To<VehicleCar>();
             
-            SampleNoForceBusiness business = new SampleNoForceBusiness();
+            var business = new SampleNoForceBusiness();
 
             business.Animal.Should().BeNull("There is no class mapped for animal, but it isn't forced to be resolved");
             business.Vehicle.Should().NotBeNull("There is a class mapped for animal, even if it isn't force to be resolved needs to get an instace");
@@ -300,7 +331,8 @@ namespace XCommon.Test.Patterns.Ioc
         }
 
         [Fact(DisplayName = "Reset")]
-        public void Reset()
+		[Trait("Patterns", "Ioc")]
+		public void Reset()
         {
             Kernel.Map<Vehicle>().To<VehicleCar>();
             Kernel.Map<IAnimal>().To<AnimalDog>(2);

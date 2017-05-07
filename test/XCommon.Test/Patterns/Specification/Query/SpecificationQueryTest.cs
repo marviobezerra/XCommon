@@ -19,7 +19,8 @@ namespace XCommon.Test.Patterns.Specification.Query
         public ISpecificationQuery<PersonEntity, PersonFilter> Specification { get; set; }
 
         [Theory(DisplayName = "Query (Simple)")]
-        [MemberData(nameof(SpecificationQueryDataSource.DataSourceDefault), MemberType = typeof(SpecificationQueryDataSource))]
+		[Trait("Patterns", "Specification - Query")]
+		[MemberData(nameof(SpecificationQueryDataSource.DataSourceDefault), MemberType = typeof(SpecificationQueryDataSource))]
         public void QuerySimple(List<PersonEntity> source, PersonFilter filter, int recordCount, string message)
         {
             var result = Specification.Build(source, filter);
@@ -27,7 +28,8 @@ namespace XCommon.Test.Patterns.Specification.Query
         }
 
         [Theory(DisplayName = "Query (Order)")]
-        [MemberData(nameof(SpecificationQueryDataSource.DataSourceOrder), MemberType = typeof(SpecificationQueryDataSource))]
+		[Trait("Patterns", "Specification - Query")]
+		[MemberData(nameof(SpecificationQueryDataSource.DataSourceOrder), MemberType = typeof(SpecificationQueryDataSource))]
         public void QueryOrder(List<PersonEntity> source, PersonFilter filter, PersonEntity expected, string message)
         {
             var result = Specification.Build(source, filter);

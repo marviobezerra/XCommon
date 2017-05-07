@@ -7,10 +7,11 @@ namespace XCommon.Test.Extensions.UtilTest
 {
     public class EnumerationExtensionsTest
     {
-        [Fact(DisplayName = "Has (False)")]        
-        public void HasFalse()
+        [Fact(DisplayName = "Has (False)")]
+		[Trait("Extensions", "Util")]
+		public void HasFalse()
         {
-            Profile value = Profile.Manager;
+            var value = Profile.Manager;
 
             var result = value.Has(Profile.CEO);
 
@@ -18,9 +19,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Has (True)")]
-        public void HasTrue()
+		[Trait("Extensions", "Util")]
+		public void HasTrue()
         {
-            Profile value = Profile.Manager;
+            var value = Profile.Manager;
 
             var result = value.Has(Profile.Manager);
 
@@ -28,9 +30,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Has Multiple")]
-        public void HasMultiple()
+		[Trait("Extensions", "Util")]
+		public void HasMultiple()
         {
-            Profile value = Profile.User | Profile.Director | Profile.Manager;
+            var value = Profile.User | Profile.Director | Profile.Manager;
 
             value.Has(Profile.User).Should().Be(true, "The profile is a user too");
             value.Has(Profile.Director).Should().Be(true, "The profile is a director too");
@@ -41,23 +44,25 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Add (Cast int)")]
-        public void AddCast()
+		[Trait("Extensions", "Util")]
+		public void AddCast()
         {
-            Profile value = Profile.User;
+            var value = Profile.User;
 
             value = value
                 .Add(Profile.Director)
                 .Add(Profile.Manager);
 
-            int intValue = (int)value;
+            var intValue = (int)value;
 
             intValue.Should().Be(6);
         }
 
         [Fact(DisplayName = "Add")]
-        public void Add()
+		[Trait("Extensions", "Util")]
+		public void Add()
         {
-            Profile value = Profile.User;
+            var value = Profile.User;
 
             value = value
                 .Add(Profile.Director)
@@ -72,9 +77,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Add (Twice)")]
-        public void AddTwice()
+		[Trait("Extensions", "Util")]
+		public void AddTwice()
         {
-            Profile value = Profile.User;
+            var value = Profile.User;
 
             value = value
                 .Add(Profile.Director)
@@ -93,9 +99,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Remove")]
-        public void Remove()
+		[Trait("Extensions", "Util")]
+		public void Remove()
         {
-            Profile value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
+            var value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
 
             value = value
                 .Remove(Profile.Director);
@@ -110,9 +117,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Remove (Twice)")]
-        public void RemoveTwice()
+		[Trait("Extensions", "Util")]
+		public void RemoveTwice()
         {
-            Profile value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
+            var value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
 
             value = value
                 .Remove(Profile.Director)
@@ -131,9 +139,10 @@ namespace XCommon.Test.Extensions.UtilTest
         }
 
         [Fact(DisplayName = "Remove (All)")]
-        public void RemoveAll()
+		[Trait("Extensions", "Util")]
+		public void RemoveAll()
         {
-            Profile value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
+            var value = Profile.User | Profile.Director | Profile.CEO | Profile.Manager;
 
             value = value
                 .Remove(Profile.User)

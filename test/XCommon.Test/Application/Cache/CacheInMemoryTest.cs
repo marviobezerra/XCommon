@@ -19,6 +19,7 @@ namespace XCommon.Test.Application.Cache
         public ICache Cache { get; set; }
 
         [Fact(DisplayName = "Get (Unexistent value string)")]
+		[Trait("Application", "Cache")]
         public void GetUnexistentValueString()
         {
             var result = Cache.Get<string>();
@@ -26,21 +27,24 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Get (Unexistent value object)")]
-        public void GetUnexistentValueObject()
+		[Trait("Application", "Cache")]
+		public void GetUnexistentValueObject()
         {
             var result = Cache.Get<PersonEntity>();
             result.Should().Be(null);
         }
 
         [Fact(DisplayName = "Get (Unexistent value int)")]
-        public void GetUnexistentValueInt()
+		[Trait("Application", "Cache")]
+		public void GetUnexistentValueInt()
         {
             var result = Cache.Get<int>();
             result.Should().Be(0);
         }
 
         [Fact(DisplayName = "Put (Int value)")]
-        public void PutValueInt()
+		[Trait("Application", "Cache")]
+		public void PutValueInt()
         {
             Cache.Put(999);
 
@@ -50,7 +54,8 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (String value)")]
-        public void PutValueString()
+		[Trait("Application", "Cache")]
+		public void PutValueString()
         {
             Cache.Put("Foo");
 
@@ -60,9 +65,10 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (Object value)")]
-        public void PutValueObject()
+		[Trait("Application", "Cache")]
+		public void PutValueObject()
         {
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -79,9 +85,10 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (Object value, checking reference)")]
-        public void PutValueObjectCheckReference()
+		[Trait("Application", "Cache")]
+		public void PutValueObjectCheckReference()
         {
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -95,16 +102,17 @@ namespace XCommon.Test.Application.Cache
             person.Id = "2".ToGuid();
             person.Name = "Marvio Andre";
 
-            PersonEntity result = Cache.Get<PersonEntity>();
+            var result = Cache.Get<PersonEntity>();
 
             result.Id.Should().Be(person.Id);
             result.Name.Should().Be(person.Name);
         }
 
         [Fact(DisplayName = "Put (Int value with key)")]
-        public void PutValueWithKeyInt()
+		[Trait("Application", "Cache")]
+		public void PutValueWithKeyInt()
         {
-            string key = "IntTest";
+            var key = "IntTest";
             Cache.Put(key, -999);
 
             var result = Cache.Get<int>(key);
@@ -113,9 +121,10 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (String value with key)")]
-        public void PutValueWithKeyString()
+		[Trait("Application", "Cache")]
+		public void PutValueWithKeyString()
         {
-            string key = "StringTest";
+            var key = "StringTest";
 
             Cache.Put(key, "Foo");
 
@@ -125,11 +134,12 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (Object value with key)")]
-        public void PutValueWithKeyObject()
+		[Trait("Application", "Cache")]
+		public void PutValueWithKeyObject()
         {
-            string key = "ObjectTest";
+            var key = "ObjectTest";
             
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -146,11 +156,12 @@ namespace XCommon.Test.Application.Cache
         }
 
         [Fact(DisplayName = "Put (Object value, checking reference with key)")]
-        public void PutValueWithKeyObjectCheckReference()
+		[Trait("Application", "Cache")]
+		public void PutValueWithKeyObjectCheckReference()
         {
-            string key = "ObjectRefTest";
+            var key = "ObjectRefTest";
             
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -164,18 +175,19 @@ namespace XCommon.Test.Application.Cache
             person.Id = "2".ToGuid();
             person.Name = "Marvio Andre";
 
-            PersonEntity result = Cache.Get<PersonEntity>(key);
+            var result = Cache.Get<PersonEntity>(key);
 
             result.Id.Should().Be(person.Id);
             result.Name.Should().Be(person.Name);
         }
 
         [Fact(DisplayName = "Expire (Not expired dateTime)")]
-        public void NotExpireCacheDateTime()
+		[Trait("Application", "Cache")]
+		public void NotExpireCacheDateTime()
         {
-            string key = "ObjectRefTest";
+            var key = "ObjectRefTest";
 
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -186,17 +198,18 @@ namespace XCommon.Test.Application.Cache
 
             Cache.Put(key, person, DateTime.Now.AddDays(1));
 
-            PersonEntity result = Cache.Get<PersonEntity>(key);
+            var result = Cache.Get<PersonEntity>(key);
 
             result.Should().Be(person);
         }
 
         [Fact(DisplayName = "Expire (Expired dateTime)")]
-        public void ExpireCacheDateTime()
+		[Trait("Application", "Cache")]
+		public void ExpireCacheDateTime()
         {
-            string key = "ObjectRefTest";
+            var key = "ObjectRefTest";
 
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -207,17 +220,18 @@ namespace XCommon.Test.Application.Cache
 
             Cache.Put(key, person, DateTime.Now.AddMinutes(-1));
 
-            PersonEntity result = Cache.Get<PersonEntity>(key);
+            var result = Cache.Get<PersonEntity>(key);
 
             result.Should().Be(null);
         }
 
         [Fact(DisplayName = "Expire (Not expired timespan)")]
-        public void NotExpireCacheTimeSpan()
+		[Trait("Application", "Cache")]
+		public void NotExpireCacheTimeSpan()
         {
-            string key = "ObjectRefTest";
+            var key = "ObjectRefTest";
 
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -228,17 +242,18 @@ namespace XCommon.Test.Application.Cache
 
             Cache.Put(key, person, TimeSpan.FromSeconds(3600));
 
-            PersonEntity result = Cache.Get<PersonEntity>(key);
+            var result = Cache.Get<PersonEntity>(key);
 
             result.Should().Be(person);
         }
 
         [Fact(DisplayName = "Expire (Expired timespan)")]
-        public void ExpireCacheTimeSpan()
+		[Trait("Application", "Cache")]
+		public void ExpireCacheTimeSpan()
         {
-            string key = "ObjectRefTest";
+            var key = "ObjectRefTest";
 
-            PersonEntity person = new PersonEntity
+            var person = new PersonEntity
             {
                 Action = EntityAction.None,
                 Id = "1".ToGuid(),
@@ -249,7 +264,7 @@ namespace XCommon.Test.Application.Cache
 
             Cache.Put(key, person, TimeSpan.FromMinutes(-10));
 
-            PersonEntity result = Cache.Get<PersonEntity>(key);
+            var result = Cache.Get<PersonEntity>(key);
 
             result.Should().Be(null);
         }

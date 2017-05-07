@@ -23,11 +23,11 @@ namespace XCommon.CodeGeneratorV2.CSharp
 		public IDataBaseRead DataBaseRead { get; set; }
 		#endregion
 
-		internal int Run(GeneratorConfig config)
+		internal int Run()
 		{
-			config.DataBaseItems = config.DataBaseItems ?? DataBaseRead.Read("");
+			Config.DataBaseItems = Config.DataBaseItems ?? DataBaseRead.Read();
 
-			foreach (var schema in config.DataBaseItems)
+			foreach (var schema in Config.DataBaseItems)
 			{
 				foreach (var table in schema.Tables)
 				{
