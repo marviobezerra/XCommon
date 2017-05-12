@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
-    <Version>1.0.51</Version>
+    <Version>1.0.52</Version>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
     <Company>Marvio Andre Bezerra Silverio</Company>
     <Copyright>Marvio Andre Bezerra Silverio</Copyright>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>
