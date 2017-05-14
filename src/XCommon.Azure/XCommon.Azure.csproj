@@ -15,4 +15,12 @@
     <Copyright>Marvio Andre Bezerra Silverio</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="WindowsAzure.Storage" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCommon\XCommon.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using XCommon.Util;
 
 namespace XCommon.Application.FileStorage.Implementations
@@ -29,72 +31,90 @@ namespace XCommon.Application.FileStorage.Implementations
             return result.Item2;
         }
 
-        public bool Delete(string fileName)
-            => Delete(Root, fileName);
+        public async Task<bool> DeleteAsync(string fileName)
+            => await DeleteAsync(Root, fileName);
 
-        public bool Delete(string container, string fileName)
-        {
-            var folder = GetFolder(container, false);
-
-            if (folder == null)
+		public async Task<bool> DeleteAsync(string container, string fileName)
+		{
+			return await Task.Factory.StartNew(() =>
 			{
+				var folder = GetFolder(container, false);
+
+				if (folder == null)
+				{
+					return false;
+				}
+
+				if (folder.ContainsKey(fileName))
+				{
+					folder.Remove(fileName);
+					return true;
+				}
+
 				return false;
-			}
+			});
+		}
 
-			if (folder.ContainsKey(fileName))
-            {
-                folder.Remove(fileName);
-                return true;
-            }
+		public async Task<bool> ExistsAsync(string fileName)
+            => await ExistsAsync(Root, fileName);
 
-            return false;
+        public async Task<bool> ExistsAsync(string container, string fileName)
+        {
+			return await Task.Factory.StartNew(() => {
+				var folder = GetFolder(container, false);
+
+				if (folder == null)
+				{
+					return false;
+				}
+
+				return folder.ContainsKey(fileName);
+			});
         }
 
-        public bool Exists(string fileName)
-            => Exists(Root, fileName);
+        public async Task<byte[]> LoadAsync(string fileName)
+            => await LoadAsync(Root, fileName);
 
-        public bool Exists(string container, string fileName)
+        public async Task<byte[]> LoadAsync(string container, string fileName)
         {
-            var folder = GetFolder(container, false);
+			return await Task.Factory.StartNew(() => {
+				var folder = GetFolder(container, false);
 
-            if (folder == null)
-			{
+				if (folder == null)
+				{
+					return null;
+				}
+
+				folder.TryGetValue(fileName, out byte[] result);
+				return result;
+			});
+        }
+
+        public async Task<bool> SaveAsync(string fileName, byte[] content, bool overRide = true)
+            => await SaveAsync(Root, fileName, content, overRide);
+
+        public async Task<bool> SaveAsync(string container, string fileName, byte[] content, bool overRide = true)
+        {
+			return await Task.Factory.StartNew(() => {
+				var folder = GetFolder(container, true);
+
+				if (overRide || !folder.ContainsKey(fileName))
+				{
+					folder[fileName] = content;
+					return true;
+				}
+
 				return false;
-			}
-
-			return folder.ContainsKey(fileName);
+			});
         }
 
-        public byte[] Load(string fileName)
-            => Load(Root, fileName);
+		public async Task<bool> DeleteContainerAsync(string container)
+		{
+			return await Task.Factory.StartNew(() => {
 
-        public byte[] Load(string container, string fileName)
-        {
-            var folder = GetFolder(container, false);
-
-            if (folder == null)
-			{
-				return null;
-			}
-
-			folder.TryGetValue(fileName, out byte[] result);
-			return result;
-        }
-
-        public bool Save(string fileName, byte[] content, bool overRide = true)
-            => Save(Root, fileName, content, overRide);
-
-        public bool Save(string container, string fileName, byte[] content, bool overRide = true)
-        {
-            var folder = GetFolder(container, true);
-
-            if (overRide || !folder.ContainsKey(fileName))
-            {
-                folder[fileName] = content;
-                return true;
-            }
-
-            return false;
-        }
-    }
+				var result = Storage.RemoveAll(c => c.Item1 == container);
+				return true;
+			});
+		}
+	}
 }
