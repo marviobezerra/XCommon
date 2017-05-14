@@ -1,21 +1,27 @@
 ﻿using FluentAssertions;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using XCommon.CodeGeneratorV2;
 using XCommon.CodeGeneratorV2.Core.DataBase;
 using XCommon.CodeGeneratorV2.CSharp.Configuration;
 using XCommon.Patterns.Ioc;
+using XCommon.Test.CodeGenerator.DataBase.Fixture;
 using Xunit;
-using System.IO;
-using System.Linq;
-using System;
 
 namespace XCommon.Test.CodeGenerator.DataBase
 {
+	[Collection("Database collection")]
 	public class DataBaseReadTest
 	{
-		public DataBaseReadTest()
+		public DatabaseFixture Fixture { get; set; }
+
+		public DataBaseReadTest(DatabaseFixture fixture)
 		{
-			var path = Directory.GetCurrentDirectory();
+			fixture.DBPath = string.Format(@"{0}\AppData\CodeGeneratorTest.mdf", Directory.GetCurrentDirectory());
+			fixture.DBServer = @"(LocalDB)\ProjectsV13";
+
+			Fixture = fixture;
 
 			var config = new GeneratorConfig
 			{
@@ -23,7 +29,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 				{
 					DataBase = new CSharpDataBaseConfig
 					{
-						ConnectionString = string.Format(@"Data Source=(LocalDB)\ProjectsV13;AttachDbFilename={0}\AppData\CodeGeneratorTest.mdf;Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", path),
+						ConnectionString = string.Format(@"Data Source={0};AttachDbFilename={1};Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", Fixture.DBServer, Fixture.DBPath),
 						SchemaExclude = new List<string> { "dbo" }
 					}
 				}
@@ -35,20 +41,33 @@ namespace XCommon.Test.CodeGenerator.DataBase
 			DataBase = dataBaseRead.Read();
 		}
 
+		private bool IsMyMachine
+		{
+			get
+			{
+				return System.Environment.MachineName.ToUpper() == "Brainiac".ToUpper();
+			}
+		}
+
+
 		public List<DataBaseSchema> DataBase { get; set; }
 
-		[Fact(DisplayName = "Null Check")]
+		[SkippableFact(DisplayName = "Null Check")]
 		[Trait("CodeGenerator", "Database reader")]
 		public void NullCheckTest()
 		{
+			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+
 			DataBase.Should().NotBeNull("That is a valid database connection");
 			DataBase.Should().HaveCount(2, "There are two schemas on test Database");
 		}
 
-		[Fact(DisplayName = "Check Common Schema")]
+		[SkippableFact(DisplayName = "Check Common Schema")]
 		[Trait("CodeGenerator", "Database reader")]
 		public void CommonSchemaTest()
 		{
+			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Common");
 
 			schema.Should().NotBeNull("It should have a Common Schema");
@@ -56,10 +75,12 @@ namespace XCommon.Test.CodeGenerator.DataBase
 			schema.Tables.Should().HaveCount(3, "There are three table on Common schema");
 		}
 
-		[Fact(DisplayName = "Check Register Schema")]
+		[SkippableFact(DisplayName = "Check Register Schema")]
 		[Trait("CodeGenerator", "Database reader")]
 		public void RegisterSchemaTest()
 		{
+			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 
 			schema.Should().NotBeNull("It should have a Register Schema");
@@ -67,10 +88,12 @@ namespace XCommon.Test.CodeGenerator.DataBase
 			schema.Tables.Should().HaveCount(2, "There are two table on Register schema");
 		}
 
-		[Fact(DisplayName = "Check People Table")]
+		[SkippableFact(DisplayName = "Check People Table")]
 		[Trait("CodeGenerator", "Database reader")]
 		public void PeopleTableTest()
 		{
+			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 			var table = schema.Tables.FirstOrDefault(c => c.Name == "People");
 
@@ -79,10 +102,12 @@ namespace XCommon.Test.CodeGenerator.DataBase
 			table.PKName.Should().Be("IdPerson");
 		}
 
-		[Fact(DisplayName = "Check People Table - Columns")]
+		[SkippableFact(DisplayName = "Check People Table - Columns")]
 		[Trait("CodeGenerator", "Database reader")]
 		public void PeopleTableTestColumns()
 		{
+			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 			var columns = schema.Tables.FirstOrDefault(c => c.Name == "People").Columns;
 

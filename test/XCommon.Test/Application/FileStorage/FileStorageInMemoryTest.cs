@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FluentAssertions;
 using System.Threading.Tasks;
 using XCommon.Application.FileStorage;
 using XCommon.Application.FileStorage.Implementations;
 using Xunit;
-using FluentAssertions;
 
 namespace XCommon.Test.Application.FileStorage
 {
-    public class FileStorageInMemoryTest
+	public class FileStorageInMemoryTest
     {
         public FileStorageInMemoryTest()
         {
@@ -17,25 +14,25 @@ namespace XCommon.Test.Application.FileStorage
             SampleContent = new byte[] { 1, 0, 1, 1, 1, 0 };
         }
 
-        public byte[] SampleContent { get; set; }
+        private byte[] SampleContent { get; set; }
 
         private IFileStorage FileStorage { get; set; }
 
         [Fact(DisplayName = "Save (Container root)")]
 		[Trait("Application", "FileStorage")]
-		public void SaveContainerRoot()
+		public async Task SaveContainerRoot()
         {
-            var result = FileStorage.Save("Sample.tmp", SampleContent);
+            var result = await FileStorage.SaveAsync("Sample.tmp", SampleContent);
 
             result.Should().Be(true);
         }
 
         [Fact(DisplayName = "Save (Container root, with override)")]
 		[Trait("Application", "FileStorage")]
-		public void SaveContainerRootWithOveride()
+		public async Task SaveContainerRootWithOveride()
         {
-            var result01 = FileStorage.Save("Sample.tmp", SampleContent);
-            var result02 = FileStorage.Save("Sample.tmp", SampleContent);
+            var result01 = await FileStorage.SaveAsync("Sample.tmp", SampleContent);
+            var result02 = await FileStorage.SaveAsync("Sample.tmp", SampleContent);
 
             result01.Should().Be(true);
             result02.Should().Be(true);
@@ -43,10 +40,10 @@ namespace XCommon.Test.Application.FileStorage
 
         [Fact(DisplayName = "Save (Container root, without override)")]
 		[Trait("Application", "FileStorage")]
-		public void SaveContainerRootWithoutOveride()
+		public async Task SaveContainerRootWithoutOveride()
         {
-            var result01 = FileStorage.Save("Sample.tmp", SampleContent, false);
-            var result02 = FileStorage.Save("Sample.tmp", SampleContent, false);
+            var result01 = await FileStorage.SaveAsync("Sample.tmp", SampleContent, false);
+            var result02 = await FileStorage.SaveAsync("Sample.tmp", SampleContent, false);
 
             result01.Should().Be(true);
             result02.Should().Be(false);

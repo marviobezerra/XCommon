@@ -11,6 +11,8 @@ namespace XCommon.Application
 
 		string ConnectionString { get; }
 
+		string AzureStorage { get; }
+
 		bool UnitTest { get; }
 
 		bool Production { get; }
@@ -30,6 +32,8 @@ namespace XCommon.Application
 		}
 
 		public string ConnectionString { get; set; }
+
+		public string AzureStorage { get; set; }
 
 		public bool UnitTest { get; set; }
 
