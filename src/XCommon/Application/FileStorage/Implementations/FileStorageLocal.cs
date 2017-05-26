@@ -9,9 +9,14 @@ namespace XCommon.Application.FileStorage.Implementations
         public FileStorageLocal(string rootFolder)
         {
             Root = rootFolder;
-        }
 
-        private string Root { get; set; }
+			if (!Directory.Exists(Root))
+			{
+				Directory.CreateDirectory(Root);
+			}
+		}
+
+        protected string Root { get; set; }
 
 		private string GetFullContainer(string container)
 		{
