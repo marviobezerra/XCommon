@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XCommon.Application.Logger;
 
 namespace XCommon.Application
@@ -17,7 +18,11 @@ namespace XCommon.Application
 
 		bool Production { get; }
 
-        LogType Logger { get; }
+		string Url { get; }
+
+		List<string> Urls { get; }
+
+		LogType Logger { get; }
 
         ApplicationCulture Culture { get; }
 
@@ -29,6 +34,7 @@ namespace XCommon.Application
 		public ApplicationSettings()
 		{
 			Cultures = new List<ApplicationCulture>();
+			Urls = new List<string>();
 		}
 
 		public string ConnectionString { get; set; }
@@ -48,6 +54,10 @@ namespace XCommon.Application
 		public string Name { get; set; }
 
 		public string Version { get; set; }
+
+		public string Url { get; set; }
+
+		public List<string> Urls { get; set; }
 	}
 
 	public class ApplicationCulture
