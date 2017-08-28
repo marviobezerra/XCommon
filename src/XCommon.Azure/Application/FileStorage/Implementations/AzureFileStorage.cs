@@ -23,13 +23,13 @@ namespace XCommon.Azure.Application.FileStorage.Implementations
 		{
 			Kernel.Resolve(this);
 
-			if (ApplicationSettings.Production && ApplicationSettings.AzureStorage.IsEmpty())
+			if (ApplicationSettings.Production && ApplicationSettings.StorageConnectionString.IsEmpty())
 			{
 				throw new Exception("Azure storage not found on the ApplicationSettings");
 			}
 
 			StorageAccount = ApplicationSettings.Production
-				? CloudStorageAccount.Parse(ApplicationSettings.AzureStorage)
+				? CloudStorageAccount.Parse(ApplicationSettings.StorageConnectionString)
 				: CloudStorageAccount.DevelopmentStorageAccount;
 
 			BlobClient = StorageAccount.CreateCloudBlobClient();

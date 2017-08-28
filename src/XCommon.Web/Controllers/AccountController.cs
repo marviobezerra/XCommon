@@ -1,22 +1,21 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using XCommon.Application.Authentication;
+using XCommon.Application.Authentication.Entity;
 using XCommon.Application.Executes;
-using XCommon.Application.Login;
-using XCommon.Application.Login.Entity;
 using XCommon.Patterns.Ioc;
-using XCommon.Web.Authentication.Ticket;
 
 namespace XCommon.Web.Controllers
 {
-    public abstract class AccountController : BaseController
+	public abstract class AccountController : BaseController
     {
         [Inject]
         protected ILoginBusiness LoginBusiness { get; set; }
 
         [Inject]
-        private ITicketManagerWeb TicketManagerWeb { get; set; }
+        private ITicketManager TicketManager { get; set; }
 
         [HttpPost("signin")]
         public virtual async Task<Execute<TicketStatus>> SignIn([FromBody] SignInEntity login)
@@ -78,12 +77,6 @@ namespace XCommon.Web.Controllers
         {
             info.Key = Ticket.UserKey;
             return await LoginBusiness.ChangePasswordAsync(info);
-        }
-
-        [HttpGet("setculture/{culture}")]
-        public virtual bool SetCulture(string culture)
-        {
-            return TicketManagerWeb.SetCookieCulture(culture);
         }
     }
 }

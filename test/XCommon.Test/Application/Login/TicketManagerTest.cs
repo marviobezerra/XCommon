@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using System.Threading.Tasks;
-using XCommon.Application.Login;
-using XCommon.Application.Login.Entity;
-using XCommon.Application.Login.Implementations;
+using XCommon.Application.Authentication;
+using XCommon.Application.Authentication.Entity;
+using XCommon.Application.Authentication.Implementations;
 using XCommon.Extensions.Converters;
 using Xunit;
 

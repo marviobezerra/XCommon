@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <Version>1.0.53</Version>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
     <Company>Marvio Andre Bezerra Silverio</Company>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.3.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>

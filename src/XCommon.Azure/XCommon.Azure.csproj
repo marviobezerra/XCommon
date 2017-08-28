@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <Description>XCommon for Azure. There are features like access blob file storage, send mail and others.</Description>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
     <Version>1.0.53</Version>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WindowsAzure.Storage" Version="8.1.1" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.4.0" />
   </ItemGroup>
 
   <ItemGroup>
