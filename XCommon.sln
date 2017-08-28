@@ -1,29 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon", "src\XCommon\XCommon.csproj", "{6CFD3511-4ECE-4FDE-9DB2-893F4CAFF453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.EF", "src\XCommon.EF\XCommon.EF.csproj", "{6D2BBF04-D042-4320-A6A9-598B9575746A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.EF", "src\XCommon.EF\XCommon.EF.csproj", "{6D2BBF04-D042-4320-A6A9-598B9575746A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Web", "src\XCommon.Web\XCommon.Web.csproj", "{B62A4B7C-3914-4C6C-ADF7-DFF34AB58D23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Web", "src\XCommon.Web\XCommon.Web.csproj", "{B62A4B7C-3914-4C6C-ADF7-DFF34AB58D23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Azure", "src\XCommon.Azure\XCommon.Azure.csproj", "{B2C2D3D2-0D18-4B92-BD39-D4B9F3F0EB2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Azure", "src\XCommon.Azure\XCommon.Azure.csproj", "{B2C2D3D2-0D18-4B92-BD39-D4B9F3F0EB2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.CodeGenerator", "src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj", "{034DE6E3-2689-4A5C-912E-637D8D467DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.CodeGenerator", "src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj", "{034DE6E3-2689-4A5C-912E-637D8D467DB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08B0F53F-B112-46C1-846F-6AF87C1584C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test", "test\XCommon.Test\XCommon.Test.csproj", "{F0465DAB-BA2F-4AF3-A4D3-026BD9A43002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test", "test\XCommon.Test\XCommon.Test.csproj", "{F0465DAB-BA2F-4AF3-A4D3-026BD9A43002}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.Azure", "test\XCommon.Test.Azure\XCommon.Test.Azure.csproj", "{FAB60F46-7F45-49BE-B9DA-B65AC20A5AD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.Azure", "test\XCommon.Test.Azure\XCommon.Test.Azure.csproj", "{FAB60F46-7F45-49BE-B9DA-B65AC20A5AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.CodeGenerator", "test\XCommon.Test.CodeGenerator\XCommon.Test.CodeGenerator.csproj", "{4263C32F-7F69-4E28-A85D-7BA0EA9B2F2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.CodeGenerator", "test\XCommon.Test.CodeGenerator\XCommon.Test.CodeGenerator.csproj", "{4263C32F-7F69-4E28-A85D-7BA0EA9B2F2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.EF", "test\XCommon.Test.EF\XCommon.Test.EF.csproj", "{7C8441D0-7E73-493F-91F8-BF9AD804C667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.EF", "test\XCommon.Test.EF\XCommon.Test.EF.csproj", "{7C8441D0-7E73-493F-91F8-BF9AD804C667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.Web", "test\XCommon.Test.Web\XCommon.Test.Web.csproj", "{F088277B-FC3C-4F0C-93EC-57D32F7BEFC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.Web", "test\XCommon.Test.Web\XCommon.Test.Web.csproj", "{F088277B-FC3C-4F0C-93EC-57D32F7BEFC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{30D1C660-49D5-481B-8DB9-E718C4A664A3}"
 EndProject
@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".extra", ".extra", "{2901F7
 		test.ps1 = test.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.CodeGeneratorV2", "src\XCommon.CodeGeneratorV2\XCommon.CodeGeneratorV2.csproj", "{CF118FD1-C82A-473B-9DF8-2327699404E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.CodeGeneratorV2", "src\XCommon.CodeGeneratorV2\XCommon.CodeGeneratorV2.csproj", "{CF118FD1-C82A-473B-9DF8-2327699404E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.Web.Site", "test\XCommon.Test.Web.Site\XCommon.Test.Web.Site.csproj", "{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{CF118FD1-C82A-473B-9DF8-2327699404E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF118FD1-C82A-473B-9DF8-2327699404E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF118FD1-C82A-473B-9DF8-2327699404E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,5 +111,9 @@ Global
 		{7C8441D0-7E73-493F-91F8-BF9AD804C667} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
 		{F088277B-FC3C-4F0C-93EC-57D32F7BEFC7} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
 		{CF118FD1-C82A-473B-9DF8-2327699404E9} = {08B0F53F-B112-46C1-846F-6AF87C1584C7}
+		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DA7A962-F214-4F97-9056-E93F7C6C6C31}
 	EndGlobalSection
 EndGlobal
