@@ -78,5 +78,12 @@ namespace XCommon.Web.Controllers
             info.Key = Ticket.UserKey;
             return await LoginBusiness.ChangePasswordAsync(info);
         }
-    }
+
+		[AllowAnonymous]
+		[HttpGet("checktoken/{key}")]
+		public virtual async Task<TokenEntity> CheckToken(string key)
+		{
+			return await Ticket.CheckTokenAsync(key);
+		}
+	}
 }

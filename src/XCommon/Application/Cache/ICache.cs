@@ -1,28 +1,30 @@
-﻿using System;
+using System;
 
 namespace XCommon.Application.Cache
 {
     public interface ICache
     {
-        T Get<T>();
+        TEntity Get<TEntity>();
 
-        T Get<T>(string key);
+        TEntity Get<TEntity>(string key);
 
-        void Put<T>(T value);
+        TEntity GetAndRemove<TEntity>(string key);
 
-        void Put<T>(string key, T value);
+		void Put<TEntity>(TEntity value);
 
-        void Put<T>(T value, DateTime absoluteExpiration);
+        void Put<TEntity>(string key, TEntity value);
 
-        void Put<T>(string key, T value, DateTime absoluteExpiration);
+        void Put<TEntity>(TEntity value, DateTime absoluteExpiration);
 
-        void Put<T>(T value, TimeSpan slidingExpiration);
+        void Put<TEntity>(string key, TEntity value, DateTime absoluteExpiration);
 
-        void Put<T>(string key, T value, TimeSpan slidingExpiration);
+        void Put<TEntity>(TEntity value, TimeSpan slidingExpiration);
 
-        void Remove<T>();
+        void Put<TEntity>(string key, TEntity value, TimeSpan slidingExpiration);
 
-        void Remove<T>(string key);
+        void Remove<TEntity>();
+
+        void Remove<TEntity>(string key);
 
         void Clear();
     }

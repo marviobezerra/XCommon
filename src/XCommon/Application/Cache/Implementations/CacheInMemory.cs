@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using XCommon.Util;
 
@@ -21,12 +21,12 @@ namespace XCommon.Application.Cache.Implementations
             Cache.Clear();
         }
 
-        public T Get<T>()
-            => Get<T>(null);
+        public TEntity Get<TEntity>()
+            => Get<TEntity>(null);
 
-        public T Get<T>(string key)
+        public TEntity Get<TEntity>(string key)
         {
-            var fullKey = key.BuildFullKey<T>();
+            var fullKey = key.BuildFullKey<TEntity>();
 
             lock (LockObject)
             {
@@ -35,47 +35,54 @@ namespace XCommon.Application.Cache.Implementations
                     if (DateTime.Now > value.Item1)
                     {
                         Cache.Remove(fullKey);
-                        return default(T);
+                        return default(TEntity);
                     }
 
-                    return (T)value.Item2;
+                    return (TEntity)value.Item2;
                 }
             }
 
-            return default(T);
+            return default(TEntity);
         }
 
-        public void Put<T>(T value)
+		public TEntity GetAndRemove<TEntity>(string key)
+		{
+			var result = Get<TEntity>(key);
+			Remove<TEntity>(key);
+			return result;
+		}
+
+		public void Put<TEntity>(TEntity value)
             => Put(null, value, DateTime.MaxValue);
 
-        public void Put<T>(string key, T value)
+        public void Put<TEntity>(string key, TEntity value)
             => Put(key, value, DateTime.MaxValue);
 
-        public void Put<T>(T value, TimeSpan slidingExpiration)
+        public void Put<TEntity>(TEntity value, TimeSpan slidingExpiration)
             => Put(null, value, DateTime.Now.Add(slidingExpiration));
 
-        public void Put<T>(T value, DateTime absoluteExpiration)
+        public void Put<TEntity>(TEntity value, DateTime absoluteExpiration)
             => Put(null, value, absoluteExpiration);
 
-        public void Put<T>(string key, T value, TimeSpan slidingExpiration)
+        public void Put<TEntity>(string key, TEntity value, TimeSpan slidingExpiration)
             => Put(key, value, DateTime.Now.Add(slidingExpiration));
 
-        public void Put<T>(string key, T value, DateTime absoluteExpiration)
+        public void Put<TEntity>(string key, TEntity value, DateTime absoluteExpiration)
         {
             lock (LockObject)
 			{
-				Cache[key.BuildFullKey<T>()] = new Pair<DateTime, object>(absoluteExpiration, value);
+				Cache[key.BuildFullKey<TEntity>()] = new Pair<DateTime, object>(absoluteExpiration, value);
 			}
 		}
 
-        public void Remove<T>()
-            => Remove<T>(null);
+        public void Remove<TEntity>()
+            => Remove<TEntity>(null);
 
-        public void Remove<T>(string key)
+        public void Remove<TEntity>(string key)
         {
             lock (LockObject)
 			{
-				Cache.Remove(key.BuildFullKey<T>());
+				Cache.Remove(key.BuildFullKey<TEntity>());
 			}
 		}
     }

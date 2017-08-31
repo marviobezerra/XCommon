@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using XCommon.Application.Authentication;
+using XCommon.Application.Cache;
+using XCommon.Application.Cache.Implementations;
 using XCommon.Application.Logger;
 
 namespace XCommon.Application
@@ -28,21 +29,17 @@ namespace XCommon.Application
 
 		List<ApplicationCulture> Cultures { get; }
 
-		TValue GetValue<TValue>(string key);
-
-		void SetValue<TValue>(string key, TValue value);
+		ICache Values { get; }
 	}
 
 	public class ApplicationSettings : IApplicationSettings
 	{
 		public ApplicationSettings()
 		{
-			ConfigValues = new Dictionary<string, object>();
+			Values = new CacheInMemory();
 			Cultures = new List<ApplicationCulture>();
 			Urls = new List<string>();
 		}
-
-		private Dictionary<string, object> ConfigValues { get; set; }
 
 		public string Version { get; set; }
 
@@ -66,20 +63,7 @@ namespace XCommon.Application
 
 		public List<ApplicationCulture> Cultures { get; set; }
 
-		public TValue GetValue<TValue>(string key)
-		{
-			if (ConfigValues.ContainsKey(key))
-			{
-				return (TValue)ConfigValues[key];
-			}
-
-			return default(TValue);
-		}
-
-		public void SetValue<TValue>(string key, TValue value)
-		{
-			ConfigValues[key] = value;
-		}
+		public ICache Values { get; private set; }
 	}
 
 	public class ApplicationCulture

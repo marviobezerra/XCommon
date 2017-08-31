@@ -14,7 +14,7 @@ namespace XCommon.Test.Patterns.Repository.Executes
             SampleUser = new ExecuteUser
             {
                 Key = "1".ToGuid(),
-                Login = "marvio.bezerra",
+                Culture = "marvio.bezerra",
                 Name = "Márvio André Bezerra Silverio"
             };
         }
@@ -139,7 +139,7 @@ namespace XCommon.Test.Patterns.Repository.Executes
             var user = new ExecuteUser
             {
                 Key = "2".ToGuid(),
-                Login = "jonhy",
+                Culture = "jonhy",
                 Name = "Jonhy"
             };
 
