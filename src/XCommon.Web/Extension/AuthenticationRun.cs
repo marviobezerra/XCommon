@@ -1,14 +1,22 @@
 using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using XCommon.Application;
+using XCommon.Application.Authentication.Entity;
+using XCommon.Extensions.String;
 using XCommon.Extensions.Util;
 using XCommon.Patterns.Ioc;
-using XCommon.Web.Authentication2;
-using XCommon.Web.Authentication2.Providers;
+using XCommon.Web.Authentication;
+using XCommon.Web.Authentication.Providers;
 
 namespace XCommon.Web.Extension
 {
@@ -17,56 +25,91 @@ namespace XCommon.Web.Extension
 		internal AuthenticationRun(IConfigurationRoot config)
 		{
 			Configuration = config;
-			SetUp();
-		}
+			ApplicationSettings = Kernel.Resolve<IApplicationSettings>();
+			AuthenticationConfig = Configuration.Get<AuthenticationConfig>(ApplicationBuilderExtension.Authentication);
+			ApplicationSettings.Values.Put(ApplicationBuilderExtension.Authentication, AuthenticationConfig);
 
-		internal AuthenticationRun(IHostingEnvironment env)
-		{
-			var builder = new ConfigurationBuilder()
-			   .SetBasePath(env.ContentRootPath)
-			   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-			   .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-			builder.AddEnvironmentVariables();
-			Configuration = builder.Build();
 			SetUp();
 		}
 
 		private IConfigurationRoot Configuration { get; }
 
-		private List<BaseProvider> Authenticators { get; set; }
+		private List<BaseProvider> Providers { get; set; }
+
+		private IApplicationSettings ApplicationSettings { get; set; }
+
+		private AuthenticationConfig AuthenticationConfig { get; set; }
+
 
 		private void SetUp()
 		{
-			Authenticators = new List<BaseProvider>();
+			Providers = new List<BaseProvider>();
 
-			var applicationSettings = Kernel.Resolve<IApplicationSettings>();
-			var config = Configuration.Get<AuthenticationConfig>("XCommon:Authentication");
+			if (AuthenticationConfig.Facebook != null)
+				Providers.Add(AuthenticationConfig.Facebook);
 
-			applicationSettings.SetValue("Authentication", config);
+			if (AuthenticationConfig.Google != null)
+				Providers.Add(AuthenticationConfig.Google);
 
-			if (config.Facebook != null)
-				Authenticators.Add(config.Facebook);
-
-			if (config.Google != null)
-				Authenticators.Add(config.Google);
-
-			if (config.Local != null)
-				Authenticators.Add(config.Local);
+			if (AuthenticationConfig.Local != null)
+				Providers.Add(AuthenticationConfig.Local);
 		}
 
-		internal AuthenticationBuilder Configure(AuthenticationBuilder builder)
+		internal IServiceCollection Configure(IServiceCollection services)
 		{
-			Authenticators.ForEach(auth => auth.SetUp(builder));
-			return builder;
+			var authSchema = AuthenticationConfig.AuthenticationType == AuthenticationType.Token
+				? JwtBearerDefaults.AuthenticationScheme
+				: CookieAuthenticationDefaults.AuthenticationScheme;
+
+			var auth = services.AddAuthentication(authSchema);
+			var audience = ApplicationSettings.Name.IsEmpty() ? "XCommon" : ApplicationSettings.Name;
+
+			if (AuthenticationConfig.AuthenticationType == AuthenticationType.Token)
+			{
+				auth.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, cfg =>
+				{
+					cfg.RequireHttpsMetadata = false;
+					cfg.SaveToken = true;
+
+					cfg.Events = new JwtBearerEvents
+					{
+						OnAuthenticationFailed = ex =>  {
+							var x = ex;
+							return Task.FromResult(0);
+						}
+					};
+
+					cfg.TokenValidationParameters = new TokenValidationParameters()
+					{
+						ValidIssuer = audience,
+						ValidAudience = audience,
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthenticationConfig.SecurityKey))
+					};
+
+				});
+			}
+
+			if (AuthenticationConfig.AuthenticationType == AuthenticationType.Cookie)
+			{
+				auth.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, cfg =>
+				{
+					cfg.SlidingExpiration = true;
+					cfg.Cookie.HttpOnly = false;
+					cfg.Cookie.Name = audience;
+				});
+			}
+
+			Providers.ForEach(provider => provider.SetUp(auth));
+			return services;
 		}
 
 		internal IApplicationBuilder Configure(IApplicationBuilder app)
 		{
 			var applicationSettings = Kernel.Resolve<IApplicationSettings>();
-			var config = Configuration.Get<AuthenticationConfig>("XCommon:Authentication");
+			var config = Configuration.Get<AuthenticationConfig>(ApplicationBuilderExtension.Authentication);
 
 			app
+			   .UseAuthentication()
 			   .Map(config.UriLogin, signoutApp =>
 			   {
 				   signoutApp.Run(async context =>
@@ -75,7 +118,7 @@ namespace XCommon.Web.Extension
 
 					   if (!string.IsNullOrEmpty(authType))
 					   {
-						   context.Request.PathBase = new PathString("");
+						   context.Request.PathBase = new PathString(config.UriApplicationBase);
 						   await context.ChallengeAsync(authType, new AuthenticationProperties() { RedirectUri = "/" });
 						   return;
 					   }
@@ -83,7 +126,7 @@ namespace XCommon.Web.Extension
 					   context.Response.ContentType = "text/html";
 					   await context.Response.WriteAsync("<html><body>");
 					   await context.Response.WriteAsync("Choose an authentication scheme: <br>");
-					   foreach (var type in Authenticators)
+					   foreach (var type in Providers)
 					   {
 						   await context.Response.WriteAsync($"<a href='?scheme={type.Provider}'>{type.Provider}</a><br>");
 					   }

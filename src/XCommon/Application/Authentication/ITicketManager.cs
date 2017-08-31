@@ -5,8 +5,9 @@ using XCommon.Application.Executes;
 
 namespace XCommon.Application.Authentication
 {
-    public interface ITicketManager
+	public interface ITicketManager
     {
+		
         bool IsAuthenticated { get; }
 
         string Culture { get; }
@@ -15,8 +16,10 @@ namespace XCommon.Application.Authentication
 
         ExecuteUser User { get; }
 
-        Task SignInAsync(TicketEntity signUpTicket);
+		Task<string> SignInAsync(TicketEntity signUpTicket);
 
         Task SignOutAsync();
+
+		Task<TokenEntity> CheckTokenAsync(string key);
     }
 }

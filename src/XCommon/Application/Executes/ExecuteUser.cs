@@ -1,4 +1,4 @@
-﻿namespace XCommon.Application.Executes
+namespace XCommon.Application.Executes
 {
     public class ExecuteUser
     {
@@ -6,6 +6,6 @@
 
         public string Name { get; set; }
 
-        public string Login { get; set; }
+        public string Culture { get; set; }
     }
 }

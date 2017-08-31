@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using XCommon.Application.Authentication.Entity;
 
-namespace XCommon.Web.Authentication2.Providers
+namespace XCommon.Web.Authentication.Providers
 {
 	public class LocalProvider : BaseProvider
 	{

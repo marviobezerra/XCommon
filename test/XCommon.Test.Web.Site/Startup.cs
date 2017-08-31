@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,23 +6,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using XCommon.Application;
 using XCommon.Application.Authentication;
-using XCommon.Application.Authentication.Entity;
 using XCommon.Extensions.Util;
 using XCommon.Patterns.Ioc;
 using XCommon.Web;
+using XCommon.Web.Authentication;
 
 namespace XCommon.Test.Web.Site
 {
-    public class Startup
-    {
+	public class Startup
+	{
 		public IConfigurationRoot Configuration { get; }
-
-		public IApplicationSettings ApplicationSettings { get; }
 
 		public Startup(IHostingEnvironment env)
 		{
-			Kernel.Map<IApplicationSettings>().To(new ApplicationSettings());
-
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -33,30 +26,54 @@ namespace XCommon.Test.Web.Site
 				.AddEnvironmentVariables();
 
 			Configuration = builder.Build();
-			ApplicationSettings = Configuration.Get<ApplicationSettings>("DoIt");
+
 
 		}
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
-        {
+		{
+			Kernel.Map<IApplicationSettings>().To(Configuration.Get<ApplicationSettings>("XCommon:Authentication"));
+			Kernel.Map<ILoginBusiness>().To<Code.LoginBusiness>();
+
 			services
-				.UseXCommonAuthentication(Configuration)
+				.AddCors(options =>
+				{
+					options.AddPolicy("AllowAllOrigins",
+						builder =>
+						{
+							builder
+								.AllowAnyOrigin()
+								.AllowAnyHeader()
+								.AllowAnyMethod();
+						});
+				})
+				.UseXCommonAuthentication(Configuration);
+
+			services
 				.AddMvc();
 		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			var httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+			Kernel.Map<ITicketManager>().To<TicketManager>(httpContextAccessor);
 
 			app
-				.UseXCommonAuthentication(env)
-				.UseMvc();			
-        }
-    }
+				.UseXCommonAuthentication(Configuration)
+				.UseDeveloperExceptionPage();
+
+			app.Map("/token", c => {
+				c.Run(async context => {
+					var key = context.Request.Path.Value.Split("/").Last();
+					var token = await Kernel.Resolve<ITicketManager>().CheckTokenAsync(key);
+					await context.Response.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(token));
+				});
+			});
+
+			app.UseMvc();
+		}
+	}
 }

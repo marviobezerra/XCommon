@@ -15,7 +15,6 @@ namespace XCommon.Application.Authentication.Implementations
 
         private string CultureDefault { get; set; }
 
-
         public string Culture { get; private set; }
 
 		public bool IsAuthenticated { get; private set; }
@@ -24,7 +23,7 @@ namespace XCommon.Application.Authentication.Implementations
 
 		public Guid UserKey { get; set; }
 
-		public async Task SignInAsync(TicketEntity signUpTicket)
+		public async Task<string> SignInAsync(TicketEntity signUpTicket)
 		{
             if (signUpTicket != null && signUpTicket.Status == TicketStatus.Sucess)
             {
@@ -35,13 +34,15 @@ namespace XCommon.Application.Authentication.Implementations
                 {
                     Key = signUpTicket.Key,
                     Name = signUpTicket.Name,
-                    Login = "Fake"
+                    Culture = "Fake"
                 };
 
-                return;
+                return string.Empty;
             }
 
             await SignOutAsync();
+			return string.Empty;
+
 		}
 
 		public async Task SignOutAsync()
@@ -53,5 +54,10 @@ namespace XCommon.Application.Authentication.Implementations
 
             await Task.Yield();
         }
+
+		public Task<TokenEntity> CheckTokenAsync(string key)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

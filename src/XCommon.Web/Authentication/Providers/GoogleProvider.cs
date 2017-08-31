@@ -2,12 +2,13 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.DependencyInjection;
 using XCommon.Application.Authentication.Entity;
 using XCommon.Extensions.String;
 
-namespace XCommon.Web.Authentication2.Providers
+namespace XCommon.Web.Authentication.Providers
 {
 	public class GoogleProvider : BaseProvider
 	{
@@ -85,22 +86,17 @@ namespace XCommon.Web.Authentication2.Providers
 				c.ClientId = ClientId;
 				c.ClientSecret = ClientSecret;
 				c.SaveTokens = true;
-				c.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
 				c.Events = new OAuthEvents
 				{
 					OnRemoteFailure = ctx =>
 					{
-						ctx.Response.Redirect("/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message));
-						ctx.HandleResponse();
-						return Task.FromResult(0);
+						return ProcessFail(ctx);
 					},
-					OnCreatingTicket = ctx =>
+					OnCreatingTicket = async ctx =>
 					{
-						return ProcessTicket(ctx);
-					},
-					OnTicketReceived = ctx =>
-					{
-						return Task.FromResult(0);
+						await ProcessTicket(ctx);
+						ctx.Success();
 					}
 				};
 			});
