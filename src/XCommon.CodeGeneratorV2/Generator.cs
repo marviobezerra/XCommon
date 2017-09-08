@@ -1,9 +1,7 @@
-﻿using XCommon.Application.CommandLine;
+using XCommon.Application.CommandLine;
 using XCommon.CodeGeneratorV2.Angular;
 using XCommon.CodeGeneratorV2.CSharp;
-using XCommon.CodeGeneratorV2.CSharp.Implementation;
 using XCommon.CodeGeneratorV2.TypeScript;
-using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGeneratorV2
 {
@@ -29,26 +27,26 @@ namespace XCommon.CodeGeneratorV2
 
 			app.OnExecute(() => {
 
-				if (csharp.HasValue())
-				{
+				//if (csharp.HasValue())
+				//{
 					var runner = new CSharpRunner();
 					return runner.Run();
-				}
+				//}
 
-				if (angular.HasValue())
-				{
-					var runner = new AngularRunner();
-					return runner.Run(args);
-				}
+				//if (angular.HasValue())
+				//{
+				//	var runner = new AngularRunner();
+				//	return runner.Run(args);
+				//}
 
-				if (typeScript.HasValue())
-				{
-					var runner = new TypeScriptRunner();
-					return runner.Run();
-				}
+				//if (typeScript.HasValue())
+				//{
+				//	var runner = new TypeScriptRunner();
+				//	return runner.Run();
+				//}
 
-				app.ShowHelp();
-				return 0;
+				//app.ShowHelp();
+				//return 0;
 			});
 
 			return app.Execute(args);

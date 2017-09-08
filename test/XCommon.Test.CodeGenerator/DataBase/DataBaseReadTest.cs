@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,13 +25,14 @@ namespace XCommon.Test.CodeGenerator.DataBase
 
 			var config = new GeneratorConfig
 			{
+				DataBase = new DataBaseConfig
+				{
+					ConnectionString = string.Format(@"Data Source={0};AttachDbFilename={1};Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", Fixture.DBServer, Fixture.DBPath),
+					SchemasExclude = new List<string> { "dbo" }
+				},
 				CSharp = new CSharpConfig
 				{
-					DataBase = new CSharpDataBaseConfig
-					{
-						ConnectionString = string.Format(@"Data Source={0};AttachDbFilename={1};Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", Fixture.DBServer, Fixture.DBPath),
-						SchemaExclude = new List<string> { "dbo" }
-					}
+					
 				}
 			};
 
@@ -50,7 +51,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		}
 
 
-		public List<DataBaseSchema> DataBase { get; set; }
+		public IReadOnlyList<DataBaseSchema> DataBase { get; set; }
 
 		[SkippableFact(DisplayName = "Null Check")]
 		[Trait("CodeGenerator", "Database reader")]

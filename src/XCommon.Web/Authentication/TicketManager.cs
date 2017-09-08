@@ -104,11 +104,7 @@ namespace XCommon.Web.Authentication
 					return result;
 				}
 
-				var claimName = AuthenticationConfig.AuthenticationType == AuthenticationType.Cookie
-					? ClaimTypes.NameIdentifier
-					: ClaimTypes.NameIdentifier;
-
-				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == claimName)?.Value;
+				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
 				if (identifier.IsEmpty())
 				{

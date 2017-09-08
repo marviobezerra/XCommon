@@ -1,9 +1,9 @@
-﻿using XCommon.CodeGeneratorV2.Core;
+using XCommon.CodeGeneratorV2.Core;
 using XCommon.CodeGeneratorV2.Core.DataBase;
 
 namespace XCommon.CodeGeneratorV2.CSharp
 {
-	public interface ICSharpRepositoryWritter : IBaseWritter
+	public interface ICSharpRepositoryWriter
 	{
 		void WriteContract(DataBaseTable item);
 

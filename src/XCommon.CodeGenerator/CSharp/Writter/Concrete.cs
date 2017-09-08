@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -56,8 +56,6 @@ namespace XCommon.CodeGenerator.CSharp.Writter
 						.DecrementIndent()
 						.AppendLine("}")
 						.InterfaceEnd();
-
-					
 
 					WriteFile(path, file, builder);
 				}

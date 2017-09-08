@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using XCommon.Patterns.Ioc;
@@ -15,11 +15,11 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase.Implementation
 		[Inject]
 		private GeneratorConfig Config { get; set; }
 
-		public List<DataBaseSchema> Read()
+		public IReadOnlyList<DataBaseSchema> Read()
 		{
 			var dataBaseObjects = new List<DataBaseObject>();
 
-			using (var cnx = new SqlConnection(Config.CSharp.DataBase.ConnectionString))
+			using (var cnx = new SqlConnection(Config.DataBase.ConnectionString))
 			{
 				cnx.Open();
 
@@ -28,7 +28,7 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase.Implementation
 			}
 		}
 
-		private List<DataBaseSchema> BuildResult(SqlConnection cnx, List<DataBaseObject> dataBaseObjects)
+		private IReadOnlyList<DataBaseSchema> BuildResult(SqlConnection cnx, List<DataBaseObject> dataBaseObjects)
 		{
 			var result = new List<DataBaseSchema>();
 
@@ -51,6 +51,7 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase.Implementation
 							Description = column.Description,
 							Nullable = column.Nullable,
 							PK = column.PK,
+							Size = column.Size,
 							Type = column.Type,
 							TypeSql = column.TypeSql
 						});
@@ -78,7 +79,7 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase.Implementation
 				result.Add(dbSchema);
 			}
 
-			return result;
+			return result.AsReadOnly();
 		}
 
 		private List<DataBaseObject> ReadSqlObjects(SqlConnection cnx)
@@ -240,21 +241,21 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase.Implementation
 				"		WHERE\n" +
 				"			X.Type NOT IN ('hierarchyid', 'geometry')\n";
 
-			if (Config.CSharp.DataBase.Schemas.Count > 0)
+			if (Config.DataBase.SchemasInclude.Count > 0)
 			{
-				var schemas = string.Join(", ", Config.CSharp.DataBase.Schemas);
+				var schemas = string.Join(", ", Config.DataBase.SchemasInclude);
 				sql += $"			AND X.[Schema] IN ('{schemas}')\n";
 			}
 
-			if (Config.CSharp.DataBase.SchemaExclude.Count > 0)
+			if (Config.DataBase.SchemasExclude.Count > 0)
 			{
-				var schemas = string.Join(", ", Config.CSharp.DataBase.SchemaExclude);
+				var schemas = string.Join(", ", Config.DataBase.SchemasExclude);
 				sql += $"			AND X.[Schema] NOT IN ('{schemas}')\n";
 			}
 
-			if (Config.CSharp.DataBase.TablesExclude.Count > 0)
+			if (Config.DataBase.TablesExclude.Count > 0)
 			{
-				var tables = string.Join(", ", Config.CSharp.DataBase.TablesExclude);
+				var tables = string.Join(", ", Config.DataBase.TablesExclude);
 				sql += $"			AND X.TableName NOT IN ('{tables}')\n";
 			}
 

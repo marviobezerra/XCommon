@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace XCommon.CodeGeneratorV2.Angular
 {
-	public interface IAngularWritter
+	public interface IAngularWriter
     {
     }
 }

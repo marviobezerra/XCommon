@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,6 +26,8 @@ namespace XCommon.CodeGeneratorV2.Core.DataBase
 		public bool ColumnComputed { get; set; }
 
 		public string Type { get; set; }
+
+		public string Size { get; set; }
 
 		public string TypeSql { get; set; }
 

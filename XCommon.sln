@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon", "src\XCommon\XCommon.csproj", "{6CFD3511-4ECE-4FDE-9DB2-893F4CAFF453}"
 EndProject
@@ -39,7 +39,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".extra", ".extra", "{2901F7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.CodeGeneratorV2", "src\XCommon.CodeGeneratorV2\XCommon.CodeGeneratorV2.csproj", "{CF118FD1-C82A-473B-9DF8-2327699404E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.Web.Site", "test\XCommon.Test.Web.Site\XCommon.Test.Web.Site.csproj", "{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.Web.Site", "test\XCommon.Test.Web.Site\XCommon.Test.Web.Site.csproj", "{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.Test.CodeGeneratorV2", "XCommon.Test.CodeGeneratorV2\XCommon.Test.CodeGeneratorV2.csproj", "{B60A8D05-25CF-43FE-AD0D-BAD93512C531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B60A8D05-25CF-43FE-AD0D-BAD93512C531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B60A8D05-25CF-43FE-AD0D-BAD93512C531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B60A8D05-25CF-43FE-AD0D-BAD93512C531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B60A8D05-25CF-43FE-AD0D-BAD93512C531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{F088277B-FC3C-4F0C-93EC-57D32F7BEFC7} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
 		{CF118FD1-C82A-473B-9DF8-2327699404E9} = {08B0F53F-B112-46C1-846F-6AF87C1584C7}
 		{4AFF7518-2A1D-4279-8E30-FDA31EF6692D} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
+		{B60A8D05-25CF-43FE-AD0D-BAD93512C531} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4DA7A962-F214-4F97-9056-E93F7C6C6C31}
