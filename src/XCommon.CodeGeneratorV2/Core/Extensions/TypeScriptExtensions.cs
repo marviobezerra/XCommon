@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 
-namespace XCommon.CodeGenerator.Angular.Extensions
+namespace XCommon.CodeGeneratorV2.Core.Extensions
 {
-	public static class AngularExtensions
+	public static class TypeScriptExtensions
     {
 		internal static bool GetOutLet(this string component)
 		{

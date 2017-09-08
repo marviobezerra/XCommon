@@ -70,15 +70,7 @@ namespace XCommon.Web.Extension
 				{
 					cfg.RequireHttpsMetadata = false;
 					cfg.SaveToken = true;
-
-					cfg.Events = new JwtBearerEvents
-					{
-						OnAuthenticationFailed = ex =>  {
-							var x = ex;
-							return Task.FromResult(0);
-						}
-					};
-
+					
 					cfg.TokenValidationParameters = new TokenValidationParameters()
 					{
 						ValidIssuer = audience,

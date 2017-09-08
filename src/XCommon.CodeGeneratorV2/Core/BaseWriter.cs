@@ -2,14 +2,17 @@ using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGeneratorV2.Core
 {
-	public abstract class BaseRunner
-    {
+	public abstract class BaseWriter
+	{
 		[Inject]
 		protected GeneratorConfig Config { get; set; }
 
-		public BaseRunner()
+		[Inject]
+		protected IWriter Writer { get; set; }
+
+		public BaseWriter()
 		{
 			Kernel.Resolve(this);
 		}
-    }
+	}
 }

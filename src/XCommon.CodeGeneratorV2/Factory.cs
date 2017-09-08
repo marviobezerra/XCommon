@@ -1,7 +1,11 @@
-﻿using XCommon.CodeGeneratorV2.Core.DataBase;
+using XCommon.CodeGeneratorV2.Core;
+using XCommon.CodeGeneratorV2.Core.DataBase;
 using XCommon.CodeGeneratorV2.Core.DataBase.Implementation;
+using XCommon.CodeGeneratorV2.Core.Implementation;
 using XCommon.CodeGeneratorV2.CSharp;
 using XCommon.CodeGeneratorV2.CSharp.Implementation;
+using XCommon.CodeGeneratorV2.TypeScript;
+using XCommon.CodeGeneratorV2.TypeScript.Implementation;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGeneratorV2
@@ -11,6 +15,7 @@ namespace XCommon.CodeGeneratorV2
 		internal static void Do(GeneratorConfig config)
 		{
 			Kernel.Map<GeneratorConfig>().To(config);
+			Kernel.Map<IWriter>().To<FileWriter>();
 
 			MapCSharp();
 			MapDataBaseReader();
@@ -25,7 +30,9 @@ namespace XCommon.CodeGeneratorV2
 
 		private static void MapTypeScript()
 		{
-
+			Kernel.Map<ITypeScriptIndexExport>().To<TypeScriptIndexExport>();
+			Kernel.Map<ITypeScriptEntityWriter>().To<TypeScriptEntityWriter>();
+			Kernel.Map<ITypeScriptResourceWriter>().To<TypeScriptResourceWriter>();
 		}
 
 		private static void MapDataBaseReader()
@@ -35,11 +42,11 @@ namespace XCommon.CodeGeneratorV2
 
 		private static void MapCSharp()
 		{
-			Kernel.Map<ICSharpRepositoryWritter>().To<CSharpRepositoryWritter>();
-			Kernel.Map<ICSharpDataWritter>().To<CSharpDataWritter>();
-			Kernel.Map<ICSharpEntityWritter>().To<CSharpEntityWritter>();
-			Kernel.Map<ICSharpFactoryWritter>().To<CSharpFactoryWritter>();
-			Kernel.Map<ICSharpUnitTestWritter>().To<CSharpUnitTestWritter>();
+			Kernel.Map<ICSharpRepositoryWriter>().To<CSharpRepositoryWritter>();
+			Kernel.Map<ICSharpEnityFrameworkWriter>().To<CSharpEnityFrameworkWriter>();
+			Kernel.Map<ICSharpEntityWriter>().To<CSharpEntityWriter>();
+			Kernel.Map<ICSharpFactoryWriter>().To<CSharpFactoryWritter>();
+			Kernel.Map<ICSharpUnitTestWriter>().To<CSharpUnitTestWritter>();
 		}
 	}
 }

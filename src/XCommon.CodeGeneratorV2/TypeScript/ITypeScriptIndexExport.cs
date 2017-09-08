@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace XCommon.CodeGeneratorV2.TypeScript
 {
-    public class TypeScriptConfig
+    public interface ITypeScriptIndexExport
     {
+		void Run(string path);
     }
 }

@@ -5,7 +5,7 @@ using XCommon.CodeGeneratorV2.Core;
 
 namespace XCommon.CodeGeneratorV2.CSharp.Implementation
 {
-	public class CSharpUnitTestWritter : BaseWritter, ICSharpUnitTestWritter
+	public class CSharpUnitTestWritter : BaseWriter, ICSharpUnitTestWriter
 	{
     }
 }
