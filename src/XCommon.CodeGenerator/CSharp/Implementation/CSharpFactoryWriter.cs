@@ -42,7 +42,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			foreach (var schema in Config.DataBaseItems)
 			{
-				nameSpace.Add($"{Config.CSharp.Repository.Contract.NameSpace}.{schema.Name}");
+				if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
+				{
+					nameSpace.Add($"{Config.CSharp.Repository.Contract.NameSpace}.{schema.Name}");
+				}
+
 				nameSpace.Add($"{Config.CSharp.Repository.Concrecte.NameSpace}.{schema.Name}");
 				nameSpace.Add($"{Config.CSharp.Repository.Concrecte.NameSpace}.{schema.Name}.Query");
 				nameSpace.Add($"{Config.CSharp.Repository.Concrecte.NameSpace}.{schema.Name}.Validate");
@@ -57,8 +61,16 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
 				.AppendLine("public static void Do(bool unitTest = false)")
 				.AppendLine("{")
-				.IncrementIndent()
-				.AppendLine("RegisterRepository();")
+				.IncrementIndent();
+
+			if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
+			{
+				builder
+					.AppendLine("RegisterRepository();");
+
+			}
+
+			builder
 				.AppendLine("RegisterValidate();")
 				.AppendLine("RegisterQuery();")
 				.AppendLine("RegisterCustom(unitTest);")
@@ -66,7 +78,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				.AppendLine("}")
 				.AppendLine();
 
-			GenerateFactoryRepository(builder);
+			if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
+			{
+				GenerateFactoryRepository(builder);
+			}
+
 			GenerateFactoryQuery(builder);
 			GenerateFactoryValidate(builder);
 

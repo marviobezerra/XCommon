@@ -18,7 +18,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var path = Config.CSharp.EntityFramework.Path;
 			var file = $"{Config.CSharp.EntityFramework.ContextName}.cs";
 
-			var nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Infrastructure", "XCommon.Patterns.Ioc", "XCommon.Application" };
+			var nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Diagnostics", "XCommon.Patterns.Ioc", "XCommon.Application" };
 
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}"));
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}.Map"));
@@ -89,15 +89,18 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var file = $"{item.Name}.cs";
 
 			var nameSpace = new List<string> { "System", "System.Collections.Generic" };
-			nameSpace.AddRange(item.RelationShips.Where(c => c.TableFK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.TableFK}").Distinct());
-			nameSpace.AddRange(item.RelationShips.Where(c => c.TablePK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.TablePK}").Distinct());
+			nameSpace.AddRange(item.RelationShips.Where(c => c.TableFK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.SchemaFK}").Distinct());
+			nameSpace.AddRange(item.RelationShips.Where(c => c.TablePK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.SchemaPK}").Distinct());
 			nameSpace.AddRange(item.Columns.Where(c => c.Schema != item.Schema).Select(c => c.Schema));
+
+			var itemNameSpace = $"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}";
+			nameSpace.RemoveAll(c => c == itemNameSpace);
 
 			var builder = new StringBuilderIndented();
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit(item.Name, null, $"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}", ClassVisility.Public, nameSpace.ToArray());
+				.ClassInit(item.Name, null, itemNameSpace, ClassVisility.Public, nameSpace.ToArray());
 
 			foreach (var property in item.Columns)
 			{
@@ -238,7 +241,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 							.Append(".IsRequired()");
 					}
 
-					if (property.Type == "string" && property.Size.IsEmpty() && property.Size != "MAX")
+					if (property.Type == "string" && property.Size.IsNotEmpty() && property.Size != "MAX")
 					{
 						builder
 							.AppendLine()

@@ -15,21 +15,23 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var path = Path.Combine(Config.CSharp.Repository.Concrecte.Path, item.Schema);
 			var file = $"{item.Name}Business.cs";
 
+			var parentClass = $"RepositoryEFBase<{item.Name}Entity, {item.Name}Filter, {item.Name}, {Config.CSharp.EntityFramework.ContextName}>";
 			var nameSpace = new List<string> { "System", " XCommon.Patterns.Repository" };
-			nameSpace.Add($"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}");
-			nameSpace.Add($"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Filter");
-			nameSpace.Add($"{Config.CSharp.Repository.Contract.NameSpace}.{item.Schema}");
+			nameSpace.Add($"{Config.CSharp.Entity.NameSpace}.{item.Schema}");
+			nameSpace.Add($"{Config.CSharp.Entity.NameSpace}.{item.Schema}.Filter");
+			nameSpace.Add($"{Config.CSharp.EntityFramework.NameSpace}");
+			nameSpace.Add($"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}");
 
-			if (Config.CSharp.EntityFramework != null)
+			if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
 			{
-				nameSpace.Add($"{Config.CSharp.EntityFramework.NameSpace}");
-				nameSpace.Add($"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}");
+				nameSpace.Add($"{Config.CSharp.Repository.Contract.NameSpace}.{item.Schema}");
+				parentClass = $"RepositoryEFBase<{item.Name}Entity, {item.Name}Filter, {item.Name}, {Config.CSharp.EntityFramework.ContextName}>, I{item.Name}Business";
 			}
 
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit($"{item.Name}Business", $"RepositoryEFBase<{item.Name}Entity, {item.Name}Filter, {item.Name}, {Config.CSharp.EntityFramework.ContextName}>, I{item.Name}Business", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}", ClassVisility.Public, nameSpace.ToArray())
+				.ClassInit($"{item.Name}Business", parentClass, $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}", ClassVisility.Public, nameSpace.ToArray())
 				.ClassEnd();
 
 			Writer.WriteFile(path, file, builder, false);

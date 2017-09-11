@@ -27,55 +27,60 @@ namespace XCommon.CodeGenerator.CSharp
 		{
 			Config.DataBaseItems = Config.DataBaseItems ?? DataBaseRead.Read();
 
-			if (Config.CSharp.Factory != null && Config.CSharp.Factory.Execute)
+			if (Config.CSharp != null)
 			{
-				CSharpFactoryWriter.WriteFactory();
-				CSharpFactoryWriter.WriteFactoryCustom();
-			}
 
-			if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
-			{
-				CSharpEnityFrameworkWriter.WriteContext();
+				if (Config.CSharp.Factory != null && Config.CSharp.Factory.Execute)
+				{
+					CSharpFactoryWriter.WriteFactory();
+					CSharpFactoryWriter.WriteFactoryCustom();
+				}
+
+				if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
+				{
+					CSharpEnityFrameworkWriter.WriteContext();
+				}
 			}
 
 			foreach (var schema in Config.DataBaseItems)
 			{
 				foreach (var table in schema.Tables)
 				{
-					if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
+					if (Config.CSharp != null)
 					{
-						CSharpEnityFrameworkWriter.WriteEntity(table);
-						CSharpEnityFrameworkWriter.WriteEntityMap(table);
-					}
-
-					if (Config.CSharp.Entity != null)
-					{
-						if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteEntity)
+						if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
 						{
-							CSharpEntityWriter.WriteEntity(table);
+							CSharpEnityFrameworkWriter.WriteEntity(table);
+							CSharpEnityFrameworkWriter.WriteEntityMap(table);
 						}
 
-						if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteFilter)
+						if (Config.CSharp.Entity != null)
 						{
-							CSharpEntityWriter.WriteFilter(table);
+							if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteEntity)
+							{
+								CSharpEntityWriter.WriteEntity(table);
+							}
+
+							if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteFilter)
+							{
+								CSharpEntityWriter.WriteFilter(table);
+							}
 						}
-					}
 
-					if (Config.CSharp == null || Config.CSharp.Repository == null || !Config.CSharp.Repository.Execute)
-					{
-						return 0;
-					}
+						if (Config.CSharp.Repository != null && Config.CSharp.Repository.Execute)
+						{
+							if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
+							{
+								CSharpRepositoryWriter.WriteContract(table);
+							}
 
-					if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
-					{
-						CSharpRepositoryWriter.WriteContract(table);
-					}
-
-					if (Config.CSharp.Repository.Concrecte != null && Config.CSharp.Repository.Concrecte.Execute)
-					{
-						CSharpRepositoryWriter.WriteConcrete(table);
-						CSharpRepositoryWriter.WriteQuery(table);
-						CSharpRepositoryWriter.WriteValidation(table);
+							if (Config.CSharp.Repository.Concrecte != null && Config.CSharp.Repository.Concrecte.Execute)
+							{
+								CSharpRepositoryWriter.WriteConcrete(table);
+								CSharpRepositoryWriter.WriteQuery(table);
+								CSharpRepositoryWriter.WriteValidation(table);
+							}
+						}
 					}
 				}
 			}
