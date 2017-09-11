@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-
 namespace XCommon.CodeGenerator.Angular.Configuration
 {
-    public class AngularConfig
+	public class AngularConfig
     {
 		public AngularConfig()
 		{
-            ComponentHtmlRoot = ".";
-			StyleInclude = new List<string>();
+			QuoteType = QuoteType.Double;
 		}
 
-		public List<string> StyleInclude { get; set; }
+		public QuoteType QuoteType { get; set; }
 
-		public string AppPath { get; set; }
-
-        public string ComponentHtmlRoot { get; set; }
+		public string Path { get; set; }
 	}
 }

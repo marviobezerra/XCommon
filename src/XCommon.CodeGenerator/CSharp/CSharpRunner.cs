@@ -1,30 +1,84 @@
-﻿using XCommon.CodeGenerator.CSharp.Configuration;
-using XCommon.CodeGenerator.CSharp.Writter;
+using XCommon.CodeGenerator.Core;
+using XCommon.CodeGenerator.Core.DataBase;
+using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGenerator.CSharp
 {
-	internal class CSharpRunner
-    {
-		internal int Run(CSharpConfig config)
+	public class CSharpRunner : BaseRunner
+	{
+		#region Inject
+		[Inject]
+		private ICSharpRepositoryWriter CSharpRepositoryWriter { get; set; }
+
+		[Inject]
+		private ICSharpEnityFrameworkWriter CSharpEnityFrameworkWriter { get; set; }
+
+		[Inject]
+		private ICSharpEntityWriter CSharpEntityWriter { get; set; }
+
+		[Inject]
+		private ICSharpFactoryWriter CSharpFactoryWriter { get; set; }
+
+		[Inject]
+		private IDataBaseRead DataBaseRead { get; set; }
+		#endregion
+
+		internal int Run()
 		{
-			if (config == null)
+			Config.DataBaseItems = Config.DataBaseItems ?? DataBaseRead.Read();
+
+			if (Config.CSharp.Factory != null && Config.CSharp.Factory.Execute)
 			{
-				return -1;
+				CSharpFactoryWriter.WriteFactory();
+				CSharpFactoryWriter.WriteFactoryCustom();
 			}
 
-			Concrete concrete = new Concrete();
-			Contract contract = new Contract();
-			Data data = new Data();
-			Entity entity = new Entity();
-			Factory factory = new Factory();
-			Writter.UnitTest unitTest = new Writter.UnitTest();
+			if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
+			{
+				CSharpEnityFrameworkWriter.WriteContext();
+			}
 
-			data.Run(config);
-			entity.Run(config);
-			contract.Run(config);
-			concrete.Run(config);
-			unitTest.Run(config);
-			factory.Run(config);
+			foreach (var schema in Config.DataBaseItems)
+			{
+				foreach (var table in schema.Tables)
+				{
+					if (Config.CSharp.EntityFramework != null && Config.CSharp.EntityFramework.Execute)
+					{
+						CSharpEnityFrameworkWriter.WriteEntity(table);
+						CSharpEnityFrameworkWriter.WriteEntityMap(table);
+					}
+
+					if (Config.CSharp.Entity != null)
+					{
+						if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteEntity)
+						{
+							CSharpEntityWriter.WriteEntity(table);
+						}
+
+						if (Config.CSharp.Entity.Execute && Config.CSharp.Entity.ExecuteFilter)
+						{
+							CSharpEntityWriter.WriteFilter(table);
+						}
+					}
+
+					if (Config.CSharp == null || Config.CSharp.Repository == null || !Config.CSharp.Repository.Execute)
+					{
+						return 0;
+					}
+
+					if (Config.CSharp.Repository.Contract != null && Config.CSharp.Repository.Contract.Execute)
+					{
+						CSharpRepositoryWriter.WriteContract(table);
+					}
+
+					if (Config.CSharp.Repository.Concrecte != null && Config.CSharp.Repository.Concrecte.Execute)
+					{
+						CSharpRepositoryWriter.WriteConcrete(table);
+						CSharpRepositoryWriter.WriteQuery(table);
+						CSharpRepositoryWriter.WriteValidation(table);
+					}
+				}
+			}
 
 			return 0;
 		}

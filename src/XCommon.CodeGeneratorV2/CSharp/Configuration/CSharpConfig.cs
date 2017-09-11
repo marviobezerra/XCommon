@@ -1,4 +1,4 @@
-namespace XCommon.CodeGeneratorV2.CSharp.Configuration
+namespace XCommon.CodeGenerator.CSharp.Configuration
 {
 	public class CSharpConfig
     {

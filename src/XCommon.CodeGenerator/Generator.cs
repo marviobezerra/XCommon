@@ -1,7 +1,5 @@
-﻿using System;
 using XCommon.Application.CommandLine;
 using XCommon.CodeGenerator.Angular;
-using XCommon.CodeGenerator.Core.DataBase;
 using XCommon.CodeGenerator.CSharp;
 using XCommon.CodeGenerator.TypeScript;
 
@@ -9,25 +7,10 @@ namespace XCommon.CodeGenerator
 {
 	public class Generator
     {
-		public Generator(Configuration config)
+		public Generator(GeneratorConfig config)
 		{
-			DBReader = new DataBaseRead();
-			Config = config;
-
-			if (Config.CSharp != null && Config.CSharp.DataBase != null)
-			{
-				Config.DataBaseItems = DBReader.ReadDataBase(Config.CSharp.DataBase);
-				Config.CSharp.DataBaseItems = Config.DataBaseItems;
-			}
-			else
-			{
-				Console.WriteLine("Missing C# Database Config");
-			}
+			Factory.Do(config);
 		}
-
-		private DataBaseRead DBReader { get; set; }
-
-		private Configuration Config { get; set; }
 
 		public int Run(string[] args)
 		{
@@ -47,19 +30,19 @@ namespace XCommon.CodeGenerator
 				if (csharp.HasValue())
 				{
 					var runner = new CSharpRunner();
-					return runner.Run(Config.CSharp);
+					return runner.Run();
 				}
 
 				if (angular.HasValue())
 				{
 					var runner = new AngularRunner();
-					return runner.Run(Config.Angular, args);
+					return runner.Run(args);
 				}
 
 				if (typeScript.HasValue())
 				{
 					var runner = new TypeScriptRunner();
-					return runner.Run(Config.TypeScript);
+					return runner.Run();
 				}
 
 				app.ShowHelp();

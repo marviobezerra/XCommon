@@ -1,10 +1,10 @@
-using FluentAssertions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using XCommon.CodeGeneratorV2;
-using XCommon.CodeGeneratorV2.Core.DataBase;
-using XCommon.CodeGeneratorV2.CSharp.Configuration;
+using FluentAssertions;
+using XCommon.CodeGenerator;
+using XCommon.CodeGenerator.Core.DataBase;
+using XCommon.CodeGenerator.CSharp.Configuration;
 using XCommon.Patterns.Ioc;
 using XCommon.Test.CodeGenerator.DataBase.Fixture;
 using Xunit;

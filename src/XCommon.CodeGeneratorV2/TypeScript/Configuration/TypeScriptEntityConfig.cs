@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace XCommon.CodeGeneratorV2.TypeScript.Configuration
+namespace XCommon.CodeGenerator.TypeScript.Configuration
 {
 	public class TypeScriptEntityConfig
     {

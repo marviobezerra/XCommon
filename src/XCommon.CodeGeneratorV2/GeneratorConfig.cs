@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using XCommon.CodeGeneratorV2.Angular;
-using XCommon.CodeGeneratorV2.Core.DataBase;
-using XCommon.CodeGeneratorV2.CSharp.Configuration;
-using XCommon.CodeGeneratorV2.TypeScript;
-using XCommon.CodeGeneratorV2.TypeScript.Configuration;
+using XCommon.CodeGenerator.Core.DataBase;
+using XCommon.CodeGenerator.CSharp.Configuration;
+using XCommon.CodeGenerator.TypeScript.Configuration;
+using XCommon.CodeGeneratorV2.Angular.Configuration;
 
-namespace XCommon.CodeGeneratorV2
+namespace XCommon.CodeGenerator
 {
 	public class GeneratorConfig
     {

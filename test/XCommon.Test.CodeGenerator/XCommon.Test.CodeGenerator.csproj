@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\XCommon.CodeGeneratorV2\XCommon.CodeGeneratorV2.csproj" />
+    <ProjectReference Include="..\..\src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj" />
     <ProjectReference Include="..\..\src\XCommon\XCommon.csproj" />
   </ItemGroup>
 

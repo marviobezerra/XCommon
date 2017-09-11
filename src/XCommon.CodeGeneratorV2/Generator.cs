@@ -1,9 +1,9 @@
 using XCommon.Application.CommandLine;
-using XCommon.CodeGeneratorV2.Angular;
-using XCommon.CodeGeneratorV2.CSharp;
-using XCommon.CodeGeneratorV2.TypeScript;
+using XCommon.CodeGenerator.Angular;
+using XCommon.CodeGenerator.CSharp;
+using XCommon.CodeGenerator.TypeScript;
 
-namespace XCommon.CodeGeneratorV2
+namespace XCommon.CodeGenerator
 {
 	public class Generator
     {
