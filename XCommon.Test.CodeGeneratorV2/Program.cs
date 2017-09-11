@@ -1,17 +1,23 @@
-using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
-using XCommon.CodeGeneratorV2;
-using XCommon.CodeGeneratorV2.CSharp.Configuration;
+using XCommon.CodeGenerator;
+using XCommon.CodeGenerator.Angular.Configuration;
+using XCommon.CodeGenerator.CSharp.Configuration;
+using XCommon.CodeGenerator.TypeScript.Configuration;
 
 namespace XCommon.Test.CodeGeneratorV2
 {
-    class Program
+	class Program
     {
         static async Task Main(string[] args)
         {
 			await Task.Factory.StartNew(() =>
 			{
 				var generator = new Generator(GetConfig());
+				//var x = new List<string> { "-t" };
+				//generator.Run(x.ToArray());
+
 				generator.Run(args);
 			});
         }
@@ -20,6 +26,19 @@ namespace XCommon.Test.CodeGeneratorV2
 		{
 			return new GeneratorConfig
 			{
+				Angular = new AngularConfig
+				{
+					Path = "D:\\Gen\\Angular",
+					QuoteType = QuoteType.Double
+				},
+				TypeScript = new TypeScriptConfig
+				{
+					Entity = new TypeScriptEntityConfig
+					{
+						Path = "D:\\Gen\\Angular\\Entity",
+						Assemblys = new List<Assembly> { typeof(GeneratorConfig).Assembly }
+					}
+				},
 				DataBase = new DataBaseConfig
 				{
 					ConnectionString = "Data Source=(local);Initial Catalog=MyPetLife;Integrated Security=False;User Id=dev;Password=dev;MultipleActiveResultSets=True;Application Name=MyPetLife-Dev;Connection Timeout=1200"

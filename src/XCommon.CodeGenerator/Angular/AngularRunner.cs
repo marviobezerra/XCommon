@@ -1,16 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using XCommon.Application.CommandLine;
-using XCommon.CodeGenerator.Angular.Configuration;
-using XCommon.CodeGenerator.Angular.Writter;
+using XCommon.CodeGenerator.Core;
+using XCommon.CodeGenerator.Angular;
+using XCommon.CodeGenerator.Angular.Implementation;
+using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGenerator.Angular
 {
-	public class AngularRunner
+	public class AngularRunner : BaseRunner
 	{
-		internal int Run(AngularConfig config, string[] args)
+		[Inject]
+		private IComponentWriter ComponentWriter { get; set; }
+
+		[Inject]
+		private IServiceWriter ServiceWriter { get; set; }
+
+		public int Run(string[] args)
 		{
 			var appCommand = new CommandLineApplication(false)
 			{
@@ -35,9 +43,8 @@ namespace XCommon.CodeGenerator.Angular
 					return 0;
 				}
 
-				IndexExport index = new IndexExport();
-                string moduleName = module.HasValue() ? module.Value() : "";
-                string featureName = feature.HasValue() ? feature.Value() : "";
+				var moduleName = module.HasValue() ? module.Value() : "";
+				var featureName = feature.HasValue() ? feature.Value() : "";
 
 				if (component.HasValue())
 				{
@@ -60,13 +67,9 @@ namespace XCommon.CodeGenerator.Angular
 						return -1;
 					}
 
-					Component componentWritter = new Component();
+					var path = ParsePath(ItemType.Component, moduleName, featureName);
 
-					string path = ParsePath(config, ItemType.Component, moduleName, featureName);
-
-					componentWritter.Run(path, moduleName, featureName, config.ComponentHtmlRoot, config.StyleInclude, GetItems(appCommand, name));
-					index.Run(path);
-
+					ComponentWriter.Run(path, moduleName, featureName, GetItems(appCommand, name));
 					return 0;
 				}
 
@@ -78,12 +81,9 @@ namespace XCommon.CodeGenerator.Angular
 						return -1;
 					}
 
-					Service serviceWritter = new Service();
-					string path = ParsePath(config, ItemType.Service, moduleName, featureName);
+					var path = ParsePath(ItemType.Service, moduleName, featureName);
 
-					serviceWritter.Run(path, GetItems(appCommand, name));
-					index.Run(path);
-
+					ServiceWriter.Run(path, GetItems(appCommand, name));
 					return 0;
 				}
 
@@ -97,33 +97,33 @@ namespace XCommon.CodeGenerator.Angular
 			return appCommand.Execute(arguments.ToArray());
 		}
 
-		private string ParsePath(AngularConfig config, ItemType type, string module, string feature)
+		private string ParsePath(ItemType type, string module, string feature)
 		{
-			string currentPath = Directory.GetCurrentDirectory();
+			var currentPath = Directory.GetCurrentDirectory();
 
 			switch (type)
 			{
 
 				case ItemType.Directive:
-                    return Path.Combine(config.AppPath, module, "directives");
+					return Path.Combine(Config.Angular.Path, module, "directives");
 				case ItemType.Service:
-                    return Path.Combine(config.AppPath, module, "services");
-                case ItemType.Pipe:
-                    return Path.Combine(config.AppPath, module, "pipes");
-                case ItemType.Component:
+					return Path.Combine(Config.Angular.Path, module, "services");
+				case ItemType.Pipe:
+					return Path.Combine(Config.Angular.Path, module, "pipes");
+				case ItemType.Component:
 				default:
-                    return Path.Combine(config.AppPath, module, "components", feature);
-            }			
+					return Path.Combine(Config.Angular.Path, module, "components", feature);
+			}
 		}
 
 		private List<string> GetItems(CommandLineApplication AppCommand, CommandArgument name)
 		{
-            List<string> items = new List<string>
-            {
-                name.Value
-            };
+			var items = new List<string>
+			{
+				name.Value
+			};
 
-            items.AddRange(AppCommand.RemainingArguments);
+			items.AddRange(AppCommand.RemainingArguments);
 			return items;
 		}
 	}

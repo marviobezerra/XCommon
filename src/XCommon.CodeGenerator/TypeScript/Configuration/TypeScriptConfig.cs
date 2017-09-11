@@ -1,9 +1,9 @@
-﻿namespace XCommon.CodeGenerator.TypeScript.Configuration
+namespace XCommon.CodeGenerator.TypeScript.Configuration
 {
 	public class TypeScriptConfig
-	{
-		public TypeScriptEntity Entity { get; set; }
+    {
+		public TypeScriptEntityConfig Entity { get; set; }
 
-		public TypeScriptResource Resource { get; set; }
+		public TypeScriptResourceConfig Resource { get; set; }
 	}
 }

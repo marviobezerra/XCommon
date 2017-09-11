@@ -1,7 +1,7 @@
-using XCommon.CodeGeneratorV2.Core;
+using XCommon.CodeGenerator.Core;
 using XCommon.Patterns.Ioc;
 
-namespace XCommon.CodeGeneratorV2.TypeScript
+namespace XCommon.CodeGenerator.TypeScript
 {
 	public class TypeScriptRunner : BaseRunner
 	{
@@ -13,6 +13,11 @@ namespace XCommon.CodeGeneratorV2.TypeScript
 
 		internal int Run()
 		{
+			if (Config.TypeScript == null)
+			{
+				return 0;
+			}
+
 			if (Config.TypeScript.Entity != null && Config.TypeScript.Entity.Execute)
 			{
 				TypeScriptEntityWriter.Run();

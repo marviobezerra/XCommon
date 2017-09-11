@@ -5,14 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using XCommon.Application.Executes;
-using XCommon.CodeGeneratorV2.Core;
-using XCommon.CodeGeneratorV2.Core.Extensions;
-using XCommon.CodeGeneratorV2.TypeScript.Implementation.Helper;
+using XCommon.CodeGenerator.Core;
+using XCommon.CodeGenerator.Core.Extensions;
+using XCommon.CodeGenerator.TypeScript.Implementation.Helper;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Util;
 
-namespace XCommon.CodeGeneratorV2.TypeScript.Implementation
+namespace XCommon.CodeGenerator.TypeScript.Implementation
 {
 	public class TypeScriptEntityWriter : BaseWriter, ITypeScriptEntityWriter
 	{

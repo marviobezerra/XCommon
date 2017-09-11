@@ -1,8 +1,8 @@
-using XCommon.CodeGeneratorV2.Core;
-using XCommon.CodeGeneratorV2.Core.DataBase;
+using XCommon.CodeGenerator.Core;
+using XCommon.CodeGenerator.Core.DataBase;
 using XCommon.Patterns.Ioc;
 
-namespace XCommon.CodeGeneratorV2.CSharp
+namespace XCommon.CodeGenerator.CSharp
 {
 	public class CSharpRunner : BaseRunner
 	{

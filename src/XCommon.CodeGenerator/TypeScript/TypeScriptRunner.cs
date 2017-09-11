@@ -1,21 +1,34 @@
-﻿using XCommon.CodeGenerator.Angular.Writter;
-using XCommon.CodeGenerator.TypeScript.Configuration;
-using XCommon.CodeGenerator.TypeScript.Writter;
+using XCommon.CodeGenerator.Core;
+using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGenerator.TypeScript
 {
-	internal class TypeScriptRunner
-    {
-		internal int Run(TypeScriptConfig config)
-		{
-			Entities entity = new Entities();
-			Resource resource = new Resource();
-			IndexExport index = new IndexExport();
+	public class TypeScriptRunner : BaseRunner
+	{
+		[Inject]
+		public ITypeScriptEntityWriter TypeScriptEntityWriter { get; set; }
 
-			entity.Run(config.Entity, index);
-			resource.Run(config.Resource, index);
+		[Inject]
+		public ITypeScriptResourceWriter TypeScriptResourceWriter { get; set; }
+
+		internal int Run()
+		{
+			if (Config.TypeScript == null)
+			{
+				return 0;
+			}
+
+			if (Config.TypeScript.Entity != null && Config.TypeScript.Entity.Execute)
+			{
+				TypeScriptEntityWriter.Run();
+			}
+
+			if (Config.TypeScript.Resource != null && Config.TypeScript.Resource.Execute)
+			{
+				TypeScriptResourceWriter.Run();
+			}
 
 			return 0;
 		}
-    }
+	}
 }

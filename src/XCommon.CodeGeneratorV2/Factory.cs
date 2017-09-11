@@ -1,14 +1,16 @@
-using XCommon.CodeGeneratorV2.Core;
-using XCommon.CodeGeneratorV2.Core.DataBase;
-using XCommon.CodeGeneratorV2.Core.DataBase.Implementation;
-using XCommon.CodeGeneratorV2.Core.Implementation;
-using XCommon.CodeGeneratorV2.CSharp;
-using XCommon.CodeGeneratorV2.CSharp.Implementation;
-using XCommon.CodeGeneratorV2.TypeScript;
-using XCommon.CodeGeneratorV2.TypeScript.Implementation;
+using XCommon.CodeGenerator.Core;
+using XCommon.CodeGenerator.Core.DataBase;
+using XCommon.CodeGenerator.Core.DataBase.Implementation;
+using XCommon.CodeGenerator.Core.Implementation;
+using XCommon.CodeGenerator.CSharp;
+using XCommon.CodeGenerator.CSharp.Implementation;
+using XCommon.CodeGenerator.TypeScript;
+using XCommon.CodeGenerator.TypeScript.Implementation;
+using XCommon.CodeGeneratorV2.Angular;
+using XCommon.CodeGeneratorV2.Angular.Implementation;
 using XCommon.Patterns.Ioc;
 
-namespace XCommon.CodeGeneratorV2
+namespace XCommon.CodeGenerator
 {
 	internal static class Factory
     {
@@ -25,7 +27,8 @@ namespace XCommon.CodeGeneratorV2
 
 		private static void MapAngular()
 		{
-
+			Kernel.Map<IComponentWriter>().To<ComponentWriter>();
+			Kernel.Map<IServiceWriter>().To<ServiceWriter>();
 		}
 
 		private static void MapTypeScript()

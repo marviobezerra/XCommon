@@ -1,4 +1,4 @@
-namespace XCommon.CodeGeneratorV2.TypeScript.Configuration
+namespace XCommon.CodeGenerator.TypeScript.Configuration
 {
 	public class TypeScriptConfig
     {
