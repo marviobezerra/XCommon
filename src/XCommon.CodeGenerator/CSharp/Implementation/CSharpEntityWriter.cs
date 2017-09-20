@@ -4,6 +4,7 @@ using System.Linq;
 using XCommon.CodeGenerator.Core;
 using XCommon.CodeGenerator.Core.DataBase;
 using XCommon.CodeGenerator.Core.Extensions;
+using XCommon.CodeGenerator.CSharp.Implementation.Helper;
 using XCommon.Util;
 
 namespace XCommon.CodeGenerator.CSharp.Implementation
@@ -17,6 +18,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			var nameSpace = new List<string> { "System", "XCommon.Patterns.Repository.Entity", "System.Runtime.Serialization" };
 			nameSpace.AddRange(item.Columns.Where(c => c.Schema != item.Schema).Select(c => c.Schema));
+			nameSpace.AddRange(item.ProcessRemapSchema(Config));
 
 			var builder = new StringBuilderIndented();
 
@@ -26,8 +28,10 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			foreach (var column in item.Columns)
 			{
+				var propertyType = column.ProcessRemapProperty(Config);
+
 				builder
-					.AppendLine($"public {column.Type} {column.Name} {{ get; set; }}")
+					.AppendLine($"public {propertyType} {column.Name} {{ get; set; }}")
 					.AppendLine();
 			}
 

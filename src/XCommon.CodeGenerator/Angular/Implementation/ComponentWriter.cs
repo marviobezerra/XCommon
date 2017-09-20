@@ -55,7 +55,7 @@ namespace XCommon.CodeGenerator.Angular.Implementation
 				.IncrementIndent()
 				.AppendLine($"selector: {Quote}{selector}{Quote},")
 				.AppendLine("templateUrl: " + templateUrl.ToLower())
-				.AppendLine($"styles: [require({Quote}./{selector}.scss{Quote})]")
+				.AppendLine($"styleUrls: [{Quote}./{selector}.scss{Quote}]")
 				.DecrementIndent()
 				.AppendLine("})")
 				.AppendLine($"export class {name.GetName()}Component implements OnInit {{")
