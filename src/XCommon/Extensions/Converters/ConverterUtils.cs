@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using XCommon.Extensions.String;
@@ -37,9 +37,9 @@ namespace XCommon.Extensions.Converters
             }
 
 			var intResult = -1;
-			var values = Enum.GetValues(typeof(TEnum)).Cast<int>();
+			var values = System.Enum.GetValues(typeof(TEnum)).Cast<int>();
 
-            if (!Enum.TryParse(value, true, out TEnum enumresult))
+            if (!System.Enum.TryParse(value, true, out TEnum enumresult))
                 return default(TEnum);
 
             intResult = enumresult.ToInt32();

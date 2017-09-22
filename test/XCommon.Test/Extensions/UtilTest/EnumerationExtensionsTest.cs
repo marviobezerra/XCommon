@@ -1,11 +1,11 @@
-﻿using XCommon.Test.Extensions.UtilTest.Sample;
-using Xunit;
-using XCommon.Extensions.Util;
 using FluentAssertions;
+using XCommon.Extensions.Enum;
+using XCommon.Test.Extensions.UtilTest.Sample;
+using Xunit;
 
 namespace XCommon.Test.Extensions.UtilTest
 {
-    public class EnumerationExtensionsTest
+	public class EnumerationExtensionsTest
     {
         [Fact(DisplayName = "Has (False)")]
 		[Trait("Extensions", "Util")]
