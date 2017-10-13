@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Collections.Generic;
 using XCommon.Extensions.Converters;
 using XCommon.Test.Extensions.Converters.DataSource;
@@ -22,7 +22,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (Simple entity)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterSimpleEntity(EntityA data, bool valid, string message)
+        public void TypeConverterSimpleEntity(EntityA data, string message)
         {
             var result = data.Convert<EntityB>();
 
@@ -48,7 +48,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (Simple entity with ignore)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterSimpleEntityWithIgnore(EntityA data, bool valid, string message)
+        public void TypeConverterSimpleEntityWithIgnore(EntityA data, string message)
         {
             var result = data.Convert<EntityB>(nameof(data.BoolValueNullAble), nameof(data.DateTimeValueNullable), nameof(data.IntValue));
 
@@ -73,7 +73,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (Simple heritage entity)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.SimpleConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterHeritageEntity(EntityA data, bool valid, string message)
+        public void TypeConverterHeritageEntity(EntityA data, string message)
         {
             var result = data.Convert<EntityC>();
 
@@ -98,7 +98,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (Complex entity)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterComplexEntity(EntityD data, bool valid, string message)
+        public void TypeConverterComplexEntity(EntityD data, string message)
         {
             var result = data.Convert<EntityE>();
 
@@ -125,7 +125,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (Complex entity With Ignore)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.ComplexConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterComplexEntityWithIgnore(EntityD data, bool valid, string message)
+        public void TypeConverterComplexEntityWithIgnore(EntityD data, string message)
         {
             var result = data.Convert<EntityE>(nameof(data.EntityA));
 
@@ -136,7 +136,7 @@ namespace XCommon.Test.Extensions.Converters
         [Theory(DisplayName = "Type converter (List)")]
 		[Trait("Extensions", "Converters")]
 		[MemberData(nameof(ConverterDataSource.ListConverterDataSource), MemberType = typeof(ConverterDataSource))]
-        public void TypeConverterList(List<EntityA> data, bool valid, string message)
+        public void TypeConverterList(List<EntityA> data, string message)
         {
             var result = data.Convert<EntityB, EntityA>();
 

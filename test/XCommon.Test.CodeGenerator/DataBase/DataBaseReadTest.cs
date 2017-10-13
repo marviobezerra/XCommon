@@ -18,38 +18,32 @@ namespace XCommon.Test.CodeGenerator.DataBase
 
 		public DataBaseReadTest(DatabaseFixture fixture)
 		{
-			fixture.DBPath = string.Format(@"{0}\AppData\CodeGeneratorTest.mdf", Directory.GetCurrentDirectory());
-			fixture.DBServer = @"(LocalDB)\ProjectsV13";
-
-			Fixture = fixture;
-
-			var config = new GeneratorConfig
+			if (TestConstants.IsMyMachine)
 			{
-				DataBase = new DataBaseConfig
+				fixture.DBPath = string.Format(@"{0}\AppData\CodeGeneratorTest.mdf", Directory.GetCurrentDirectory());
+				fixture.DBServer = @"(LocalDB)\ProjectsV13";
+
+				Fixture = fixture;
+
+				var config = new GeneratorConfig
 				{
-					ConnectionString = string.Format(@"Data Source={0};AttachDbFilename={1};Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", Fixture.DBServer, Fixture.DBPath),
-					SchemasExclude = new List<string> { "dbo" }
-				},
-				CSharp = new CSharpConfig
-				{
-					
-				}
-			};
+					DataBase = new DataBaseConfig
+					{
+						ConnectionString = string.Format(@"Data Source={0};AttachDbFilename={1};Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=True", Fixture.DBServer, Fixture.DBPath),
+						SchemasExclude = new List<string> { "dbo" }
+					},
+					CSharp = new CSharpConfig
+					{
 
-			var generator = new Generator(config);
+					}
+				};
 
-			var dataBaseRead = Kernel.Resolve<IDataBaseRead>();
-			DataBase = dataBaseRead.Read();
-		}
+				var generator = new Generator(config);
 
-		private bool IsMyMachine
-		{
-			get
-			{
-				return System.Environment.MachineName.ToUpper() == "Brainiac".ToUpper();
+				var dataBaseRead = Kernel.Resolve<IDataBaseRead>();
+				DataBase = dataBaseRead.Read();
 			}
 		}
-
 
 		public IReadOnlyList<DataBaseSchema> DataBase { get; set; }
 
@@ -57,7 +51,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		[Trait("CodeGenerator", "Database reader")]
 		public void NullCheckTest()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			DataBase.Should().NotBeNull("That is a valid database connection");
 			DataBase.Should().HaveCount(2, "There are two schemas on test Database");
@@ -67,7 +61,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		[Trait("CodeGenerator", "Database reader")]
 		public void CommonSchemaTest()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Common");
 
@@ -80,7 +74,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		[Trait("CodeGenerator", "Database reader")]
 		public void RegisterSchemaTest()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 
@@ -93,7 +87,7 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		[Trait("CodeGenerator", "Database reader")]
 		public void PeopleTableTest()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 			var table = schema.Tables.FirstOrDefault(c => c.Name == "People");
@@ -107,13 +101,13 @@ namespace XCommon.Test.CodeGenerator.DataBase
 		[Trait("CodeGenerator", "Database reader")]
 		public void PeopleTableTestColumns()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var schema = DataBase.FirstOrDefault(c => c.Name == "Register");
 			var columns = schema.Tables.FirstOrDefault(c => c.Name == "People").Columns;
 
 			columns.Should().HaveCount(5, "There are five columns on People table");
-			
+
 			columns.Should().Contain(c => c.Name == "IdPerson" && c.Type == "Guid" && !c.Nullable && c.PK);
 			columns.Should().Contain(c => c.Name == "Name" && c.Type == "string" && !c.Nullable && !c.PK);
 			columns.Should().Contain(c => c.Name == "Email" && c.Type == "string" && !c.Nullable && !c.PK);

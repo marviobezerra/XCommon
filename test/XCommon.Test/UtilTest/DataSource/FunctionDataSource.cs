@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,13 +65,13 @@ namespace XCommon.Test.UtilTest.DataSource
         {
             get
             {
-                PairList<int[], char> result = new PairList<int[], char>();
+                var result = new PairList<int[]>();
 
-                result.Add(new int[] { 5, 4, 5 }, '+');
-                result.Add(new int[] { 8, 2, 9 }, '@');
-                result.Add(new int[] { 8, 8 }, '*');
-                result.Add(new int[] { 8, 8, 8, 8, 8 }, '^');
-                result.Add(new int[] { 8, 7, 6, 5, 4 }, '$');
+                result.Add(new int[] { 5, 4, 5 });
+                result.Add(new int[] { 8, 2, 9 });
+                result.Add(new int[] { 8, 8 });
+                result.Add(new int[] { 8, 8, 8, 8, 8 });
+                result.Add(new int[] { 8, 7, 6, 5, 4 });
 
                 return result.Cast();
             }

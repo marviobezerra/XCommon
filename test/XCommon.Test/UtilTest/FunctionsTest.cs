@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using XCommon.Test.UtilTest.DataSource;
 using XCommon.Util;
 using Xunit;
@@ -28,7 +28,7 @@ namespace XCommon.Test.UtilTest
         [Theory(DisplayName = "GetToken (Default)")]
 		[Trait("Common", "Functions")]
 		[MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
-        public void GetTokenDefault(int[] parts, char separator)
+        public void GetTokenDefault(int[] parts)
         {
             var token = Functions.GetToken(parts);
             var tokenSplit = token.Split('-');
@@ -43,11 +43,11 @@ namespace XCommon.Test.UtilTest
         [Theory(DisplayName = "GetToken (Separator)")]
 		[Trait("Common", "Functions")]
 		[MemberData(nameof(FunctionDataSource.Token), MemberType = typeof(FunctionDataSource))]
-        public void GetTokenSeparator(int[] parts, char separator)
+        public void GetTokenSeparator(int[] parts)
         {
-            var token = Functions.GetToken(separator, parts);
+            var token = Functions.GetToken(parts);
 
-            var tokenSplit = token.Split(separator);
+            var tokenSplit = token.Split('-');
             tokenSplit.Length.Should().Be(parts.Length);
 
             for (var i = 0; i < tokenSplit.Length; i++)

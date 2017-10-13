@@ -1,3 +1,5 @@
+using XCommon.CodeGenerator.Core;
+
 namespace XCommon.CodeGenerator.Angular.Configuration
 {
 	public class AngularConfig

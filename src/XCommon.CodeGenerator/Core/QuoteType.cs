@@ -1,4 +1,4 @@
-namespace XCommon.CodeGenerator.Angular.Configuration
+namespace XCommon.CodeGenerator.Core
 {
 	public enum QuoteType
     {

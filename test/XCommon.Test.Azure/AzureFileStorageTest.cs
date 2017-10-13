@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Threading.Tasks;
 using XCommon.Application;
 using XCommon.Application.FileStorage;
@@ -29,19 +29,11 @@ namespace XCommon.Test.Azure
 
 		private byte[] SampleContent02 { get; set; }
 
-		private bool IsMyMachine
-		{
-			get
-			{
-				return System.Environment.MachineName.ToUpper() == "Brainiac".ToUpper();
-			}
-		}
-
 		[SkippableFact(DisplayName = "Save")]
 		[Trait("Azure", "Blob Storage")]
 		public async Task SaveFile()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "SaveFileOveride";
 			var fileName = "TestFile.txt";
@@ -56,7 +48,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task SaveFileOveride()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "SaveFileOveride";
 			var fileName = "TestFile.txt";
@@ -76,7 +68,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task SaveFileNotOveride()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "SaveFileNotOveride";
 			var fileName = "TestFile.txt";
@@ -99,7 +91,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task CheckExitsFalse()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "CheckExitsFalse";
 			var fileName = "TestFile.txt";
@@ -114,7 +106,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task CheckExitsTrue()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "CheckExitsTrue";
 			var fileName = "TestFile.txt";
@@ -131,7 +123,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task DeleteTrue()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "DeleteTrue";
 			var fileName = "TestFile.txt";
@@ -148,7 +140,7 @@ namespace XCommon.Test.Azure
 		[Trait("Azure", "Blob Storage")]
 		public async Task DeleteFalse()
 		{
-			Skip.IfNot(IsMyMachine, "This test needs Azure Storage Emulator");
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Azure Storage Emulator");
 
 			var container = "CheckExitsFalse";
 			var fileName = "TestFile.txt";
