@@ -48,7 +48,7 @@ namespace XCommon.Web.Authentication.Providers
 
 				if (ctx.Failure.Message.StartsWith(RedirectKey) && AuthenticationConfig.AuthenticationType == AuthenticationType.Token)
 				{
-					var split = ctx.Failure.Message.Split("|");
+					var split = ctx.Failure.Message.Split('|');
 					url = AuthenticationConfig.UriTokenSucess + split.Last();
 				}
 

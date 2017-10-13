@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,6 +159,12 @@ namespace XCommon.Patterns.Repository
 			}
 
 			return result;
+		}
+
+		public virtual async Task<TEntity> GetFirstByFilterAsync(TFilter filter)
+		{
+			var result = await GetByFilterAsync(filter);
+			return result.FirstOrDefault();
 		}
 
 		public virtual async Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute)

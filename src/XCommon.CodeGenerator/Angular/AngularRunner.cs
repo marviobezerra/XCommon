@@ -7,6 +7,7 @@ using XCommon.CodeGenerator.Core;
 using XCommon.CodeGenerator.Angular;
 using XCommon.CodeGenerator.Angular.Implementation;
 using XCommon.Patterns.Ioc;
+using XCommon.CodeGenerator.TypeScript;
 
 namespace XCommon.CodeGenerator.Angular
 {
@@ -17,6 +18,9 @@ namespace XCommon.CodeGenerator.Angular
 
 		[Inject]
 		private IServiceWriter ServiceWriter { get; set; }
+
+		[Inject]
+		private ITypeScriptIndexExport TypeScriptIndexExport { get; set; }
 
 		public int Run(string[] args)
 		{
@@ -29,7 +33,7 @@ namespace XCommon.CodeGenerator.Angular
 
 			var help = appCommand.HelpOption("-h|--help");
 			var name = appCommand.Argument("[terms]", "Name of items to be generate");
-
+			var index = appCommand.Option("-i|--index", "Index", CommandOptionType.NoValue);
 			var module = appCommand.Option("-m|--module", "Module", CommandOptionType.SingleValue);
 			var feature = appCommand.Option("-f|--feature", "Feature", CommandOptionType.SingleValue);
 			var component = appCommand.Option("-c|--component", "Generate a new Component with HTML, TS and SCSS", CommandOptionType.NoValue);
@@ -40,6 +44,12 @@ namespace XCommon.CodeGenerator.Angular
 				if (appCommand.OptionHelp.HasValue())
 				{
 					appCommand.ShowHelp();
+					return 0;
+				}
+
+				if (index.HasValue())
+				{
+					TypeScriptIndexExport.Run(Config.Angular.Path);
 					return 0;
 				}
 

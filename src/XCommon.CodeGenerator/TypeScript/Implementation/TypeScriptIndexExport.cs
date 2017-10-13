@@ -17,6 +17,16 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
+		private string Quote
+		{
+			get
+			{
+				return Config.TypeScript.QuoteType == QuoteType.Double
+					? "\""
+					: "'";
+			}
+		}
+
 		private void Process(string path)
 		{
 			if (!Directory.Exists(path))
@@ -34,10 +44,18 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					continue;
 				}
 
-				builder.AppendLine($"export * from './{CheckFileName(fileName)}';");
+				builder.AppendLine($"export * from {Quote}./{CheckFileName(fileName)}{Quote};");
 			}
 
-			Writer.WriteFile(path, file, builder, true);
+			if (builder.Length > 0)
+			{
+				Writer.WriteFile(path, file, builder, true);
+			}
+
+			foreach (var directory in Directory.GetDirectories(path))
+			{
+				Process(directory);
+			}
 		}
 
 		private string CheckFileName(string file)

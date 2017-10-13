@@ -1,18 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using XCommon.Extensions.Converters;
-using XCommon.UnitTest;
 using XCommon.Util;
 
 namespace XCommon.Test.Extensions.Checks.DataSource
 {
-    public static class ValueCheckDataSource
+	public static class ValueCheckDataSource
     {
         public static IEnumerable<object[]> GreaterThanDateTimeDataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime>, bool, string>();
+                var result = new PairList<Pair<DateTime, DateTime>, bool, string>();
 
                 result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
@@ -24,7 +23,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime>, bool, string>();
+                var result = new PairList<Pair<DateTime, DateTime>, bool, string>();
 
                 result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
@@ -36,7 +35,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<int, int, bool, string> result = new PairList<int, int, bool, string>();
+                var result = new PairList<int, int, bool, string>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -48,7 +47,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<decimal, decimal, bool, string> result = new PairList<decimal, decimal, bool, string>();
+                var result = new PairList<decimal, decimal, bool, string>();
 
                 result.Add(0, 0, false, "Equals value");
                 
@@ -60,9 +59,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime>, bool, string>();
-
-                result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
+                var result = new PairList<Pair<DateTime, DateTime>, bool, string>();
+				var value = DateTime.Now;
+                result.Add(new Pair<DateTime, DateTime>(value, value), false, "Equals date");
 
                 return result.Cast();
             }
@@ -72,7 +71,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime>, bool, string>();
+                var result = new PairList<Pair<DateTime, DateTime>, bool, string>();
 
                 result.Add(new Pair<DateTime, DateTime>(DateTime.Now, DateTime.Now), false, "Equals date");
 
@@ -84,7 +83,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<int, int, bool, string> result = new PairList<int, int, bool, string>();
+                var result = new PairList<int, int, bool, string>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -96,7 +95,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<decimal, decimal, bool, string> result = new PairList<decimal, decimal, bool, string>();
+                var result = new PairList<decimal, decimal, bool, string>();
 
                 result.Add(0, 0, false, "Equals value");
 
@@ -108,9 +107,9 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime, DateTime>, bool, string>();
+                var result = new PairList<Pair<DateTime, DateTime, DateTime>, bool, string>();
 
-                result.Add(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date");
+                result.Add(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now.AddSeconds(-1), DateTime.Now.AddSeconds(1)), true, "Equals date");
 
                 return result.Cast();
             }
@@ -120,7 +119,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<Pair<DateTime, DateTime, DateTime>, bool, string> result = new PairList<Pair<DateTime, DateTime, DateTime>, bool, string>();
+                var result = new PairList<Pair<DateTime, DateTime, DateTime>, bool, string>();
 
                 result.Add(new Pair<DateTime, DateTime, DateTime>(DateTime.Now, DateTime.Now, DateTime.Now), true, "Equals date");
 
@@ -132,7 +131,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<int, int, int, bool, string> result = new PairList<int, int, int, bool, string>();
+                var result = new PairList<int, int, int, bool, string>();
 
                 result.Add(0, 0, 0, true, "Equals value");
 
@@ -144,7 +143,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<decimal, decimal, decimal, bool, string> result = new PairList<decimal, decimal, decimal, bool, string>();
+                var result = new PairList<decimal, decimal, decimal, bool, string>();
 
                 result.Add(0, 0, 0, true, "Equals value");
 
@@ -156,7 +155,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<List<Guid>, bool, string> result = new PairList<List<Guid>, bool, string>();
+                var result = new PairList<List<Guid>, bool, string>();
 
                 result.Add(null, false, "Null list");
                 result.Add(new List<Guid>(), false, "Empty list");
@@ -172,7 +171,7 @@ namespace XCommon.Test.Extensions.Checks.DataSource
         {
             get
             {
-                PairList<List<Guid>, bool, string> result = new PairList<List<Guid>, bool, string>();
+                var result = new PairList<List<Guid>, bool, string>();
 
                 result.Add(null, false, "Null list");
                 result.Add(new List<Guid>(), false, "Empty list");

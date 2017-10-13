@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
 using XCommon.Patterns.Specification.Query;
@@ -24,7 +24,7 @@ namespace XCommon.Test.Patterns.Specification.Query
         public void QuerySimple(List<PersonEntity> source, PersonFilter filter, int recordCount, string message)
         {
             var result = Specification.Build(source, filter);
-            result.Count().Should().Be(recordCount);
+            result.Count().Should().Be(recordCount, message);
         }
 
         [Theory(DisplayName = "Query (Order)")]
@@ -34,7 +34,7 @@ namespace XCommon.Test.Patterns.Specification.Query
         {
             var result = Specification.Build(source, filter);
             result.Count().Should().Be(1);
-            result.First().ShouldBeEquivalentTo(expected);
+            result.First().ShouldBeEquivalentTo(expected, message);
         }
     }
 }

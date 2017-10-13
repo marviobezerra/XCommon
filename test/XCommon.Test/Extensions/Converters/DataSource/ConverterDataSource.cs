@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using XCommon.Extensions.Converters;
 using XCommon.Test.Extensions.Converters.Sample;
@@ -13,9 +13,9 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<EntityA, bool, string> result = new PairList<EntityA, bool, string>();
+                var result = new PairList<EntityA, string>();
 
-                result.Add(new EntityA { }, true, "Default value");
+                result.Add(new EntityA { }, "Default value");
 
                 result.Add(new EntityA
                 {
@@ -30,7 +30,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValue = "5".ToGuid(),
                     GuidValueNullable = "5".ToGuid(),
                     StringValue = "Marvio"
-                }, true, "Default value");
+                }, "Default value");
 
                 result.Add(new EntityA
                 {
@@ -45,7 +45,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     GuidValue = "105".ToGuid(),
                     GuidValueNullable = null,
                     StringValue = "Marvio"
-                }, true, "Default value");
+                }, "Default value");
 
                 result.Add(new EntityA
                 {
@@ -54,7 +54,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                     DateTimeValueNullable = DateTime.Now.AddDays(1),
                     EnumValueNullable = BooleanOption.False,
                     GuidValueNullable = "105".ToGuid(),
-                }, true, "Default value");
+                }, "Default value");
 
                 return result.Cast();
             }
@@ -64,7 +64,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                PairList<EntityD, bool, string> result = new PairList<EntityD, bool, string>();
+                var result = new PairList<EntityD, string>();
 
                 result.Add(new EntityD
                 {
@@ -83,7 +83,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         GuidValueNullable = "5".ToGuid(),
                         StringValue = "Marvio"
                     }
-                }, true, "Default value");
+                }, "Default value");
 
                 result.Add(new EntityD
                 {
@@ -102,7 +102,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         GuidValueNullable = null,
                         StringValue = "Marvio"
                     }
-                }, true, "Default value");
+                }, "Default value");
 
                 result.Add(new EntityD
                 {
@@ -115,7 +115,7 @@ namespace XCommon.Test.Extensions.Converters.DataSource
                         EnumValueNullable = BooleanOption.False,
                         GuidValueNullable = "105".ToGuid(),
                     }
-                }, true, "Default value");
+                }, "Default value");
 
                 return result.Cast();
             }
@@ -125,49 +125,50 @@ namespace XCommon.Test.Extensions.Converters.DataSource
         {
             get
             {
-                List<EntityA> dataItem = new List<EntityA>();
+				var dataItem = new List<EntityA>
+				{
+					new EntityA
+					{
+						IntValue = 17,
+						IntValueNullable = 17,
+						BoolValue = true,
+						BoolValueNullAble = true,
+						DateTimeValue = DateTime.Now,
+						DateTimeValueNullable = DateTime.Now,
+						EnumValue = Util.BooleanOption.True,
+						EnumValueNullable = BooleanOption.True,
+						GuidValue = "5".ToGuid(),
+						GuidValueNullable = "5".ToGuid(),
+						StringValue = "Marvio"
+					},
 
-                dataItem.Add(new EntityA
-                {
-                    IntValue = 17,
-                    IntValueNullable = 17,
-                    BoolValue = true,
-                    BoolValueNullAble = true,
-                    DateTimeValue = DateTime.Now,
-                    DateTimeValueNullable = DateTime.Now,
-                    EnumValue = Util.BooleanOption.True,
-                    EnumValueNullable = BooleanOption.True,
-                    GuidValue = "5".ToGuid(),
-                    GuidValueNullable = "5".ToGuid(),
-                    StringValue = "Marvio"
-                });
+					new EntityA
+					{
+						IntValue = 100,
+						IntValueNullable = null,
+						BoolValue = false,
+						BoolValueNullAble = null,
+						DateTimeValue = DateTime.Now.AddDays(-1),
+						DateTimeValueNullable = null,
+						EnumValue = Util.BooleanOption.All,
+						EnumValueNullable = null,
+						GuidValue = "105".ToGuid(),
+						GuidValueNullable = null,
+						StringValue = "Marvio"
+					},
 
-                dataItem.Add(new EntityA
-                {
-                    IntValue = 100,
-                    IntValueNullable = null,
-                    BoolValue = false,
-                    BoolValueNullAble = null,
-                    DateTimeValue = DateTime.Now.AddDays(-1),
-                    DateTimeValueNullable = null,
-                    EnumValue = Util.BooleanOption.All,
-                    EnumValueNullable = null,
-                    GuidValue = "105".ToGuid(),
-                    GuidValueNullable = null,
-                    StringValue = "Marvio"
-                });
+					new EntityA
+					{
+						IntValueNullable = 100,
+						BoolValueNullAble = false,
+						DateTimeValueNullable = DateTime.Now.AddDays(1),
+						EnumValueNullable = BooleanOption.False,
+						GuidValueNullable = "105".ToGuid(),
+					}
+				};
 
-                dataItem.Add(new EntityA
-                {
-                    IntValueNullable = 100,
-                    BoolValueNullAble = false,
-                    DateTimeValueNullable = DateTime.Now.AddDays(1),
-                    EnumValueNullable = BooleanOption.False,
-                    GuidValueNullable = "105".ToGuid(),
-                });
-
-                PairList<List<EntityA>, bool, string> result = new PairList<List<EntityA>, bool, string>();
-                result.Add(dataItem, true, "Valid list");
+				var result = new PairList<List<EntityA>, string>();
+                result.Add(dataItem, "Valid list");
 
                 return result.Cast();
             }

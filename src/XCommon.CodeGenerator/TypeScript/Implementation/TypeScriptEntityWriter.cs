@@ -104,7 +104,10 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					tsClass.Properties.Add(new TypeScriptProperty
 					{
 						Name = property.Name,
-						Nullable = nullablePropertys.Contains(property.Name) || type.Name.EndsWith("Filter") || Nullable.GetUnderlyingType(property.PropertyType) != null,
+						Nullable = nullablePropertys.Contains(property.Name) 
+									|| type.Name.EndsWith("Filter") 
+									|| type.GetCustomAttributes<TSNullableAttribute>().Count() > 0
+									|| Nullable.GetUnderlyingType(property.PropertyType) != null,
 						Generic = isGeneric,
 						Type = typeName
 					});
@@ -264,6 +267,13 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 
 		private string GetPropertyType(Type type, TypeScriptClass tsClass, bool generic)
 		{
+			var attr = type.GetCustomAttribute<TSCastAttribute>();
+
+			if (attr != null)
+			{
+				return attr.Type;
+			}
+
 			var underlyingType = Nullable.GetUnderlyingType(type);
 			var currentType = underlyingType ?? type;
 

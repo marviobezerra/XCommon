@@ -1,4 +1,4 @@
-﻿using XCommon.Patterns.Repository.Entity;
+using XCommon.Patterns.Repository.Entity;
 using XCommon.Application.Executes;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace XCommon.Patterns.Repository
         Task<TEntity> GetNewAsync();
         Task<TEntity> GetByKeyAsync(Guid key);
         Task<List<TEntity>> GetByFilterAsync(TFilter filter);
+		Task<TEntity> GetFirstByFilterAsync(TFilter filter);
 		Task<Execute<TEntity>> SaveAsync(TEntity entity);
 		Task<Execute<List<TEntity>>> SaveManyAsync(List<TEntity> enntities);
 		Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute);

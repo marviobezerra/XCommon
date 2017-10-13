@@ -1,4 +1,4 @@
-﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Threading.Tasks;
@@ -57,7 +57,7 @@ namespace XCommon.Azure.Application.FileStorage.Implementations
 				await blob.UploadFromByteArrayAsync(content, 0, content.Length);
 				return true;
 			}
-			catch (Exception ex)
+			catch
 			{
 				return false;
 			}
