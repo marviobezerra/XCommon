@@ -1,4 +1,4 @@
-﻿function EnsurePsbuildInstalled {
+function EnsurePsbuildInstalled {
     [cmdletbinding()]
     param(
         [string]$psbuildInstallUri = 'https://raw.githubusercontent.com/ligershark/psbuild/master/src/GetPSBuild.ps1'
@@ -38,7 +38,7 @@ EnsurePsbuildInstalled
 exec { & dotnet restore }
 
 exec { & dotnet pack .\src\XCommon\XCommon.csproj -c Release -o ..\..\artifacts }
-exec { & dotnet pack .\src\XCommon.Azure\XCommon.Azure.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.XCommon.CloudServices\XCommon.XCommon.CloudServices.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.EF\XCommon.EF.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.Web\XCommon.Web.csproj -c Release -o ..\..\artifacts }

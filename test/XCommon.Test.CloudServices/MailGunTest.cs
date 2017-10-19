@@ -9,7 +9,7 @@ namespace XCommon.Test.CloudServices
 {
 	public class MailGunTest
 	{
-		[Fact]
+		[SkippableFact]
 		public async Task SendMail()
 		{
 			var app = new ApplicationSettings
