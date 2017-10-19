@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using XCommon.Application.Executes;
 
 namespace XCommon.Application.Mail.Implementations
@@ -12,18 +13,7 @@ namespace XCommon.Application.Mail.Implementations
         }
 
         public List<MailInMemoryEntity> Mails { get; set; }
-
-        public Execute Send(string to, string subject, string body)
-            => Send(to, to, subject, body);
-
-        public Execute Send(string to, string replyTo, string subject, string body)
-        {
-            var result = new Execute();
-            Mails.Add(new MailInMemoryEntity(to, replyTo, subject, body));
-
-            return result;
-        }
-
+		
         public List<MailInMemoryEntity> GetMailsTo(string to)
         {
             return Mails
@@ -31,5 +21,16 @@ namespace XCommon.Application.Mail.Implementations
                 .OrderBy(c => c.SendDate)
                 .ToList();
         }
-    }
+
+		public async Task<Execute> SendAsync(string from, string to, string subject, string body)
+			=> await SendAsync(from, from, to, to, subject, body);
+
+		public async Task<Execute> SendAsync(string from, string fromName, string to, string toName, string subject, string body)
+		{
+			var result = new Execute();
+			Mails.Add(new MailInMemoryEntity(to, toName, from, fromName, subject, body));
+
+			return await Task.FromResult(result);
+		}
+	}
 }

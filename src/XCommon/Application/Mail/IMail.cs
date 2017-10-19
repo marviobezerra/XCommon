@@ -1,10 +1,11 @@
-﻿using XCommon.Application.Executes;
+using System.Threading.Tasks;
+using XCommon.Application.Executes;
 
 namespace XCommon.Application.Mail
 {
     public interface IMail
     {
-        Execute Send(string to, string subject, string body);
-        Execute Send(string to, string replyTo, string subject, string body);
+        Task<Execute> SendAsync(string from, string to, string subject, string body);
+		Task<Execute> SendAsync(string from, string fromName, string to, string toName, string subject, string body);
     }
 }

@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using XCommon.Application.Mail;
 using XCommon.Application.Mail.Implementations;
 using Xunit;
-using FluentAssertions;
 
 namespace XCommon.Test.Application.Mail
 {
-    public class MailTest
+	public class MailTest
     {
         [Fact(DisplayName = "Send")]
 		[Trait("Application", "Mail")]
-		public void Send()
+		public async Task Send()
         {
             var mail = new MailInMemory();
             var to = "marvio.bezerra@gmail.com";
             var subject = "Simple mail";
             var body = "Just testing code";
 
-            mail.Send(to, subject, body);
+            await mail.SendAsync(to, to, subject, body);
 
             var sentMails = (mail as MailInMemory).GetMailsTo(to);
             var sentMail = sentMails.FirstOrDefault();
@@ -29,22 +27,22 @@ namespace XCommon.Test.Application.Mail
 
             sentMail.Should().NotBeNull("There is a mail sent");
             sentMail.To.Should().Be(to);
-            sentMail.ReplyTo.Should().Be(to);
+            sentMail.From.Should().Be(to);
             sentMail.Subject.Should().Be(subject);
             sentMail.Body.Should().Be(body);
         }
 
         [Fact(DisplayName = "Send (ReplyTo)")]
 		[Trait("Application", "Mail")]
-		public void SendReplyTo()
+		public async Task SendReplyTo()
         {
             IMail mail = new MailInMemory();
-            string to = "marvio.bezerra@gmail.com";
-            string replyTo = "maria@gmail.com";
-            string subject = "Simple mail";
-            string body = "Just testing code";
+            var to = "marvio.bezerra@gmail.com";
+            var from = "maria@gmail.com";
+            var subject = "Simple mail";
+            var body = "Just testing code";
 
-            mail.Send(to, replyTo, subject, body);
+            await mail.SendAsync(to, from, subject, body);
 
             var sentMails = (mail as MailInMemory).GetMailsTo(to);
             var sentMail = sentMails.FirstOrDefault();
@@ -53,14 +51,14 @@ namespace XCommon.Test.Application.Mail
 
             sentMail.Should().NotBeNull("There is a mail sent");
             sentMail.To.Should().Be(to);
-            sentMail.ReplyTo.Should().Be(replyTo);
+            sentMail.From.Should().Be(from);
             sentMail.Subject.Should().Be(subject);
             sentMail.Body.Should().Be(body);
         }
 
         [Fact(DisplayName = "Send (Many)")]
 		[Trait("Application", "Mail")]
-		public void SendMany()
+		public async Task SendMany()
         {
             IMail mail = new MailInMemory();
             var toMarvio = "marvio.bezerra@gmail.com";
@@ -68,14 +66,13 @@ namespace XCommon.Test.Application.Mail
 
             for (var i = 0; i < 3; i++)
             {
-                mail.Send(toMarvio, $"Mail {i}", $"Interact {i}");
+                await mail.SendAsync(toMarvio, toMaria, $"Mail {i}", $"Interact {i}");
             }
 
             for (var i = 0; i < 5; i++)
             {
-                mail.Send(toMaria, $"Mail {i}", $"Interact {i}");
+                await mail.SendAsync(toMaria, toMarvio, $"Mail {i}", $"Interact {i}");
             }
-
 
             var sentMailsMarvio = (mail as MailInMemory).GetMailsTo(toMarvio);
             var sentMailsMaria = (mail as MailInMemory).GetMailsTo(toMaria);
