@@ -1,4 +1,4 @@
-﻿using XCommon.Patterns.Ioc;
+using XCommon.Patterns.Ioc;
 using Xunit;
 using FluentAssertions;
 using System;
@@ -19,7 +19,7 @@ namespace XCommon.Test.Patterns.Ioc
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalCat>();
 
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
             Kernel.Count.Should().Be(1, "There is one class mapped");
         }
 
@@ -29,7 +29,7 @@ namespace XCommon.Test.Patterns.Ioc
         {
             Action act = () => Kernel.Map<Vehicle>().To<VehicleCar>();
 
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
             Kernel.Count.Should().Be(1, "There is one class mapped");
         }
 
@@ -39,7 +39,7 @@ namespace XCommon.Test.Patterns.Ioc
         {
             Action act = () => Kernel.Map<VehicleCar>().To<VehicleCar>();
 
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
             Kernel.Count.Should().Be(1, "There is one class mapped");
         }
 
@@ -50,7 +50,7 @@ namespace XCommon.Test.Patterns.Ioc
             Func<VehicleCar> resolver = () => new VehicleCar();
             Action act = () => Kernel.Map<Vehicle>().To(resolver);
 
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
             Kernel.Count.Should().Be(1, "There is one class mapped");
         }
         
@@ -59,7 +59,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsValid01Param()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDog>(150);
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, valid - 02 params)")]
@@ -67,7 +67,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsValid02Params()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true);
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, valid - 03 params)")]
@@ -75,7 +75,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsValid03Params()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true, DateTime.Now);
-            act.ShouldNotThrow("It is a valid map");
+            act.Should().NotThrow("It is a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - with no params)")]
@@ -83,7 +83,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsInvalidWithNoParams()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - invalid param type)")]
@@ -91,7 +91,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsInvalidInvalidParamType()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, "Fail", DateTime.Now);
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Constructor params, invalid - invalid param count)")]
@@ -99,7 +99,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapConstructorParamsInvalidInvalidParamCount()
         {
             Action act = () => Kernel.Map<IAnimal>().To<AnimalDuck>(150, true, DateTime.Now, "Fail");
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to interface)")]
@@ -107,7 +107,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidInterfaceToInterface()
         {
             Action act = () => Kernel.Map<IAnimal>().To<IAnimal>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to abstract)")]
@@ -115,7 +115,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidInterfaceToAbstract()
         {
             Action act = () => Kernel.Map<Vehicle>().To<Vehicle>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - interface to a class that doesn't implement it)")]
@@ -123,7 +123,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidInterfaceToClassThatDoesImplement()
         {
             Action act = () => Kernel.Map<IAnimal>().To<VehicleCar>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to abstrac)")]
@@ -131,7 +131,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidAbstractToAbstrac()
         {
             Action act = () => Kernel.Map<Vehicle>().To<Vehicle>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to interface)")]
@@ -139,7 +139,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidAbstractToInterface()
         {
             Action act = () => Kernel.Map<IAnimal>().To<Vehicle>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Map (Simple, invalid - abstract to a class that doesn't implement)")]
@@ -147,7 +147,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void MapSimpleInvalidAbstractToClassThatDoesImplement()
         {
             Action act = () => Kernel.Map<Vehicle>().To<AnimalDog>();
-            act.ShouldThrow<Exception>("It isn't a valid map");
+            act.Should().Throw<Exception>("It isn't a valid map");
         }
 
         [Fact(DisplayName = "Resolve (Generic, valid)")]
@@ -198,7 +198,7 @@ namespace XCommon.Test.Patterns.Ioc
 		public void ResolveGenericInvalidUnmapedType()
         {
             Action act = () => Kernel.Resolve<IAnimal>();
-            act.ShouldThrow<Exception>("There isn't a class mapped for that interface");
+            act.Should().Throw<Exception>("There isn't a class mapped for that interface");
         }
 
         [Fact(DisplayName = "Resolve (Object, valid)")]
@@ -238,7 +238,7 @@ namespace XCommon.Test.Patterns.Ioc
         {
             Action act = () => Kernel.Resolve<AnimalCat>();
 
-            act.ShouldThrow<Exception>("There isn't a mapped class");
+            act.Should().Throw<Exception>("There isn't a mapped class");
         }
 
         [Fact(DisplayName = "Resolve (Function, valid - cache)")]
@@ -301,7 +301,7 @@ namespace XCommon.Test.Patterns.Ioc
 
             Action act = () => new SampleBusiness();
 
-            act.ShouldThrow<Exception>("There is no classe mapped for vehicle");
+            act.Should().Throw<Exception>("There is no classe mapped for vehicle");
         }
 
         [Fact(DisplayName = "Resolve (Attribute, no cache)")]

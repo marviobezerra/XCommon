@@ -34,7 +34,7 @@ namespace XCommon.Test.Patterns.Specification.Query
         {
             var result = Specification.Build(source, filter);
             result.Count().Should().Be(1);
-            result.First().ShouldBeEquivalentTo(expected, message);
+            result.First().Should().BeEquivalentTo(expected, message);
         }
     }
 }
