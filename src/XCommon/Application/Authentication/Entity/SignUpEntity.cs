@@ -2,7 +2,7 @@ using System;
 
 namespace XCommon.Application.Authentication.Entity
 {
-    public class SignUpExternalEntity
+    public class SignUpEntity
     {
         public ProviderType Provider { get; set; }
 

@@ -6,8 +6,6 @@ using XCommon.CodeGenerator.CSharp;
 using XCommon.CodeGenerator.CSharp.Implementation;
 using XCommon.CodeGenerator.TypeScript;
 using XCommon.CodeGenerator.TypeScript.Implementation;
-using XCommon.CodeGenerator.Angular;
-using XCommon.CodeGenerator.Angular.Implementation;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGenerator
@@ -21,14 +19,7 @@ namespace XCommon.CodeGenerator
 
 			MapCSharp();
 			MapDataBaseReader();
-			MapAngular();
 			MapTypeScript();
-		}
-
-		private static void MapAngular()
-		{
-			Kernel.Map<IComponentWriter>().To<ComponentWriter>();
-			Kernel.Map<IServiceWriter>().To<ServiceWriter>();
 		}
 
 		private static void MapTypeScript()

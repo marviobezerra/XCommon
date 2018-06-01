@@ -7,13 +7,9 @@ namespace XCommon.Application.Authentication
 {
     public interface ILoginBusiness
     {
-        Task<Execute<TicketStatus>> SignInAsync(SignInEntity login);
+        Task<Execute<TicketEntity>> SignInAsync(SignInEntity login);
 
-        Task<Execute<TicketEntity>> SignUpAsync(SignUpExternalEntity signUp);
-
-        Task<Execute<TicketStatus>> SignUpAsync(SignUpInternalEntity signUp);
-
-        Task<Execute<TicketStatus>> SignOutAsync(Guid userKey);
+        Task<Execute<TicketEntity>> SignUpAsync(SignUpEntity signUp);
         
         Task<Execute> ConfirmEmailAsync(Guid userKey);
 

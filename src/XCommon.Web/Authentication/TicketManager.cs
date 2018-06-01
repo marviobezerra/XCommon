@@ -25,65 +25,36 @@ namespace XCommon.Web.Authentication
 		[Inject]
 		private IApplicationSettings ApplicationSettings { get; set; }
 
-		private AuthenticationConfig AuthenticationConfig { get; set; }
-
 		private IHttpContextAccessor HttpContextAccessor { get; set; }
-
-		private Dictionary<string, TokenEntity> Tokens { get; set; }
 
 		public TicketManager(IHttpContextAccessor accessor)
 		{
 			Kernel.Resolve(this);
-			Tokens = new Dictionary<string, TokenEntity>();
-			AuthenticationConfig = ApplicationSettings.Values.Get<AuthenticationConfig>(ApplicationBuilderExtension.Authentication);
 			HttpContextAccessor = accessor;
-
 		}
 
-		#region Private
-		private AuthenticationProperties GetAuthenticationProperties(TicketEntity signUpTicket)
-		{
-			return new AuthenticationProperties
-			{
-				ExpiresUtc = DateTime.UtcNow.AddDays(AuthenticationConfig.Expiration),
-				IsPersistent = true,
-				AllowRefresh = true
-			};
-		}
-
-		private ClaimsPrincipal GetClaimsPrincipal(TicketEntity signUpTicket)
-		{
-			var audience = ApplicationSettings.Name.IsEmpty() ? "XCommon" : ApplicationSettings.Name;
-
-			var userIdentity = new ClaimsIdentity(audience);
-			var claims = new List<Claim>
-			{
-				new Claim(ClaimTypes.NameIdentifier, signUpTicket.Key.ToString()),
-				new Claim(ClaimTypes.Name, signUpTicket.Name),
-				new Claim(ClaimCulture, signUpTicket.Culture)
-			};
-
-			userIdentity.AddClaims(claims);
-
-			return new ClaimsPrincipal(userIdentity);
-		}
-
-		private JwtSecurityToken GetTokenAsync(TicketEntity signUpTicket)
+		public string WriteToken(TicketEntity signUpTicket)
 		{
 			var claims = new List<Claim>
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, signUpTicket.Key.ToString()),
-				new Claim(JwtRegisteredClaimNames.Jti, signUpTicket.Name),
+				new Claim(JwtRegisteredClaimNames.Jti, signUpTicket.Key.ToString()),
 				new Claim(ClaimCulture, signUpTicket.Culture)
 			};
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthenticationConfig.SecurityKey));
-			var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-			var audience = ApplicationSettings.Name.IsEmpty() ? "XCommon" : ApplicationSettings.Name;
+			signUpTicket.Roles.ForEach(role =>
+			{
+				claims.Add(new Claim("roles", role));
+			});
 
-			return new JwtSecurityToken(audience, audience, claims, expires: DateTime.Now.AddDays(AuthenticationConfig.Expiration), signingCredentials: credentials);
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ApplicationSettings.Authentication.SecurityKey));
+			var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+			var audience = ApplicationSettings.Authentication.Audience;
+			var issuer = ApplicationSettings.Authentication.Issuer;
+			var expiration = DateTime.Now.AddDays(ApplicationSettings.Authentication.Expiration);
+
+			var result = new JwtSecurityToken(issuer, audience, claims, expires: expiration, signingCredentials: signingCredentials);
+			return new JwtSecurityTokenHandler().WriteToken(result);
 		}
-		#endregion
 
 		public bool IsAuthenticated
 		{
@@ -103,8 +74,9 @@ namespace XCommon.Web.Authentication
 				{
 					return result;
 				}
+				
 
-				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti)?.Value;
 
 				if (identifier.IsEmpty())
 				{
@@ -121,22 +93,15 @@ namespace XCommon.Web.Authentication
 		{
 			get
 			{
-				var userKey = UserKey;
-
-				if (userKey == Guid.Empty)
+				if (!IsAuthenticated)
 				{
 					return null;
 				}
 
-				var claimName = AuthenticationConfig.AuthenticationType == AuthenticationType.Cookie
-					? ClaimTypes.Name
-					: JwtRegisteredClaimNames.Jti;
-
 				return new ExecuteUser
 				{
-					Key = userKey,
-					Name = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == claimName)?.Value,
-					Culture = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimCulture)?.Value
+					UserKey = UserKey,
+					Culture = Culture
 				};
 			}
 		}
@@ -156,51 +121,6 @@ namespace XCommon.Web.Authentication
 
 				return HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimCulture)?.Value;
 			}
-		}
-
-		public async Task<string> SignInAsync(TicketEntity signUpTicket)
-		{
-			var key = Util.Functions.GetToken(4, 3, 4);
-
-			if (AuthenticationConfig.AuthenticationType == AuthenticationType.Cookie)
-			{
-				await HttpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, GetClaimsPrincipal(signUpTicket), GetAuthenticationProperties(signUpTicket));
-				HttpContextAccessor.HttpContext.Response.Redirect(AuthenticationConfig.UriCookieSucess);
-				return key;
-			}
-
-			var token = new TokenEntity
-			{
-				Culture = signUpTicket.Culture,
-				Expire = DateTime.UtcNow.AddDays(AuthenticationConfig.Expiration),
-				Name = signUpTicket.Name,
-				Token = new JwtSecurityTokenHandler().WriteToken(GetTokenAsync(signUpTicket))
-			};
-
-			Tokens.Add(key, token);
-			return key;
-		}
-
-		public async Task SignOutAsync()
-		{
-			await HttpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-		}
-
-		public async Task<TokenEntity> CheckTokenAsync(string key)
-		{
-			return await Task.Factory.StartNew(() =>
-			{
-				key = key.Replace("#", string.Empty);
-
-				if (Tokens.ContainsKey(key))
-				{
-					var result = Tokens[key];
-					Tokens.Remove(key);
-					return result;
-				}
-
-				return null;
-			});
 		}
 	}
 }

@@ -38,5 +38,7 @@ namespace XCommon.Application
 		public ICache Values { get; private set; }
 
 		public CloudServicesKeys CloudKeys { get; set; }
+
+		public ApplicationAuthentication Authentication { get; set; }
 	}
 }

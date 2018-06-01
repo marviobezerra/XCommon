@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using XCommon.Extensions.Converters;
 using XCommon.Application.Executes;
@@ -13,9 +13,8 @@ namespace XCommon.Test.Patterns.Repository.Executes
         {
             SampleUser = new ExecuteUser
             {
-                Key = "1".ToGuid(),
-                Culture = "marvio.bezerra",
-                Name = "Márvio André Bezerra Silverio"
+                UserKey = "1".ToGuid(),
+                Culture = "marvio.bezerra"
             };
         }
 
@@ -138,9 +137,8 @@ namespace XCommon.Test.Patterns.Repository.Executes
 
             var user = new ExecuteUser
             {
-                Key = "2".ToGuid(),
-                Culture = "jonhy",
-                Name = "Jonhy"
+                UserKey = "2".ToGuid(),
+                Culture = "jonhy"
             };
 
             var execute = new Execute(prioExecute, user);

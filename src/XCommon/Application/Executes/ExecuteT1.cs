@@ -1,7 +1,6 @@
-﻿namespace XCommon.Application.Executes
+namespace XCommon.Application.Executes
 {
     public class Execute<TEntity> : Execute
-        where TEntity : new()
     {
         public Execute()
             : this(default(TEntity), null, null)

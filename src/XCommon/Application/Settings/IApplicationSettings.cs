@@ -28,6 +28,8 @@ namespace XCommon.Application
 
 		ICache Values { get; }
 
+		ApplicationAuthentication Authentication { get; }
+
 		CloudServicesKeys CloudKeys { get; }
 	}
 }
