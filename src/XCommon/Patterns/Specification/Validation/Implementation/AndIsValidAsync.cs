@@ -4,9 +4,9 @@ using XCommon.Application.Executes;
 
 namespace XCommon.Patterns.Specification.Validation.Implementation
 {
-	internal class AndIsValid<TEntity> : ISpecificationValidation<TEntity>
+	internal class AndIsValidAsync<TEntity> : ISpecificationValidation<TEntity>
 	{
-		private Func<TEntity, bool> Selector { get; set; }
+		private Func<TEntity, Task<bool>> Selector { get; set; }
 
 		private string Message { get; set; }
 
@@ -14,12 +14,12 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 
 		private Func<TEntity, bool> Condition { get; set; }
 
-		internal AndIsValid(Func<TEntity, bool> selector, bool condition, string message, params object[] args)
+		internal AndIsValidAsync(Func<TEntity, Task<bool>> selector, bool condition, string message, params object[] args)
 			: this(selector, c => condition, message, args)
 		{
 		}
 
-		internal AndIsValid(Func<TEntity, bool> selector, Func<TEntity, bool> condition, string message, params object[] args)
+		internal AndIsValidAsync(Func<TEntity, Task<bool>> selector, Func<TEntity, bool> condition, string message, params object[] args)
 		{
 			Selector = selector;
 			Message = message;
@@ -40,7 +40,7 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 				return result;
 			}
 
-			result = await Task.Factory.StartNew(() => Selector(entity));
+			result = await Selector(entity);
 
 			if (!result && execute != null)
 			{

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 using XCommon.Extensions.String;
 using XCommon.Application.Executes;
+using System.Threading.Tasks;
 
 namespace XCommon.Patterns.Specification.Validation.Implementation
 {
@@ -32,36 +33,39 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
             Condition = condition;
         }
 
-        public bool IsSatisfiedBy(TEntity entity)
-            => IsSatisfiedBy(entity, null);
+        public async Task<bool> IsSatisfiedByAsync(TEntity entity)
+            => await IsSatisfiedByAsync(entity, null);
 
-        public bool IsSatisfiedBy(TEntity entity, Execute execute)
+        public async Task<bool> IsSatisfiedByAsync(TEntity entity, Execute execute)
         {
-			var value = Selector(entity);
-            Regex regex = null;
+			return await Task.Factory.StartNew(() => 
+			{
+				var value = Selector(entity);
+				Regex regex = null;
 
-            try
-            {
-                regex = new Regex(RegexExpression);
-            }
-            catch (Exception ex)
-            {
-                if (execute != null)
+				try
 				{
-					execute.AddMessage(ex, "Invalid regex", RegexExpression);
+					regex = new Regex(RegexExpression);
+				}
+				catch (Exception ex)
+				{
+					if (execute != null)
+					{
+						execute.AddMessage(ex, "Invalid regex", RegexExpression);
+					}
+
+					return false;
 				}
 
-				return false;
-            }
+				var result = value.IsNotEmpty() && regex.IsMatch(value);
 
-			var result = value.IsNotEmpty() && regex.IsMatch(value);
+				if (!result && execute != null && !string.IsNullOrEmpty(Message))
+				{
+					execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
+				}
 
-            if (!result && execute != null && !string.IsNullOrEmpty(Message))
-			{
-				execute.AddMessage(ExecuteMessageType.Error, Message, MessageArgs);
-			}
-
-			return result;
+				return result;
+			});
         }
     }
 }

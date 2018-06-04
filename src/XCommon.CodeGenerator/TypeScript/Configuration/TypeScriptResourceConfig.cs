@@ -15,15 +15,13 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public bool Execute { get; set; }
 
-		public bool LazyLoad { get; set; }
-
 		public string RequestAddress { get; set; }
+
+		public string File { get; set; }
 
 		public string Path { get; set; }
 
-		public string EntityPath { get; set; }
-
-		public string File { get; set; }
+		public string ServiceName { get; set; }
 
 		public ApplicationCulture CultureDefault { get; set; }
 

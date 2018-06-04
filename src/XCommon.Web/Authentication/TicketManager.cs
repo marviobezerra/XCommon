@@ -20,7 +20,7 @@ namespace XCommon.Web.Authentication
 {
 	public class TicketManager : ITicketManager
 	{
-		private string ClaimCulture => "Culture";
+		private string ClaimCulture => "culture";
 
 		[Inject]
 		private IApplicationSettings ApplicationSettings { get; set; }
@@ -33,15 +33,16 @@ namespace XCommon.Web.Authentication
 			HttpContextAccessor = accessor;
 		}
 
-		public string WriteToken(TicketEntity signUpTicket)
+		public string WriteToken(TicketEntity ticket)
 		{
 			var claims = new List<Claim>
 			{
-				new Claim(JwtRegisteredClaimNames.Jti, signUpTicket.Key.ToString()),
-				new Claim(ClaimCulture, signUpTicket.Culture)
+				new Claim(JwtRegisteredClaimNames.Sub, ticket.Name),
+				new Claim(JwtRegisteredClaimNames.Jti, ticket.Key.ToString()),
+				new Claim(ClaimCulture, ticket.Culture)
 			};
 
-			signUpTicket.Roles.ForEach(role =>
+			ticket.Roles.ForEach(role =>
 			{
 				claims.Add(new Claim("roles", role));
 			});
@@ -61,6 +62,20 @@ namespace XCommon.Web.Authentication
 			get
 			{
 				return HttpContextAccessor.HttpContext.User.Identities.Any(c => c.IsAuthenticated);
+			}
+		}
+
+		public string Name
+		{
+			get
+			{
+				if (!IsAuthenticated)
+				{
+					return string.Empty;
+				}
+
+
+				return HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
 			}
 		}
 
@@ -100,6 +115,7 @@ namespace XCommon.Web.Authentication
 
 				return new ExecuteUser
 				{
+					Name = Name,
 					UserKey = UserKey,
 					Culture = Culture
 				};

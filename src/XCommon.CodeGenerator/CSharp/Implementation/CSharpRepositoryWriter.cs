@@ -102,14 +102,14 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var file = $"{item.Name}Validate.cs";
 
 
-			var nameSpace = new List<string> { "System", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
+			var nameSpace = new List<string> { "System", "System.Threading.Tasks", "XCommon.Application.Executes", "XCommon.Patterns.Specification.Validation", "XCommon.Patterns.Specification.Validation.Extensions" };
 			nameSpace.Add($"{Config.CSharp.Entity.NameSpace}.{item.Schema}");
 
 			var builder = new StringBuilderIndented();
 
 			builder
 				.ClassInit($"{item.Name}Validate", $"SpecificationValidation<{item.Name}Entity>", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Validate", ClassVisility.Public, nameSpace.ToArray())
-				.AppendLine($"public override bool IsSatisfiedBy({item.Name}Entity entity, Execute execute)")
+				.AppendLine($"public override async Task<bool> IsSatisfiedByAsync({item.Name}Entity entity, Execute execute)")
 				.AppendLine("{")
 				.IncrementIndent()
 				.AppendLine("var spefications = NewSpecificationList()")
@@ -117,7 +117,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				.AppendLine(".AndIsValid(e => e.Key != Guid.Empty, \"Default key isn't valid\");")
 				.DecrementIndent()
 				.AppendLine()
-				.AppendLine("return CheckSpecifications(spefications, entity, execute);")
+				.AppendLine("return await CheckSpecificationsAsync(spefications, entity, execute);")
 				.DecrementIndent()
 				.AppendLine("}")
 				.InterfaceEnd();

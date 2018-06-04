@@ -1,16 +1,17 @@
-﻿using System;
+using System;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Application.Executes;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Validation.Extensions;
 using XCommon.Patterns.Specification.Validation.Implementation;
 using XCommon.Test.Entity;
+using System.Threading.Tasks;
 
 namespace XCommon.Test.Patterns.Specification.Validation.Sample
 {
     public class ComplexSpecificationValidation : SpecificationValidation<PersonEntity>
     {
-        public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
+        public override async Task<bool> IsSatisfiedByAsync(PersonEntity entity, Execute execute)
         {
             var specifications = NewSpecificationList()
                 .AndMerge(ValidateNew(), c => c.Action == EntityAction.New)
@@ -19,7 +20,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
                 .AndIsNotEmpty(c => c.Name, "Person needs a Name")                
                 .AndIsEmail(c => c.Email, "Person needs a valida email");
 
-            return CheckSpecifications(specifications, entity, execute);
+            return await CheckSpecificationsAsync(specifications, entity, execute);
         }
 
         private SpecificationList<PersonEntity> ValidateDelete()

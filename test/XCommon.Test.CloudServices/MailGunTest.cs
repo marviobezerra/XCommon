@@ -12,6 +12,9 @@ namespace XCommon.Test.CloudServices
 		[SkippableFact]
 		public async Task SendMail()
 		{
+			Skip.IfNot(TestConstants.IsMyMachine, "This test needs Internet Connection");
+
+
 			var app = new ApplicationSettings
 			{
 				CloudKeys = new CloudServicesKeys

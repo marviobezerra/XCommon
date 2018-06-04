@@ -14,12 +14,12 @@ namespace XCommon.Test.Web.Site.Code
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> ConfirmEmailAsync(Guid userKey)
+		public Task<Execute> ConfirmEmailAsync(Guid userKey, string token)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> ConfirmPhoneAsync(Guid userKey)
+		public Task<Execute> ConfirmPhoneAsync(Guid userKey, string token)
 		{
 			throw new NotImplementedException();
 		}
@@ -34,12 +34,12 @@ namespace XCommon.Test.Web.Site.Code
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> RecoveryPasswordValidateTokenAsync(string token)
+		public Task<Execute> RecoveryPasswordValidateTokenAsync(Guid userKey, string token)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute<TicketEntity>> SignInAsync(SignInEntity login)
+		public Task<Execute<TicketEntity>> SignInAsync(SignInEntity signIn)
 		{
 			throw new NotImplementedException();
 		}

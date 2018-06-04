@@ -7,17 +7,17 @@ namespace XCommon.Application.Authentication
 {
     public interface ILoginBusiness
     {
-        Task<Execute<TicketEntity>> SignInAsync(SignInEntity login);
+        Task<Execute<TicketEntity>> SignInAsync(SignInEntity signIn);
 
         Task<Execute<TicketEntity>> SignUpAsync(SignUpEntity signUp);
         
-        Task<Execute> ConfirmEmailAsync(Guid userKey);
+        Task<Execute> ConfirmEmailAsync(Guid userKey, string token);
 
-        Task<Execute> ConfirmPhoneAsync(Guid userKey);
+        Task<Execute> ConfirmPhoneAsync(Guid userKey, string token);
 
         Task<Execute> RecoveryPasswordRequestTokenAsync(string email);
 
-        Task<Execute> RecoveryPasswordValidateTokenAsync(string token);
+        Task<Execute> RecoveryPasswordValidateTokenAsync(Guid userKey, string token);
 
         Task<Execute> RecoveryPasswordAsync(PasswordRecoveryEntity info);
 

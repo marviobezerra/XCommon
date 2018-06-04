@@ -243,14 +243,14 @@ namespace XCommon.Patterns.Repository
 
 		public virtual async Task<Execute> ValidateManyAsync(List<TEntity> entity)
 		{
-			return await Task.Run(() =>
+			var result = new Execute();
+
+			foreach (var item in entity)
 			{
-				var result = new Execute();
+				await SpecificationValidate.IsSatisfiedByAsync(item, result);
+			}
 
-				entity.ForEach(c => SpecificationValidate.IsSatisfiedBy(c, result));
-
-				return result;
-			});
+			return result;
 		}
 	}
 }

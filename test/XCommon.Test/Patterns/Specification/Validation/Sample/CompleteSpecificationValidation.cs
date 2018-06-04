@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 using XCommon.Application.Executes;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Validation.Extensions;
@@ -8,7 +9,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
 {
     public class CompleteSpecificationValidation : SpecificationValidation<PersonEntity>
     {
-        public override bool IsSatisfiedBy(PersonEntity entity, Execute execute)
+        public override async Task<bool> IsSatisfiedByAsync(PersonEntity entity, Execute execute)
         {
             var specification = NewSpecificationList()
                 .AndIsValid(c => c.Id != Guid.Empty, "Invalid ID")
@@ -18,7 +19,7 @@ namespace XCommon.Test.Patterns.Specification.Validation.Sample
                 .AndIsValid(c => c.Age > 0, "Age need's to be more than zero");
 
 
-            return CheckSpecifications(specification, entity, execute);
+            return await CheckSpecificationsAsync(specification, entity, execute);
         }
     }
 }

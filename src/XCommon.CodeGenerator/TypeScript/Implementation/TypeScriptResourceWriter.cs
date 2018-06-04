@@ -11,312 +11,191 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 {
 	public class TypeScriptResourceWriter : BaseWriter, ITypeScriptResourceWriter
 	{
+		[Inject]
+		private ITypeScriptIndexExport Index { get; set; }
+
+		private Dictionary<string, List<ResourceEntity>> Resources { get; set; }
+
 		public void Run()
 		{
 			var builder = new StringBuilderIndented();
 
 			builder
-				.AppendLine("import { Injectable } from '@angular/core';");
+				.AppendLine("import { Injectable } from '@angular/core';")
+				.AppendLine("import { HttpClient } from '@angular/common/http';")
+				.AppendLine("import { Observable } from 'rxjs';")
+				.AppendLine("");
 
-			if (Config.TypeScript.Resource.LazyLoad)
-			{
-				builder
-					.AppendLine("import { Http, Response } from '@angular/http';")
-					.AppendLine("import { Observable } from 'rxjs/Observable';");
-			}
-
-			builder
-				.AppendLine($"import {{ Map }} from '{Config.TypeScript.Resource.EntityPath}';")
-				.AppendLine();
-
-			Resources = new List<GeneratorResourceEntity>();
-
-			GetResouces();
-			BuildLanguageSuported(builder);
-			BuildInterface(builder);
-
-			if (!Config.TypeScript.Resource.LazyLoad)
-			{
-				BuildClass(builder);
-			}
-
+			InitResource();
+			LoadResouces();
+			BuildResourceClasses(builder);
 			BuidService(builder);
-			
-			var file = Config.TypeScript.Resource.File.GetSelector() + ".service.ts";
-			var path = Config.TypeScript.Resource.Path.ToLower();
-			Writer.WriteFile(path, file, builder, true);
 
-			Index.Run(path);
+			Writer.WriteFile(Config.TypeScript.Resource.Path, Config.TypeScript.Resource.File, builder, true);
+
+			Index.Run(Config.TypeScript.Resource.Path);
 		}
 
-		[Inject]
-		private ITypeScriptIndexExport Index { get; set; }
-
-		private List<GeneratorResourceEntity> Resources { get; set; }
-
-		private string GetCultureName(string culture)
+		private void InitResource()
 		{
-			return culture
-				.Replace("-", string.Empty)
-				.ToUpper();
-		}
+			Resources = new Dictionary<string, List<ResourceEntity>>();
 
-		private void GetResouces()
-		{
-			foreach (var manager in Config.TypeScript.Resource.Resources)
+			Config.TypeScript.Resource.Cultures.ForEach(culture =>
 			{
-				var resource = new GeneratorResourceEntity
-				{
-					ResourceName = manager.Key.Name
-				};
+				Resources.Add(culture.Code, new List<ResourceEntity>());
+			});
 
-				foreach (var culture in Config.TypeScript.Resource.Cultures)
-				{
-					var retorno = new Dictionary<string, string>();
+			if (!Resources.ContainsKey(Config.TypeScript.Resource.CultureDefault.Code))
+			{
+				Resources.Add(Config.TypeScript.Resource.CultureDefault.Code, new List<ResourceEntity>());
+			}
+		}
 
+		private void LoadResouces()
+		{
+			// Get the culture from the generator config
+			foreach (var culture in Config.TypeScript.Resource.Cultures)
+			{
+				var resource = new List<ResourceEntity>();
+
+				// Get the mapped resource files
+				foreach (var manager in Config.TypeScript.Resource.Resources)
+				{
+					var resouceItem = new ResourceEntity
+					{
+						ResourceName = manager.Key.Name,
+						Properties = new Dictionary<string, string>()
+					};		
+
+					// Get the properties from the resouce file
 					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
 					{
-						retorno.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Name)));
+						resouceItem.Properties.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Code)));
 					}
 
-					resource.Values.Add(new GeneratorResourceEntityValues { Culture = culture.Name, Properties = retorno });
+					resource.Add(resouceItem);
 				}
 
-				Resources.Add(resource);
+				Resources[culture.Code] = resource;
 			}
 		}
 
-		private void BuildInterface(StringBuilderIndented builder)
+		private void BuildResourceClasses(StringBuilderIndented builder)
 		{
-			foreach (var resource in Resources)
+			var resources = Resources[Config.TypeScript.Resource.CultureDefault.Code];
+
+			foreach (var resource in resources)
 			{
 				builder
-					.AppendLine($"export interface I{resource.ResourceName} {{")
+					.AppendLine($"class {resource.ResourceName}Resource {{")
 					.IncrementIndent();
 
-				foreach (var value in resource.Values.FirstOrDefault().Properties)
+				foreach (var value in resource.Properties)
 				{
 					builder
-						.AppendLine($"{value.Key}: string;");
+						.AppendLine($"{value.Key} = '{value.Value.Replace("'", "\\'")}';");
 				}
 
 				builder
 					.DecrementIndent()
 					.AppendLine("}")
-					.AppendLine();
-			}
-
-			builder
-				.AppendLine("export interface IResource {")
-				.IncrementIndent()
-				.AppendLine("Culture: string;");
-
-			foreach (var resource in Resources)
-			{
-				builder
-					.AppendLine($"{resource.ResourceName}: I{resource.ResourceName};");
-			}
-
-			builder
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine();
-		}
-
-		private void BuildClass(StringBuilderIndented builder)
-		{
-			foreach (var culture in Config.TypeScript.Resource.Cultures)
-			{
-				foreach (var resource in Resources)
-				{
-					builder
-						.AppendLine($"class {resource.ResourceName}{GetCultureName(culture.Name)} implements I{resource.ResourceName} {{")
-						.IncrementIndent();
-
-					foreach (var property in resource.Values.Where(c => c.Culture == culture.Name).SelectMany(c => c.Properties))
-					{
-						builder
-							.AppendLine($"{property.Key}: string = '{property.Value}';");
-					}
-
-					builder
-						.DecrementIndent()
-						.AppendLine("}")
-						.AppendLine();
-				}
+					.AppendLine()
+					.DecrementIndent();
 			}
 		}
 
 		private string BuidService(StringBuilderIndented builder)
 		{
 			builder
-				.AppendLine("@Injectable()")
-				.AppendLine("export class ResourceService {")
+				.AppendLine("@Injectable({")
 				.IncrementIndent()
-				.AppendLine(Config.TypeScript.Resource.LazyLoad ? "constructor(private http: Http) {" : "constructor() {")
-				.IncrementIndent();
-
-			BuildLanguageSuportedContructor(builder);
-
-			builder
-				.AppendLine($"this.SetLanguage('{Config.TypeScript.Resource.CultureDefault.Name}')")
+				.AppendLine("providedIn: 'root'")
 				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine();
+				.AppendLine("})")
+				.AppendLine($"export class {Config.TypeScript.Resource.ServiceName} {{")
+				.IncrementIndent()
+				.AppendLine("");
 
-			if (Config.TypeScript.Resource.LazyLoad)
+			foreach (var resource in Resources[Config.TypeScript.Resource.CultureDefault.Code])
 			{
 				builder
-					.AppendLine("private Resources: Map<IResource> = {};");
+					.AppendLine($"public {resource.ResourceName} = new {resource.ResourceName}Resource();")
+					.AppendLine("");
 			}
 
 			builder
-				.AppendLine("public Languages: ApplicationCulture[] = [];")
-				.AppendLine("private Language: ApplicationCulture;")
+				.AppendLine("public CurrentCulture = {")
+				.IncrementIndent()
+				.AppendLine($"Code: '{Config.TypeScript.Resource.CultureDefault.Code}',")
+				.AppendLine($"Name: '{Config.TypeScript.Resource.CultureDefault.Name}'")
+				.DecrementIndent()
+				.AppendLine("};")
 				.AppendLine();
 
-			foreach (var resource in Resources)
-			{
-				builder.AppendLine($"public {resource.ResourceName}: I{resource.ResourceName};");
-			}
-
 			builder
-				.AppendLine()
-				.AppendLine("public GetLanguage(): ApplicationCulture {")
-				.IncrementIndent()
-				.AppendLine("return this.Language;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-				.AppendLine("public SetLanguage(language: string): void {")
-				.IncrementIndent()
-				.AppendLine()
-
-				.AppendLine("if (this.Language && this.Language.Name === language) {")
-				.IncrementIndent()
-				.AppendLine("return;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-
-				.AppendLine("let value = this.Languages.find((item: ApplicationCulture) => item.Name == language);")
-				.AppendLine()
-				.AppendLine("if (!value) {")
-				.IncrementIndent()
-				.AppendLine($"console.warn(`Unknown language: ${{language}}! Set up current culture as the default language: {Config.TypeScript.Resource.CultureDefault.Name}`);")
-				.AppendLine($"this.SetLanguage('{Config.TypeScript.Resource.CultureDefault.Name}');")
-				.AppendLine("return;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-				.AppendLine("this.Language = value;")
-				.AppendLine();
-
-
-			if (!Config.TypeScript.Resource.LazyLoad)
-			{
-				BuildNormalService(builder);
-			}
-
-			if (Config.TypeScript.Resource.LazyLoad)
-			{
-				BuildLazyService(builder);
-			}
-
-			builder
-				.DecrementIndent()
-							.AppendLine("}")
-							.DecrementIndent()
-							.AppendLine("}");
-
-			return builder.ToString();
-		}
-
-		private void BuildLazyService(StringBuilderIndented builder)
-		{
-			builder
-				.AppendLine("if (this.Resources[this.Language.Name]) {")
-				.IncrementIndent()
-				.AppendLine("let resource: IResource = this.Resources[this.Language.Name];")
-				.AppendLine();
-
-			foreach (var resource in Resources)
-			{
-				builder
-					.AppendLine($"this.{resource.ResourceName} = resource.{resource.ResourceName};");
-			}
-
-			builder
-				.AppendLine()
-				.AppendLine("return;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-				.AppendLine($"this.http.get(`{Config.TypeScript.Resource.RequestAddress}/${{this.Language.Name}}`)")
-				.IncrementIndent()
-				.AppendLine(".map((response: Response, index: number) => response.json())")
-				.AppendLine(".subscribe((resource: IResource) => {")
-				.IncrementIndent()
-				.AppendLine("this.Resources[resource.Culture] = resource;")
-				.AppendLine();
-
-			foreach (var resource in Resources)
-			{
-				builder
-					.AppendLine($"this.{resource.ResourceName} = resource.{resource.ResourceName};");
-			}
-
-			builder
-				.DecrementIndent()
-				.AppendLine("});");
-		}
-
-		private void BuildNormalService(StringBuilderIndented builder)
-		{
-			builder
-				.AppendLine("switch (this.Language.Name) {")
+				.AppendLine("public Cultures = [")
 				.IncrementIndent();
 
 			foreach (var culture in Config.TypeScript.Resource.Cultures)
 			{
-				builder
-					.AppendLine($"case '{culture.Name}':")
-					.IncrementIndent();
-
-				foreach (var resource in Resources)
-				{
-					builder
-						.AppendLine($"this.{resource.ResourceName} = new {resource.ResourceName}{GetCultureName(culture.Name)}();");
-				}
-
-				builder
-					.AppendLine("break;")
-					.DecrementIndent();
+				builder.AppendLine($"{{ Code: '{culture.Code}', Name: '{culture.Name}' }}");
 			}
+
+			builder
+				.DecrementIndent()
+				.AppendLine("];")
+				.AppendLine("");
+
+
+			builder
+				.AppendLine("constructor(private http: HttpClient) {")
+				.AppendLine("}")
+				.AppendLine("");
+
+			builder
+				.AppendLine("public setCulture(cultureCode: string): Observable<boolean> {")
+				.AppendLine("")
+				.IncrementIndent()
+				.AppendLine("const newCulture = this.Cultures.find(c => c.Code === cultureCode);")
+				.AppendLine("")
+				.AppendLine("if (!newCulture) {")
+				.IncrementIndent()
+				.AppendLine("throw new Error(`Invalid culture: ${cultureCode}`);")
+				.DecrementIndent()
+				.AppendLine("}")
+				.AppendLine("")
+				.AppendLine("return new Observable<boolean>(observer => {")
+				.AppendLine("")
+				.IncrementIndent()
+				.AppendLine("if (cultureCode === this.CurrentCulture.Code) {")
+				.IncrementIndent()
+				.AppendLine("observer.next(true);")
+				.AppendLine("observer.complete();")
+				.AppendLine("return;")
+				.DecrementIndent()
+				.AppendLine("}")
+				.AppendLine("")
+				.AppendLine($"this.http.post<MessagesResource>('{Config.TypeScript.Resource.RequestAddress}', cultureCode)")
+				.IncrementIndent()
+				.AppendLine(".subscribe(res => {")
+				.IncrementIndent()
+				.AppendLine("this.Messages = res;")
+				.AppendLine("observer.next(true);")
+				.AppendLine("observer.complete();")
+				.DecrementIndent()
+				.AppendLine("});")
+				.DecrementIndent()
+				.DecrementIndent()
+				.AppendLine("});")
+				.DecrementIndent()
+				.AppendLine("}")
+				.DecrementIndent();
 
 			builder
 				.DecrementIndent()
 				.AppendLine("}");
-		}
 
-		private void BuildLanguageSuportedContructor(StringBuilderIndented builder)
-		{
-			foreach (var culture in Config.TypeScript.Resource.Cultures)
-			{
-				builder.AppendLine($"this.Languages.push({{ Name: '{culture.Name}', Description: '{culture.Description}' }});");
-			}
-		}
-
-		private void BuildLanguageSuported(StringBuilderIndented builder)
-		{
-			builder
-				.AppendLine("export class ApplicationCulture {")
-				.IncrementIndent()
-				.AppendLine("public Name: string;")
-				.AppendLine("public Description: string;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine();
+			return builder.ToString();
 		}
 	}
 }

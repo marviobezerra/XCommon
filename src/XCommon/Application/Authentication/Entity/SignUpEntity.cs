@@ -25,5 +25,9 @@ namespace XCommon.Application.Authentication.Entity
         public string Token { get; set; }
 
         public DateTime? BirthDay { get; set; }
-    }
+
+		public string Password { get; set; }
+
+		public string PasswordConfirm { get; set; }
+	}
 }

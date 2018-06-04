@@ -46,15 +46,15 @@ namespace XCommon.Web.Controllers
 		}
 		
 		[HttpPost("confirm/email")]
-		public virtual async Task<Execute> ConfirmEmail(Guid userKey)
+		public virtual async Task<Execute> ConfirmEmail(Guid userKey, string token)
 		{
-			return await LoginBusiness.ConfirmEmailAsync(userKey);
+			return await LoginBusiness.ConfirmEmailAsync(userKey, token);
 		}
 
 		[HttpPost("confirm/phone")]
-		public virtual async Task<Execute> ConfirmPhone(Guid userKey)
+		public virtual async Task<Execute> ConfirmPhone(Guid userKey, string token)
 		{
-			return await LoginBusiness.ConfirmPhoneAsync(userKey);
+			return await LoginBusiness.ConfirmPhoneAsync(userKey, token);
 		}
 
 		[HttpPost("recoverypassword")]
@@ -70,9 +70,9 @@ namespace XCommon.Web.Controllers
 		}
 
 		[HttpPost("recoverypassword/validatetoken")]
-		public virtual async Task<Execute> RecoveryPasswordValidateToken(string token)
+		public virtual async Task<Execute> RecoveryPasswordValidateToken(Guid userKey, string token)
 		{
-			return await LoginBusiness.RecoveryPasswordValidateTokenAsync(token);
+			return await LoginBusiness.RecoveryPasswordValidateTokenAsync(userKey, token);
 		}
 
 		[Authorize]

@@ -1,51 +1,52 @@
-﻿using XCommon.Application.Executes;
+using System.Threading.Tasks;
+using XCommon.Application.Executes;
 using XCommon.Patterns.Specification.Validation.Implementation;
 
 namespace XCommon.Patterns.Specification.Validation
 {
-    public abstract class SpecificationValidation<TEntity> : ISpecificationValidation<TEntity>
-    {
-        protected SpecificationList<TEntity> NewSpecificationList(bool addCheckNullObject = true)
-        {
-            var result = new SpecificationList<TEntity>();
+	public abstract class SpecificationValidation<TEntity> : ISpecificationValidation<TEntity>
+	{
+		protected SpecificationList<TEntity> NewSpecificationList(bool addCheckNullObject = true)
+		{
+			var result = new SpecificationList<TEntity>();
 
-            if (addCheckNullObject)
-            {
-                ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
-                result.Add(basicSpecification, true);
-            }
-            
-            return result;
-        }
+			if (addCheckNullObject)
+			{
+				ISpecificationValidation<TEntity> basicSpecification = new AndIsNotEmpty<TEntity, object>(c => c, AndIsNotEmptyType.Object, true, "Entity {0} can't be null", typeof(TEntity).Name);
+				result.Add(basicSpecification, true);
+			}
 
-        public bool IsSatisfiedBy(TEntity entity)
-        {
-            return IsSatisfiedBy(entity, new Execute());
-        }
+			return result;
+		}
 
-        public abstract bool IsSatisfiedBy(TEntity entity, Execute execute);
+		public async Task<bool> IsSatisfiedByAsync(TEntity entity)
+		{
+			return await IsSatisfiedByAsync(entity, new Execute());
+		}
 
-        protected virtual bool CheckSpecifications(SpecificationList<TEntity> specifications, TEntity entity, Execute execute)
-        {
-            var result = true;
+		public abstract Task<bool> IsSatisfiedByAsync(TEntity entity, Execute execute);
 
-            foreach (var item in specifications.Items)
-            {
-                if (!item.Condition(entity))
+		protected virtual async Task<bool> CheckSpecificationsAsync(SpecificationList<TEntity> specifications, TEntity entity, Execute execute)
+		{
+			var result = true;
+
+			foreach (var item in specifications.Items)
+			{
+				if (!item.Condition(entity))
 				{
 					continue;
 				}
 
-				var satisfied = item.Specification.IsSatisfiedBy(entity, execute);
-                result = result && satisfied;
+				var satisfied = await item.Specification.IsSatisfiedByAsync(entity, execute);
+				result = result && satisfied;
 
-                if (!result && item.StopIfInvalid)
+				if (!result && item.StopIfInvalid)
 				{
 					break;
 				}
 			}
 
-            return result;
-        }
-    }
+			return result;
+		}
+	}
 }
