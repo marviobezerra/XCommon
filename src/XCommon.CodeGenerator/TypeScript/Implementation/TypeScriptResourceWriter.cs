@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using XCommon.CodeGenerator.Core;
 using XCommon.CodeGenerator.Core.Extensions;
 using XCommon.CodeGenerator.TypeScript.Implementation.Helper;
@@ -20,24 +23,43 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 		{
 			var builder = new StringBuilderIndented();
 
-			builder
-				.AppendLine("import { Injectable } from '@angular/core';")
-				.AppendLine("import { HttpClient } from '@angular/common/http';")
-				.AppendLine("import { Observable } from 'rxjs';")
-				.AppendLine("");
-
 			InitResource();
-			LoadResouces();
-			BuildResourceClasses(builder);
-			BuidService(builder);
+			WriteResourceClasses(builder);
+			WriteService(builder);
+			WriteJsonFiles();
 
 			Writer.WriteFile(Config.TypeScript.Resource.Path, Config.TypeScript.Resource.File, builder, true);
+
 
 			Index.Run(Config.TypeScript.Resource.Path);
 		}
 
+		private void WriteJsonFiles()
+		{
+			foreach (var culture in Resources)
+			{
+				dynamic result = new ExpandoObject();
+
+				foreach (var resouce in culture.Value)
+				{
+					dynamic current = new ExpandoObject();
+
+					foreach (var item in resouce.Properties)
+					{
+						(current as IDictionary<string, object>).Add(item.Key, item.Value);
+					}
+
+					(result as IDictionary<string, object>).Add(resouce.ResourceName, current);
+				}
+
+				Writer.WriteFile(Config.TypeScript.Resource.PathJson, $"{culture.Key}.json", JsonConvert.SerializeObject(result), true);
+
+			}
+		}
+
 		private void InitResource()
 		{
+			// Load the maped resource files
 			Resources = new Dictionary<string, List<ResourceEntity>>();
 
 			Config.TypeScript.Resource.Cultures.ForEach(culture =>
@@ -45,14 +67,12 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				Resources.Add(culture.Code, new List<ResourceEntity>());
 			});
 
+			// Check if the default is in the list
 			if (!Resources.ContainsKey(Config.TypeScript.Resource.CultureDefault.Code))
 			{
 				Resources.Add(Config.TypeScript.Resource.CultureDefault.Code, new List<ResourceEntity>());
 			}
-		}
 
-		private void LoadResouces()
-		{
 			// Get the culture from the generator config
 			foreach (var culture in Config.TypeScript.Resource.Cultures)
 			{
@@ -65,7 +85,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					{
 						ResourceName = manager.Key.Name,
 						Properties = new Dictionary<string, string>()
-					};		
+					};
 
 					// Get the properties from the resouce file
 					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
@@ -80,10 +100,18 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void BuildResourceClasses(StringBuilderIndented builder)
+		private void WriteResourceClasses(StringBuilderIndented builder)
 		{
 			var resources = Resources[Config.TypeScript.Resource.CultureDefault.Code];
 
+			// Write the file header
+			builder
+				.AppendLine("import { Injectable } from '@angular/core';")
+				.AppendLine("import { HttpClient } from '@angular/common/http';")
+				.AppendLine("import { Observable } from 'rxjs';")
+				.AppendLine("");
+
+			// Create the resouce class with default values
 			foreach (var resource in resources)
 			{
 				builder
@@ -104,8 +132,9 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private string BuidService(StringBuilderIndented builder)
+		private string WriteService(StringBuilderIndented builder)
 		{
+			// Service declaration
 			builder
 				.AppendLine("@Injectable({")
 				.IncrementIndent()
@@ -116,6 +145,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.IncrementIndent()
 				.AppendLine("");
 
+			// Resource Propertoes
 			foreach (var resource in Resources[Config.TypeScript.Resource.CultureDefault.Code])
 			{
 				builder
@@ -123,6 +153,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					.AppendLine("");
 			}
 
+			// Current Culture
 			builder
 				.AppendLine("public CurrentCulture = {")
 				.IncrementIndent()
@@ -132,13 +163,16 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.AppendLine("};")
 				.AppendLine();
 
+			// Available cultures
 			builder
 				.AppendLine("public Cultures = [")
 				.IncrementIndent();
 
 			foreach (var culture in Config.TypeScript.Resource.Cultures)
 			{
-				builder.AppendLine($"{{ Code: '{culture.Code}', Name: '{culture.Name}' }}");
+				var last = Config.TypeScript.Resource.Cultures.Last().Code.Equals(culture.Code);
+				var comma = last ? string.Empty : ",";
+				builder.AppendLine($"{{ Code: '{culture.Code}', Name: '{culture.Name}' }}{comma}");
 			}
 
 			builder
@@ -146,12 +180,13 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.AppendLine("];")
 				.AppendLine("");
 
-
+			// Service constructor
 			builder
 				.AppendLine("constructor(private http: HttpClient) {")
 				.AppendLine("}")
 				.AppendLine("");
 
+			// Set culture method
 			builder
 				.AppendLine("public setCulture(cultureCode: string): Observable<boolean> {")
 				.AppendLine("")
@@ -175,11 +210,24 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine("")
-				.AppendLine($"this.http.post<MessagesResource>('{Config.TypeScript.Resource.RequestAddress}', cultureCode)")
+				.AppendLine($"this.http.get<any>(`{Config.TypeScript.Resource.RequestAddress}${{cultureCode}}.json`)")
 				.IncrementIndent()
 				.AppendLine(".subscribe(res => {")
-				.IncrementIndent()
-				.AppendLine("this.Messages = res;")
+				.IncrementIndent();
+
+			// Set the properties with the new language
+
+			foreach (var item in Resources[Config.TypeScript.Resource.CultureDefault.Code])
+			{
+				builder
+					.AppendLine($"this.{item.ResourceName} = res.{item.ResourceName};");
+			}
+
+			// Complete the service
+			builder
+				.AppendLine("")
+				.AppendLine("this.CurrentCulture = newCulture;")
+				.AppendLine("")
 				.AppendLine("observer.next(true);")
 				.AppendLine("observer.complete();")
 				.DecrementIndent()
@@ -191,6 +239,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.AppendLine("}")
 				.DecrementIndent();
 
+			// Close service class
 			builder
 				.DecrementIndent()
 				.AppendLine("}");

@@ -21,6 +21,8 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public string Path { get; set; }
 
+		public string PathJson { get; set; }
+
 		public string ServiceName { get; set; }
 
 		public ApplicationCulture CultureDefault { get; set; }
