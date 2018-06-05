@@ -79,23 +79,20 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			foreach (var culture in Config.TypeScript.Resource.Cultures)
 			{
 				var resource = new List<ResourceEntity>();
-				var cultureInfo = new CultureInfo(culture.Code);
 
 				// Get the mapped resource files
 				foreach (var manager in Config.TypeScript.Resource.Resources)
 				{
 					var resouceItem = new ResourceEntity
 					{
-						ResourceName = manager.Name,
+						ResourceName = manager.Key.Name,
 						Properties = new Dictionary<string, string>()
 					};
 
-					var rm = new ResourceManager(manager);
-
-					using (var resourceSet = rm.GetResourceSet(cultureInfo, true, true))
+					// Get the properties from the resouce file
+					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
 					{
-						resouceItem.Properties = resourceSet.OfType<DictionaryEntry>()
-								 .ToDictionary(r => r.Key.ToString(), r => r.Value.ToString());
+						resouceItem.Properties.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Code)));
 					}
 
 					resource.Add(resouceItem);

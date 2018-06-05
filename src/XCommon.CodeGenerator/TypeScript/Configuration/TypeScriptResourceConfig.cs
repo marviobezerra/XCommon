@@ -10,7 +10,7 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 		public TypeScriptResourceConfig()
 		{
 			Cultures = new List<ApplicationCulture>();
-			Resources = new List<Type>();
+			Resources = new Dictionary<Type, ResourceManager>();
 		}
 
 		public bool Execute { get; set; }
@@ -29,6 +29,6 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public List<ApplicationCulture> Cultures { get; set; }
 
-		public List<Type> Resources { get; set; }
+		public Dictionary<Type, ResourceManager> Resources { get; set; }
 	}
 }
