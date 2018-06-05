@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using Newtonsoft.Json;
 using XCommon.CodeGenerator.Core;
 using XCommon.CodeGenerator.Core.Extensions;
@@ -77,20 +79,23 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			foreach (var culture in Config.TypeScript.Resource.Cultures)
 			{
 				var resource = new List<ResourceEntity>();
+				var cultureInfo = new CultureInfo(culture.Code);
 
 				// Get the mapped resource files
 				foreach (var manager in Config.TypeScript.Resource.Resources)
 				{
 					var resouceItem = new ResourceEntity
 					{
-						ResourceName = manager.Key.Name,
+						ResourceName = manager.Name,
 						Properties = new Dictionary<string, string>()
 					};
 
-					// Get the properties from the resouce file
-					foreach (var item in manager.Key.GetProperties().Where(c => c.PropertyType == typeof(string)))
+					var rm = new ResourceManager(manager);
+
+					using (var resourceSet = rm.GetResourceSet(cultureInfo, true, true))
 					{
-						resouceItem.Properties.Add(item.Name, manager.Value.GetString(item.Name, new CultureInfo(culture.Code)));
+						resouceItem.Properties = resourceSet.OfType<DictionaryEntry>()
+								 .ToDictionary(r => r.Key.ToString(), r => r.Value.ToString());
 					}
 
 					resource.Add(resouceItem);

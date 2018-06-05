@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp2.1</TargetFrameworks>
 		<Description>XCommon Cloud Services are features like access blob file storage, send mail and others.</Description>
 		<Authors>Marvio Andre Bezerra Silverio</Authors>
-		<Version>1.0.59</Version>
+		<Version>1.0.60</Version>
 		<Company>Marvio Andre Bezerra Silverio</Company>
 		<PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
 		<PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
@@ -16,7 +16,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Sendgrid" Version="9.9.0" />
-		<PackageReference Include="WindowsAzure.Storage" Version="9.1.1" />
+		<PackageReference Include="WindowsAzure.Storage" Version="9.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>

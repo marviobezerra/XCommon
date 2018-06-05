@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
-    <Version>1.0.59</Version>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <Version>1.0.60</Version>
     <Authors>Marvio Andre Bezerra Silverio</Authors>
     <Company>Marvio Andre Bezerra Silverio</Company>
     <Copyright>Marvio Andre Bezerra Silverio</Copyright>
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
