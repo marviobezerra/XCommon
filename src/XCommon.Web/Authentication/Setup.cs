@@ -20,6 +20,8 @@ namespace XCommon.Web.Authentication
 				throw new Exception("Authentication parameters missing on ApplicationSettings");
 			}
 
+			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
 			services.AddAuthentication(options =>
 			 {
 				 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
