@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Resources;
-using XCommon.Application;
+using XCommon.Application.Settings;
 
 namespace XCommon.CodeGenerator.TypeScript.Configuration
 {

@@ -1,14 +1,35 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
+using XCommon.Application.Settings;
+using XCommon.Extensions.String;
+using XCommon.Patterns.Ioc;
 
 namespace XCommon.Application.FileStorage.Implementations
 {
-    public class FileStorageLocal : IFileStorage
+	public class FileStorageLocal : IFileStorage
     {
-        public FileStorageLocal(string rootFolder)
+		private IApplicationSettings ApplicationSettings => Kernel.Resolve<IApplicationSettings>();
+
+		public FileStorageLocal()
+		{
+			Init(ApplicationSettings.Storage.FileStorage, false, false);
+		}
+
+		public FileStorageLocal(string rootFolder)
         {
-            Root = rootFolder;
+			Init(rootFolder, true, false);
+		}
+
+		protected void Init(string rootFolder, bool rootByParam, bool tempFolder)
+		{
+			if (rootFolder.IsEmpty())
+			{
+				var mapType = tempFolder ? "FileStorageLocal" : "FileTemporaryStorage";
+				throw new Exception($"Empty {mapType} parameter. The root folder is required.");
+			}
+
+			Root = rootFolder;
 
 			if (!Directory.Exists(Root))
 			{

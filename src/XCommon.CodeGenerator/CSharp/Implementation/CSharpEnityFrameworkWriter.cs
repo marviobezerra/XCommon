@@ -20,7 +20,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var path = Config.CSharp.EntityFramework.Path;
 			var file = $"{Config.CSharp.EntityFramework.ContextName}.cs";
 
-			var nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Diagnostics", "XCommon.Patterns.Ioc", "XCommon.Application" };
+			var nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Diagnostics", "XCommon.Patterns.Ioc", "XCommon.Application.Settings" };
 
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}"));
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}.Map"));

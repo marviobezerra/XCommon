@@ -1,4 +1,4 @@
-namespace XCommon.Application
+namespace XCommon.Application.Settings
 {
 	public class ApplicationAuthentication
 	{

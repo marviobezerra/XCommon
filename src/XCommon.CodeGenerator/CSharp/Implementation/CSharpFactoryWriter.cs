@@ -25,7 +25,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
-				.AppendLine("public static void RegisterCustom(bool unitTest)")
+				.AppendLine("public static void RegisterCustom(bool production, bool unitTest)")
 				.AppendLine("{")
 				.AppendLine("}")
 				.ClassEnd();
@@ -59,7 +59,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
-				.AppendLine("public static void Do(bool unitTest = false)")
+				.AppendLine("public static void Do(bool production, bool unitTest)")
 				.AppendLine("{")
 				.IncrementIndent();
 
@@ -73,7 +73,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			builder
 				.AppendLine("RegisterValidate();")
 				.AppendLine("RegisterQuery();")
-				.AppendLine("RegisterCustom(unitTest);")
+				.AppendLine("RegisterCustom(production, unitTest);")
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine();

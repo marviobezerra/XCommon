@@ -2,9 +2,9 @@ using System;
 using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using XCommon.Application;
 using XCommon.Application.Executes;
 using XCommon.Application.Mail;
+using XCommon.Application.Settings;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 
@@ -27,7 +27,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 		{
 			var result = new Execute();
 
-			if (ApplicationSettings.CloudKeys == null || ApplicationSettings.CloudKeys.SendGridKey.IsEmpty())
+			if (ApplicationSettings.Mail == null || ApplicationSettings.Mail.SendGridKey.IsEmpty())
 			{
 				result.AddMessage(ExecuteMessageType.Error, "SendGrid API Key is not defined on ApplicationSettings.");
 				return result;
@@ -35,7 +35,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 
 			try
 			{
-				var client = new SendGridClient(ApplicationSettings.CloudKeys.SendGridKey);
+				var client = new SendGridClient(ApplicationSettings.Mail.SendGridKey);
 				var msg = MailHelper.CreateSingleEmail(new EmailAddress(from, fromName), new EmailAddress(to, toName), subject, body, body);
 				var response = await client.SendEmailAsync(msg);
 			}

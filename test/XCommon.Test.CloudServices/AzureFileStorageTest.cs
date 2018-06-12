@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using FluentAssertions;
-using XCommon.Application;
 using XCommon.Application.FileStorage;
+using XCommon.Application.Settings;
 using XCommon.CloudServices.Application.FileStorage.Implementations;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;

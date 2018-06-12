@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace XCommon.Application
+namespace XCommon.Application.Settings
 {
 	public class ApplicationCulture
 	{

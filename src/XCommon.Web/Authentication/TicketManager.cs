@@ -4,15 +4,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using XCommon.Application;
 using XCommon.Application.Authentication;
 using XCommon.Application.Authentication.Entity;
 using XCommon.Application.Executes;
+using XCommon.Application.Settings;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 

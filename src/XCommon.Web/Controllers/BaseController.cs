@@ -1,7 +1,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
-using XCommon.Application;
 using XCommon.Application.Authentication;
+using XCommon.Application.Settings;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 

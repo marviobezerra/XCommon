@@ -1,9 +1,9 @@
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Threading.Tasks;
-using XCommon.Application;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using XCommon.Application.FileStorage;
+using XCommon.Application.Settings;
 using XCommon.Extensions.Converters;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
@@ -23,13 +23,13 @@ namespace XCommon.CloudServices.Application.FileStorage.Implementations
 		{
 			Kernel.Resolve(this);
 
-			if (ApplicationSettings.Production && ApplicationSettings.CloudKeys.AzureStorageConnectionString.IsEmpty())
+			if (ApplicationSettings.Production && ApplicationSettings.Storage.AzureStorageConnectionString.IsEmpty())
 			{
 				throw new Exception("Azure storage not found on the ApplicationSettings");
 			}
 
 			StorageAccount = ApplicationSettings.Production
-				? CloudStorageAccount.Parse(ApplicationSettings.CloudKeys.AzureStorageConnectionString)
+				? CloudStorageAccount.Parse(ApplicationSettings.Storage.AzureStorageConnectionString)
 				: CloudStorageAccount.DevelopmentStorageAccount;
 
 			BlobClient = StorageAccount.CreateCloudBlobClient();

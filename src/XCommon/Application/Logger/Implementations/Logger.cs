@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using XCommon.Application.Settings;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.Application.Logger.Implementations
 {
-    public class Logger : ILogger
+	public class Logger : ILogger
     {
         public Logger()
         {

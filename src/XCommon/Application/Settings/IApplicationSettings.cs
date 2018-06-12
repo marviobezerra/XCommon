@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using XCommon.Application.Cache;
 using XCommon.Application.Logger;
 
-namespace XCommon.Application
+namespace XCommon.Application.Settings
 {
 	public interface IApplicationSettings
 	{
@@ -30,6 +30,8 @@ namespace XCommon.Application
 
 		ApplicationAuthentication Authentication { get; }
 
-		CloudServicesKeys CloudKeys { get; }
+		ApplicationStorage Storage { get; }
+
+		ApplicationMail Mail { get; }
 	}
 }

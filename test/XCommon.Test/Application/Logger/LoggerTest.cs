@@ -1,16 +1,16 @@
-﻿using FluentAssertions;
 using System;
 using System.Threading.Tasks;
-using XCommon.Application;
+using FluentAssertions;
 using XCommon.Application.Logger;
 using XCommon.Application.Logger.Implementations;
+using XCommon.Application.Settings;
 using XCommon.Patterns.Ioc;
 using Xunit;
 using AppLogger = XCommon.Application.Logger.Implementations;
 
 namespace XCommon.Test.Application.Logger
 {
-    public class LoggerTest
+	public class LoggerTest
     {
         public ApplicationSettings AppSettings { get; set; }
 

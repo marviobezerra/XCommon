@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using XCommon.Application;
 using XCommon.Application.Mail;
+using XCommon.Application.Settings;
 using XCommon.CloudServices.Application.Mail.Implementations;
 using XCommon.Patterns.Ioc;
 using Xunit;
@@ -17,7 +17,7 @@ namespace XCommon.Test.CloudServices
 
 			var app = new ApplicationSettings
 			{
-				CloudKeys = new CloudServicesKeys
+				Mail = new ApplicationMail
 				{
 					MailGunDomain = "sandbox412370cd86ec43da8b550f934d447d47.mailgun.org",
 					MailGunKey = "key-4f555f7ea4764348c6b872580e5ef1c8"

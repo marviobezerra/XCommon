@@ -3,7 +3,7 @@ using XCommon.Application.Cache;
 using XCommon.Application.Cache.Implementations;
 using XCommon.Application.Logger;
 
-namespace XCommon.Application
+namespace XCommon.Application.Settings
 {
 	public class ApplicationSettings : IApplicationSettings
 	{
@@ -11,8 +11,9 @@ namespace XCommon.Application
 		{
 			Values = new CacheInMemory();
 			Cultures = new List<ApplicationCulture>();
-			CloudKeys = new CloudServicesKeys();
 			Urls = new List<string>();
+			Storage = new ApplicationStorage();
+			Mail = new ApplicationMail();
 		}
 
 		public string Version { get; set; }
@@ -37,8 +38,10 @@ namespace XCommon.Application
 
 		public ICache Values { get; private set; }
 
-		public CloudServicesKeys CloudKeys { get; set; }
-
 		public ApplicationAuthentication Authentication { get; set; }
+
+		public ApplicationStorage Storage { get; set; }
+
+		public ApplicationMail Mail { get; set; }
 	}
 }

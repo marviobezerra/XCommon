@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using XCommon.Application;
+using XCommon.Application.Settings;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.Web.Authentication

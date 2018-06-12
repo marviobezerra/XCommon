@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using XCommon.Application;
 using XCommon.Application.Executes;
 using XCommon.Application.Mail;
+using XCommon.Application.Settings;
 using XCommon.Extensions.String;
 using XCommon.Patterns.Ioc;
 
@@ -30,9 +30,9 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 		{
 			var result = new Execute();
 
-			if (ApplicationSettings.CloudKeys == null
-				|| ApplicationSettings.CloudKeys.MailGunKey.IsEmpty()
-				|| ApplicationSettings.CloudKeys.MailGunDomain.IsEmpty())
+			if (ApplicationSettings.Mail == null
+				|| ApplicationSettings.Mail.MailGunKey.IsEmpty()
+				|| ApplicationSettings.Mail.MailGunDomain.IsEmpty())
 			{
 				result.AddMessage(ExecuteMessageType.Error, "MailGun API Key/Domain is not defined on ApplicationSettings.");
 				return result;
@@ -41,7 +41,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 			try
 			{
 				var client = new HttpClient();
-				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes("api" + ":" + ApplicationSettings.CloudKeys.MailGunKey)));
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes("api" + ":" + ApplicationSettings.Mail.MailGunKey)));
 
 				var form = new Dictionary<string, string>
 				{
@@ -51,7 +51,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 					["text"] = body
 				};
 
-				var response = await client.PostAsync($"https://api.mailgun.net/v3/{ApplicationSettings.CloudKeys.MailGunDomain}/messages", new FormUrlEncodedContent(form));
+				var response = await client.PostAsync($"https://api.mailgun.net/v3/{ApplicationSettings.Mail.MailGunDomain}/messages", new FormUrlEncodedContent(form));
 
 				if (response.StatusCode != HttpStatusCode.OK)
 				{

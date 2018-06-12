@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using XCommon.Application;
+using Microsoft.Extensions.Configuration;
+using XCommon.Application.Settings;
 using XCommon.Extensions.String;
 using XCommon.Extensions.Util;
 

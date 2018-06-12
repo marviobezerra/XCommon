@@ -1,9 +1,7 @@
-namespace XCommon.Application
+namespace XCommon.Application.Settings
 {
-	public class CloudServicesKeys
-	{
-		public string AzureStorageConnectionString { get; set; }
-
+	public class ApplicationMail
+    {
 		public string SendGridKey { get; set; }
 
 		public string MailGunKey { get; set; }
