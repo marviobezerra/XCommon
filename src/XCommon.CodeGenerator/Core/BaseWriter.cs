@@ -10,6 +10,16 @@ namespace XCommon.CodeGenerator.Core
 		[Inject]
 		protected IWriter Writer { get; set; }
 
+		protected string Quote
+		{
+			get
+			{
+				return Config.TypeScript.QuoteType == QuoteType.Double
+					? "\""
+					: "'";
+			}
+		}
+
 		public BaseWriter()
 		{
 			Kernel.Resolve(this);

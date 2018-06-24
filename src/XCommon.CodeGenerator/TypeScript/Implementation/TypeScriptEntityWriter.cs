@@ -117,6 +117,54 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
+		private void ProcessStaticData()
+		{
+			var builder = new StringBuilderIndented();
+
+			builder
+				.AppendLine($"import {{ Injectable }} from {Quote}@angular/core{Quote};")
+				.AppendLine($"import {{ {string.Join(", ", TSEnums.Select(c => c.Name))}  }} from {Quote}../entity/enum{Quote};")
+				.AppendLine($"import {{ TranslateService }} from {Quote}./translate.service{Quote};")
+				.AppendLine("")
+				.AppendLine("export class SelectOption {")
+				.IncrementIndent()
+				.AppendLine("value: any;")
+				.AppendLine("text: string;")
+				.DecrementIndent()
+				.AppendLine("}")
+				.AppendLine("")
+				.AppendLine("@Injectable()")
+				.AppendLine("export class StaticDataService {")
+				.AppendLine("")
+				.AppendLine("constructor(private translator: TranslateService) { }")
+				.AppendLine("")
+				.IncrementIndent();
+
+			foreach (var item in TSEnums)
+			{
+				var lowerName = item.Name.Substring(0, 1).ToLower() + item.Name.Substring(1);
+
+				builder
+					.AppendLine($"public {lowerName}: SelectOption[] = this.mapEnum({Quote}{item.Name}{Quote}, {item.Name});")
+					.AppendLine("");
+			}
+
+			builder
+				.AppendLine("private mapEnum(key: string, type: any): SelectOption[] {")
+				.IncrementIndent()
+				.AppendLine("return Object.keys(type)")
+				.IncrementIndent()
+				.AppendLine($".filter(c => typeof type[c] === {Quote}number{Quote})")
+				.AppendLine(".map(c => ({ value: type[c], text: this.translator.Static[`${key}${c}`] || c }));")
+				.DecrementIndent()
+				.DecrementIndent()
+				.AppendLine("}")
+				.DecrementIndent()
+				.AppendLine("}");
+
+			Writer.WriteFile(Config.TypeScript.Resource.Path.ToLower(), "static-data.service.ts", builder, true);
+		}
+
 		private void ProcessEnum()
 		{
 			var builder = new StringBuilderIndented();
@@ -348,6 +396,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			ProcessExtras();
 			ProcessEnum();
 			ProcessTypes();
+			ProcessStaticData();
 
 			TypeScriptIndexExport.Run(Config.TypeScript.Entity.Path);
 

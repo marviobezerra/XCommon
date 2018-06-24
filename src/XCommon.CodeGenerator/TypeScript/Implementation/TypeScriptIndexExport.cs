@@ -17,16 +17,6 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private string Quote
-		{
-			get
-			{
-				return Config.TypeScript.QuoteType == QuoteType.Double
-					? "\""
-					: "'";
-			}
-		}
-
 		private void Process(string path)
 		{
 			if (!Directory.Exists(path))
