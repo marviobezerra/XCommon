@@ -31,7 +31,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit($"{item.Name}Business", parentClass, $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}", ClassVisility.Public, nameSpace.ToArray())
+				.ClassInit($"{item.Name}Business", parentClass, $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}", ClassVisibility.Public, nameSpace.ToArray())
 				.ClassEnd();
 
 			Writer.WriteFile(path, file, builder, false);
@@ -49,7 +49,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.InterfaceInit($"I{item.Name}Business", $"IRepositoryEF<{item.Name}Entity, {item.Name}Filter>", $"{Config.CSharp.Repository.Contract.NameSpace}.{item.Schema}", ClassVisility.Public, nameSpace.ToArray())
+				.InterfaceInit($"I{item.Name}Business", $"IRepositoryEF<{item.Name}Entity, {item.Name}Filter>", $"{Config.CSharp.Repository.Contract.NameSpace}.{item.Schema}", ClassVisibility.Public, nameSpace.ToArray())
 				.InterfaceEnd();
 
 			Writer.WriteFile(path, file, builder, false);
@@ -76,7 +76,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				: item.PKName;
 
 			builder
-				.ClassInit($"{item.Name}Query", $"SpecificationQuery<{item.Name}, {item.Name}Filter>", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Query", ClassVisility.Public, nameSpace.ToArray())
+				.ClassInit($"{item.Name}Query", $"SpecificationQuery<{item.Name}, {item.Name}Filter>", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Query", ClassVisibility.Public, nameSpace.ToArray())
 				.AppendLine($"public override IQueryable<{item.Name}> Build(IQueryable<{item.Name}> source, {item.Name}Filter filter)")
 				.AppendLine("{")
 				.IncrementIndent()
@@ -108,7 +108,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit($"{item.Name}Validate", $"SpecificationValidation<{item.Name}Entity>", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Validate", ClassVisility.Public, nameSpace.ToArray())
+				.ClassInit($"{item.Name}Validate", $"SpecificationValidation<{item.Name}Entity>", $"{Config.CSharp.Repository.Concrecte.NameSpace}.{item.Schema}.Validate", ClassVisibility.Public, nameSpace.ToArray())
 				.AppendLine($"public override async Task<bool> IsSatisfiedByAsync({item.Name}Entity entity, Execute execute)")
 				.AppendLine("{")
 				.IncrementIndent()

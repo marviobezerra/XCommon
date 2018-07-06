@@ -29,7 +29,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit(Config.CSharp.EntityFramework.ContextName, "DbContext", Config.CSharp.EntityFramework.NameSpace, ClassVisility.Public, nameSpaces.ToArray())
+				.ClassInit(Config.CSharp.EntityFramework.ContextName, "DbContext", Config.CSharp.EntityFramework.NameSpace, ClassVisibility.Public, nameSpaces.ToArray())
 				.AppendLine()
 				.AppendLine("private IApplicationSettings AppSettings => Kernel.Resolve<IApplicationSettings>();")
 				.AppendLine();
@@ -104,7 +104,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit(item.Name, null, itemNameSpace, ClassVisility.Public, nameSpace.ToArray());
+				.ClassInit(item.Name, null, itemNameSpace, ClassVisibility.Public, nameSpace.ToArray());
 
 			foreach (var property in item.Columns)
 			{
@@ -148,7 +148,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit($"{item.Name}Map", null, $"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}.Map", ClassVisility.Internal, "System", "Microsoft.EntityFrameworkCore")
+				.ClassInit($"{item.Name}Map", null, $"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}.Map", ClassVisibility.Internal, "System", "Microsoft.EntityFrameworkCore")
 				.AppendLine("internal static void Map(ModelBuilder modelBuilder, bool unitTest)")
 				.AppendLine("{")
 				.IncrementIndent()

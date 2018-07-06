@@ -1,9 +1,11 @@
 namespace XCommon.CodeGenerator.Core.Extensions
 {
-	internal enum ClassVisility
+	internal enum ClassVisibility
 	{
 		Private,
 		Public,
+		PublicStatic,
+		InternalStatic,
 		Internal
 	}
 }

@@ -6,13 +6,13 @@ namespace XCommon.CodeGenerator.Core.Extensions
 {
 	internal static class CSharpExtensions
 	{
-		internal static StringBuilderIndented ClassInit(this StringBuilderIndented builder, string className, string parent, string nameSpace, ClassVisility visibily, params string[] usings)
+		internal static StringBuilderIndented ClassInit(this StringBuilderIndented builder, string className, string parent, string nameSpace, ClassVisibility visibily, params string[] usings)
 		{
 			return builder
 				.ClassInit(className, parent, nameSpace, visibily, false, usings);
 		}
 
-		internal static StringBuilderIndented ClassInit(this StringBuilderIndented builder, string className, string parent, string nameSpace, ClassVisility visibily, bool partial, params string[] usings)
+		internal static StringBuilderIndented ClassInit(this StringBuilderIndented builder, string className, string parent, string nameSpace, ClassVisibility visibility, bool partial, params string[] usings)
 		{
 			return builder
 				.AddUsing(usings)
@@ -20,7 +20,7 @@ namespace XCommon.CodeGenerator.Core.Extensions
 				.AppendLine($"namespace {nameSpace}")
 				.AppendLine("{")
 				.IncrementIndent()
-				.Append(visibily.ToString().ToLower())
+				.Append(VisibilityParse(visibility))
 				.Append(partial ? " partial" : string.Empty)
 				.Append(" class ")
 				.Append(className)
@@ -45,13 +45,13 @@ namespace XCommon.CodeGenerator.Core.Extensions
 			return builder;
 		}
 
-		internal static StringBuilderIndented InterfaceInit(this StringBuilderIndented builder, string interfaceName, string parent, string nameSpace, ClassVisility visibily, params string[] usings)
+		internal static StringBuilderIndented InterfaceInit(this StringBuilderIndented builder, string interfaceName, string parent, string nameSpace, ClassVisibility visibily, params string[] usings)
 		{
 			return builder
 				.InterfaceInit(interfaceName, parent, nameSpace, visibily, false, usings);
 		}
 
-		internal static StringBuilderIndented InterfaceInit(this StringBuilderIndented builder, string interfaceName, string parent, string nameSpace, ClassVisility visibily, bool partial, params string[] usings)
+		internal static StringBuilderIndented InterfaceInit(this StringBuilderIndented builder, string interfaceName, string parent, string nameSpace, ClassVisibility visibility, bool partial, params string[] usings)
 		{
 			return builder
 				.AddUsing(usings)
@@ -59,7 +59,7 @@ namespace XCommon.CodeGenerator.Core.Extensions
 				.AppendLine($"namespace {nameSpace}")
 				.AppendLine("{")
 				.IncrementIndent()
-				.Append(visibily.ToString().ToLower())
+				.Append(VisibilityParse(visibility))
 				.Append(" interface ")
 				.Append(interfaceName)
 				.Append(parent.IsNotEmpty() ? $": {parent}" : string.Empty)
@@ -92,6 +92,22 @@ namespace XCommon.CodeGenerator.Core.Extensions
 			builder.AppendLine();
 
 			return builder;
+		}
+
+		private static string VisibilityParse(ClassVisibility visibility)
+		{
+			switch (visibility)
+			{
+				case ClassVisibility.PublicStatic:
+					return "public static";
+				case ClassVisibility.InternalStatic:
+					return "internal static";
+				case ClassVisibility.Private:
+				case ClassVisibility.Public:
+				case ClassVisibility.Internal:
+				default:
+					return visibility.ToString().ToLower();
+			}
 		}
 	}
 }

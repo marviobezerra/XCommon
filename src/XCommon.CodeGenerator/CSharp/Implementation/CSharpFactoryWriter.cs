@@ -24,7 +24,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
+				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisibility.Public, true, nameSpace.ToArray())
 				.AppendLine("public static void RegisterCustom(bool production, bool unitTest)")
 				.AppendLine("{")
 				.AppendLine("}")
@@ -58,7 +58,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisility.Public, true, nameSpace.ToArray())
+				.ClassInit("Register", null, $"{Config.CSharp.Factory.NameSpace}", ClassVisibility.Public, true, nameSpace.ToArray())
 				.AppendLine("public static void Do(bool production, bool unitTest)")
 				.AppendLine("{")
 				.IncrementIndent();

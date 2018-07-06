@@ -24,7 +24,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit($"{item.Name}Entity", "EntityBase", $"{Config.CSharp.Entity.NameSpace}.{item.Schema}", ClassVisility.Public, true, nameSpace.ToArray());
+				.ClassInit($"{item.Name}Entity", "EntityBase", $"{Config.CSharp.Entity.NameSpace}.{item.Schema}", ClassVisibility.Public, true, nameSpace.ToArray());
 
 			foreach (var column in item.Columns)
 			{
@@ -70,7 +70,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			var builder = new StringBuilderIndented();
 
 			builder
-				.ClassInit($"{item.Name}Filter", "FilterBase", $"{Config.CSharp.Entity.NameSpace}.{item.Schema}.Filter", ClassVisility.Public, nameSpace.ToArray())
+				.ClassInit($"{item.Name}Filter", "FilterBase", $"{Config.CSharp.Entity.NameSpace}.{item.Schema}.Filter", ClassVisibility.Public, nameSpace.ToArray())
 				.ClassEnd();
 
 			Writer.WriteFile(path, file, builder, false);

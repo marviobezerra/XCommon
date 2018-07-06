@@ -20,6 +20,9 @@ namespace XCommon.CodeGenerator.CSharp
 		private ICSharpFactoryWriter CSharpFactoryWriter { get; set; }
 
 		[Inject]
+		private ICSharpUnitTestWriter CSharpUnitTestWriter { get; set; }
+
+		[Inject]
 		private IDataBaseRead DataBaseRead { get; set; }
 		#endregion
 
@@ -80,6 +83,11 @@ namespace XCommon.CodeGenerator.CSharp
 								CSharpRepositoryWriter.WriteQuery(table);
 								CSharpRepositoryWriter.WriteValidation(table);
 							}
+						}
+
+						if (Config.CSharp.UnitTest != null && Config.CSharp.UnitTest.Execute)
+						{
+							CSharpUnitTestWriter.WriteTests(table);
 						}
 					}
 				}
