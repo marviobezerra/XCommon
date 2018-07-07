@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using XCommon.Patterns.Specification.Query.Implementation;
 
@@ -19,6 +19,11 @@ namespace XCommon.Patterns.Specification.Query
         {
             AppliedFilters = 0;
             AppliedOrders = 0;
+
+			if (source == null || filter == null)
+			{
+				return new List<TEntity>().AsQueryable();
+			}
 
             foreach (var specification in specifications.Items)
             {

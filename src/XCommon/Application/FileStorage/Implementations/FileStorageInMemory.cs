@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,17 +6,22 @@ using XCommon.Util;
 
 namespace XCommon.Application.FileStorage.Implementations
 {
-    public class FileStorageInMemory : IFileStorage
+    public class FileStorageInMemory : IFileStorage, IFileTemporaryStorage
     {
         private List<Pair<string, Dictionary<string, byte[]>>> Storage { get; set; }
 
         public FileStorageInMemory()
         {
             Root = "FileStorageInMemory";
-            Storage = new List<Pair<string, Dictionary<string, byte[]>>>();
+			Init();
         }
 
         private string Root { get; set; }
+
+		private void Init()
+		{
+			Storage = new List<Pair<string, Dictionary<string, byte[]>>>();
+		}
 
         private Dictionary<string, byte[]> GetFolder(string name, bool createIfEmpty = true)
         {
@@ -115,6 +120,12 @@ namespace XCommon.Application.FileStorage.Implementations
 				var result = Storage.RemoveAll(c => c.Item1 == container);
 				return true;
 			});
+		}
+
+		public bool ClearAll()
+		{
+			Init();
+			return true;
 		}
 	}
 }
