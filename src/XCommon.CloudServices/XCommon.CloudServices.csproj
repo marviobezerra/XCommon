@@ -4,7 +4,7 @@
 		<TargetFrameworks>netcoreapp2.1</TargetFrameworks>
 		<Description>XCommon Cloud Services are features like access blob file storage, send mail and others.</Description>
 		<Authors>Marvio Andre Bezerra Silverio</Authors>
-		<Version>1.0.62</Version>
+		<Version>1.0.63</Version>
 		<Company>Marvio Andre Bezerra Silverio</Company>
 		<PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
 		<PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
