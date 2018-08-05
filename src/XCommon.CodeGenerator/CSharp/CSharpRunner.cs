@@ -26,7 +26,7 @@ namespace XCommon.CodeGenerator.CSharp
 		private IDataBaseRead DataBaseRead { get; set; }
 		#endregion
 
-		internal int Run()
+		public override int Run()
 		{
 			Config.DataBaseItems = Config.DataBaseItems ?? DataBaseRead.Read();
 

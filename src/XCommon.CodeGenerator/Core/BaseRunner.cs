@@ -11,5 +11,8 @@ namespace XCommon.CodeGenerator.Core
 		{
 			Kernel.Resolve(this);
 		}
-    }
+
+		public abstract int Run();
+
+	}
 }

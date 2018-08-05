@@ -11,7 +11,7 @@ namespace XCommon.CodeGenerator.TypeScript
 		[Inject]
 		public ITypeScriptResourceWriter TypeScriptResourceWriter { get; set; }
 
-		internal int Run()
+		public override int Run()
 		{
 			if (Config.TypeScript == null)
 			{
