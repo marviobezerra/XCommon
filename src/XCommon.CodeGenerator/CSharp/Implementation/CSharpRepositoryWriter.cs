@@ -10,7 +10,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 {
 	public class CSharpRepositoryWritter : BaseWriter, ICSharpRepositoryWriter
 	{
-		public void WriteConcrete(DataBaseTable item)
+		public virtual void WriteConcrete(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Repository.Concrecte.Path, item.Schema);
 			var file = $"{item.Name}Business.cs";
@@ -37,7 +37,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, false);
 		}
 
-		public void WriteContract(DataBaseTable item)
+		public virtual void WriteContract(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Repository.Contract.Path, item.Schema);
 			var file = $"I{item.Name}Business.cs";
@@ -55,7 +55,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, false);
 		}
 
-		public void WriteQuery(DataBaseTable item)
+		public virtual void WriteQuery(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Repository.Concrecte.Path, item.Schema, "Query");
 			var file = $"{item.Name}Query.cs";
@@ -96,7 +96,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, false);
 		}
 
-		public void WriteValidation(DataBaseTable item)
+		public virtual void WriteValidation(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Repository.Concrecte.Path, item.Schema, "Validate");
 			var file = $"{item.Name}Validate.cs";

@@ -4,7 +4,7 @@ using XCommon.Util;
 
 namespace XCommon.CodeGenerator.Core.Implementation
 {
-	public class FileWriter : IWriter
+	public class FileWriter : IFileWriter
 	{
 		public void WriteFile(string path, string file, StringBuilderIndented builder, bool overrideIfExists)
 			=> WriteFile(path, file, builder.ToString(), overrideIfExists);

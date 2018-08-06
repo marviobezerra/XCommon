@@ -13,79 +13,13 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 {
 	public class CSharpEnityFrameworkWriter : BaseWriter, ICSharpEnityFrameworkWriter
 	{
-		public void WriteContext()
+		public virtual void WriteContext()
 		{
-			CleanFolder();
-
-			var path = Config.CSharp.EntityFramework.Path;
-			var file = $"{Config.CSharp.EntityFramework.ContextName}.cs";
-
-			var nameSpaces = new List<string> { "System", "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Diagnostics", "XCommon.Patterns.Ioc", "XCommon.Application.Settings" };
-
-			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}"));
-			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}.Map"));
-
-			var builder = new StringBuilderIndented();
-
-			builder
-				.GenerateFileMessage()
-				.ClassInit(Config.CSharp.EntityFramework.ContextName, "DbContext", Config.CSharp.EntityFramework.NameSpace, ClassVisibility.Public, nameSpaces.ToArray())
-				.AppendLine()
-				.AppendLine("private IApplicationSettings AppSettings => Kernel.Resolve<IApplicationSettings>();")
-				.AppendLine();
-
-			foreach (var item in Config.DataBaseItems.SelectMany(c => c.Tables))
-			{
-				builder
-					.AppendLine($"public DbSet<{item.Name}> {item.Name} {{ get; set; }}")
-					.AppendLine();
-			}
-
-			builder
-				.AppendLine("protected override void OnConfiguring(DbContextOptionsBuilder options)")
-				.AppendLine("{")
-				.IncrementIndent()
-				.AppendLine("if (AppSettings.UnitTest)")
-				.AppendLine("{")
-				.IncrementIndent()
-				.AppendLine($"options")
-				.IncrementIndent()
-				.AppendLine($".UseInMemoryDatabase(\"{Config.CSharp.EntityFramework.ContextName}\")")
-				.AppendLine(".ConfigureWarnings(config => config.Ignore(InMemoryEventId.TransactionIgnoredWarning));")
-				.DecrementIndent()
-				.AppendLine()
-				.AppendLine("return;")
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-				.AppendLine($"options.UseSqlServer(AppSettings.DataBaseConnectionString);")
-				.AppendLine()
-				.DecrementIndent()
-				.AppendLine("}")
-				.AppendLine()
-				.AppendLine("protected override void OnModelCreating(ModelBuilder modelBuilder)")
-				.AppendLine("{");
-
-			using (builder.Indent())
-			{
-				builder
-					.AppendLine();
-
-				foreach (var item in Config.DataBaseItems.SelectMany(c => c.Tables))
-				{
-					builder.AppendLine($"{item.Name}Map.Map(modelBuilder, AppSettings.UnitTest);");
-				}
-			}
-
-			builder
-				.AppendLine("}")
-				.ClassEnd();
-
-			Writer.WriteFile(path, file, builder, true);
+			
 
 		}
 
-		public void WriteEntity(DataBaseTable item)
+		public virtual void WriteEntity(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.EntityFramework.Path, item.Schema);
 			var file = $"{item.Name}.cs";
@@ -139,7 +73,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, true);
 		}
 		
-		public void WriteEntityMap(DataBaseTable item)
+		public virtual void WriteEntityMap(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.EntityFramework.Path, item.Schema, "Map");
 			var file = $"{item.Name}Map.cs";
@@ -180,7 +114,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, true);
 		}
 
-		private void CleanFolder()
+		protected virtual void CleanFolder()
 		{
 			if (!Directory.Exists(Config.CSharp.EntityFramework.Path))
 			{
@@ -208,7 +142,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			}
 		}
 
-		private string ProcessRelationShipName(DataBaseRelationShip relationShip, string defaultName)
+		protected virtual string ProcessRelationShipName(DataBaseRelationShip relationShip, string defaultName)
 		{
 			if (Config.CSharp.EntityFramework.Rewrite == null)
 			{
@@ -231,7 +165,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			return defaultName;
 		}
 
-		private void ProcessMapColumns(StringBuilderIndented builder, DataBaseTable item)
+		protected virtual void ProcessMapColumns(StringBuilderIndented builder, DataBaseTable item)
 		{
 			foreach (var property in item.Columns)
 			{
@@ -270,7 +204,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			}
 		}
 
-		private void ProcessMapRelationShips(StringBuilderIndented builder, DataBaseTable item)
+		protected virtual void ProcessMapRelationShips(StringBuilderIndented builder, DataBaseTable item)
 		{
 			foreach (var relationShip in item.RelationShips.Where(c => c.Type == DataBaseRelationShipType.Single))
 			{

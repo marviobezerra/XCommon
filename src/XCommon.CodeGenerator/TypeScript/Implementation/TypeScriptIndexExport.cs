@@ -7,7 +7,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 {
 	public class TypeScriptIndexExport : BaseWriter, ITypeScriptIndexExport
 	{
-		public void Run(string path)
+		public virtual void Run(string path)
 		{
 			Process(path);
 
@@ -17,7 +17,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void Process(string path)
+		protected virtual void Process(string path)
 		{
 			if (!Directory.Exists(path))
 			{
@@ -48,7 +48,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private string CheckFileName(string file)
+		protected virtual string CheckFileName(string file)
 		{
 			var result = Path.GetFileName(file);
 			result = result.Replace(".ts", string.Empty);

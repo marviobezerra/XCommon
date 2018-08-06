@@ -3,7 +3,7 @@ using XCommon.Util;
 
 namespace XCommon.CodeGenerator.Core
 {
-	public interface IWriter
+	public interface IFileWriter
     {
 		 void WriteFile(string path, string file, StringBuilderIndented builder, bool overrideIfExists);
 		 void WriteFile(string path, string file, StringBuilder builder, bool overrideIfExists);

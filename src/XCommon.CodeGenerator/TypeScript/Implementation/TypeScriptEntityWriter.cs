@@ -20,13 +20,13 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 		[Inject]
 		private ITypeScriptIndexExport TypeScriptIndexExport { get; set; }
 
-		private List<string> GeneratedEntities { get; set; }
+		protected List<string> GeneratedEntities { get; set; }
 
-		private List<TypeScriptClass> TSClass { get; set; }
+		protected List<TypeScriptClass> TSClass { get; set; }
 
-		private List<TypeScriptEnum> TSEnums { get; set; }
+		protected virtual List<TypeScriptEnum> TSEnums { get; set; }
 
-		private void LoadEnums()
+		protected virtual void LoadEnums()
 		{
 			var types = Config.TypeScript.Entity.Assemblys.SelectMany(c => c.GetTypes()).Where(c => c.GetTypeInfo().IsEnum).ToList();
 
@@ -55,7 +55,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void LoadProperties()
+		protected virtual void LoadProperties()
 		{
 			var nullablePropertys = new string[] { "Keys", "Keys", "PageNumber", "PageSize" };
 
@@ -117,7 +117,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void ProcessStaticData()
+		protected virtual void ProcessStaticData()
 		{
 			var builder = new StringBuilderIndented();
 
@@ -165,7 +165,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			Writer.WriteFile(Config.TypeScript.Resource.Path.ToLower(), "static-data.service.ts", builder, true);
 		}
 
-		private void ProcessEnum()
+		protected virtual void ProcessEnum()
 		{
 			var builder = new StringBuilderIndented();
 
@@ -193,7 +193,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			Writer.WriteFile(Config.TypeScript.Entity.Path.ToLower(), "enum.ts", builder, true);
 		}
 
-		private void ProcessTypes()
+		protected virtual void ProcessTypes()
 		{
 			foreach (var file in TSClass.Select(c => c.FileName).Distinct().OrderBy(c => c))
 			{
@@ -276,7 +276,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void ProcessExtras()
+		protected virtual void ProcessExtras()
 		{
 			if (!Config.TypeScript.Entity.IncludeUtils)
 				return;
@@ -300,7 +300,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			Writer.WriteFile(Config.TypeScript.Entity.Path.ToLower(), "entity-util.ts", builder, false);
 		}
 
-		private string GetFileName(string nameSpace)
+		protected virtual string GetFileName(string nameSpace)
 		{
 			var overRide = Config.TypeScript.Entity.NameOverride.FirstOrDefault(c => c.NameSpace == nameSpace);
 
@@ -313,7 +313,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			return $"{result}.ts";
 		}
 
-		private string GetPropertyType(Type type, TypeScriptClass tsClass, bool generic)
+		protected virtual string GetPropertyType(Type type, TypeScriptClass tsClass, bool generic)
 		{
 			var attr = type.GetCustomAttribute<TSCastAttribute>();
 

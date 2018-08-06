@@ -5,10 +5,13 @@ namespace XCommon.CodeGenerator.Core
 	public abstract class BaseWriter
 	{
 		[Inject]
-		protected GeneratorConfig Config { get; set; }
+		protected GeneratorConfig Config { get; private set; }
 
 		[Inject]
-		protected IWriter Writer { get; set; }
+		protected IFileWriter Writer { get; private set; }
+
+		[Inject]
+		protected ILog Log { get; private set; }
 
 		protected string Quote
 		{
@@ -24,5 +27,7 @@ namespace XCommon.CodeGenerator.Core
 		{
 			Kernel.Resolve(this);
 		}
+
+		public abstract bool Write();
 	}
 }

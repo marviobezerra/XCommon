@@ -11,7 +11,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 {
 	public class CSharpEntityWriter : BaseWriter, ICSharpEntityWriter
 	{
-		public void WriteEntity(DataBaseTable item)
+		public virtual void WriteEntity(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Entity.Path, item.Schema, "Auto");
 			var file = $"{item.Name}Entity.cs";
@@ -60,7 +60,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, true);
 		}
 
-		public void WriteFilter(DataBaseTable item)
+		public virtual void WriteFilter(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.Entity.Path, item.Schema, "Filter");
 			var file = $"{item.Name}Filter.cs";

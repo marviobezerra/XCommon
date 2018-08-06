@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XCommon.CodeGenerator.TypeScript.Implementation.Helper
 {
-	internal class TypeScriptEnum
+	public class TypeScriptEnum
 	{
 		public string Name { get; set; }
 

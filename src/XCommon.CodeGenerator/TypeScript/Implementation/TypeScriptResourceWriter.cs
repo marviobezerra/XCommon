@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Resources;
 using Newtonsoft.Json;
 using XCommon.CodeGenerator.Core;
-using XCommon.CodeGenerator.Core.Extensions;
 using XCommon.CodeGenerator.TypeScript.Implementation.Helper;
 using XCommon.Patterns.Ioc;
 using XCommon.Util;
@@ -17,11 +13,11 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 	public class TypeScriptResourceWriter : BaseWriter, ITypeScriptResourceWriter
 	{
 		[Inject]
-		private ITypeScriptIndexExport Index { get; set; }
+		protected ITypeScriptIndexExport Index { get; set; }
 
-		private Dictionary<string, List<ResourceEntity>> Resources { get; set; }
+		protected Dictionary<string, List<ResourceEntity>> Resources { get; set; }
 
-		public void Run()
+		public virtual void Run()
 		{
 			var builder = new StringBuilderIndented();
 
@@ -36,7 +32,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			Index.Run(Config.TypeScript.Resource.Path);
 		}
 
-		private void WriteJsonFiles()
+		protected virtual void WriteJsonFiles()
 		{
 			foreach (var culture in Resources)
 			{
@@ -59,7 +55,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void InitResource()
+		protected virtual void InitResource()
 		{
 			// Load the maped resource files
 			Resources = new Dictionary<string, List<ResourceEntity>>();
@@ -102,7 +98,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private void WriteResourceClasses(StringBuilderIndented builder)
+		protected virtual void WriteResourceClasses(StringBuilderIndented builder)
 		{
 			var resources = Resources[Config.TypeScript.Resource.CultureDefault.Code];
 
@@ -134,7 +130,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			}
 		}
 
-		private string WriteService(StringBuilderIndented builder)
+		protected virtual string WriteService(StringBuilderIndented builder)
 		{
 			// Service declaration
 			builder

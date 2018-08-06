@@ -1,5 +1,4 @@
 using XCommon.CodeGenerator.Core;
-using XCommon.CodeGenerator.Core.DataBase;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.CodeGenerator.CSharp
@@ -22,14 +21,10 @@ namespace XCommon.CodeGenerator.CSharp
 		[Inject]
 		private ICSharpUnitTestWriter CSharpUnitTestWriter { get; set; }
 
-		[Inject]
-		private IDataBaseRead DataBaseRead { get; set; }
 		#endregion
 
 		public override int Run()
 		{
-			Config.DataBaseItems = Config.DataBaseItems ?? DataBaseRead.Read();
-
 			if (Config.CSharp != null)
 			{
 

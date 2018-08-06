@@ -15,7 +15,8 @@ namespace XCommon.CodeGenerator
 		internal static void Do(GeneratorConfig config)
 		{
 			Kernel.Map<GeneratorConfig>().To(config);
-			Kernel.Map<IWriter>().To<FileWriter>();
+			Kernel.Map<IFileWriter>().To<FileWriter>();
+			Kernel.Map<ILog>().To<LogScreen>();
 
 			MapCSharp();
 			MapDataBaseReader();

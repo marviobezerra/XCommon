@@ -9,7 +9,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 {
 	public class CSharpFactoryWritter : BaseWriter, ICSharpFactoryWriter
 	{
-		public void WriteFactoryCustom()
+		public virtual void WriteFactoryCustom()
 		{
 			var path = Path.Combine(Config.CSharp.Factory.Path);
 			var file = $"Register.cs";
@@ -33,7 +33,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, false);
 		}
 
-		public void WriteFactory()
+		public virtual void WriteFactory()
 		{
 			var path = Path.Combine(Config.CSharp.Factory.Path);
 			var file = $"Register.Auto.cs";
@@ -92,7 +92,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			Writer.WriteFile(path, file, builder, true);
 		}
 
-		private void GenerateFactoryValidate(StringBuilderIndented builder)
+		protected virtual void GenerateFactoryValidate(StringBuilderIndented builder)
 		{
 			builder
 				.AppendLine("private static void RegisterValidate()")
@@ -110,7 +110,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				.AppendLine("}");
 		}
 
-		private void GenerateFactoryQuery(StringBuilderIndented builder)
+		protected virtual void GenerateFactoryQuery(StringBuilderIndented builder)
 		{
 			builder
 				.AppendLine("private static void RegisterQuery()")
@@ -129,7 +129,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				.AppendLine();
 		}
 
-		private void GenerateFactoryRepository(StringBuilderIndented builder)
+		protected virtual void GenerateFactoryRepository(StringBuilderIndented builder)
 		{
 			builder
 				.AppendLine("private static void RegisterRepository()")

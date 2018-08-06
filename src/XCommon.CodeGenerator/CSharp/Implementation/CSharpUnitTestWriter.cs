@@ -11,19 +11,19 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 {
 	public class CSharpUnitTestWritter : BaseWriter, ICSharpUnitTestWriter
 	{
-		public void WriteTests(DataBaseTable table)
+		public virtual void WriteTests(DataBaseTable table)
 		{
 			WriteUnitTest(table);
 			WriteDataSource(table);
 		}
 
-		private void WriteUnitTest(DataBaseTable item)
+		protected virtual void WriteUnitTest(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.UnitTest.Path, item.Schema);
 			var file = $"{item.Name}Test.cs";
 		}
 
-		private void WriteDataSource(DataBaseTable item)
+		protected virtual void WriteDataSource(DataBaseTable item)
 		{
 			var path = Path.Combine(Config.CSharp.UnitTest.Path, "DataSource", item.Schema);
 			var file = $"{item.Name}DataSource.cs";

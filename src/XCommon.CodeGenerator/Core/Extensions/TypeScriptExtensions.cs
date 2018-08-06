@@ -5,11 +5,6 @@ namespace XCommon.CodeGenerator.Core.Extensions
 {
 	public static class TypeScriptExtensions
     {
-		internal static bool GetOutLet(this string component)
-		{
-			return component.Contains("?o");
-		}
-
 		internal static string GetSelector(this string component)
 		{
 			var result = string.Empty;

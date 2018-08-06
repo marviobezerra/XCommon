@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace XCommon.CodeGenerator.TypeScript.Implementation.Helper
 {
-	internal class TypeScriptClass
+	public class TypeScriptClass
 	{
 		public TypeScriptClass()
 		{
