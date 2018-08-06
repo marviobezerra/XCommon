@@ -104,8 +104,8 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					tsClass.Properties.Add(new TypeScriptProperty
 					{
 						Name = property.Name,
-						Nullable = nullablePropertys.Contains(property.Name) 
-									|| type.Name.EndsWith("Filter") 
+						Nullable = nullablePropertys.Contains(property.Name)
+									|| type.Name.EndsWith("Filter")
 									|| type.GetCustomAttributes<TSNullableAttribute>().Count() > 0
 									|| Nullable.GetUnderlyingType(property.PropertyType) != null,
 						Generic = isGeneric,
@@ -325,12 +325,20 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			var underlyingType = Nullable.GetUnderlyingType(type);
 			var currentType = underlyingType ?? type;
 
+			if (currentType.GetTypeInfo().IsGenericType && currentType.Name.Contains("Dictionary"))
+			{
+				var genericKey = GetPropertyType(currentType.GenericTypeArguments[0], tsClass, generic);
+				var genericValue = GetPropertyType(currentType.GenericTypeArguments[1], tsClass, generic);
+
+				return string.Format("{{ [key: {0}]: {1} }}", genericKey, genericValue);
+			}
+
 			if (currentType.GetTypeInfo().IsGenericType && currentType.Name.Contains("List"))
 			{
 				try
 				{
 					var genericType = currentType.GenericTypeArguments.FirstOrDefault();
-					return string.Format("Array<{0}>", GetPropertyType(genericType, tsClass, generic));
+					return string.Format("{0}[]", GetPropertyType(genericType, tsClass, generic));
 				}
 				catch (Exception ex)
 				{
