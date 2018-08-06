@@ -44,6 +44,11 @@ namespace XCommon.Web.Authentication
 				claims.Add(new Claim("roles", role));
 			});
 
+			foreach (var item in ticket.Values)
+			{
+				claims.Add(new Claim(item.Key, item.Value));
+			}
+
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ApplicationSettings.Authentication.SecurityKey));
 			var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 			var audience = ApplicationSettings.Authentication.Audience;
@@ -52,6 +57,16 @@ namespace XCommon.Web.Authentication
 
 			var result = new JwtSecurityToken(issuer, audience, claims, expires: expiration, signingCredentials: signingCredentials);
 			return new JwtSecurityTokenHandler().WriteToken(result);
+		}
+
+		public string GetVaue(string key)
+		{
+			return HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == key)?.Value;
+		}
+
+		public string GetHost()
+		{
+			return HttpContextAccessor?.HttpContext?.Request?.Host.Host;
 		}
 
 		public bool IsAuthenticated
@@ -86,7 +101,7 @@ namespace XCommon.Web.Authentication
 				{
 					return result;
 				}
-				
+
 
 				var identifier = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti)?.Value;
 
