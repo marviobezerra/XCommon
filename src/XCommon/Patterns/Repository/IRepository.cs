@@ -10,14 +10,13 @@ namespace XCommon.Patterns.Repository
         where TEntity : EntityBase, new()
         where TFilter : FilterBase, new()
     {
-        Task<TEntity> GetNewAsync();
         Task<TEntity> GetByKeyAsync(Guid key);
         Task<List<TEntity>> GetByFilterAsync(TFilter filter);
 		Task<TEntity> GetFirstByFilterAsync(TFilter filter);
+
 		Task<Execute<TEntity>> SaveAsync(TEntity entity);
 		Task<Execute<List<TEntity>>> SaveManyAsync(List<TEntity> enntities);
-		Task<Execute<TEntity>> SaveAsync(Execute<TEntity> execute);
-        Task<Execute<List<TEntity>>> SaveManyAsync(Execute<List<TEntity>> execute);
+
         Task<Execute> ValidateAsync(TEntity entity);
         Task<Execute> ValidateManyAsync(List<TEntity> entity);
     }
