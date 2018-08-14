@@ -16,7 +16,12 @@ namespace XCommon.Patterns.Specification.Query.Implementation
 
         internal int PageNumber { get; set; }
 
-        internal List<SpecificationItem<TEntity, TFilter>> Items { get; set; }
+		public object And(Func<object, bool> p1, Func<object, object> p2)
+		{
+			throw new NotImplementedException();
+		}
+
+		internal List<SpecificationItem<TEntity, TFilter>> Items { get; set; }
 
         internal List<SpecificationOrder<TEntity, TFilter>> Order { get; set; }       
     }

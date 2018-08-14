@@ -33,7 +33,7 @@ namespace XCommon.Test.Patterns.Repository.Executes
             execute.User.Should().Be(null, "Just assing a user when it is infomed");
 
             execute.Messages.Should().NotBeNull("Messages never can be null");
-            execute.Messages.Count.Should().Be(0, "There isn't messages");
+            execute.Messages.Count.Should().Be(0, "There isn't message");
         }
 
         [Fact(DisplayName = "Constructor (Empty)")]
