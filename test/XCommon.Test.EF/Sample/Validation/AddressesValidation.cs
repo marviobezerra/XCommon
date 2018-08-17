@@ -7,7 +7,7 @@ using XCommon.Test.EF.Sample.Entity;
 
 namespace XCommon.Test.EF.Sample.Validation
 {
-	class AddressesValidation : SpecificationValidation<AddressesEntity>
+	public class AddressesValidation : SpecificationValidation<AddressesEntity>
 	{
 		public override async Task<bool> IsSatisfiedByAsync(AddressesEntity entity, Execute execute)
 		{
