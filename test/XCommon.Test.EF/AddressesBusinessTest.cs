@@ -1,6 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using XCommon.EF.Patterns.Repository;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Specification.Query;
 using XCommon.Patterns.Specification.Validation;
@@ -14,7 +17,7 @@ using Xunit;
 
 namespace XCommon.Test.EF
 {
-    public class AddressesBusinessTest
+	public class AddressesBusinessTest
 	{
 		public AddressesBusinessTest()
 		{
@@ -26,12 +29,16 @@ namespace XCommon.Test.EF
 
 			Kernel.Map<AddressesBusiness>().To<AddressesBusiness>();
 			Kernel.Map<PeopleBusiness>().To<PeopleBusiness>();
+
+
 		}
 
-        [Fact]		
+		[Fact]
 		public async Task GetAllByFilter()
-        {
-			using (var db = new SampleContext())
+		{
+			var options = RepositoryTestHelper.IsolateContext<SampleContext>();
+
+			using (var db = new SampleContext(options))
 			{
 				db.People.AddRange(PeopleDataSource.DBPeopleDataSource);
 				db.SaveChanges();
@@ -45,7 +52,9 @@ namespace XCommon.Test.EF
 		[Fact]
 		public async Task GetFirstByFilter()
 		{
-			using (var db = new SampleContext())
+			var options = RepositoryTestHelper.IsolateContext<SampleContext>();
+
+			using (var db = new SampleContext(options))
 			{
 				db.People.AddRange(PeopleDataSource.DBPeopleDataSource);
 				db.SaveChanges();

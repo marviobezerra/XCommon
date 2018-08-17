@@ -5,15 +5,27 @@ namespace XCommon.Test.EF.Sample.Context
 {
 	public class SampleContext : DbContext
 	{
+		public SampleContext()
+		{
+		}
+
+		public SampleContext(DbContextOptions<SampleContext> options)
+			: base(options)
+		{
+		}
+
 		public DbSet<Addresses> Addresses { get; set; }
 
 		public DbSet<People> People { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
-			options
-				.UseInMemoryDatabase("XCommonSampleContext")
-				.ConfigureWarnings(config => config.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+			if (!options.IsConfigured)
+			{
+				options
+					.UseInMemoryDatabase("XCommonSampleContext")
+					.ConfigureWarnings(config => config.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+			}
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

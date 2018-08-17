@@ -36,6 +36,15 @@ namespace XCommon.Patterns.Repository
 		{
 			return typeof(TEntity).Name.Replace("Entity", string.Empty);
 		}
+
+		protected virtual TContext GetContext()
+		{
+			var options = Kernel.Resolve<DbContextOptions<TContext>>(true, false);
+
+			return options != null
+				? (TContext)Activator.CreateInstance(typeof(TContext), options)
+				: new TContext();
+		}
 		#endregion
 
 		#region Get
@@ -49,7 +58,7 @@ namespace XCommon.Patterns.Repository
 		{
 			var result = new List<TEntity>();
 
-			using (var db = new TContext())
+			using (var db = GetContext())
 			{
 				var query = SpecificationQuery.Build(db.Set<TData>(), filter);
 
@@ -159,7 +168,7 @@ namespace XCommon.Patterns.Repository
 
 		public async Task<Execute<TEntity>> SaveAsync(TEntity entity)
 		{
-			using (var db = new TContext())
+			using (var db = GetContext())
 			{
 				return await SaveAsync(entity, db);
 			}
@@ -178,7 +187,7 @@ namespace XCommon.Patterns.Repository
 
 		public virtual async Task<Execute<List<TEntity>>> SaveManyAsync(List<TEntity> entities)
 		{
-			using (var db = new TContext())
+			using (var db = GetContext())
 			{
 				return await SaveManyAsync(entities, db);
 			}
