@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -93,5 +94,17 @@ namespace XCommon.Util
 			var config = builder.Build();
 			return config.Get<ApplicationSettings>(section);
 		}
-    }
+
+		public static string GetAssemblytVersion(Assembly assembly)
+		{
+			var attr = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>();
+
+			if (attr != null)
+			{
+				return attr.Version;
+			}
+
+			return string.Empty;
+		}
+	}
 }

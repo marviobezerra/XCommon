@@ -85,5 +85,13 @@ namespace XCommon.Test.UtilTest
             var result = Functions.GetMD5(value);
             result.Should().Be(expected, "Value doesn't match: " + value);
         }
+
+		[Fact(DisplayName ="Get Assembly Version")]
+		[Trait("Common", "Functions")]
+		public void GetAssemblyVersion()
+		{
+			var result = Functions.GetAssemblytVersion(typeof(Functions).Assembly);
+			result.Should().Be("1.0.66.0");
+		}
     }
 }
