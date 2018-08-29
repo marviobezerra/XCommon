@@ -1,16 +1,28 @@
-version: '{build}'  
-pull_requests:  
-  do_not_increment_build_number: true
-branches:  
-  only:
-  - master
-nuget:  
-  disable_publish_on_pr: true
-build_script:  
-- ps: .\build.ps1
-test: off  
+version: '1.0.{build}'
+image: Visual Studio 2017
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+install:
+  # Install repo specific stuff here
+before_build:
+  # Display .NET Core version
+  - cmd: dotnet --version
+  # Get Git Version
+  - ps: ./appveyor-version.ps1
+  # Display minimal restore text
+  - cmd: dotnet restore --verbosity m  
+build_script:
+  # output will be in ./src/bin/debug/netcoreapp1.1/publish
+  - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$env:SOURCE_VERSION -p:AssemblyVersion=$env:SOURCE_VERSION -p:FileVersion=$env:SOURCE_VERSION -p:InformationalVersion="$env:SOURCE_VERSION+$env:SOURCE_HASH"
+  - cmd: dotnet pack ./src/XCommon.CloudServices/XCommon.CloudServices.csproj -c Release -o ../../artifacts -p:PackageVersion=$env:SOURCE_VERSION -p:AssemblyVersion=$env:SOURCE_VERSION -p:FileVersion=$env:SOURCE_VERSION -p:InformationalVersion="$env:SOURCE_VERSION+$env:SOURCE_HASH"
+  - cmd: dotnet pack ./src/XCommon.CodeGenerator/XCommon.CodeGenerator.csproj -c Release -o ../../artifacts -p:PackageVersion=$env:SOURCE_VERSION -p:AssemblyVersion=$env:SOURCE_VERSION -p:FileVersion=$env:SOURCE_VERSION -p:InformationalVersion="$env:SOURCE_VERSION+$env:SOURCE_HASH"
+  - cmd: dotnet pack ./src/XCommon.EF/XCommon.EF.csproj -c Release -o ../../artifacts -p:PackageVersion=$env:SOURCE_VERSION -p:AssemblyVersion=$env:SOURCE_VERSION -p:FileVersion=$env:SOURCE_VERSION -p:InformationalVersion="$env:SOURCE_VERSION+$env:SOURCE_HASH"
+  - cmd: dotnet pack ./src/XCommon.Web/XCommon.Web.csproj -c Release -o ../../artifacts -p:PackageVersion=$env:SOURCE_VERSION -p:AssemblyVersion=$env:SOURCE_VERSION -p:FileVersion=$env:SOURCE_VERSION -p:InformationalVersion="$env:SOURCE_VERSION+$env:SOURCE_HASH"
+after_build:
+  # For once the build has completed
 artifacts:  
-- path: .\artifacts\**\*.nupkg
+- path: ./artifacts/**/*.nupkg
   name: NuGet
 deploy:  
 - provider: NuGet
@@ -19,3 +31,12 @@ deploy:
     secure: fsRetSaFXw+0cu0f35ys7iiQi81/0CSLzJ620cOIChLwF7akoYLuWk+T7B+FHrKo
   on:
     branch: master
+test_script:
+  # run the unit tests
+  - cmd: dotnet test ./test/XCommon.Test/XCommon.Test.csproj -c Release
+  - cmd: dotnet test ./test/XCommon.Test.CloudServices/XCommon.Test.CloudServices.csproj -c Release
+  - cmd: dotnet test ./test/XCommon.Test.CodeGenerator/XCommon.Test.CodeGenerator.csproj -c Release
+  - cmd: dotnet test ./test/XCommon.Test.EF/XCommon.Test.EF.csproj -c Release
+  - cmd: dotnet test ./test/XCommon.Test.Web/XCommon.Test.Web.csproj -c Release
+on_finish :
+  # any cleanup in here
