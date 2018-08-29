@@ -9,9 +9,9 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Get Git Version
-  - ps: ./appveyor-version.ps1
   # Display minimal restore text
-  - cmd: dotnet restore --verbosity m  
+  - cmd: dotnet restore --verbosity m
+  - ps: ./appveyor-version.ps1
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
   - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
