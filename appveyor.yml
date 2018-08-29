@@ -11,17 +11,7 @@ before_build:
   # Get Git Version
   # Display minimal restore text
   - cmd: dotnet restore --verbosity m
-  - ps: |
-    $env:TAG = (git describe --tags --long  --match "v/*").split('/')[1]
-    Write-Host $env:TAG
-    $env:MAJOR = $env:TAG.split('.')[0]
-    $env:MINOR = $env:TAG.split('.')[1].split('-')[0]
-    $env:PATCH = $env:TAG.split('.')[2].split('-')[0]
-    $env:TICK = $env:TAG.split('.')[2].split('-')[1]
-    $env:HASH = $env:TAG.split('.')[2].split('-')[2]
-    $env:SOURCE_TAG=$env:TAG
-    $env:SOURCE_VERSION="$env:MAJOR.$env:MINOR.$env:PATCH.$env:TICK"
-    $env:SOURCE_HASH=$env:HASH	
+  - ps: ./appveyor-version.ps1
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
   - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"

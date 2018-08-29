@@ -7,6 +7,6 @@ $PATCH = $TAG.split('.')[2].split('-')[0]
 $TICK = $TAG.split('.')[2].split('-')[1]
 $HASH = $TAG.split('.')[2].split('-')[2]
 
-Write-Host "$env:SOURCE_TAG=$TAG"
-Write-Host "$env:SOURCE_VERSION=$MAJOR.$MINOR.$PATCH.$TICK"
-Write-Host "$env:SOURCE_HASH=$HASH"
+$env:SOURCE_TAG=$TAG
+$env:SOURCE_VERSION=$MAJOR.$MINOR.$PATCH.$TICK
+$env:SOURCE_HASH=$HASH
