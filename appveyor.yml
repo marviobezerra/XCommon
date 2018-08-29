@@ -11,14 +11,24 @@ before_build:
   # Get Git Version
   # Display minimal restore text
   - cmd: dotnet restore --verbosity m
-  - ps: ./appveyor-version.ps1
+  - ps: |
+    $TAG = (git describe --tags --long  --match "v/*").split('/')[1]
+    Write-Host $TAG
+    $MAJOR = $TAG.split('.')[0]
+    $MINOR = $TAG.split('.')[1].split('-')[0]
+    $PATCH = $TAG.split('.')[2].split('-')[0]
+    $TICK = $TAG.split('.')[2].split('-')[1]
+    $HASH = $TAG.split('.')[2].split('-')[2]
+    $env:SOURCE_TAG=$TAG
+    $env:SOURCE_VERSION="$MAJOR.$MINOR.$PATCH.$TICK"
+    $env:SOURCE_HASH=$HASH	
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.CloudServices/XCommon.CloudServices.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.CodeGenerator/XCommon.CodeGenerator.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.EF/XCommon.EF.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.Web/XCommon.Web.csproj -c Release -o ../../artifacts -p:PackageVersion=$($env:SOURCE_VERSION) -p:AssemblyVersion=$($env:SOURCE_VERSION) -p:FileVersion=$($env:SOURCE_VERSION) -p:InformationalVersion="$($env:SOURCE_VERSION)+$($env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon.CloudServices/XCommon.CloudServices.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon.CodeGenerator/XCommon.CodeGenerator.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon.EF/XCommon.EF.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon.Web/XCommon.Web.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
 after_build:
   # For once the build has completed
 artifacts:  
