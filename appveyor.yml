@@ -8,17 +8,17 @@ install:
 before_build:
   # Display .NET Core version
   - cmd: dotnet --version
-  # Get Git Version
   # Display minimal restore text
   - cmd: dotnet restore --verbosity m
+  # Get Git Version
   - ps: ./appveyor-version.ps1
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.CloudServices/XCommon.CloudServices.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.CodeGenerator/XCommon.CodeGenerator.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.EF/XCommon.EF.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
-  - cmd: dotnet pack ./src/XCommon.Web/XCommon.Web.csproj -c Release -o ../../artifacts -p:PackageVersion=$(env:SOURCE_VERSION) -p:AssemblyVersion=$(env:SOURCE_VERSION) -p:FileVersion=$(env:SOURCE_VERSION) -p:InformationalVersion="$(env:SOURCE_VERSION)+$(env:SOURCE_HASH)"
+  - cmd: dotnet pack ./src/XCommon/XCommon.csproj -c Release -o ../../artifacts -p:PackageVersion={env:SOURCE_VERSION} -p:AssemblyVersion={env:SOURCE_VERSION} -p:FileVersion={env:SOURCE_VERSION} -p:InformationalVersion="{env:SOURCE_VERSION}+{env:SOURCE_HASH}"
+  - cmd: dotnet pack ./src/XCommon.CloudServices/XCommon.CloudServices.csproj -c Release -o ../../artifacts -p:PackageVersion={env:SOURCE_VERSION} -p:AssemblyVersion={env:SOURCE_VERSION} -p:FileVersion={env:SOURCE_VERSION} -p:InformationalVersion="{env:SOURCE_VERSION}+{env:SOURCE_HASH}"
+  - cmd: dotnet pack ./src/XCommon.CodeGenerator/XCommon.CodeGenerator.csproj -c Release -o ../../artifacts -p:PackageVersion={env:SOURCE_VERSION} -p:AssemblyVersion={env:SOURCE_VERSION} -p:FileVersion={env:SOURCE_VERSION} -p:InformationalVersion="{env:SOURCE_VERSION}+{env:SOURCE_HASH}"
+  - cmd: dotnet pack ./src/XCommon.EF/XCommon.EF.csproj -c Release -o ../../artifacts -p:PackageVersion={env:SOURCE_VERSION} -p:AssemblyVersion={env:SOURCE_VERSION} -p:FileVersion={env:SOURCE_VERSION} -p:InformationalVersion="{env:SOURCE_VERSION}+{env:SOURCE_HASH}"
+  - cmd: dotnet pack ./src/XCommon.Web/XCommon.Web.csproj -c Release -o ../../artifacts -p:PackageVersion={env:SOURCE_VERSION} -p:AssemblyVersion={env:SOURCE_VERSION} -p:FileVersion={env:SOURCE_VERSION} -p:InformationalVersion="{env:SOURCE_VERSION}+{env:SOURCE_HASH}"
 after_build:
   # For once the build has completed
 artifacts:  
