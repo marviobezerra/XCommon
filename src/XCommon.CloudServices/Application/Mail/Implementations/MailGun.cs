@@ -60,7 +60,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 			}
 			catch (Exception ex)
 			{
-				result.AddMessage(ex, "Error sending email by MailGun");
+				result.AddException(ex, "Error sending email by MailGun");
 			}
 
 			return await Task.FromResult(result);

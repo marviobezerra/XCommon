@@ -245,7 +245,7 @@ namespace XCommon.Test.Patterns.Repository.Executes
         {
             var execute = new Execute();
 
-            execute.AddMessage(new Exception("Check this message"), "Errors: {0} - {1}");
+            execute.AddException(new Exception("Check this message"), "Errors: {0} - {1}");
 
             execute.HasErro.Should().Be(true, "There is error message");
             execute.HasWarning.Should().Be(false, "There is warning message");
@@ -266,7 +266,7 @@ namespace XCommon.Test.Patterns.Repository.Executes
         {
             var execute = new Execute();
 
-            execute.AddMessage(new Exception("Check this message"), "Errors: {0} - {1}", "Three", "Four");
+            execute.AddException(new Exception("Check this message"), "Errors: {0} - {1}", "Three", "Four");
 
             execute.HasErro.Should().Be(true, "There is error message");
             execute.HasWarning.Should().Be(false, "There is warning message");

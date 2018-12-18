@@ -1,68 +1,76 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
 namespace XCommon.Application.Executes
 {
-    public class Execute
-    {
-        public Execute()
-            : this(null, null)
-        {
-        }
+	public class Execute
+	{
+		public Execute()
+			: this(null, null)
+		{
+		}
 
-        public Execute(ExecuteUser user)
-            : this(null, user)
-        {
-        }
+		public Execute(ExecuteUser user)
+			: this(null, user)
+		{
+		}
 
-        public Execute(Execute execute)
-            : this(execute, null)
-        {
-        }
+		public Execute(Execute execute)
+			: this(execute, null)
+		{
+		}
 
-        public Execute(Execute execute, ExecuteUser user)
-        {
-            Messages = new List<ExecuteMessage>();
-            Properties = new Dictionary<string, object>();
+		public Execute(Execute execute, ExecuteUser user)
+		{
+			Messages = new List<ExecuteMessage>();
+			Properties = new Dictionary<string, object>();
 
-            User = user ?? execute?.User;
+			User = user ?? execute?.User;
 
-            if (execute != null)
-            {
-                AddMessage(execute);
-            }
-        }
+			if (execute != null)
+			{
+				AddMessage(execute);
+			}
+		}
 
-        #region Propertys
+		#region Properties
 
-        [IgnoreDataMember]
-        private Dictionary<string, object> Properties { get; set; }
+		[IgnoreDataMember]
+		private Dictionary<string, object> Properties { get; set; }
 
-        [IgnoreDataMember]
-        public ExecuteUser User { get; set; }
+		[IgnoreDataMember]
+		public ExecuteUser User { get; set; }
 
-        public bool HasErro { get; private set; }
+		public bool HasErro { get; private set; }
 
-        public bool HasException { get; private set; }
+		public bool HasException { get; private set; }
 
-        public bool HasWarning { get; private set; }
+		public bool HasWarning { get; private set; }
 
-        public List<ExecuteMessage> Messages { get; private set; }
-        #endregion
+		public List<ExecuteMessage> Messages { get; private set; }
+		#endregion
 
-        #region public
-        public virtual void AddMessage(ExecuteMessageType type, string message)
-        {
-            Messages.Add(new ExecuteMessage { Type = type, Message = message });
-            CheckMessage();
-        }
+		#region public
+		public virtual void AddMessage(ExecuteMessageType type, string message)
+		{
+			Messages.Add(new ExecuteMessage { Type = type, Message = message });
+			CheckMessage();
+		}
 
+		public virtual void AddError(string message) => AddMessage(ExecuteMessageType.Error, message);
+
+		public virtual void AddError(string message, params object[] args) => AddMessage(ExecuteMessageType.Error, message, args);
+
+		public virtual void AddWarning(string message) => AddMessage(ExecuteMessageType.Warning, message);
+
+		public virtual void AddWarning(string message, params object[] args) => AddMessage(ExecuteMessageType.Warning, message, args);
+		
         public virtual void AddMessage(ExecuteMessageType type, string message, params object[] args)
             => AddMessage(type, string.Format(message ?? string.Empty, args ?? new object[] { }));
 
-        public virtual void AddMessage(Exception ex, string message)
+        public virtual void AddException(Exception ex, string message)
         {
             var executeMessage = new ExecuteMessage();
             executeMessage.MessageInternal.AddException(ex);
@@ -74,12 +82,9 @@ namespace XCommon.Application.Executes
             CheckMessage();
         }
 
-        public virtual void AddMessage(Exception ex, string message, params object[] args)
-        {
-            AddMessage(ex, string.Format(message, args));
-        }
+        public virtual void AddException(Exception ex, string message, params object[] args) => AddException(ex, string.Format(message, args));
 
-        public virtual void AddMessage(params Execute[] execute)
+		public virtual void AddMessage(params Execute[] execute)
         {
             foreach (var item in execute)
             {

@@ -41,7 +41,7 @@ namespace XCommon.CloudServices.Application.Mail.Implementations
 			}
 			catch (Exception ex)
 			{
-				result.AddMessage(ex, "Error sending email by SendGrid");
+				result.AddException(ex, "Error sending email by SendGrid");
 			}
 
 			return result;
