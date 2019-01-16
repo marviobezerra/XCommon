@@ -1,25 +1,21 @@
-using XCommon.Just4You.Business.Contract.Register;
-using XCommon.Just4You.Business.Entity.Enumerators;
-using XCommon.Just4You.Business.Entity.Register;
-using XCommon.Just4You.Business.Entity.Register.Filter;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using XCommon.Application;
 using XCommon.Application.Authentication;
 using XCommon.Application.Authentication.Entity;
 using XCommon.Application.Executes;
-using XCommon.Application.Settings;
+using XCommon.Application.Register.Entity;
+using XCommon.Application.Register.Entity.Enumerators;
+using XCommon.Application.Register.Entity.Filter;
+using XCommon.EF.Application.Register.Interface;
 using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Util;
-using XCommon.EF.Application.Register.Interface;
-using XCommon.Application.Register.Entity.Filter;
 
 namespace XCommon.EF.Application.Authentication
 {
-	public class LoginBusiness : : ILoginBusiness
+	public class LoginBusiness : ILoginBusiness
 	{
 		#region Inject
 		[Inject]
@@ -43,17 +39,18 @@ namespace XCommon.EF.Application.Authentication
 			Kernel.Resolve(this);
 		}
 
-		public Task<Execute> ChangePasswordAsync(PasswordChangeEntity info)
+		#region Public Methods
+		public virtual async Task<Execute> ChangePasswordAsync(PasswordChangeEntity info)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> ConfirmEmailAsync(Guid userKey, string token)
+		public virtual async Task<Execute> ConfirmEmailAsync(Guid userKey, string token)
 		{
 			throw new NotImplementedException();
 		}
 
-		public async Task<Execute> ConfirmPhoneAsync(Guid userKey, string token)
+		public virtual async Task<Execute> ConfirmPhoneAsync(Guid userKey, string token)
 		{
 			var result = new Execute();
 			var user = await UsersBusiness.GetByKeyAsync(userKey);
@@ -61,22 +58,22 @@ namespace XCommon.EF.Application.Authentication
 			return result;
 		}
 
-		public Task<Execute> RecoveryPasswordAsync(PasswordRecoveryEntity info)
+		public virtual async Task<Execute> RecoveryPasswordAsync(PasswordRecoveryEntity info)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> RecoveryPasswordRequestTokenAsync(string email)
+		public virtual async Task<Execute> RecoveryPasswordRequestTokenAsync(string email)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Execute> RecoveryPasswordValidateTokenAsync(Guid userKey, string token)
+		public virtual async Task<Execute> RecoveryPasswordValidateTokenAsync(Guid userKey, string token)
 		{
 			throw new NotImplementedException();
 		}
 
-		public async Task<Execute<TicketEntity>> SignInAsync(SignInEntity signIn)
+		public virtual async Task<Execute<TicketEntity>> SignInAsync(SignInEntity signIn)
 		{
 			var result = new Execute<TicketEntity>();
 
@@ -103,7 +100,7 @@ namespace XCommon.EF.Application.Authentication
 
 			if (signIn.Provider == ProviderType.Local)
 			{
-				var passwordHash = Functions.GetMD5(signIn.Password);
+				var passwordHash = await GetPasswordHashAsync(user, signIn.Password);
 
 				if (user.PasswordHash != passwordHash)
 				{
@@ -116,10 +113,10 @@ namespace XCommon.EF.Application.Authentication
 					Culture = person.Culture,
 					Key = person.IdPerson,
 					Name = person.Name,
-					Roles = new List<string> { ((int)companyUser.Role).ToString() }
+					Roles = await GetUserRolesAsync(user)
 				};
 
-				result.Entity.Values.Add("cp", company.IdCompany.ToString());
+				await SetTicketCustomValuesAsync(result.Entity);
 
 				return result;
 			}
@@ -137,10 +134,10 @@ namespace XCommon.EF.Application.Authentication
 				Culture = person.Culture,
 				Key = person.IdPerson,
 				Name = person.Name,
-				Roles = new List<string> { ((int)companyUser.Role).ToString() }
+				Roles = await GetUserRolesAsync(user)
 			};
 
-			result.Entity.Values.Add("cp", company.IdCompany.ToString());
+			await SetTicketCustomValuesAsync(result.Entity);
 
 			return result;
 		}
@@ -154,9 +151,9 @@ namespace XCommon.EF.Application.Authentication
 				return result;
 			}
 
-			var (person, user, provider, companyPerson) = await CastNewUser(signUp);
+			var (person, user, provider) = await CastNewUser(signUp);
 
-			using (var db = new Data.Just4YouContext())
+			using (var db = new Context.XCommonDbContext())
 			{
 				using (var transaction = await db.Database.BeginTransactionAsync())
 				{
@@ -179,17 +176,32 @@ namespace XCommon.EF.Application.Authentication
 					Culture = person.Culture,
 					Key = person.IdPerson,
 					Name = person.Name,
-					Roles = new List<string> { ((int)companyPerson.Role).ToString() }
+					Roles = await GetUserRolesAsync(user)
 				};
 			}
 
 			return result;
 		}
+		#endregion
 
-		private async Task<(PeopleEntity person, UsersEntity user, UsersProvidersEntity provider, CompaniesPeopleEntity companyPerson)> CastNewUser(SignUpEntity signUp)
+		#region Protected
+		protected virtual async Task SetTicketCustomValuesAsync(TicketEntity ticket)
 		{
-			var company = await CompaniesBusiness.GetCurrentCompany();
+			await Task.Yield();
+		}
 
+		protected virtual async Task<List<string>> GetUserRolesAsync(UsersEntity user)
+		{
+			return await Task.FromResult(new List<string>());
+		}
+
+		protected virtual async Task<string> GetPasswordHashAsync(UsersEntity user, string password)
+		{
+			return await Task.FromResult(Functions.GetMD5(password));
+		}
+
+		protected virtual async Task<(PeopleEntity person, UsersEntity user, UsersProvidersEntity provider)> CastNewUser(SignUpEntity signUp)
+		{
 			var person = new PeopleEntity
 			{
 				Action = EntityAction.New,
@@ -198,18 +210,12 @@ namespace XCommon.EF.Application.Authentication
 				Email = signUp.Email,
 				Birthday = signUp.BirthDay,
 				Culture = signUp.Language,
-				Gender = signUp.Male
-				   ? GenderType.Male
-				   : GenderType.Female,
+				Gender = signUp.Male ? GenderType.Male : GenderType.Female,
 				CreatedAt = DateTime.Now,
 				ChangedAt = DateTime.Now,
 				ImageCover = signUp.UrlCover,
 				ImageProfile = signUp.UrlImage
 			};
-
-			var passwordHash = signUp.Provider == XCommon.Application.Authentication.Entity.ProviderType.Local
-				? Functions.GetMD5(signUp.Password)
-				: string.Empty;
 
 			var user = new UsersEntity
 			{
@@ -219,10 +225,15 @@ namespace XCommon.EF.Application.Authentication
 				AccessFailedCount = 0,
 				EmailConfirmed = false,
 				LockoutEnabled = false,
-				PasswordHash = passwordHash,
+				PasswordHash = string.Empty,
 				PhoneConfirmed = false,
 				ProfileComplete = false
 			};
+
+			if (signUp.Provider == ProviderType.Local)
+			{
+				user.PasswordHash = await GetPasswordHashAsync(user, signUp.Password);
+			}
 
 			var userProvider = new UsersProvidersEntity
 			{
@@ -236,16 +247,8 @@ namespace XCommon.EF.Application.Authentication
 				ProviderUrlImage = signUp.UrlImage
 			};
 
-			var companyPerson = new CompaniesPeopleEntity
-			{
-				Action = EntityAction.New,
-				IdCompanyPerson = Guid.NewGuid(),
-				IdCompany = company.IdCompany,
-				IdPerson = person.IdPerson,
-				Role = RoleType.Anonymous
-			};
-
-			return (person, user, userProvider, companyPerson);
+			return await Task.FromResult((person, user, userProvider));
 		}
+		#endregion
 	}
 }

@@ -10,7 +10,7 @@ namespace System.Threading.Tasks
 		{
 			if (execute != null && execute.HasErro)
 			{
-				return await Task.FromResult<TResult>(default(TResult));
+				return await Task.FromResult(default(TResult));
 			}
 
 			return await fn(await source);
