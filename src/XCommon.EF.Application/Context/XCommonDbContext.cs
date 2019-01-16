@@ -11,7 +11,9 @@ namespace XCommon.EF.Application.Context
 		protected virtual IApplicationSettings AppSettings => Kernel.Resolve<IApplicationSettings>();
 
 		public virtual DbSet<People> People { get; set; }
+
 		public virtual DbSet<Users> Users { get; set; }
+
 		public virtual DbSet<UsersProviders> UsersProviders { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -19,6 +21,8 @@ namespace XCommon.EF.Application.Context
 			PeopleMap.Map(modelBuilder, AppSettings.UnitTest);
 			UsersMap.Map(modelBuilder, AppSettings.UnitTest);
 			UsersProvidersMap.Map(modelBuilder, AppSettings.UnitTest);
+			UsersRolesMap.Map(modelBuilder, AppSettings.UnitTest);
+			UsersTokensMap.Map(modelBuilder, AppSettings.UnitTest);
 		}
 	}
 }

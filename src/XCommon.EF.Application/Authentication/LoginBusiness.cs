@@ -160,7 +160,7 @@ namespace XCommon.EF.Application.Authentication
 					result.AddMessage(await PeopleBusiness.SaveAsync(person, db));
 					result.AddMessage(await UsersBusiness.SaveAsync(user, db));
 					result.AddMessage(await UsersProvidersBusiness.SaveAsync(provider, db));
-					result.AddMessage(await CompaniesPeopleBusiness.SaveAsync(companyPerson, db));
+					//result.AddMessage(await CompaniesPeopleBusiness.SaveAsync(companyPerson, db));
 
 					if (!result.HasErro)
 					{

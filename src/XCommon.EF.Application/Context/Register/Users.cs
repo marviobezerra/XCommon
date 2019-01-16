@@ -26,5 +26,9 @@ namespace XCommon.EF.Application.Context.Register
 		public virtual People People { get; set; }
 
 		public virtual ICollection<UsersProviders> UsersProviders { get; set; }
+
+		public virtual ICollection<UsersTokens> UsersTokens { get; set; }
+
+		public virtual ICollection<UsersRoles> UsersRoles { get; set; }
 	}
 }

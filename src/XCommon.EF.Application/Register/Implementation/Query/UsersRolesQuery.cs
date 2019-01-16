@@ -7,9 +7,9 @@ using XCommon.Patterns.Specification.Query.Extensions;
 
 namespace XCommon.EF.Application.Register.Implementation.Query
 {
-	public class UsersQuery : SpecificationQuery<Users, UsersFilter>
+	public class UsersRolesQuery : SpecificationQuery<UsersRoles, UsersRolesFilter>
 	{
-		public override IQueryable<Users> Build(IQueryable<Users> source, UsersFilter filter)
+		public override IQueryable<UsersRoles> Build(IQueryable<UsersRoles> source, UsersRolesFilter filter)
 		{
 			var spefications = NewSpecificationList()
 				.And(e => e.IdUser == filter.Key, f => f.Key.HasValue)
