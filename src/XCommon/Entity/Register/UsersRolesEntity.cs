@@ -2,7 +2,7 @@ using System;
 using System.Runtime.Serialization;
 using XCommon.Patterns.Repository.Entity;
 
-namespace XCommon.Application.Register.Entity
+namespace XCommon.Entity.Register
 {
 	public class UsersRolesEntity : EntityBase
 	{

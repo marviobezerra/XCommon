@@ -1,5 +1,5 @@
 using System.Linq;
-using XCommon.Application.Register.Entity.Filter;
+using XCommon.Entity.Register.Filter;
 using XCommon.EF.Application.Context.Register;
 using XCommon.Extensions.Checks;
 using XCommon.Extensions.String;

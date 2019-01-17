@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.Serialization;
-using XCommon.Application.Register.Entity.Enumerators;
+using XCommon.Entity.Register.Enumerators;
 using XCommon.Patterns.Repository.Entity;
 
-namespace XCommon.Application.Register.Entity
+namespace XCommon.Entity.Register
 {
 	public class PeopleEntity : EntityBase
 	{

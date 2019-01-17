@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using XCommon.Application.Executes;
-using XCommon.Application.Register.Entity;
+using XCommon.Entity.Register;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Patterns.Specification.Validation.Extensions;
 

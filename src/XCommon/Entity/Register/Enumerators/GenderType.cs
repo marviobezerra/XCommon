@@ -1,4 +1,4 @@
-namespace XCommon.Application.Register.Entity.Enumerators
+namespace XCommon.Entity.Register.Enumerators
 {
 	public enum GenderType
 	{

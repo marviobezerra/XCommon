@@ -2,7 +2,7 @@ using System;
 using XCommon.Application.Authentication.Entity;
 using XCommon.Patterns.Repository.Entity;
 
-namespace XCommon.Application.Register.Entity.Filter
+namespace XCommon.Entity.Register.Filter
 {
 	public class UsersProvidersFilter : FilterBase
 	{

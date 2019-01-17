@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using XCommon.Application.Authentication.Entity;
 using XCommon.Patterns.Repository.Entity;
 
-namespace XCommon.Application.Register.Entity
+namespace XCommon.Entity.Register
 {
 	public partial class UsersProvidersEntity : EntityBase
 	{

@@ -1,5 +1,5 @@
 using System;
-using XCommon.Application.Register.Entity.Enumerators;
+using XCommon.Entity.Register.Enumerators;
 
 namespace XCommon.EF.Application.Context.Register
 {
