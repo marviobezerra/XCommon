@@ -1,13 +1,17 @@
+using System;
 using System.Linq;
+using System.Threading.Tasks;
+using XCommon.Application.Authentication;
 using XCommon.Application.Executes;
-using XCommon.Entity.Config;
+using XCommon.Entity.System;
 using XCommon.Extensions.String;
 
 namespace XCommon.EF.Application.Authentication
 {
-	public class PasswordPolicesBusiness
+	public class PasswordPolicesBusiness : IPasswordPolicesBusiness
 	{
-		public Execute ValidatePassword(string email, string password)
+
+		public async Task<Execute> ValidatePasswordAsync(string email, string password)
 		{
 			var policy = new PasswordPolicesEntity();
 			var result = new Execute();
@@ -56,13 +60,13 @@ namespace XCommon.EF.Application.Authentication
 			{
 				var userMail = email.Split('@').First();
 
-				if (password.Contains(userMail, System.StringComparison.OrdinalIgnoreCase | System.StringComparison.InvariantCulture))
+				if (password.Contains(userMail, StringComparison.InvariantCultureIgnoreCase))
 				{
 					result.AddError("ShouldNotMatchUserId");
 				}
 			}
 
-			return result;
+			return await Task.FromResult(result);
 		}
 	}
 }

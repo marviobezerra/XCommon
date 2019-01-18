@@ -1,8 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+		<Version>1.0.67</Version>
+		<Authors>Marvio Andre Bezerra Silverio</Authors>
+		<Company>Marvio Andre Bezerra Silverio</Company>
+		<Copyright>Marvio Andre Bezerra Silverio</Copyright>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/marviobezerra/XCommon</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Description>XCommon.EF.Application is an implementation with features for authentication, user management, configuration, and others using Entity Frame Core.</Description>
+		<PackageIconUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.EF.png</PackageIconUrl>
+		<PackageTags>XCommon, EntityFrameWork, Application, Repository</PackageTags>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />

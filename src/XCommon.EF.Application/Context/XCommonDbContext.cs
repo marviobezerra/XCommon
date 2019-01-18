@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using XCommon.Application.Settings;
 using XCommon.EF.Application.Context.Register;
 using XCommon.EF.Application.Context.Register.Map;
+using XCommon.EF.Application.Context.System;
+using XCommon.EF.Application.Context.System.Map;
 using XCommon.Patterns.Ioc;
 
 namespace XCommon.EF.Application.Context
@@ -16,6 +18,8 @@ namespace XCommon.EF.Application.Context
 
 		public virtual DbSet<UsersProviders> UsersProviders { get; set; }
 
+		public Config Config { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			PeopleMap.Map(modelBuilder, AppSettings.UnitTest);
@@ -23,6 +27,8 @@ namespace XCommon.EF.Application.Context
 			UsersProvidersMap.Map(modelBuilder, AppSettings.UnitTest);
 			UsersRolesMap.Map(modelBuilder, AppSettings.UnitTest);
 			UsersTokensMap.Map(modelBuilder, AppSettings.UnitTest);
+
+			ConfigMap.Map(modelBuilder, AppSettings.UnitTest);
 		}
 	}
 }

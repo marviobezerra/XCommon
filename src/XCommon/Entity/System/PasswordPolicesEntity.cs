@@ -1,4 +1,4 @@
-namespace XCommon.Entity.Config
+namespace XCommon.Entity.System
 {
 	public class PasswordPolicesEntity
 	{
