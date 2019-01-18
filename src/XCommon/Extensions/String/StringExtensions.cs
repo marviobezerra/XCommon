@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -34,5 +34,36 @@ namespace XCommon.Extensions.String
             var chars = value.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
             return new string(chars).Normalize(NormalizationForm.FormC);
         }
+
+		public static bool ContainsNumericCharacters(this string value)
+		{
+			return value.Any(char.IsDigit);
+		}
+
+		public static bool ContainsUpperCaseLetters(this string value)
+		{
+			return value.Any(char.IsUpper);
+		}
+
+		public static bool ContainsLowerCaseLetters(this string value)
+		{
+			return value.Any(char.IsLower);
+		}
+
+		public static bool ContiansPunctuationCharacters(this string value)
+		{
+			return value.Any(char.IsPunctuation);
+		}
+
+		public static bool ContainsSpaces(this string value)
+		{
+			return value.Any(char.IsWhiteSpace);
+		}
+
+		public static bool ContainsNonAsciiCharacters(this string input)
+		{
+			const int MaxAnsiCode = 255;
+			return input.Any(c => c > MaxAnsiCode);
+		}
 	}
 }

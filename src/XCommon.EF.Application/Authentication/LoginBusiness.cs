@@ -12,12 +12,16 @@ using XCommon.Patterns.Ioc;
 using XCommon.Patterns.Repository.Entity;
 using XCommon.Patterns.Specification.Validation;
 using XCommon.Util;
+using System.Linq;
 
 namespace XCommon.EF.Application.Authentication
 {
 	public class LoginBusiness : ILoginBusiness
 	{
 		#region Inject
+		[Inject]
+		private ITicketManager TicketManager { get; set; }
+
 		[Inject]
 		private IPeopleBusiness PeopleBusiness { get; set; }
 
@@ -26,6 +30,9 @@ namespace XCommon.EF.Application.Authentication
 
 		[Inject]
 		private IUsersProvidersBusiness UsersProvidersBusiness { get; set; }
+
+		[Inject]
+		private IUsersRolesBusiness UsersRolesBusiness { get; set; }
 
 		[Inject]
 		private ISpecificationValidation<SignInEntity> ValidateSignIn { get; set; }
@@ -42,7 +49,31 @@ namespace XCommon.EF.Application.Authentication
 		#region Public Methods
 		public virtual async Task<Execute> ChangePasswordAsync(PasswordChangeEntity info)
 		{
-			throw new NotImplementedException();
+			var result = new Execute();
+			var user = await UsersBusiness.GetByKeyAsync(TicketManager.UserKey);
+
+			if (user == null)
+			{
+				result.AddError("Invalid user");
+				return result;
+			}
+
+			if (!await VerifyPasswordHashAsync(user, info.PasswordCurrent))
+			{
+				result.AddError("Password doesn't match");
+				return result;
+			}
+
+			if (info.PasswordNew != info.PasswordConfirm)
+			{
+
+			}
+
+			user.Action = EntityAction.Update;
+			user.PasswordHash = await GetPasswordHashAsync(user, info.PasswordNew);
+			result.AddMessage(await UsersBusiness.SaveAsync(user));
+
+			return result;
 		}
 
 		public virtual async Task<Execute> ConfirmEmailAsync(Guid userKey, string token)
@@ -100,9 +131,7 @@ namespace XCommon.EF.Application.Authentication
 
 			if (signIn.Provider == ProviderType.Local)
 			{
-				var passwordHash = await GetPasswordHashAsync(user, signIn.Password);
-
-				if (user.PasswordHash != passwordHash)
+				if (!await VerifyPasswordHashAsync(user, signIn.Password))
 				{
 					result.AddMessage(ExecuteMessageType.Error, Resources.Messages.InvalidUserPassword);
 					return result;
@@ -192,12 +221,18 @@ namespace XCommon.EF.Application.Authentication
 
 		protected virtual async Task<List<string>> GetUserRolesAsync(UsersEntity user)
 		{
-			return await Task.FromResult(new List<string>());
+			var result = await UsersRolesBusiness.GetByFilterAsync(new UsersRolesFilter { IdUser = user.IdUser });
+			return result.Select(c => c.Role).ToList();
 		}
 
 		protected virtual async Task<string> GetPasswordHashAsync(UsersEntity user, string password)
 		{
-			return await Task.FromResult(Functions.GetMD5(password));
+			return await Task.FromResult(Hash.GetMD5(password));
+		}
+
+		protected virtual async Task<bool> VerifyPasswordHashAsync(UsersEntity user, string input)
+		{
+			return await Task.FromResult(Hash.VerifyMD5(input, user.PasswordHash));
 		}
 
 		protected virtual async Task<(PeopleEntity person, UsersEntity user, UsersProvidersEntity provider)> CastNewUser(SignUpEntity signUp)

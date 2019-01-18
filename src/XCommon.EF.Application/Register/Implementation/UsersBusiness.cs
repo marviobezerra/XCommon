@@ -8,5 +8,6 @@ namespace XCommon.EF.Application.Register.Implementation
 {
 	public class UsersBusiness : RepositoryEFBase<UsersEntity, UsersFilter, Users, XCommonDbContext>
 	{
+
 	}
 }
