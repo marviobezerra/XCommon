@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+		<Version>1.0.67</Version>
+		<Authors>Marvio Andre Bezerra Silverio</Authors>
+		<Company>Marvio Andre Bezerra Silverio</Company>
+		<Copyright>Marvio Andre Bezerra Silverio</Copyright>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/marviobezerra/XCommon</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/marviobezerra/XCommon</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Description>XCommon.EF.Application is an implementation with features for authentication, user management, configuration, and others using Entity Frame Core.</Description>
+		<PackageIconUrl>https://raw.githubusercontent.com/marviobezerra/XCommon/master/files/XCommon.EF.png</PackageIconUrl>
+		<PackageTags>XCommon, EntityFrameWork, Application, Repository</PackageTags>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XCommon.EF\XCommon.EF.csproj" />
+    <ProjectReference Include="..\XCommon\XCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

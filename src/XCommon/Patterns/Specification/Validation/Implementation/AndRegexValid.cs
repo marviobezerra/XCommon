@@ -51,7 +51,7 @@ namespace XCommon.Patterns.Specification.Validation.Implementation
 				{
 					if (execute != null)
 					{
-						execute.AddMessage(ex, "Invalid regex", RegexExpression);
+						execute.AddException(ex, "Invalid regex", RegexExpression);
 					}
 
 					return false;

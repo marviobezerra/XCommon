@@ -107,7 +107,7 @@ namespace XCommon.Patterns.Repository
 				}
 				catch (Exception ex)
 				{
-					execute.AddMessage(ex, "Error on delete info to: {0}", GetEntityName());
+					execute.AddException(ex, "Error on delete info to: {0}", GetEntityName());
 				}
 			}
 
@@ -121,7 +121,7 @@ namespace XCommon.Patterns.Repository
 				}
 				catch (Exception ex)
 				{
-					execute.AddMessage(ex, "Error on insert info to: {0}", GetEntityName());
+					execute.AddException(ex, "Error on insert info to: {0}", GetEntityName());
 				}
 			}
 
@@ -135,7 +135,7 @@ namespace XCommon.Patterns.Repository
 				}
 				catch (Exception ex)
 				{
-					execute.AddMessage(ex, "Error on update info to: {0}", GetEntityName());
+					execute.AddException(ex, "Error on update info to: {0}", GetEntityName());
 				}
 			}
 
@@ -149,7 +149,7 @@ namespace XCommon.Patterns.Repository
 				}
 				catch (Exception ex)
 				{
-					execute.AddMessage(ex, "Error on savechanges in: {0}", GetEntityName());
+					execute.AddException(ex, "Error on savechanges in: {0}", GetEntityName());
 				}
 			}
 

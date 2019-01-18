@@ -41,4 +41,5 @@ exec { & dotnet pack .\src\XCommon\XCommon.csproj -c Release -o ..\..\artifacts 
 exec { & dotnet pack .\src\XCommon.CloudServices\XCommon.CloudServices.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.CodeGenerator\XCommon.CodeGenerator.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.EF\XCommon.EF.csproj -c Release -o ..\..\artifacts }
+exec { & dotnet pack .\src\XCommon.EF.Application\XCommon.EF.Application.csproj -c Release -o ..\..\artifacts }
 exec { & dotnet pack .\src\XCommon.Web\XCommon.Web.csproj -c Release -o ..\..\artifacts }
