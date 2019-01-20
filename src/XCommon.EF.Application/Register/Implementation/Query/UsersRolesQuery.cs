@@ -13,7 +13,7 @@ namespace XCommon.EF.Application.Register.Implementation.Query
 		{
 			var spefications = NewSpecificationList()
 				.And(e => e.IdUserRole == filter.Key, f => f.Key.HasValue)
-				.And(e => e.IdUser == filter.Key, f => f.IdUser.HasValue)
+				.And(e => e.IdUser == filter.IdUser, f => f.IdUser.HasValue)
 				.And(e => filter.Keys.Contains(e.IdUserRole), f => f.Keys.IsValidList())
 				.And(e => filter.IdUsers.Contains(e.IdUser), f => f.IdUsers.IsValidList())
 				.OrderBy(e => e.IdUser)
