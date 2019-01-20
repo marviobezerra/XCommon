@@ -5,8 +5,8 @@ using XCommon.CodeGenerator.Core.DataBase;
 namespace XCommon.CodeGenerator.CSharp.Implementation.Helper
 {
 	public static class Remap
-    {
-		public static List<string> ProcessRemapSchema(this DataBaseTable item, GeneratorConfig config)
+	{
+		public static List<string> ProcessRemapSchema(this DataBaseTable item, GeneratorConfig config, bool isEF)
 		{
 			var result = new List<string>();
 
@@ -23,6 +23,21 @@ namespace XCommon.CodeGenerator.CSharp.Implementation.Helper
 			if (remap != null)
 			{
 				result.AddRange(remap.Select(c => c.NameSpace));
+			}
+
+			var applicationClass = config.CSharp.ApplicationClasses.Where(c => item.RelationShips.Any(x => x.SchemaPK == c.Schema && x.TablePK == c.Name));
+
+			if (config.CSharp.UsingApplicationBase && applicationClass != null)
+			{
+				if (isEF)
+				{
+					result.AddRange(applicationClass.Select(c => c.NamespaceContext));
+				}
+				else
+				{
+					result.AddRange(applicationClass.Select(c => c.NamespaceEntity));
+
+				}
 			}
 
 			return result;

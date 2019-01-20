@@ -1,7 +1,27 @@
+using System.Collections.Generic;
+
 namespace XCommon.CodeGenerator.CSharp.Configuration
 {
 	public class CSharpConfig
-    {
+	{
+		public CSharpConfig()
+		{
+			ApplicationClasses = new List<CSharpApplicationClass>
+			{
+				new CSharpApplicationClass("Register", "People"),
+				new CSharpApplicationClass("Register", "Users"),
+				new CSharpApplicationClass("Register", "UsersProviders"),
+				new CSharpApplicationClass("Register", "UsersRoles"),
+				new CSharpApplicationClass("Register", "UsersTokens"),
+				new CSharpApplicationClass("System", "Configs")
+			};
+		}
+
+
+		public List<CSharpApplicationClass> ApplicationClasses { get; set; }
+
+		public bool UsingApplicationBase { get; set; }
+
 		public CSharpRepositoryConfig Repository { get; set; }
 
 		public CSharpProjectConfig Factory { get; set; }
@@ -12,5 +32,7 @@ namespace XCommon.CodeGenerator.CSharp.Configuration
 
 		public CSharpProjectConfig UnitTest { get; set; }
 
+
+		
 	}
 }

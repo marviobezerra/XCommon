@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using XCommon.Application.Settings;
 using XCommon.EF.Application.Context.Register;
 using XCommon.EF.Application.Context.Register.Map;
@@ -18,7 +19,22 @@ namespace XCommon.EF.Application.Context
 
 		public virtual DbSet<UsersProviders> UsersProviders { get; set; }
 
-		public Config Config { get; set; }
+		public Configs Configs { get; set; }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder options)
+		{
+			if (AppSettings.UnitTest)
+			{
+				options
+					.UseInMemoryDatabase("XCommonDbContext")
+					.ConfigureWarnings(config => config.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+
+				return;
+			}
+
+			options.UseSqlServer(AppSettings.DataBaseConnectionString);
+
+		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -28,7 +44,7 @@ namespace XCommon.EF.Application.Context
 			UsersRolesMap.Map(modelBuilder, AppSettings.UnitTest);
 			UsersTokensMap.Map(modelBuilder, AppSettings.UnitTest);
 
-			ConfigMap.Map(modelBuilder, AppSettings.UnitTest);
+			ConfigsMap.Map(modelBuilder, AppSettings.UnitTest);
 		}
 	}
 }

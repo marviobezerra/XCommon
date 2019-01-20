@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,17 +24,35 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}"));
 			nameSpaces.AddRange(Config.DataBaseItems.Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.Name}.Map"));
 
+			var baseContext = "DbContext";
+
+			if (Config.CSharp.UsingApplicationBase)
+			{
+				baseContext = "XCommonDbContext";
+				nameSpaces.Add("XCommon.EF.Application.Context");
+			}
+
 			var builder = new StringBuilderIndented();
 
 			builder
 				.GenerateFileMessage()
-				.ClassInit(Config.CSharp.EntityFramework.ContextName, "DbContext", Config.CSharp.EntityFramework.NameSpace, ClassVisibility.Public, nameSpaces.ToArray())
-				.AppendLine()
+				.ClassInit(Config.CSharp.EntityFramework.ContextName, baseContext, Config.CSharp.EntityFramework.NameSpace, ClassVisibility.Public, nameSpaces.ToArray())
+				.AppendLine();
+
+			if (!Config.CSharp.UsingApplicationBase)
+			{
+				builder
 				.AppendLine("private IApplicationSettings AppSettings => Kernel.Resolve<IApplicationSettings>();")
 				.AppendLine();
+			}
 
 			foreach (var item in Config.DataBaseItems.SelectMany(c => c.Tables))
 			{
+				if (Config.CSharp.UsingApplicationBase && Config.CSharp.ApplicationClasses.Any(c => c.Name == item.Name && c.Schema == item.Schema))
+				{
+					continue;
+				}
+
 				builder
 					.AppendLine($"public DbSet<{item.Name}> {item.Name} {{ get; set; }}")
 					.AppendLine();
@@ -73,6 +90,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 				foreach (var item in Config.DataBaseItems.SelectMany(c => c.Tables))
 				{
+					if (Config.CSharp.UsingApplicationBase && Config.CSharp.ApplicationClasses.Any(c => c.Name == item.Name && c.Schema == item.Schema))
+					{
+                        continue;
+					}
+
 					builder.AppendLine($"{item.Name}Map.Map(modelBuilder, AppSettings.UnitTest);");
 				}
 			}
@@ -87,6 +109,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 		public void WriteEntity(DataBaseTable item)
 		{
+			if (Config.CSharp.UsingApplicationBase && Config.CSharp.ApplicationClasses.Any(c => c.Name == item.Name && c.Schema == item.Schema))
+			{
+				return;
+			}
+
 			var path = Path.Combine(Config.CSharp.EntityFramework.Path, item.Schema);
 			var file = $"{item.Name}.cs";
 
@@ -94,7 +121,7 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			nameSpace.AddRange(item.RelationShips.Where(c => c.TableFK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.SchemaFK}").Distinct());
 			nameSpace.AddRange(item.RelationShips.Where(c => c.TablePK != item.Schema).Select(c => $"{Config.CSharp.EntityFramework.NameSpace}.{c.SchemaPK}").Distinct());
 			nameSpace.AddRange(item.Columns.Where(c => c.Schema != item.Schema).Select(c => c.Schema));
-			nameSpace.AddRange(item.ProcessRemapSchema(Config));
+			nameSpace.AddRange(item.ProcessRemapSchema(Config, true));
 
 
 			var itemNameSpace = $"{Config.CSharp.EntityFramework.NameSpace}.{item.Schema}";
@@ -138,9 +165,14 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 
 			Writer.WriteFile(path, file, builder, true);
 		}
-		
+
 		public void WriteEntityMap(DataBaseTable item)
 		{
+			if (Config.CSharp.UsingApplicationBase && Config.CSharp.ApplicationClasses.Any(c => c.Name == item.Name && c.Schema == item.Schema))
+			{
+				return;
+			}
+
 			var path = Path.Combine(Config.CSharp.EntityFramework.Path, item.Schema, "Map");
 			var file = $"{item.Name}Map.cs";
 
@@ -276,6 +308,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 			{
 				var relationShipNamePK = ProcessRelationShipName(relationShip, relationShip.TablePK);
 				var relationShipNameFK = ProcessRelationShipName(relationShip, relationShip.TableFK);
+
+				if (Config.CSharp.UsingApplicationBase && Config.CSharp.ApplicationClasses.Any(c => c.Name == relationShipNamePK))
+				{
+					return;
+				}
 
 				builder
 					.AppendLine("entity")

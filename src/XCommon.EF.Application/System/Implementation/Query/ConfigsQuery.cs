@@ -8,15 +8,15 @@ using XCommon.Patterns.Specification.Query.Extensions;
 
 namespace XCommon.EF.Application.System.Implementation.Query
 {
-	public class ConfigQuery : SpecificationQuery<Config, ConfigFilter>
+	public class ConfigsQuery : SpecificationQuery<Configs, ConfigsFilter>
 	{
-		public override IQueryable<Config> Build(IQueryable<Config> source, ConfigFilter filter)
+		public override IQueryable<Configs> Build(IQueryable<Configs> source, ConfigsFilter filter)
 		{
 			var spefications = NewSpecificationList()
 				.And(e => e.IdConfig == filter.Key, f => f.Key.HasValue)
 				.And(e => filter.Keys.Contains(e.IdConfig), f => f.Keys.IsValidList())
 				.And(e => e.ConfigKey == filter.ConfigKey, f => f.ConfigKey.IsNotEmpty())
-				.And(e => e.Section == filter.Section, f => f.Section.IsNotEmpty())
+				.And(e => e.Module == filter.Module, f => f.Module.IsNotEmpty())
 				.OrderBy(e => e.ConfigKey)
 				.Take(filter.PageNumber, filter.PageSize);
 

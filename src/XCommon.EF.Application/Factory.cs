@@ -1,5 +1,7 @@
 using XCommon.Application.Authentication;
+using XCommon.Application.Authentication.Entity;
 using XCommon.EF.Application.Authentication;
+using XCommon.EF.Application.Authentication.Validation;
 using XCommon.EF.Application.Context.Register;
 using XCommon.EF.Application.Context.System;
 using XCommon.EF.Application.Register.Implementation;
@@ -37,8 +39,9 @@ namespace XCommon.EF.Application
 			Kernel.Map<ISpecificationValidation<UsersProvidersEntity>>().To<UsersProvidersValidate>();
 			Kernel.Map<ISpecificationValidation<UsersRolesEntity>>().To<UsersRolesValidate>();
 			Kernel.Map<ISpecificationValidation<UsersTokensEntity>>().To<UsersTokensValidate>();
-
-			Kernel.Map<ISpecificationValidation<ConfigEntity>>().To<ConfigValidate>();
+			Kernel.Map<ISpecificationValidation<SignUpEntity>>().To<SignUpValidate>();
+			Kernel.Map<ISpecificationValidation<SignInEntity>>().To<SignInValidate>();
+			Kernel.Map<ISpecificationValidation<ConfigsEntity>>().To<ConfigsValidate>();
 		}
 
 		private static void Query()
@@ -49,7 +52,7 @@ namespace XCommon.EF.Application
 			Kernel.Map<ISpecificationQuery<UsersRoles, UsersRolesFilter>>().To<UsersRolesQuery>();
 			Kernel.Map<ISpecificationQuery<UsersTokens, UsersTokensFilter>>().To<UsersTokensQuery>();
 
-			Kernel.Map<ISpecificationQuery<Config, ConfigFilter>>().To<ConfigQuery>();
+			Kernel.Map<ISpecificationQuery<Configs, ConfigsFilter>>().To<ConfigsQuery>();
 		}
 
 		private static void Repository()
@@ -60,7 +63,7 @@ namespace XCommon.EF.Application
 			Kernel.Map<IUsersRolesBusiness>().To<UsersRolesBusiness>();
 			Kernel.Map<IUsersTokensBusiness>().To<UsersTokensBusiness>();
 
-			Kernel.Map<IConfigBusiness>().To<ConfigBusiness>();			
+			Kernel.Map<IConfigsBusiness>().To<ConfigsBusiness>();			
 		}
 
 		private static void Others()

@@ -2,18 +2,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace XCommon.EF.Application.Context.System.Map
 {
-	internal class ConfigMap
+	internal class ConfigsMap
 	{
 		internal static void Map(ModelBuilder modelBuilder, bool unitTest)
 		{
-			modelBuilder.Entity<Config>(entity =>
+			modelBuilder.Entity<Configs>(entity =>
 			{
 				entity.HasKey(e => e.IdConfig);
 
 				if (!unitTest)
-					entity.ToTable("System", "Config");
+					entity.ToTable("System", "Configs");
 				else
-					entity.ToTable("SystemConfig");
+					entity.ToTable("SystemConfigs");
 
 				entity.Property(e => e.IdConfig)
 					.IsRequired()
@@ -22,10 +22,10 @@ namespace XCommon.EF.Application.Context.System.Map
 				entity.Property(e => e.ConfigKey)
 					.IsRequired();
 
-				entity.Property(e => e.Value)
-					.IsRequired();
+				entity.Property(e => e.Value);
 
-				entity.Property(e => e.Section);
+				entity.Property(e => e.Module)
+					.IsRequired();
 			});
 		}
 	}

@@ -110,21 +110,5 @@ namespace XCommon.Test.UtilTest.DataSource
                 return result.Cast();
             }
         }
-
-        public static IEnumerable<object[]> MD5
-        {
-            get
-            {
-                PairList<string, string> result = new PairList<string, string>();
-
-                result.Add("", "");
-                result.Add("1234567890", "e807f1fcf82d132f9bb018ca6738a19f");
-                result.Add("OneTwoThree", "b9a0bc490bed30f4311bdf0150b26504");
-                result.Add("One Two Three 1234", "f046e0d8efab8b28515ec10f43c9559b");
-                result.Add("Bilive in good", "1994c2caef2f264539786496bf6e358c");
-
-                return result.Cast();
-            }
-        }
     }
 }

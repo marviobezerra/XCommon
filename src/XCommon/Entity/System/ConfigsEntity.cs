@@ -4,11 +4,11 @@ using XCommon.Patterns.Repository.Entity;
 
 namespace XCommon.Entity.System
 {
-	public class ConfigEntity : EntityBase
+	public class ConfigsEntity : EntityBase
 	{
 		public Guid IdConfig { get; set; }
 
-		public string Section { get; set; }
+		public string Module { get; set; }
 
 		public string ConfigKey { get; set; }
 

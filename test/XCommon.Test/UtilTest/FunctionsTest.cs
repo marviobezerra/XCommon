@@ -76,14 +76,5 @@ namespace XCommon.Test.UtilTest
             result.Should().BeGreaterOrEqualTo(min, "Invalid min: " + min.ToString())
                 .And.BeLessOrEqualTo(max, "Invalid max: " + max.ToString());
         }
-
-        [Theory(DisplayName = "GetMD5")]
-		[Trait("Common", "Functions")]
-		[MemberData(nameof(FunctionDataSource.MD5), MemberType = typeof(FunctionDataSource))]
-        public void GetMD5(string value, string expected)
-        {
-            var result = Functions.GetMD5(value);
-            result.Should().Be(expected, "Value doesn't match: " + value);
-        }
     }
 }

@@ -55,6 +55,11 @@ namespace XCommon.CodeGenerator.CSharp.Implementation
 				nameSpace.Add($"{Config.CSharp.EntityFramework.NameSpace}.{schema.Name}");
 			};
 
+			if (Config.CSharp.UsingApplicationBase)
+			{
+				nameSpace.AddRange(Config.CSharp.ApplicationClasses.Select(c => c.NamespaceContext).Distinct());
+			}
+
 			var builder = new StringBuilderIndented();
 
 			builder

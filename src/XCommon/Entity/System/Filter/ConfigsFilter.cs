@@ -2,9 +2,9 @@ using XCommon.Patterns.Repository.Entity;
 
 namespace XCommon.Entity.System.Filter
 {
-	public class ConfigFilter : FilterBase
+	public class ConfigsFilter : FilterBase
 	{
-		public string Section { get; set; }
+		public string Module { get; set; }
 
 		public string ConfigKey { get; set; }
 	}
