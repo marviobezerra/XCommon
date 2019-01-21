@@ -12,7 +12,7 @@ namespace XCommon.EF.Application.Register.Implementation.Validate
 		public override async Task<bool> IsSatisfiedByAsync(PeopleEntity entity, Execute execute)
 		{
 			var spefications = NewSpecificationList()
-				.AndIsValid(e => e.Key != Guid.Empty, "Default key isn't valid");
+				.AndIsValid(e => e.Key != Guid.Empty, Resources.Messages.DefaultKeyInvalid);
 
 			return await CheckSpecificationsAsync(spefications, entity, execute);
 		}

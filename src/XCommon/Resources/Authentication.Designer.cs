@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XCommon.EF.Application.Resources {
+namespace XCommon.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace XCommon.EF.Application.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Messages {
+    public class Authentication {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal Authentication() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace XCommon.EF.Application.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XCommon.EF.Application.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XCommon.Resources.Authentication", typeof(Authentication).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,25 +61,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data saving Error.
-        /// </summary>
-        public static string DataSaveError {
-            get {
-                return ResourceManager.GetString("DataSaveError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data saved successfully.
-        /// </summary>
-        public static string DataSaveSuccess {
-            get {
-                return ResourceManager.GetString("DataSaveSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email aredy registered.
+        ///   Looks up a localized string similar to Email duplicated.
         /// </summary>
         public static string EmailDuplicated {
             get {
@@ -88,7 +70,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It&apos;s required a valid email.
+        ///   Looks up a localized string similar to Invalid email.
         /// </summary>
         public static string InvalidEmail {
             get {
@@ -97,25 +79,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default key is not valid.
-        /// </summary>
-        public static string InvalidKey {
-            get {
-                return ResourceManager.GetString("InvalidKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to URL is not valid.
-        /// </summary>
-        public static string InvalidUrl {
-            get {
-                return ResourceManager.GetString("InvalidUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid username and/or password.
+        ///   Looks up a localized string similar to Invalid user or password.
         /// </summary>
         public static string InvalidUserPassword {
             get {
@@ -124,7 +88,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password confirmation does not match.
+        ///   Looks up a localized string similar to Password doesn&apos;t match.
         /// </summary>
         public static string PasswordNotMatch {
             get {
@@ -133,25 +97,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The company is required.
-        /// </summary>
-        public static string RequiredCompany {
-            get {
-                return ResourceManager.GetString("RequiredCompany", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Content is required.
-        /// </summary>
-        public static string RequiredContent {
-            get {
-                return ResourceManager.GetString("RequiredContent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The email is required.
+        ///   Looks up a localized string similar to Email is required.
         /// </summary>
         public static string RequiredEmail {
             get {
@@ -160,16 +106,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline is required.
-        /// </summary>
-        public static string RequiredHeadline {
-            get {
-                return ResourceManager.GetString("RequiredHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The name is required.
+        ///   Looks up a localized string similar to Name is required.
         /// </summary>
         public static string RequiredName {
             get {
@@ -178,7 +115,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password is required.
+        ///   Looks up a localized string similar to Password is required.
         /// </summary>
         public static string RequiredPassword {
             get {
@@ -187,34 +124,7 @@ namespace XCommon.EF.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The person is required.
-        /// </summary>
-        public static string RequiredPerson {
-            get {
-                return ResourceManager.GetString("RequiredPerson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title is required.
-        /// </summary>
-        public static string RequiredTitle {
-            get {
-                return ResourceManager.GetString("RequiredTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to URL is required.
-        /// </summary>
-        public static string RequiredUrl {
-            get {
-                return ResourceManager.GetString("RequiredUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The user is required.
+        ///   Looks up a localized string similar to User name is required.
         /// </summary>
         public static string RequiredUser {
             get {

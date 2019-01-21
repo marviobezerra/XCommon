@@ -11,9 +11,9 @@ namespace XCommon.EF.Application.Authentication.Validation
 		public override async Task<bool> IsSatisfiedByAsync(SignInEntity entity, Execute execute)
 		{
 			var spefications = NewSpecificationList()
-				.AndIsEmail(e => e.User, Resources.Messages.InvalidEmail)
-				.AndIsNotEmpty(e => e.User, Resources.Messages.RequiredUser)
-				.AndIsNotEmpty(e => e.Password, Resources.Messages.RequiredPassword);
+				.AndIsEmail(e => e.User, Resources.Authentication.InvalidEmail)
+				.AndIsNotEmpty(e => e.User, Resources.Authentication.RequiredUser)
+				.AndIsNotEmpty(e => e.Password, Resources.Authentication.RequiredPassword);
 
 			return await CheckSpecificationsAsync(spefications, entity, execute);
 		}

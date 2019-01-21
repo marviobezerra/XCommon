@@ -17,9 +17,9 @@ namespace XCommon.EF.Application.Authentication.Validation
 		public override async Task<bool> IsSatisfiedByAsync(SignUpEntity entity, Execute execute)
 		{
 			var spefications = NewSpecificationList()
-				.AndIsNotEmpty(e => e.Name, Resources.Messages.RequiredName)
-				.AndIsNotEmpty(e => e.Email, Resources.Messages.RequiredEmail)
-				.AndIsValidAsync(e => CheckDuplicatedEmailAsync(e.Email), Resources.Messages.EmailDuplicated)
+				.AndIsNotEmpty(e => e.Name, Resources.Authentication.RequiredName)
+				.AndIsNotEmpty(e => e.Email, Resources.Authentication.RequiredEmail)
+				.AndIsValidAsync(e => CheckDuplicatedEmailAsync(e.Email), Resources.Authentication.EmailDuplicated)
 				.AndMerge(ValidatePassword(), e => e.Provider == ProviderType.Local);
 
 			return await CheckSpecificationsAsync(spefications, entity, execute);
@@ -34,8 +34,8 @@ namespace XCommon.EF.Application.Authentication.Validation
 		private SpecificationList<SignUpEntity> ValidatePassword()
 		{
 			var spefications = NewSpecificationList()
-				.AndIsNotEmpty(e => e.Password, Resources.Messages.RequiredPassword)
-				.AndIsValid(e => e.Password == e.PasswordConfirm, Resources.Messages.PasswordNotMatch);
+				.AndIsNotEmpty(e => e.Password, Resources.Authentication.RequiredPassword)
+				.AndIsValid(e => e.Password == e.PasswordConfirm, Resources.Authentication.PasswordNotMatch);
 
 			return spefications;
 		}

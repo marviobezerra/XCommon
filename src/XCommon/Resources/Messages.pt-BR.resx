@@ -117,13 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmailDuplicated" xml:space="preserve">
-    <value>Email em uso</value>
-  </data>
-  <data name="DataSaveError" xml:space="preserve">
-    <value>Error ao salvar os dados</value>
-  </data>
-  <data name="DataSaveSuccess" xml:space="preserve">
-    <value>Dados salvos</value>
-  </data>
 </root>

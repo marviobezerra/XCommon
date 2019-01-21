@@ -12,9 +12,9 @@ namespace XCommon.EF.Application.System.Implementation.Validate
 		public override async Task<bool> IsSatisfiedByAsync(ConfigsEntity entity, Execute execute)
 		{
 			var spefications = NewSpecificationList()
-				.AndIsValid(e => e.Key != Guid.Empty, "Default key isn't valid")
-				.AndIsNotEmpty(e => e.ConfigKey, "Config Key is Required")
-				.AndIsNotEmpty(e => e.Module, "Section is Required");
+				.AndIsValid(e => e.Key != Guid.Empty, Resources.Messages.DefaultKeyInvalid)
+				.AndIsNotEmpty(e => e.ConfigKey, Resources.Messages.Config_KeyRequired)
+				.AndIsNotEmpty(e => e.Module, Resources.Messages.Config_SectionRequired);
 
 			return await CheckSpecificationsAsync(spefications, entity, execute);
 		}

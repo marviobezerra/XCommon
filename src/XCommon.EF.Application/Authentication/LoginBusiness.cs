@@ -54,13 +54,13 @@ namespace XCommon.EF.Application.Authentication
 
 			if (user == null)
 			{
-				result.AddError("Invalid user");
+				result.AddError(Resources.Authentication.InvalidUserPassword);
 				return result;
 			}
 
 			if (!await VerifyPasswordHashAsync(user, info.PasswordCurrent))
 			{
-				result.AddError("Password doesn't match");
+				result.AddError(Resources.Authentication.PasswordNotMatch);
 				return result;
 			}
 
@@ -117,7 +117,7 @@ namespace XCommon.EF.Application.Authentication
 
 			if (person == null)
 			{
-				result.AddMessage(ExecuteMessageType.Error, Resources.Messages.InvalidUserPassword);
+				result.AddMessage(ExecuteMessageType.Error, Resources.Authentication.InvalidUserPassword);
 				return result;
 			}
 
@@ -125,7 +125,7 @@ namespace XCommon.EF.Application.Authentication
 
 			if (user == null)
 			{
-				result.AddMessage(ExecuteMessageType.Error, Resources.Messages.InvalidUserPassword);
+				result.AddMessage(ExecuteMessageType.Error, Resources.Authentication.InvalidUserPassword);
 				return result;
 			}
 
@@ -133,7 +133,7 @@ namespace XCommon.EF.Application.Authentication
 			{
 				if (!await VerifyPasswordHashAsync(user, signIn.Password))
 				{
-					result.AddMessage(ExecuteMessageType.Error, Resources.Messages.InvalidUserPassword);
+					result.AddMessage(ExecuteMessageType.Error, Resources.Authentication.InvalidUserPassword);
 					return result;
 				}
 
@@ -154,7 +154,7 @@ namespace XCommon.EF.Application.Authentication
 
 			if (provider == null)
 			{
-				result.AddMessage(ExecuteMessageType.Error, Resources.Messages.InvalidUserPassword);
+				result.AddMessage(ExecuteMessageType.Error, Resources.Authentication.InvalidUserPassword);
 				return result;
 			}
 
@@ -189,7 +189,6 @@ namespace XCommon.EF.Application.Authentication
 					result.AddMessage(await PeopleBusiness.SaveAsync(person, db));
 					result.AddMessage(await UsersBusiness.SaveAsync(user, db));
 					result.AddMessage(await UsersProvidersBusiness.SaveAsync(provider, db));
-					//result.AddMessage(await CompaniesPeopleBusiness.SaveAsync(companyPerson, db));
 
 					if (!result.HasErro)
 					{
