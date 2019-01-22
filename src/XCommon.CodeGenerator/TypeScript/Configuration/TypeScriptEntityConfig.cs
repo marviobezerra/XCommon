@@ -18,6 +18,10 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 
 		public string Path { get; set; }
 
+		public string FilePrefix { get; set; }
+
+		public string FileSufix { get; set; }
+
 		public bool IncludeUtils { get; set; }
 
 		public List<TypeScriptNameOverride> NameOverride { get; set; }

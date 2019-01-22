@@ -5,11 +5,6 @@ namespace XCommon.CodeGenerator.Core.Extensions
 {
 	public static class TypeScriptExtensions
     {
-		internal static bool GetOutLet(this string component)
-		{
-			return component.Contains("?o");
-		}
-
 		internal static string GetSelector(this string component)
 		{
 			var result = string.Empty;
@@ -22,7 +17,7 @@ namespace XCommon.CodeGenerator.Core.Extensions
 					continue;
 				}
 
-				if (Char.IsUpper(item))
+				if (char.IsUpper(item))
 				{
 					result += '-';
 					result += item;
@@ -33,14 +28,6 @@ namespace XCommon.CodeGenerator.Core.Extensions
 			}
 
 			return result.ToLower();
-		}
-
-		internal static string GetName(this string name)
-		{
-			var result = name.First().ToString().ToUpper() + name.Substring(1);
-			result = result.Replace("Service", string.Empty);
-			result = result.Replace("Component", string.Empty);
-			return result;
 		}
 	}
 }

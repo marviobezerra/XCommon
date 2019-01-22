@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Resources;
 using Newtonsoft.Json;
 using XCommon.CodeGenerator.Core;
-using XCommon.CodeGenerator.Core.Extensions;
 using XCommon.CodeGenerator.TypeScript.Implementation.Helper;
 using XCommon.Patterns.Ioc;
 using XCommon.Util;
@@ -31,9 +27,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			WriteJsonFiles();
 
 			Writer.WriteFile(Config.TypeScript.Resource.Path, Config.TypeScript.Resource.File, builder, true);
-
-
-			Index.Run(Config.TypeScript.Resource.Path);
+			//Index.Run(Config.TypeScript.Resource.Path);
 		}
 
 		private void WriteJsonFiles()
@@ -54,7 +48,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					(result as IDictionary<string, object>).Add(resouce.ResourceName, current);
 				}
 
-				Writer.WriteFile(Config.TypeScript.Resource.PathJson, $"{culture.Key}.json", JsonConvert.SerializeObject(result), true);
+				Writer.WriteFile(Config.TypeScript.Resource.PathJson, $"{Config.TypeScript.Resource.JsonPrefix}-{culture.Key}.json", JsonConvert.SerializeObject(result), true);
 
 			}
 		}
@@ -138,21 +132,48 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 		{
 			// Service declaration
 			builder
-				.AppendLine("@Injectable({")
-				.IncrementIndent()
-				.AppendLine("providedIn: 'root'")
-				.DecrementIndent()
-				.AppendLine("})")
-				.AppendLine($"export class {Config.TypeScript.Resource.ServiceName} {{")
+				.AppendLine("@Injectable()")
+				.AppendLine($"export class {Config.TypeScript.Resource.ServiceName}Service {{")
 				.IncrementIndent()
 				.AppendLine("");
 
-			// Resource Propertoes
-			foreach (var resource in Resources[Config.TypeScript.Resource.CultureDefault.Code])
+			var visibility = "public ";
+			var setter = " = ";
+			var finalizer = ";";
+			var resources = Resources[Config.TypeScript.Resource.CultureDefault.Code];
+			var count = 0;
+
+			if (Config.TypeScript.Resource.Extractor)
+			{
+				visibility = "";
+				setter = ": ";
+				finalizer = ",";
+
+				builder
+					.AppendLine("public XCommon = {")
+					.IncrementIndent();
+			}
+
+			// Resource Properties
+			foreach (var resource in resources)
+			{
+				count++;
+
+				if (resources.Count == count)
+				{
+					finalizer = "";
+				}
+
+				builder
+					.AppendLine($"{visibility}{resource.ResourceName}{setter}new {resource.ResourceName}Resource(){finalizer}");
+			}
+
+			if (Config.TypeScript.Resource.Extractor)
 			{
 				builder
-					.AppendLine($"public {resource.ResourceName} = new {resource.ResourceName}Resource();")
-					.AppendLine("");
+					.DecrementIndent()
+					.AppendLine("}")
+					.AppendLine();
 			}
 
 			// Current Culture
@@ -212,7 +233,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 				.DecrementIndent()
 				.AppendLine("}")
 				.AppendLine("")
-				.AppendLine($"this.http.get<any>(`{Config.TypeScript.Resource.RequestAddress}${{cultureCode}}.json`)")
+				.AppendLine($"this.http.get<any>(`{Config.TypeScript.Resource.RequestAddress}{Config.TypeScript.Resource.JsonPrefix}-${{cultureCode}}.json`)")
 				.IncrementIndent()
 				.AppendLine(".subscribe(res => {")
 				.IncrementIndent();
@@ -221,8 +242,16 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 
 			foreach (var item in Resources[Config.TypeScript.Resource.CultureDefault.Code])
 			{
-				builder
-					.AppendLine($"this.{item.ResourceName} = res.{item.ResourceName};");
+				if (Config.TypeScript.Resource.Extractor)
+				{
+					builder
+						.AppendLine($"this.XCommon.{item.ResourceName} = res.{item.ResourceName};");
+				}
+				else
+				{
+					builder
+						.AppendLine($"this.{item.ResourceName} = res.{item.ResourceName};");
+				}
 			}
 
 			// Complete the service

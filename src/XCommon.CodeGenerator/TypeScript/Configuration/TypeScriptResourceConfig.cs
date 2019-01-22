@@ -13,6 +13,8 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 			Resources = new Dictionary<Type, ResourceManager>();
 		}
 
+		public bool Extractor { get; set; }
+
 		public bool Execute { get; set; }
 
 		public string RequestAddress { get; set; }
@@ -20,6 +22,8 @@ namespace XCommon.CodeGenerator.TypeScript.Configuration
 		public string File { get; set; }
 
 		public string Path { get; set; }
+
+		public string JsonPrefix { get; set; }
 
 		public string PathJson { get; set; }
 

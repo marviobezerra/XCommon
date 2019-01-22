@@ -24,6 +24,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{30D1C660-49D5-481B-8DB9-E718C4A664A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".extra", ".extra", "{2901F7A4-C121-4796-9292-2FD11F54226C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.Web.Site", "test\XCommon.Test.Web.Site\XCommon.Test.Web.Site.csproj", "{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.CloudServices", "src\XCommon.CloudServices\XCommon.CloudServices.csproj", "{C29D2497-8A0E-4585-A0BA-D3F42E3F6FD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.CloudServices", "test\XCommon.Test.CloudServices\XCommon.Test.CloudServices.csproj", "{4B1D2D4A-6873-49FB-9343-717ABB31E0BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.EF.Application", "src\XCommon.EF.Application\XCommon.EF.Application.csproj", "{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2C7C253F-0C8E-4F55-8272-EFE7191842E0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
@@ -33,13 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".extra", ".extra", "{2901F7
 		test.ps1 = test.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.Web.Site", "test\XCommon.Test.Web.Site\XCommon.Test.Web.Site.csproj", "{4AFF7518-2A1D-4279-8E30-FDA31EF6692D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.CloudServices", "src\XCommon.CloudServices\XCommon.CloudServices.csproj", "{C29D2497-8A0E-4585-A0BA-D3F42E3F6FD5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.Test.CloudServices", "test\XCommon.Test.CloudServices\XCommon.Test.CloudServices.csproj", "{4B1D2D4A-6873-49FB-9343-717ABB31E0BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCommon.EF.Application", "src\XCommon.EF.Application\XCommon.EF.Application.csproj", "{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XCommon.ResourceExtractor", "extra\XCommon.ResourceExtractor\XCommon.ResourceExtractor.csproj", "{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +99,10 @@ Global
 		{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +120,8 @@ Global
 		{C29D2497-8A0E-4585-A0BA-D3F42E3F6FD5} = {08B0F53F-B112-46C1-846F-6AF87C1584C7}
 		{4B1D2D4A-6873-49FB-9343-717ABB31E0BC} = {30D1C660-49D5-481B-8DB9-E718C4A664A3}
 		{6ED3F34B-9E2B-4A0A-A1A1-ACF0ADB9601E} = {08B0F53F-B112-46C1-846F-6AF87C1584C7}
+		{2C7C253F-0C8E-4F55-8272-EFE7191842E0} = {2901F7A4-C121-4796-9292-2FD11F54226C}
+		{8B4819EB-09C3-4DF0-A37D-86668C2DB9EB} = {2901F7A4-C121-4796-9292-2FD11F54226C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4DA7A962-F214-4F97-9056-E93F7C6C6C31}

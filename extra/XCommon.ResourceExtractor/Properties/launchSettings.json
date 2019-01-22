@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "XCommon.ResourceExtractor": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\VSGit\\XCommon-Js\\libs\\xc-core"
+    }
+  }
+}

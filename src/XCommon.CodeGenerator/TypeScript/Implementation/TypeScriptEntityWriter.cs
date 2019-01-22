@@ -17,6 +17,8 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 {
 	public class TypeScriptEntityWriter : BaseWriter, ITypeScriptEntityWriter
 	{
+		private string EnumFile => $"{Config.TypeScript.Entity.FilePrefix}-enum.{Config.TypeScript.Entity.FileSufix}.ts";
+
 		[Inject]
 		private ITypeScriptIndexExport TypeScriptIndexExport { get; set; }
 
@@ -97,7 +99,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 						tsClass.Imports.Add(new TypeScriptImport
 						{
 							Class = enumProperty.Name,
-							File = "enum.ts"
+							File = EnumFile
 						});
 					}
 
@@ -190,7 +192,7 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 					.AppendLine();
 			}
 
-			Writer.WriteFile(Config.TypeScript.Entity.Path.ToLower(), "enum.ts", builder, true);
+			Writer.WriteFile(Config.TypeScript.Entity.Path.ToLower(), EnumFile, builder, true);
 		}
 
 		private void ProcessTypes()
@@ -198,6 +200,8 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 			foreach (var file in TSClass.Select(c => c.FileName).Distinct().OrderBy(c => c))
 			{
 				var fileName = file.GetSelector();
+				fileName = $"{Config.TypeScript.Entity.FilePrefix}-{fileName}.{Config.TypeScript.Entity.FileSufix}.ts";
+
 				var importItems = TSClass.Where(c => c.FileName == file).SelectMany(c => c.Imports).ToList();
 
 				var builder = new StringBuilderIndented();
@@ -306,11 +310,11 @@ namespace XCommon.CodeGenerator.TypeScript.Implementation
 
 			if (overRide != null)
 			{
-				return $"{overRide.FileName.ToLower()}.ts";
+				return $"{overRide.FileName.ToLower()}";
 			}
 
 			var result = nameSpace.Split('.').Last(c => c != "Filter");
-			return $"{result}.ts";
+			return $"{result}";
 		}
 
 		private string GetPropertyType(Type type, TypeScriptClass tsClass, bool generic)
